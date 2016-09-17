@@ -18,16 +18,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
+ * It is what the user interacts with to play the game and chat with other uses.  It is
+ * the visual component of the program.
+ * 
+ * It uses a ClientPipe to 'middle-man' any interaction between itself and the Server
+ * 
+ * In a Model-View-Controller sense, ClientWindow is the view.
+ *  
+ * @author Tyler Jones
+ */
 public class ClientWindow extends JFrame implements Runnable{
 	private static final long serialVersionUID = 1L;
 	
+	// Swing components
 	private JPanel contentPane;
 	private JTextField messageField;
 	private JTextArea chatLog;
 	
+	// The ClientPipe for this ClientWindow, and the different Threads running different aspects of the ClientWindow
 	private ClientPipe client;
 	private Thread listen, run;
 	
+	// Used in some of the loops as a while (true) mechanism, but provides a little more safety
+	// since we can switch it to false anywhere in the program if something very bad happens
 	private boolean running;
 	
 	/**
@@ -53,6 +68,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		String connection = "/c/" + name + "/e/";
 		client.send(connection.getBytes() );
 		
+		// Put the program in running state
 		running = true;
 		run = new Thread(this, "Running");
 		run.start();
@@ -90,23 +106,44 @@ public class ClientWindow extends JFrame implements Runnable{
 		messageField.setText("");
 	}
 	
+	/**
+	 * The listen thread in this method will sit and listen for packets
+	 * coming through the socket.  When it receives one, it calls the process
+	 * packet method and loops back around, waiting for the next packet.
+	 */
 	public void listen(){
+		// Create a new thread and start it
 		listen = new Thread("Listen"){
 			public void run(){
 				while(running){
 					String message = client.receive();
-					if(message.startsWith("/c/") ){
-						client.setId(Integer.parseInt(message.split("/c/|/e/")[1]) );
-						writeToChatLog("Successful connection! ID: " + client.getId() );
-					}
-					else if(message.startsWith("/m/") ){
-						message = message.split("/m/|/e/")[1];
-						writeToChatLog(message);
-					}
+					process(message);
 				}
 			}
 		};
 		listen.start();
+	}
+	
+	/**
+	 * When a packet is received, the message is extracted
+	 * and sent to this method.  Based on our header conventions,
+	 * it will perform the appropriate actions.  The different header
+	 * conventions are explained in the "PacketBrainstorming.txt" file.
+	 * 
+	 * @param message - The message in the received packet needing processing
+	 */
+	public void process(String message){
+		// Did the server confirm our connection?
+		if(message.startsWith("/c/") ){
+			client.setId(Integer.parseInt(message.split("/c/|/e/")[1]) );
+			writeToChatLog("Successful connection! ID: " + client.getId() );
+		}
+		
+		// Is the message from another Client?
+		else if(message.startsWith("/m/") ){
+			message = message.split("/m/|/e/")[1];
+			writeToChatLog(message);
+		}
 	}
 	
 	/**
@@ -122,11 +159,15 @@ public class ClientWindow extends JFrame implements Runnable{
 		dispose();
 	}
 	
+	/**
+	 * Called after a successful connection has been made,
+	 * starts another thread which will sit and listen for
+	 * packets from the server through the socket
+	 */
 	@Override
 	public void run() {
 		listen();
 	}
-	
 	
 	
 	// =================================================================================================================================================================

@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
+	// Swing components
 	private JPanel contentPane;
 	private JTextField addressField;
 	private JTextField textField;
@@ -106,9 +107,13 @@ public class Login extends JFrame {
 	private void login(String name, String address, int port) {
 		dispose();
 		ClientWindow client = new ClientWindow(name, address, port);
-		//System.out.println(name + " " + address + " " + port);
 	}
 	
+	/**
+	 * Main method for Login
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

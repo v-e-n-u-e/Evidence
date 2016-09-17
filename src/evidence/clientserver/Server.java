@@ -139,6 +139,7 @@ public class Server implements Runnable{
 		gui.writeToLog("Processing packet from: " + packet.getAddress() + ":" + packet.getPort() );
 		String string = new String(packet.getData() );
 		
+		// Is this packet a connection packet?
 		if(string.startsWith("/c/") ){
 			//Assign a unique identifier for this client
 			int id = UniqueIdentifier.getIdentifier();
@@ -158,16 +159,20 @@ public class Server implements Runnable{
 			gui.writeToLog("Sent confirm packet to: " + packet.getAddress() + ":" + packet.getPort() );
 		}
 		
+		// Is this packet a disconnection packet?
 		else if(string.startsWith("/dc/") ){
 			String ID = string.split("/dc/|/e/")[1];
 			disconnect(Integer.parseInt(ID), true);
 		}
 		
+		// Is this packet a message packet?
 		else if(string.startsWith("/m/") ){
 			sendToAll(string);
 		}
+		
+		// If we could not categorize the packet, print to the server log
 		else{
-			
+			gui.writeToLog("Could not categorize packet from " + packet.getAddress() + ":" + packet.getPort());
 		}
 	}
 	
@@ -199,9 +204,9 @@ public class Server implements Runnable{
 	/**
 	 * Appends an end character to our message
 	 * 
-	 * @param message
-	 * @param address
-	 * @param port
+	 * @param message - The message to send
+	 * @param address - The address to send the packet to
+	 * @param port - The port to send the packet to
 	 */
 	private void send(String message, InetAddress address, int port){
 		message += "/e/";
@@ -224,6 +229,8 @@ public class Server implements Runnable{
 	}
 	
 	/**
+	 * Removes a client from our list and reports
+	 * the appropriate message to the server log.
 	 * 
 	 * @param id - ID of the client to disconnect
 	 * @param intentional - was the disconnection intentional?
@@ -239,6 +246,7 @@ public class Server implements Runnable{
 			}
 		}
 		
+		// Build an appropriate message for the server log
 		String message = "";
 		if(intentional){
 			message = "Client " + sc.name + "(" + sc.ID + 

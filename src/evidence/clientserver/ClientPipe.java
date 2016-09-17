@@ -86,8 +86,7 @@ public class ClientPipe{
 	 * Attempt a connection to the given address and report.
 	 * Returns true if the connection succeeds, false otherwise.
 	 * 
-	 * @param address
-	 * @param port
+	 * @param address - the address we are connecting to
 	 * @return
 	 */
 	public boolean openConnection(String address){
@@ -105,6 +104,15 @@ public class ClientPipe{
 		return true;
 	}
 	
+	/**
+	 * This method will return a String representing a message
+	 * that has been sent to a ClientPipe from the server.  The program
+	 * will sit at the socket.receive(packet) method until the server
+	 * sends us something.  Because we have a separate Thread running this
+	 * method however, it does not hang up our entire program.
+	 * 
+	 * @return - A string representation of a packet that has been received
+	 */
 	public String receive(){
 		// Construct a byte array, and give it to a DatagramPacket object. 
 		// At this stage it is currently empty
@@ -124,6 +132,13 @@ public class ClientPipe{
 		return message;
 	}
 	
+	/**
+	 * This method creates a packet, given a byte[] and sends
+	 * it through the socket, to the server.  A separate thread
+	 * is created to do this.
+	 * 
+	 * @param data - The array of bytes to put in our packet
+	 */
 	public void send(final byte[] data){
 		// Create a new thread to send the data on and then start the thread
 		send = new Thread("Sender"){
@@ -142,7 +157,7 @@ public class ClientPipe{
 	}
 	
 	/**
-	 * Closes the socket's connecting, called when disconnecting
+	 * Closes the socket's connection, called when disconnecting
 	 * intentionally.
 	 */
 	public void close(){

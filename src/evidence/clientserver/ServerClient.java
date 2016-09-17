@@ -16,6 +16,7 @@ public class ServerClient {
 	public int port;
 	public final int ID;
 	
+	// Used to handle client's disconnecting unintentionally
 	public int attempt = 0;
 	
 	/**
