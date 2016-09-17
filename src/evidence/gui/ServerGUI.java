@@ -22,9 +22,15 @@ import java.awt.SystemColor;
  */
 public class ServerGUI extends JFrame {
 
+	// Swing components
 	private JPanel contentPane;
 	private JTextArea logArea;
 	
+	/**
+	 * Appends the given message to the ServerGUI's JTextArea
+	 * 
+	 * @param message - The message we wish to log
+	 */
 	public void writeToLog(String message){
 		logArea.append(message + "\n");
 	}
@@ -61,21 +67,4 @@ public class ServerGUI extends JFrame {
 		
 		setVisible(true);
 	}
-	
-	/**
-	 * Launch the application. (TESTING)
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ServerGUI frame = new ServerGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 }
