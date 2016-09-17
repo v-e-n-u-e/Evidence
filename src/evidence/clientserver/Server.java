@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * until it receives something through the socket.  If we did not have a separate 
  * thread for this, the entire server would sit and wait and this is not desirable.
  * 
+ * * In a Model-View-Controller sense, Server acts as the controller.
+ * 
  * @author Tyler Jones
  */
 public class Server implements Runnable{
