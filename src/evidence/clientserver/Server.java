@@ -42,6 +42,13 @@ public class Server implements Runnable{
 	// An ArrayList containing all the clients connected to the server
 	private ArrayList<ServerClient> clients = new ArrayList<ServerClient>();
 	
+	// An ArrayList containing the ID's of all clients who have responded to our ping packets
+	private ArrayList<Integer> clientResponse = new ArrayList<Integer>();
+	
+	// Variables to help with managing the clients
+	private final int MAX_ATTEMPTS = 5; // How many times we will ping a client unsuccessfully before we disconnect them
+	private final long MANAGE_DURATION = 2000; // How long the Manage thread will sleep after every iteration, to save resources.
+	
 	// A simple Window that servers as a formal log for the server
 	private ServerGUI gui;
 	
@@ -90,11 +97,58 @@ public class Server implements Runnable{
 		manage = new Thread("Manager") {
 			public void run(){
 				while(running){
-					// Managing...
+					// Sleep the manage thread for a couple seconds 
+					// to not be so resource intensive
+					try {
+						Thread.sleep(MANAGE_DURATION);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if(clients.isEmpty() ){continue;}
+					sendToAll("/ping/areYouThere?");
+					checkForResponse();
+					
 				}
 			}
 		};
 		manage.start();
+	}
+	
+	/**
+	 * Checks our clients list against our clientReponse list
+	 * to see who has responded to our ping packets and who hasn't.
+	 * Will disconnect a client if they have not responded after
+	 * a certain number of attempts to ping them.
+	 */
+	private void checkForResponse(){
+		// Iterate over every ServerClient
+		for(int i = 0; i < clients.size(); i++){
+			ServerClient sc = clients.get(i);
+			
+			// Check our clientResponse doesn't contain their ID
+			if(!clientResponse.contains(sc.ID) ){
+				
+				// If the ServerClient has reached max_attempts,
+				// disconnect them via timeOut
+				if(sc.attempt >= MAX_ATTEMPTS){
+					disconnect(sc.ID, false);
+				}
+				
+				// If they havne't reached MAX_ATTEMPTS, increment their counter
+				else{
+					sc.attempt++;
+					gui.writeToLog(sc.ID + " " + "attempted  " + sc.attempt);
+				}
+			}
+			
+			// The server has responded, so we need to to remove their
+			// ID from our clientResponse and reset their attempt to 0
+			else{
+				clientResponse.remove(new Integer(sc.ID) );
+				sc.attempt = 0;
+			}
+			
+		}
 	}
 
 	/**
@@ -149,6 +203,7 @@ public class Server implements Runnable{
 			
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
+			sendToAll("/m/" + string.split("/c/|/e/")[1] + " connected to the Server!");
 			
 			// Form a connection confirmation packet, and send it,
 			// to the client to confirm a connection was successful
@@ -168,6 +223,11 @@ public class Server implements Runnable{
 		// Is this packet a message packet?
 		else if(string.startsWith("/m/") ){
 			sendToAll(string);
+		}
+		
+		// Is this packet responding to a ping from the server?
+		else if(string.startsWith("/ping/")){
+			clientResponse.add(Integer.parseInt(string.split("/ping/|/e/")[1]) );
 		}
 		
 		// If we could not categorize the packet, print to the server log
@@ -245,6 +305,8 @@ public class Server implements Runnable{
 				break;
 			}
 		}
+		
+		if(sc == null){return;}
 		
 		// Build an appropriate message for the server log
 		String message = "";

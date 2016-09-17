@@ -17,7 +17,6 @@ import java.net.UnknownHostException;
  * @author Tyler Jones
  */
 public class ClientPipe{
-	private static final long serialVersionUID = 1L;
 	
 	// Information for our connection
 	private String name; // The name of the user connecting

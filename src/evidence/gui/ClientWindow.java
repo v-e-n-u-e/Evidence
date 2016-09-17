@@ -144,6 +144,12 @@ public class ClientWindow extends JFrame implements Runnable{
 			message = message.split("/m/|/e/")[1];
 			writeToChatLog(message);
 		}
+		
+		// Is the server pinging us to make sure we are connected?
+		else if(message.startsWith("/ping/")){
+			String reply = "/ping/" + client.getId() + "/e/";
+			client.send(reply.getBytes() );
+		}
 	}
 	
 	/**

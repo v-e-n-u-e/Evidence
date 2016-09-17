@@ -1,7 +1,6 @@
 package evidence.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +20,8 @@ import java.awt.SystemColor;
  * @author Tyler Jones
  */
 public class ServerGUI extends JFrame {
-
+	private static final long serialVersionUID = 1L;
+	
 	// Swing components
 	private JPanel contentPane;
 	private JTextArea logArea;
