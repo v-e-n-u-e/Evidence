@@ -1,5 +1,7 @@
 package evidence.clientserver;
 
+import evidence.gui.ServerGUI;
+
 /**
  * The ServerMain is responsible for instantiating a new instance
  * of a Server for the Game.  It requires one argument, a port
@@ -13,6 +15,7 @@ public class ServerMain {
 	// The port the server will run on, and the instance of the Server object
 	private int port;
 	private Server server;
+	private ServerGUI serverGUI;
 	
 	/**
 	 * A constructor for a ServerMain object, saves the port
@@ -23,7 +26,8 @@ public class ServerMain {
 	 */
 	public ServerMain(int port){
 		this.port = port;
-		this.server = new Server(port);
+		this.serverGUI = new ServerGUI();
+		this.server = new Server(port, serverGUI);
 	}
 	
 	/**

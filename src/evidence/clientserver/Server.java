@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.gui.ServerGUI;
+
 /**
  * The server is responsible for keeping track of any users connected to the server
  * and sending / receiving packets to and from them.  For example, if a player moves 
@@ -40,13 +42,18 @@ public class Server implements Runnable{
 	// An ArrayList containing all the clients connected to the server
 	private ArrayList<ServerClient> clients = new ArrayList<ServerClient>();
 	
+	// A simple Window that servers as a formal log for the server
+	private ServerGUI gui;
+	
 	/**
 	 * Constructor for a server instance
 	 * 
 	 * @param port - The port the server will be running on
+	 * @param gui - The GUI object for the server
 	 */
-	public Server(int port){
+	public Server(int port, ServerGUI gui){
 		this.port = port;
+		this.gui = gui;
 		
 		// Try to create a socket for the port given in the command line arguments
 		try {
@@ -56,6 +63,7 @@ public class Server implements Runnable{
 		}
 		
 		// If successful, create a new Thread for the server and start the thread
+		// Make a record of the server starting successfully
 		run = new Thread(this, "Server");
 		run.start();
 	}
@@ -68,7 +76,7 @@ public class Server implements Runnable{
 	@Override
 	public void run() {
 		running = true;
-		//System.out.println("Server started on port: " + port);
+		gui.writeToLog("Server successfully started on port: " + port);
 		manageClients();
 		receive();
 	}
@@ -127,6 +135,8 @@ public class Server implements Runnable{
 	 * @param packet - The packet to process
 	 */
 	private void process(DatagramPacket packet) {
+		// Record the server processing a packet
+		gui.writeToLog("Processing packet from: " + packet.getAddress() + ":" + packet.getPort() );
 		String string = new String(packet.getData() );
 		
 		if(string.startsWith("/c/") ){
@@ -134,21 +144,26 @@ public class Server implements Runnable{
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
 					packet.getPort(), id) );
-			System.out.println("Added : " + string.split("/c/|/e/")[1] + " with ID: " + id);
+			System.out.println("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
+			
+			// Record who we connected to the server
+			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
 			
 			// Form a connection confirmation packet, and send it,
 			// to the client to confirm a connection was successful
 			String confirm = "/c/" + id;
 			send(confirm, packet.getAddress(), packet.getPort() );
+			
+			// Record we sent a connect packet and to who
+			gui.writeToLog("Sent confirm packet to: " + packet.getAddress() + ":" + packet.getPort() );
 		}
 		
 		else if(string.startsWith("/dc/") ){
 			String ID = string.split("/dc/|/e/")[1];
 			disconnect(Integer.parseInt(ID), true);
-			
 		}
 		
-		else if(string.startsWith("/m/")){
+		else if(string.startsWith("/m/") ){
 			sendToAll(string);
 		}
 		else{
@@ -200,6 +215,8 @@ public class Server implements Runnable{
 	 * @param message - the message to send
 	 */
 	private void sendToAll(String message){
+		// Record we sent a packet and to everyone on the server
+		gui.writeToLog("Sent packet to all clients");
 		for(int i = 0; i < clients.size(); i++){
 			ServerClient client = clients.get(i);
 			send(message.getBytes(), client.address, client.port);
@@ -233,6 +250,7 @@ public class Server implements Runnable{
 					") @" + sc.address + ":" + sc.port + " timed out";
 		}
 		
-		System.out.println(message);
+		// Record the user being disconnected
+		gui.writeToLog(message);
 	}
 }
