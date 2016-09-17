@@ -1,0 +1,10 @@
+README
+
+How to run:
+	1. Run ServerMain in the evidence.clientserverpackage (make sure to add a Port number for the server to run on in the run configuration options - I use 8192).
+	2. Run login and give yourself a name, type in the address and port number for the server we are connecting to.  Port = the port number from step 1
+		IF YOU ARE RUNNING THE SERVER LOCALLY ON YOUR OWN PC: Address = localhost   
+		IF YOU ARE NOT RUNNING THE SERVER LOCALLY ON YOUR OWN PC: You need the actual IP Address of the server
+	
+	3. The main window should appear, if the chat panel does not display "Successful connection" anywhere, then a connection has not been established with the server
+	4. Assuming a connection was established, you should now be able to send messages and have them appear to every client connected to the server.
