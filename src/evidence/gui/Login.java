@@ -105,8 +105,8 @@ public class Login extends JFrame {
 	 */
 	private void login(String name, String address, int port) {
 		dispose();
-		//ClientWindow client = new ClientWindow(name, address, port);
-		System.out.println(name + " " + address + " " + port);
+		ClientWindow client = new ClientWindow(name, address, port);
+		//System.out.println(name + " " + address + " " + port);
 	}
 	
 	public static void main(String[] args) {

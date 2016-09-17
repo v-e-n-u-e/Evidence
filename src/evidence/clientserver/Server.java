@@ -142,6 +142,12 @@ public class Server implements Runnable{
 			send(confirm, packet.getAddress(), packet.getPort() );
 		}
 		
+		else if(string.startsWith("/dc/") ){
+			String ID = string.split("/dc/|/e/")[1];
+			disconnect(Integer.parseInt(ID), true);
+			
+		}
+		
 		else if(string.startsWith("/m/")){
 			sendToAll(string);
 		}
@@ -198,5 +204,35 @@ public class Server implements Runnable{
 			ServerClient client = clients.get(i);
 			send(message.getBytes(), client.address, client.port);
 		}
+	}
+	
+	/**
+	 * 
+	 * @param id - ID of the client to disconnect
+	 * @param intentional - was the disconnection intentional?
+	 */
+	private void disconnect(int id, boolean intentional){
+		// Find the client with the given id and remove them from our list
+		ServerClient sc = null;
+		for(int i = 0; i < clients.size(); i++){
+			if(clients.get(i).ID == id){
+				sc = clients.get(i);
+				clients.remove(i);
+				break;
+			}
+		}
+		
+		String message = "";
+		if(intentional){
+			message = "Client " + sc.name + "(" + sc.ID + 
+					") @" + sc.address + ":" + sc.port + " disconnected";
+			
+		}
+		else{
+			message = "Client " + sc.name + "(" + sc.ID + 
+					") @" + sc.address + ":" + sc.port + " timed out";
+		}
+		
+		System.out.println(message);
 	}
 }

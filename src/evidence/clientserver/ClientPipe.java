@@ -140,4 +140,19 @@ public class ClientPipe{
 		};
 		send.start();
 	}
+	
+	/**
+	 * Closes the socket's connecting, called when disconnecting
+	 * intentionally.
+	 */
+	public void close(){
+		Thread close = new Thread() {
+			public void run(){
+				synchronized(socket){
+					socket.close();
+				}
+			}
+		};
+		close.start();
+	}
 }
