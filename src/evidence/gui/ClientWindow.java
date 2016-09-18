@@ -93,7 +93,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * 
 	 * @param message - the message to send to the client
 	 */
-	private void send(String message){
+	private void sendMessage(String message){
 		// Do not send empty messages to the server
 		if(message.equals("") ){return;}
 		
@@ -227,7 +227,7 @@ public class ClientWindow extends JFrame implements Runnable{
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					String message = messageField.getText();
-					send(message);
+					sendMessage(message);
 				}
 			}
 		});
