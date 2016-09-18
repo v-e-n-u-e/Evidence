@@ -43,10 +43,6 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	
-	// Used in some of the loops as a while (true) mechanism, but provides a little more safety
-	// since we can switch it to false anywhere in the program if something very bad happens
-	private boolean running;
-	
 	/**
 	 * Create the frame and attempt to open the connection
 	 * 
@@ -71,7 +67,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(connection.getBytes() );
 		
 		// Put the program in running state
-		running = true;
 		run = new Thread(this, "Running");
 		run.start();
 	}
@@ -117,7 +112,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.close();
 		
 		// Close the window
-		running = false;
 		dispose();
 	}
 	
