@@ -199,7 +199,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		
 		setVisible(true);
-		
+		canvas.setImage("fridge.png", "table.png");
 		render();
 	}
 

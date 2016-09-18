@@ -11,14 +11,18 @@ public class RenderCanvas extends Canvas{
 	
 	ImageIcon img;
 	Image image;
+	ImageIcon img2;
+	Image image2;
 	
 	public RenderCanvas(){
 		super();
 	}
 	
-	public void setImage(String file){
-		img = new ImageIcon(file);
+	public void setImage(String file1, String file2){
+		img = new ImageIcon(file1);
 		image = img.getImage();
+		img2 = new ImageIcon(file2);
+		image2 = img2.getImage();
 	}
 	
 	@Override
@@ -27,5 +31,6 @@ public class RenderCanvas extends Canvas{
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
 		g.drawImage(image, 0, 0, null);
+		g.drawImage(image2, 0, 0, null);
 	}
 }
