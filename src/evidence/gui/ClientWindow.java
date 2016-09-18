@@ -17,6 +17,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics2D;
+import javax.swing.JButton;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -42,6 +47,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	// A thread to run on
 	private Thread run;
+	private RenderCanvas canvas;
 	
 	/**
 	 * Create the frame and attempt to open the connection
@@ -150,11 +156,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel renderPanel = new JPanel();
-		renderPanel.setBorder(new TitledBorder(null, "Scene", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		renderPanel.setBounds(10, 11, 748, 639);
-		contentPane.add(renderPanel);
-		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new TitledBorder(null, "Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setBounds(768, 11, 306, 639);
@@ -185,6 +186,10 @@ public class ClientWindow extends JFrame implements Runnable{
 		contentPane.add(messageField);
 		messageField.setColumns(10);
 		
+		canvas = new RenderCanvas();
+		canvas.setBounds(20, 18, 720, 630);
+		contentPane.add(canvas);
+		
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				String disconnect = "/dc/" + pipe.getId() + "/e/";
@@ -194,5 +199,13 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		
 		setVisible(true);
+		
+		render();
+	}
+
+	private void render() {
+		for(Component c : contentPane.getComponents() ){
+			c.repaint();
+		}
 	}
 }
