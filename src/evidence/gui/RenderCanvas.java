@@ -14,7 +14,6 @@ public class RenderCanvas extends Canvas{
 	
 	public RenderCanvas(){
 		super();
-
 	}
 	
 	public void setImage(String file){
