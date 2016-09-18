@@ -37,9 +37,11 @@ public class ClientWindow extends JFrame implements Runnable{
 	private JTextField messageField;
 	private JTextArea chatLog;
 	
-	// The ClientPipe for this ClientWindow, and the different Threads running different aspects of the ClientWindow
-	private ClientPipe client;
-	private Thread listen, run;
+	// The ClientPipe that gives us a "pipe" to the server
+	private ClientPipe pipe;
+	
+	// A thread to run on
+	private Thread run;
 	
 	// Used in some of the loops as a while (true) mechanism, but provides a little more safety
 	// since we can switch it to false anywhere in the program if something very bad happens
@@ -53,20 +55,20 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * @param port - port we are connecting to
 	 */
 	public ClientWindow(String name, String address, int port) {
-		client = new ClientPipe(name, address, port);
+		pipe = new ClientPipe(name, address, port, this);
 		
 		// Setup the window
 		createWindow();
 		writeToChatLog("Attempting a connection to address: " + address + ", port: " + port + ", user: " + name);
 		
 		// Open the connection with the server, through the client
-		if(!client.openConnection(address) ){
+		if(!pipe.openConnection(address) ){
 			writeToChatLog("Connection failed!");
 		}
 		
 		// Send a connection packet to the server via our client
 		String connection = "/c/" + name + "/e/";
-		client.send(connection.getBytes() );
+		pipe.send(connection.getBytes() );
 		
 		// Put the program in running state
 		running = true;
@@ -93,63 +95,17 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * 
 	 * @param message - the message to send to the client
 	 */
-	private void send(String message){
+	private void sendMessage(String message){
 		// Do not send empty messages to the server
 		if(message.equals("") ){return;}
 		
 		// Append the user's name to their message, writeToHistory and clear the txtMessage Area
-		message = client.getName() + ": " + message;
+		message = pipe.getName() + ": " + message;
 		message = "/m/" + message;
 		
 		// Send message to server
-		client.send(message.getBytes() );
+		pipe.send(message.getBytes() );
 		messageField.setText("");
-	}
-	
-	/**
-	 * The listen thread in this method will sit and listen for packets
-	 * coming through the socket.  When it receives one, it calls the process
-	 * packet method and loops back around, waiting for the next packet.
-	 */
-	public void listen(){
-		// Create a new thread and start it
-		listen = new Thread("Listen"){
-			public void run(){
-				while(running){
-					String message = client.receive();
-					process(message);
-				}
-			}
-		};
-		listen.start();
-	}
-	
-	/**
-	 * When a packet is received, the message is extracted
-	 * and sent to this method.  Based on our header conventions,
-	 * it will perform the appropriate actions.  The different header
-	 * conventions are explained in the "PacketBrainstorming.txt" file.
-	 * 
-	 * @param message - The message in the received packet needing processing
-	 */
-	public void process(String message){
-		// Did the server confirm our connection?
-		if(message.startsWith("/c/") ){
-			client.setId(Integer.parseInt(message.split("/c/|/e/")[1]) );
-			writeToChatLog("Successful connection! ID: " + client.getId() );
-		}
-		
-		// Is the message from another Client?
-		else if(message.startsWith("/m/") ){
-			message = message.split("/m/|/e/")[1];
-			writeToChatLog(message);
-		}
-		
-		// Is the server pinging us to make sure we are connected?
-		else if(message.startsWith("/ping/")){
-			String reply = "/ping/" + client.getId() + "/e/";
-			client.send(reply.getBytes() );
-		}
 	}
 	
 	/**
@@ -158,7 +114,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 */
 	public void close(){
 		// Close the connection
-		client.close();
+		pipe.close();
 		
 		// Close the window
 		running = false;
@@ -172,7 +128,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 */
 	@Override
 	public void run() {
-		listen();
+		pipe.receive();
 	}
 	
 	
@@ -227,7 +183,7 @@ public class ClientWindow extends JFrame implements Runnable{
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					String message = messageField.getText();
-					send(message);
+					sendMessage(message);
 				}
 			}
 		});
@@ -237,8 +193,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
-				String disconnect = "/dc/" + client.getId() + "/e/";
-				client.send(disconnect.getBytes() );
+				String disconnect = "/dc/" + pipe.getId() + "/e/";
+				pipe.send(disconnect.getBytes() );
 				close();
 			}
 		});

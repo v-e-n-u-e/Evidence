@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import evidence.gui.ClientWindow;
+
 /**
  * The Client is responsible for mediating the interaction between
  * the Server and the GUI (ClientWindow).  It serves as the 'back-end'
@@ -27,7 +29,14 @@ public class ClientPipe{
 	private DatagramSocket socket; // A socket to the server, for the UDP Connection protocol.
 	private InetAddress ip; // The address of the server we are connecting to, as an InetAddress
 	
-	private Thread send; // A thread to handle sending of message
+	// Threads to handle different aspects of the program
+	private Thread send, receive;
+	
+	// Boolean that contains the state of the program
+	private boolean running;
+	
+	// The ClientWindow object to call to when we need to visually update something to the user
+	private ClientWindow gui;
 	
 	/**
 	 * A constructor for a ClientPipe
@@ -36,10 +45,11 @@ public class ClientPipe{
 	 * @param address - The address of the server we are connecting to
 	 * @param port - The port of the server we are connecting to
 	 */
-	public ClientPipe(String name, String address, int port){
+	public ClientPipe(String name, String address, int port, ClientWindow gui){
 		this.name = name;
 		this.address = address;
 		this.port = port;
+		this.gui = gui;
 	}
 	
 	/**
@@ -75,7 +85,7 @@ public class ClientPipe{
 	}
 	
 	/**
-	 * Setter for the name
+	 * Setter for the ID
 	 */
 	public void setId(int ID) {
 		this.ID = ID;
@@ -100,35 +110,71 @@ public class ClientPipe{
 			e.printStackTrace();
 			return false;
 		}
+		
+		running = true;
 		return true;
 	}
 	
 	/**
-	 * This method will return a String representing a message
-	 * that has been sent to a ClientPipe from the server.  The program
-	 * will sit at the socket.receive(packet) method until the server
-	 * sends us something.  Because we have a separate Thread running this
-	 * method however, it does not hang up our entire program.
+	 * This method will receive a Datagram packet that has been sent
+	 * to the ClientPipe from the server.  The program will sit at
+	 * the socket.receive(packet) line until the server send us something.
+	 * Because we have a separate Thread running this method however,
+	 * it does not hang up our entire program.
 	 * 
 	 * @return - A string representation of a packet that has been received
 	 */
-	public String receive(){
-		// Construct a byte array, and give it to a DatagramPacket object. 
-		// At this stage it is currently empty
-		byte[] data = new byte[1024];
-		DatagramPacket packet = new DatagramPacket(data, data.length);
+	public void receive(){
+		// Start a new Thread for receiving
+		receive = new Thread("Receiver") {
+			public void run(){
+				while(running){
+					// Construct a byte array, and give it to a DatagramPacket object. 
+					// At this stage it is currently empty
+					byte[] data = new byte[1024];
+					DatagramPacket packet = new DatagramPacket(data, data.length);
+					//
+					try {
+						socket.receive(packet);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					process(packet);
+				}
+			}
+		};
+		receive.start();
+	}
+	
+	/**
+	 * When a packet is received, the packet is extracted
+	 * and sent to this method.  Based on our header conventions,
+	 * it will perform the appropriate actions.  The different header
+	 * conventions are explained in the "PacketBrainstorming.txt" file.
+	 * 
+	 * @param message - The message in the received packet needing processing
+	 */
+	public void process(DatagramPacket packet){
+		// Extract the message into a String
+		String message = new String(packet.getData() );
 		
-		// Try to receive from the socket for our connection
-		// Packet will be filled with the bytes of data we are receiving
-		try {
-			// This method call essentially freezes the program until it receives something
-			socket.receive(packet);
-		} catch (IOException e) {
-			e.printStackTrace();
+		// Did the server confirm our connection?
+		if(message.startsWith("/c/") ){
+			setId(Integer.parseInt(message.split("/c/|/e/")[1]) );
+			gui.writeToChatLog("Successful connection! ID: " + ID);
 		}
 		
-		String message = new String(packet.getData() );
-		return message;
+		// Is the message from another Client?
+		else if(message.startsWith("/m/") ){
+			message = message.split("/m/|/e/")[1];
+			gui.writeToChatLog(message);
+		}
+		
+		// Is the server pinging us to make sure we are connected?
+		else if(message.startsWith("/ping/")){
+			String reply = "/ping/" + ID + "/e/";
+			send(reply.getBytes() );
+		}
 	}
 	
 	/**
