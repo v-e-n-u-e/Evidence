@@ -16,19 +16,19 @@ import java.awt.event.ActionEvent;
  * The login class is purely here to serve as preparation for
  * the client stage of the application.  It will ask the user for:
  * A name, an Address and a Port.
- * 
+ *
  * A ClientWindow is then created and these three variables are passed to it.
  * When the ClientWindow is created, which is what the user interacts with to send
  * messages, the ClientWindow will create a Client object.  The client is responsible
- * for all Network interactions with the Server.  
- * 
+ * for all Network interactions with the Server.
+ *
  * So ClientWindow is the GUI, Client is the back-end Network interaction.
- * 
+ *
  * @author Tyler Jones
  */
 public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	// Swing components
 	private JPanel contentPane;
 	private JTextField addressField;
@@ -48,7 +48,7 @@ public class Login extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		setResizable(false);
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,22 +58,22 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		addressField = new JTextField();
 		addressField.setColumns(10);
 		addressField.setBounds(79, 158, 135, 20);
 		contentPane.add(addressField);
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(79, 103, 135, 20);
 		contentPane.add(textField);
-		
+
 		portField = new JTextField();
 		portField.setColumns(10);
 		portField.setBounds(79, 214, 135, 20);
 		contentPane.add(portField);
-		
+
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,23 +84,23 @@ public class Login extends JFrame {
 				login(name, address, port);
 			}
 		});
-		
+
 		btnNewButton.setBounds(102, 271, 89, 23);
 		contentPane.add(btnNewButton);
-		
+
 		lblName = new JLabel("Name:");
-		lblName.setBounds(79, 88, 46, 14);
+		lblName.setBounds(79, 88, 135, 14);
 		contentPane.add(lblName);
-		
+
 		lblIpAddress = new JLabel("IP Address:");
-		lblIpAddress.setBounds(79, 141, 56, 14);
+		lblIpAddress.setBounds(79, 141, 135, 14);
 		contentPane.add(lblIpAddress);
-		
+
 		lblPort = new JLabel("Server Port:");
-		lblPort.setBounds(79, 200, 70, 14);
+		lblPort.setBounds(79, 200, 135, 14);
 		contentPane.add(lblPort);
 	}
-	
+
 	/**
 	 * Called when the user clicks the login button
 	 */
@@ -108,10 +108,10 @@ public class Login extends JFrame {
 		dispose();
 		ClientWindow client = new ClientWindow(name, address, port);
 	}
-	
+
 	/**
 	 * Main method for Login
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
