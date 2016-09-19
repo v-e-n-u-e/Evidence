@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultCaret;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -25,6 +26,7 @@ public class ServerGUI extends JFrame {
 	// Swing components
 	private JPanel contentPane;
 	private JTextArea logArea;
+	private DefaultCaret caret;
 	
 	/**
 	 * Appends the given message to the ServerGUI's JTextArea
@@ -63,6 +65,8 @@ public class ServerGUI extends JFrame {
 		logArea.setBackground(SystemColor.info);
 		logArea.setLineWrap(true);
 		logArea.setEditable(false);
+		caret = (DefaultCaret) logArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		scrollPane.setViewportView(logArea);
 		
 		setVisible(true);

@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
 
@@ -41,6 +42,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	private JPanel contentPane;
 	private JTextField messageField;
 	private JTextArea chatLog;
+	private DefaultCaret caret;
 
 	// The ClientPipe that gives us a "pipe" to the server
 	private ClientPipe pipe;
@@ -170,6 +172,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		chatLog.setBackground(SystemColor.info);
 		chatLog.setLineWrap(true);
 		chatLog.setEditable(false);
+		caret = (DefaultCaret) chatLog.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		chatPane.setViewportView(chatLog);
 
 		messageField = new JTextField();
