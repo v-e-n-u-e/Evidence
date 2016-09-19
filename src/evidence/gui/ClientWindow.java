@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -20,6 +21,7 @@ import java.awt.event.WindowEvent;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import javax.swing.JButton;
 
@@ -148,7 +150,12 @@ public class ClientWindow extends JFrame implements Runnable{
 			e.printStackTrace();
 		}
 		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frameSize = new Dimension(screenSize.width-200,screenSize.height-200);
+	    // setBounds(0,0,screenSize.width, screenSize.height);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//1400 by 700
 		setBounds(100, 100, 1400, 700);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -159,10 +166,13 @@ public class ClientWindow extends JFrame implements Runnable{
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new TitledBorder(null, "Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setBounds(768, 11, 306, 639);
+		//infoPanel.setBounds(frameSize.width/2, 11, (frameSize.width/4)-10, frameSize.height-11);
+		//infoPanel.setBounds(screenSize.width/2, 11, (3/14)*screenSize.width, screenSize.height-211);
 		contentPane.add(infoPanel);
 		
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
+		//chatPane.setBounds(frameSize.width-(frameSize.width/4), 11, (frameSize.width/4)-11, frameSize.height-11);
 		chatPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(chatPane);
 		
