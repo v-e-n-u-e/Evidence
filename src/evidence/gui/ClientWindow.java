@@ -227,19 +227,26 @@ public class ClientWindow extends JFrame implements Runnable{
 		render();
 	}
 
+	/**
+	 * Re-renders the contentPane components
+	 */
 	private void render() {
 		for(Component c : contentPane.getComponents() ){
 			c.repaint();
 		}
 	}
 	
+	/**
+	 * Updates the time left displayed in the information panel
+	 * 
+	 * @param time - A string representing time left
+	 */
 	public void updateTime(String time){
 		timeLeftArea.setText(time);
 		String[] splitted = time.split(" ");
 		int minutes = Integer.parseInt(splitted[2]); // The minutes left 
-		System.out.println(minutes);
-		if(minutes > 3){timeLeftArea.setBackground(Color.green);}
-		else if(minutes > 1){timeLeftArea.setBackground(Color.yellow);}
+		if(minutes >= 3){timeLeftArea.setBackground(Color.green);}
+		else if(minutes >= 1){timeLeftArea.setBackground(Color.yellow);}
 		else if(minutes < 1){timeLeftArea.setBackground(Color.red);}
 	}
 }
