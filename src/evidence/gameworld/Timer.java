@@ -1,5 +1,6 @@
 package evidence.gameworld;
 
+
 /**
  * Timer class is responsible for counting down to zero from the specified
  * number of seconds. True is returned when the time is up
@@ -11,7 +12,7 @@ package evidence.gameworld;
  *
  */
 public class Timer{
-	Thread thread;
+	Thread counter;
 	int seconds;
 	
 	/**
@@ -20,8 +21,14 @@ public class Timer{
 	 * @param seconds - the number of seconds to count down
 	 */
 	public Timer(int seconds){
-		thread = new Thread();
 		this.seconds = seconds;
+		counter = new Thread("Counter") {
+			public void run(){
+				countdown();
+			}
+		};
+		counter.start();
+		
 	}
 
 	/**
@@ -32,17 +39,39 @@ public class Timer{
 	 * @return false - when an exception is encountered
 	 * @throws InterruptedException
 	 */
-	public boolean countdown(){
+	public void countdown(){
 		for(; seconds >= 0; seconds--){
 			try {
-				thread.sleep(1000);
+				counter.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-				return false;
+				return;
 			}
 			System.out.println(this.toString());  //send timer here
+			
+			
 		}
-		return true;
+		
+		System.out.println("Times up"); //make cops arrive here
+		
+	}
+	
+	/**
+	 * Adds time to the counter
+	 * 
+	 * @param secs - number of seconds to be added to the time
+	 */
+	public void addTime(int secs){
+		this.seconds += secs;
+	}
+	
+	/**
+	 * Removes time from the counter
+	 * 
+	 * @param secs - number of seconds to be removed from the time
+	 */
+	public void removeTime(int secs){
+		this.seconds -= secs;
 	}
 	
 	/**
