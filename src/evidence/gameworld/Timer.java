@@ -82,7 +82,7 @@ public class Timer{
 	
 	/**
 	 * String is returned in the following format:
-	 * "Time Remaining: 00 minutes, 00 seconds"
+	 * "Time Left: 00 minutes, 00 seconds"
 	 */
 	public String toString(){
 		int secs = seconds;

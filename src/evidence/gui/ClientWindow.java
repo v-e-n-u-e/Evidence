@@ -176,7 +176,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		infoPanel.setLayout(null);
 		
 		timeLeftArea = new JTextArea();
-		timeLeftArea.setBackground(Color.LIGHT_GRAY);
+		timeLeftArea.setBackground(UIManager.getColor("Button.background"));
 		timeLeftArea.setEditable(false);
 		timeLeftArea.setBounds(10, 21, 286, 22);
 		timeLeftArea.setText(" ");
@@ -235,5 +235,11 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	public void updateTime(String time){
 		timeLeftArea.setText(time);
+		String[] splitted = time.split(" ");
+		int minutes = Integer.parseInt(splitted[2]); // The minutes left 
+		System.out.println(minutes);
+		if(minutes > 3){timeLeftArea.setBackground(Color.green);}
+		else if(minutes > 1){timeLeftArea.setBackground(Color.yellow);}
+		else if(minutes < 1){timeLeftArea.setBackground(Color.red);}
 	}
 }
