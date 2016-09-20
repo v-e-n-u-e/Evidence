@@ -14,6 +14,7 @@ public class ServerMain {
 	
 	// The port the server will run on, and the instance of the Server object
 	private int port;
+	private int numPlayers;
 	private Server server;
 	private ServerGUI serverGUI;
 	
@@ -24,10 +25,11 @@ public class ServerMain {
 	 * 
 	 * @param port - The port for the server to run on
 	 */
-	public ServerMain(int port){
+	public ServerMain(int port, int numPlayers){
 		this.port = port;
+		this.numPlayers = numPlayers;
 		this.serverGUI = new ServerGUI();
-		this.server = new Server(port, serverGUI);
+		this.server = new Server(port, serverGUI, numPlayers);
 	}
 	
 	/**
@@ -38,16 +40,14 @@ public class ServerMain {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		int port;
 		// Return and print a message if the user did not provide
 		// the correct command line arguments
-		if(args.length != 1){
-			System.out.println("Usage: java -jar [jarName].jar [port]");
+		if(args.length != 2){
+			System.out.println("Usage: java -jar [jarName].jar [port] [numPlayers]");
 			return;
 		}
 		
 		// Access the provided port number and call the constructor for ServerMain
-		port = Integer.parseInt(args[0]);
-		new ServerMain(port);
+		new ServerMain(Integer.parseInt(args[0]), Integer.parseInt(args[1]) );
 	}
 }

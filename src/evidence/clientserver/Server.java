@@ -54,7 +54,12 @@ public class Server implements Runnable{
 	private ServerGUI gui;
 	
 	// A Timer for the Server
-	Timer timer;
+	private Timer timer;
+	
+	// Number of players to start the game at
+	private int numPlayers;
+	
+	private boolean allPlayersConnected;
 	
 	/**
 	 * Constructor for a server instance
@@ -62,9 +67,10 @@ public class Server implements Runnable{
 	 * @param port - The port the server will be running on
 	 * @param gui - The GUI object for the server
 	 */
-	public Server(int port, ServerGUI gui){
+	public Server(int port, ServerGUI gui, int numPlayers){
 		this.port = port;
 		this.gui = gui;
+		this.numPlayers = numPlayers;
 		
 		// Try to create a socket for the port given in the command line arguments
 		try {
@@ -94,7 +100,7 @@ public class Server implements Runnable{
 		gui.writeToLog("Server successfully started on port: " + port);
 		manageClients();
 		receive();
-		startTimer();
+		//startTimer();
 	}
 
 	/**
@@ -220,6 +226,11 @@ public class Server implements Runnable{
 			
 			// Record we sent a connect packet and to who
 			gui.writeToLog("Sent confirm packet to: " + packet.getAddress() + ":" + packet.getPort() );
+			
+			if(!allPlayersConnected && clients.size() == numPlayers){
+				startTimer();
+				allPlayersConnected = true;
+			}
 		}
 		
 		// Is this packet a disconnection packet?
