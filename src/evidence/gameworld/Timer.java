@@ -1,5 +1,6 @@
 package evidence.gameworld;
 
+import evidence.clientserver.Server;
 
 /**
  * Timer class is responsible for counting down to zero from the specified
@@ -13,6 +14,7 @@ package evidence.gameworld;
  */
 public class Timer{
 	Thread counter;
+	Server server;
 	int seconds;
 	
 	/**
@@ -20,8 +22,9 @@ public class Timer{
 	 * 
 	 * @param seconds - the number of seconds to count down
 	 */
-	public Timer(int seconds){
+	public Timer(int seconds, Server server){
 		this.seconds = seconds;
+		this.server = server;
 		counter = new Thread("Counter") {
 			public void run(){
 				countdown();
@@ -47,7 +50,10 @@ public class Timer{
 				e.printStackTrace();
 				return;
 			}
-			System.out.println(this.toString());  //send timer here
+			String time = toString();
+			server.getGUI().writeToLog(time);
+			server.sendToAll("/timer/" + time + "/e/");
+			//System.out.println(this.toString());  //send timer here
 			
 			
 		}
@@ -80,7 +86,7 @@ public class Timer{
 	 */
 	public String toString(){
 		int secs = seconds;
-		String time = "Time Remaining: ";
+		String time = "Time Left: ";
 		int minutes = 0;
 		while(secs >= 60){
 			minutes ++;

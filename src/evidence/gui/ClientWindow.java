@@ -42,6 +42,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	private JPanel contentPane;
 	private JTextField messageField;
 	private JTextArea chatLog;
+	private JTextArea timeLeftArea;
 	private DefaultCaret caret;
 
 	// The ClientPipe that gives us a "pipe" to the server
@@ -162,6 +163,14 @@ public class ClientWindow extends JFrame implements Runnable{
 		infoPanel.setBorder(new TitledBorder(null, "Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setBounds(768, 11, 306, 639);
 		contentPane.add(infoPanel);
+		infoPanel.setLayout(null);
+		
+		timeLeftArea = new JTextArea();
+		timeLeftArea.setBackground(Color.LIGHT_GRAY);
+		timeLeftArea.setEditable(false);
+		timeLeftArea.setBounds(10, 21, 286, 22);
+		timeLeftArea.setText(" ");
+		infoPanel.add(timeLeftArea);
 
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
@@ -211,5 +220,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		for(Component c : contentPane.getComponents() ){
 			c.repaint();
 		}
+	}
+	
+	public void updateTime(String time){
+		timeLeftArea.setText(time);
 	}
 }

@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.gameworld.Timer;
 import evidence.gui.ServerGUI;
 
 /**
@@ -52,6 +53,9 @@ public class Server implements Runnable{
 	// A simple Window that servers as a formal log for the server
 	private ServerGUI gui;
 	
+	// A Timer for the Server
+	Timer timer;
+	
 	/**
 	 * Constructor for a server instance
 	 * 
@@ -74,6 +78,10 @@ public class Server implements Runnable{
 		run = new Thread(this, "Server");
 		run.start();
 	}
+	
+	public ServerGUI getGUI(){
+		return this.gui;
+	}
 
 	/**
 	 * Called when the run thread is started
@@ -86,6 +94,7 @@ public class Server implements Runnable{
 		gui.writeToLog("Server successfully started on port: " + port);
 		manageClients();
 		receive();
+		startTimer();
 	}
 
 	/**
@@ -243,7 +252,7 @@ public class Server implements Runnable{
 	 * @param address - the address to send to
 	 * @param port - the port to send to
 	 */
-	private void send(final byte[] data, InetAddress address, int port){
+	private synchronized void send(final byte[] data, InetAddress address, int port){
 		// Create a new thread to send the data on and then start the thread
 		send = new Thread("ServerSender"){
 			public void run(){
@@ -278,7 +287,7 @@ public class Server implements Runnable{
 	 * 
 	 * @param message - the message to send
 	 */
-	private void sendToAll(String message){
+	public void sendToAll(String message){
 		// Record we sent a packet and to everyone on the server
 		gui.writeToLog("Sent packet to all clients");
 		for(int i = 0; i < clients.size(); i++){
@@ -321,5 +330,9 @@ public class Server implements Runnable{
 		
 		// Record the user being disconnected
 		gui.writeToLog(message);
+	}
+	
+	private void startTimer(){
+		Timer timer = new Timer(300, this);
 	}
 }

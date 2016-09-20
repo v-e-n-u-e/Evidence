@@ -175,6 +175,11 @@ public class ClientPipe{
 			String reply = "/ping/" + ID + "/e/";
 			send(reply.getBytes() );
 		}
+		
+		else if(message.startsWith("/timer/")){
+			String timeUpdate = message.split("/timer/|/e/")[1];
+			gui.updateTime(timeUpdate);
+		}
 	}
 
 	/**
