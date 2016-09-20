@@ -3,7 +3,11 @@ package evidence.gameworld;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Object for the body
+ * @author Georgina Murphy
+ *
+ */
 public class Body extends Item {
 
 	public Body(String currentImage, String description) {
@@ -14,6 +18,7 @@ public class Body extends Item {
 	public void addActions() {
 		super.actions = new ArrayList<Action>();
 		actions.add(new PickUp());
+
 	}
 
 	@Override
