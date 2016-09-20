@@ -199,7 +199,6 @@ public class Server implements Runnable{
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
 					packet.getPort(), id) );
-			System.out.println("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
 			
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
