@@ -223,7 +223,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 
 		setVisible(true);
-		canvas.setImage("img/fridge.png", "img/table.png");
+		canvas.setImage("img/testwall.png", "img/bigfridge.png");
 		render();
 	}
 

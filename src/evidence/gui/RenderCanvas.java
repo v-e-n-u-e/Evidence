@@ -31,6 +31,6 @@ public class RenderCanvas extends Canvas{
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
 		g.drawImage(image, 0, 0, null);
-		g.drawImage(image2, 0, 0, null);
+		g.drawImage(image2, 200, 200, null);
 	}
 }
