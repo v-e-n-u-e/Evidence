@@ -1,8 +1,11 @@
-package evidence.gameworld;
+package evidence.gameworld.items;
 
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+
+import evidence.gameworld.actions.Action;
+import evidence.gameworld.actions.PickUp;
 /**
  * Object for the body
  * @author Georgina Murphy

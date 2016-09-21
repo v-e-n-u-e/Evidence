@@ -1,5 +1,6 @@
-package evidence.gameworld;
+package evidence.gameworld.rooms;
 
+import evidence.gameworld.Wall;
 import evidence.gameworld.Wall.Direction;
 
 /**

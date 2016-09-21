@@ -1,4 +1,4 @@
-package evidence.gameworld;
+package evidence.gameworld.rooms;
 /**
  * Class for the Garage
  * @author Georgina Murphy

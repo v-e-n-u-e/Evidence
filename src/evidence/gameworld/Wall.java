@@ -2,6 +2,8 @@ package evidence.gameworld;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import evidence.gameworld.items.Item;
  
 /**
  * A class for the wall object.
