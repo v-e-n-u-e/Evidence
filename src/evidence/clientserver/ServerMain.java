@@ -12,7 +12,9 @@ import evidence.gui.ServerGUI;
  */
 public class ServerMain {
 	
-	// The port the server will run on, and the instance of the Server object
+	// The port the server will run on, and the instance of the Server / ServerGUI objects
+	// NumPlayers is an argument needed to run ServerMain, it represents the number of players
+	// that the Server will start the game at when that many players have connected
 	private int port;
 	private int numPlayers;
 	private Server server;
@@ -35,7 +37,8 @@ public class ServerMain {
 	/**
 	 * The main method that the user should run to start the server.
 	 * Must provide a port number via the command line arguments or
-	 * run configurations in the user's IDE.  
+	 * run configurations in the user's IDE, as well as the numOfPlayers
+	 * to start the game at.  
 	 * 
 	 * @param args
 	 */
