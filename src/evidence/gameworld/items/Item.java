@@ -1,9 +1,11 @@
-package evidence.gameworld;
+package evidence.gameworld.items;
 
 
 import java.util.List;
 
 import javax.swing.ImageIcon;
+
+import evidence.gameworld.actions.Action;
 
 public abstract class  Item {
 	ImageIcon currentImage;

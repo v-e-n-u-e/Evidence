@@ -1,4 +1,7 @@
-package evidence.gameworld;
+package evidence.gameworld.actions;
+
+import evidence.gameworld.items.Item;
+
 /**
  * Pick up action
  * allows player to pickup up an item and put it in their inventory

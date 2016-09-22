@@ -4,6 +4,7 @@ How to run:
 	!IF NOT RUNNING THE SERVER ON YOUR LOCAL MACHINE, SKIP TO STEP 3!
 	
 	1. Run ServerMain in the evidence.clientserverpackage (make sure to add a Port number for the server to run on in the run configuration options - I use 8192).
+		ServerMain now also requires a number of players to start the game at, e.g when x number of players have connected, start the timer / game. 2 is default
 	
 	2. A small GUI interface for the server should appear if you are, this will log the server's activity.
 	

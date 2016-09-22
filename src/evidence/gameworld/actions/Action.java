@@ -1,4 +1,7 @@
-package evidence.gameworld;
+package evidence.gameworld.actions;
+
+import evidence.gameworld.items.Item;
+
 /**
  * Interface for action
  * 

@@ -180,6 +180,11 @@ public class ClientPipe{
 			String timeUpdate = message.split("/timer/|/e/")[1];
 			gui.updateTime(timeUpdate);
 		}
+		
+		else if(message.startsWith("/refusal/") ){
+			String refusal = message.split("/refusal/|/e/")[1];
+			gui.writeToChatLog(refusal);
+		}
 	}
 
 	/**

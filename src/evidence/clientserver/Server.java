@@ -54,7 +54,12 @@ public class Server implements Runnable{
 	private ServerGUI gui;
 	
 	// A Timer for the Server
-	Timer timer;
+	private Timer timer;
+	
+	// Number of players to start the game at
+	private int numPlayers;
+	
+	private boolean allPlayersConnected;
 	
 	/**
 	 * Constructor for a server instance
@@ -62,9 +67,10 @@ public class Server implements Runnable{
 	 * @param port - The port the server will be running on
 	 * @param gui - The GUI object for the server
 	 */
-	public Server(int port, ServerGUI gui){
+	public Server(int port, ServerGUI gui, int numPlayers){
 		this.port = port;
 		this.gui = gui;
+		this.numPlayers = numPlayers;
 		
 		// Try to create a socket for the port given in the command line arguments
 		try {
@@ -94,7 +100,6 @@ public class Server implements Runnable{
 		gui.writeToLog("Server successfully started on port: " + port);
 		manageClients();
 		receive();
-		startTimer();
 	}
 
 	/**
@@ -204,6 +209,12 @@ public class Server implements Runnable{
 		
 		// Is this packet a connection packet?
 		if(string.startsWith("/c/") ){
+			if(allPlayersConnected){
+				String refusal = "/m/A game is already running, you have been refused connnection/e/";
+				send(refusal, packet.getAddress(), packet.getPort() );
+				return;
+			}
+			
 			//Assign a unique identifier for this client
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
@@ -220,6 +231,13 @@ public class Server implements Runnable{
 			
 			// Record we sent a connect packet and to who
 			gui.writeToLog("Sent confirm packet to: " + packet.getAddress() + ":" + packet.getPort() );
+			
+			// Check if we are still waiting for all the players to connect, if we are still waiting
+			// and we just added the last player, start the timer / game.
+			if(!allPlayersConnected && clients.size() == numPlayers){
+				startTimer();
+				allPlayersConnected = true;
+			}
 		}
 		
 		// Is this packet a disconnection packet?
