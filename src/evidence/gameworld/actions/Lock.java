@@ -28,7 +28,7 @@ public class Lock extends Action {
 		if(item instanceof Door){
 			Door door = (Door)item;
 			// TODO get item from inventory
-			// TODO call unlock method in the door class
+			// TODO call lock method in the door class
 		}
 		
 		return "Cannot perform " + this.toString() + " on " + item.toString();

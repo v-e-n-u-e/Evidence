@@ -22,7 +22,7 @@ public abstract class Item {
 	private String name;
 	private String description;
 	private List<Action> actions;
-	private Map<String, String> images; //Map of image names to their descriptionsi
+	private Map<String, String> images; //Map of image names to their descriptions
 	private ImageIcon currentImage;
 	private int xPos;
 	private int yPos;

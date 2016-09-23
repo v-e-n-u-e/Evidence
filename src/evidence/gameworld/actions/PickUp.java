@@ -2,6 +2,7 @@ package evidence.gameworld.actions;
 
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
+import evidence.gameworld.items.MovableItem;
 
 /**
  * Pick up action
@@ -23,7 +24,11 @@ public class PickUp extends Action {
 	 */
 	@Override
 	public String apply(Item item, Player player) {
-		// TODO Auto-generated method stub
+		if(item instanceof MovableItem){
+			MovableItem mItem = (MovableItem) item;
+			player.addItem(mItem);
+			player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
+		}
 		return "Cannot perform " + this.toString() + " on " + item.toString();
 	}
 }

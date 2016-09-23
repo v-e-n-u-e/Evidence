@@ -5,6 +5,7 @@ import java.util.List;
 
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.Item;
+import evidence.gameworld.items.MovableItem;
 
 /**
  * Player Class
@@ -55,7 +56,7 @@ public class Player {
 	 * @param item
 	 *            - the item to add to the inventory
 	 */
-	public void addItem(Item item) {
+	public void addItem(MovableItem item) {
 		inventory.add(item);
 	}
 
@@ -65,7 +66,7 @@ public class Player {
 	 * @param item
 	 *            - the item to remove from the inventory
 	 */
-	public void removeItem(Item item) {
+	public void removeItem(MovableItem item) {
 		inventory.remove(item);
 	}
 
@@ -99,5 +100,9 @@ public class Player {
 			else
 				currentDirection = Direction.NORTH;
 		}
+	}
+
+	public Direction getCurrentDirection() {
+		return currentDirection;
 	}
 }

@@ -1,6 +1,7 @@
 package evidence.gameworld;
 
 import evidence.gameworld.Wall.Direction;
+import evidence.gameworld.items.Item;
 
 /**
  * Abstract class for a room
@@ -40,5 +41,17 @@ public class Room {
 	
 	public Wall[] getWalls(){
 		return walls;
+	}
+	
+	public void removeItem(Direction dir, Item item){
+		for(Wall wall : walls){
+			if(wall.getDirection().equals(dir)){
+				wall.removeItem(item);
+			}
+		}
+	}
+	
+	public String toString(){
+		return name.toString();
 	}
 }
