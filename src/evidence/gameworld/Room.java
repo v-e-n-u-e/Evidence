@@ -33,13 +33,12 @@ public class Room {
 	public Room(Name name) {
 		this.name = name;
 		this.walls[0] = new Wall(Direction.NORTH);
-		this.walls[1] = new Wall(Direction.SOUTH);
-		this.walls[2] = new Wall(Direction.EAST);
+		this.walls[1] = new Wall(Direction.EAST);
+		this.walls[2] = new Wall(Direction.SOUTH);
 		this.walls[3] = new Wall(Direction.WEST);
 	}
 	
 	public Wall[] getWalls(){
 		return walls;
 	}
-
 }

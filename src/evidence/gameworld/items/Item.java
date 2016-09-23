@@ -33,6 +33,10 @@ public abstract class Item {
 		this.actions = actions;
 		this.images = images;
 	}
+	
+	public List<Action> getActions(){
+		return actions;
+	}
 		
 	@XmlElement
 	public void setCurrentImage(String fileName){

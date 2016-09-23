@@ -1,5 +1,6 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
 /**
@@ -9,23 +10,20 @@ import evidence.gameworld.items.Item;
  *
  */
 public class Unlock extends Action {
-
+	
 	public Unlock() {
-		setName("Unlock");
-		setDescription("Unlock this item");
+		super("Unlock", "Unlock this item");
 	}
 
-	
 	/**
 	 * Method to apply the Unlock action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @return string - updated state
 	 */
 	@Override
-	public Item apply(Item item) {
+	public String apply(Item item, Player player) {
 		// TODO Auto-generated method stub
-		return null;
+		return "Cannot perform " + this.toString() + " on " + item.toString();
 	}
-
 }

@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
+import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
 /**
  * Enter action
@@ -10,23 +12,33 @@ import evidence.gameworld.items.Item;
 public class Enter extends Action {
 	
 	public Enter(){
-		setName("Enter");
-		setDescription("Go into this item");
+		super("Enter", "Go into this item");
 	}
 	
 	/**
 	 * Method to apply the enter action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @return string - updated state
 	 */
 	@Override
-	public Item apply(Item item) {
-		// TODO Auto-generated method stub
-		return null;
+	public String apply(Item item, Player player) {
+		if(item instanceof Door){
+			Door door = (Door)item;
+			if(door.getRoomOne().equals(player.getCurrentRoom())){
+				player.setRoom(door.getRoomTwo());
+			}else{
+				player.setRoom(door.getRoomOne());
+			}
+			return "You are now in the" + player.getCurrentRoom().toString();
+		}
+		
+		return "Cannot perform " + this.toString() + " on " + item.toString();
 	}
 
-
+	public String toString(){
+		return super.getName();
+	}
 
 	
 }

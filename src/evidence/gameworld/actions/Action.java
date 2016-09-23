@@ -1,5 +1,6 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
 /**
@@ -12,14 +13,20 @@ public abstract class Action {
 	private String name;
 	private String description;
 	
+	public Action(String name, String description){
+		this.name = name;
+		this.description = description;
+	}
+	
 	
 	/**
 	 * Method to apply this action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @param player - the player performing this action
+	 * @return string - updated state
 	 */
-	public abstract Item apply(Item item);
+	public abstract String apply(Item item, Player player);
 	
 	/**
 	 * Gets the name of this action
@@ -37,19 +44,7 @@ public abstract class Action {
 		return description;
 	}
 	
-	/**
-	 * Sets the name of this action
-	 * @return name
-	 */
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	/**
-	 * Sets the description of this action
-	 * @param description - description to set
-	 */
-	public void setDescription(String description){
-		this.description = description;
+	public String toString(){
+		return name;
 	}
 }

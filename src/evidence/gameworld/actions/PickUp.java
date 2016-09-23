@@ -1,5 +1,6 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
 /**
@@ -11,19 +12,18 @@ import evidence.gameworld.items.Item;
 public class PickUp extends Action {
 	
 	public PickUp(){
-		setName("Pick up");
-		setDescription("Pick up this item and put it in your inventory");
+		super("Pick up", "Pick up this item and put it in your inventory");
 	}
 	
 	/**
 	 * Method to apply the pickup action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @return string - updated state
 	 */
 	@Override
-	public Item apply(Item item) {
+	public String apply(Item item, Player player) {
 		// TODO Auto-generated method stub
-		return null;
+		return "Cannot perform " + this.toString() + " on " + item.toString();
 	}
 }
