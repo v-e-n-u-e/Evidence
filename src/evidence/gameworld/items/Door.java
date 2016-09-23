@@ -1,26 +1,49 @@
 package evidence.gameworld.items;
 
-import evidence.gameworld.rooms.Room;
+import java.util.List;
+import java.util.Map;
 
+import evidence.gameworld.Room;
+import evidence.gameworld.actions.Action;
+
+/**
+ * Class for a door object.
+ * 
+ * A door object links two room objects 
+ * @author Georgina Murphy
+ *
+ */
 public class Door extends Item {
-	Room roomOne;
-	Room roomTwo;
+
+	private Room roomOne;
+	private Room roomTwo;
+	private boolean locked;
+	private int keyCode;
+
+	public Door(String name, String description, List<Action> actions, Map<String, String> images,
+			Room roomOne, Room roomTwo, boolean locked, int keyCode) {
+		super(name, description, actions, images);
+		this.roomOne = roomOne;
+		this.roomTwo = roomTwo;
+		this.locked = locked;
+		this.keyCode = keyCode;
+	}
 	
-	public Door(String currentImage, String description) {
-		super(currentImage, description);
-		// TODO Auto-generated constructor stub
+	public String unlock(Key key){
+		if(checkKey(key)){
+			locked = false;
+			return "Door is now unlocked";
+		}
+		else
+			return "Incorrect key. Door remains locked";
 	}
-
-	@Override
-	public void addActions() {
-		// TODO Auto-generated method stub
-
+	
+	public boolean checkKey(Key key){
+		if(key.getCode() == keyCode)
+			return true;
+		
+		else 
+			return false;
 	}
-
-	@Override
-	public void addImages() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }

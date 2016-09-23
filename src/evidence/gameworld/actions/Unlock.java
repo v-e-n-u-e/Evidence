@@ -3,20 +3,21 @@ package evidence.gameworld.actions;
 import evidence.gameworld.items.Item;
 
 /**
- * Pick up action
- * allows player to pickup up an item and put it in their inventory
- * 
+ * Unlock Action
+ * Allows a player to unlock and item
  * @author Georgina Murphy
+ *
  */
-public class PickUp extends Action {
-	
-	public PickUp(){
-		setName("Pick up");
-		setDescription("Pick up this item and put it in your inventory");
+public class Unlock extends Action {
+
+	public Unlock() {
+		setName("Unlock");
+		setDescription("Unlock this item");
 	}
+
 	
 	/**
-	 * Method to apply the pickup action to the provided item
+	 * Method to apply the Unlock action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
 	 * @return item - a new item with an updated state
@@ -26,4 +27,5 @@ public class PickUp extends Action {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

@@ -7,8 +7,13 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
-public class Enter implements Action {
-
+public class Enter extends Action {
+	
+	public Enter(){
+		setName("Enter");
+		setDescription("Go into this item");
+	}
+	
 	/**
 	 * Method to apply the enter action to the provided item
 	 * 
@@ -21,16 +26,7 @@ public class Enter implements Action {
 		return null;
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	
 }
