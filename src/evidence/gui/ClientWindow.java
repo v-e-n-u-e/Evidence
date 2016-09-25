@@ -19,12 +19,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import javax.swing.JButton;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -75,7 +72,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
 		// Send a connection packet to the server via our client
 		String connection = "/c/" + name + "/e/";
-		pipe.send(connection.getBytes() );
+		pipe.send(connection);
 
 		// Put the program in running state
 		run = new Thread(this, "Running");
@@ -108,9 +105,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		// Append the user's name to their message, writeToHistory and clear the txtMessage Area
 		message = pipe.getName() + ": " + message;
 		message = "/m/" + message;
-
+		
 		// Send message to server
-		pipe.send(message.getBytes() );
+		pipe.send(message);
 		messageField.setText("");
 	}
 
@@ -217,7 +214,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				String disconnect = "/dc/" + pipe.getId() + "/e/";
-				pipe.send(disconnect.getBytes() );
+				pipe.send(disconnect);
 				close();
 			}
 		});
