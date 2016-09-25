@@ -246,4 +246,12 @@ public class ClientWindow extends JFrame implements Runnable{
 		else if(minutes >= 1){timeLeftArea.setBackground(Color.yellow);}
 		else if(minutes < 1){timeLeftArea.setBackground(Color.red);}
 	}
+	
+	/**
+	 * Used when a client is refused connection, stops them
+	 * from being able to send messages to the server.
+	 */
+	public void doNotAllowMessaging(){
+		messageField.setEditable(false);
+	}
 }

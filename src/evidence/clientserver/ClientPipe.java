@@ -200,6 +200,7 @@ public class ClientPipe{
 		else if(message.startsWith("/refusal/") ){
 			String refusal = message.split("/refusal/|/e/")[1];
 			gui.writeToChatLog(refusal);
+			gui.doNotAllowMessaging();
 		}
 	}
 	
