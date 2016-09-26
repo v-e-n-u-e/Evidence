@@ -1,6 +1,10 @@
 package evidence.clientserver;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -59,6 +63,7 @@ public class Server implements Runnable{
 	// Number of players to start the game at
 	private int numPlayers;
 	
+	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
 	
 	/**
@@ -85,6 +90,11 @@ public class Server implements Runnable{
 		run.start();
 	}
 	
+	/**
+	 * Returns the GUI object for the server
+	 * 
+	 * @return - The GUI for the server
+	 */
 	public ServerGUI getGUI(){
 		return this.gui;
 	}
@@ -193,20 +203,33 @@ public class Server implements Runnable{
 	
 	/**
 	 * Upon receiving a packet, this method is called.
-	 * Responsible for reading the header of the packet and
-	 * performing the appropriate action based on it.
-	 * 
-	 * HEADERS:
-	 * "/c/" - A connection packet, used upon initial connection
-	 * "/m/" - A message packet, used when users send messages to the server
+	 * Responsible for reading the bytes into and object
+	 * and delegating the work to the appropriate method
+	 * depending on the object.
 	 * 
 	 * @param packet - The packet to process
 	 */
 	private void process(DatagramPacket packet) {
 		// Record the server processing a packet
 		gui.writeToLog("Processing packet from: " + packet.getAddress() + ":" + packet.getPort() );
-		String string = new String(packet.getData() );
+		Object o = null;
+		try {
+			o = getObject(packet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		// If we received a String in the form of bytes, process the String
+		if(o instanceof String){processString((String) o, packet);}
+	}
+	
+	/**
+	 * Processes a String received over the network
+	 * 
+	 * @param string - The String to process
+	 * @param packet - The packet the String arrived in
+	 */
+	private void processString(String string, DatagramPacket packet){
 		// Is this packet a connection packet?
 		if(string.startsWith("/c/") ){
 			if(allPlayersConnected){
@@ -219,11 +242,11 @@ public class Server implements Runnable{
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
 					packet.getPort(), id) );
-			
+					
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
 			sendToAll("/m/" + string.split("/c/|/e/")[1] + " connected to the Server!");
-			
+					
 			// Form a connection confirmation packet, and send it,
 			// to the client to confirm a connection was successful
 			String confirm = "/c/" + id;
@@ -239,27 +262,62 @@ public class Server implements Runnable{
 				allPlayersConnected = true;
 			}
 		}
-		
+				
 		// Is this packet a disconnection packet?
 		else if(string.startsWith("/dc/") ){
 			String ID = string.split("/dc/|/e/")[1];
 			disconnect(Integer.parseInt(ID), true);
 		}
-		
+				
 		// Is this packet a message packet?
 		else if(string.startsWith("/m/") ){
 			sendToAll(string);
 		}
-		
+				
 		// Is this packet responding to a ping from the server?
 		else if(string.startsWith("/ping/")){
 			clientResponse.add(Integer.parseInt(string.split("/ping/|/e/")[1]) );
 		}
-		
+				
 		// If we could not categorize the packet, print to the server log
 		else{
 			gui.writeToLog("Could not categorize packet from " + packet.getAddress() + ":" + packet.getPort());
 		}
+	}
+	
+	/**
+	 * Given an object, will serialize the object
+	 * using ByteArrayOutputStream and ObjectOutputStream
+	 * 
+	 * @param o - The object to serialize
+	 * @return - The Array of bytes representing our serialized object
+	 * @throws IOException
+	 */
+	public byte[] getBytes(Object o) throws IOException{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
+		oos.flush();
+		oos.writeObject(o);
+		oos.flush();
+		return bos.toByteArray();
+	}
+	
+	/**
+	 * Given a packet, will return the Object that the packet.getData()
+	 * represents.  deserializes using ByteArrayInputStream and 
+	 * ObjectInputStream.
+	 * 
+	 * @param packet - The packet containing the data
+	 * @return - The object the data represented
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private Object getObject(DatagramPacket packet) throws IOException, ClassNotFoundException{
+		byte[] data = packet.getData();
+		ByteArrayInputStream bis = new ByteArrayInputStream(data);
+		ObjectInputStream ois = new ObjectInputStream(bis);
+		Object o = ois.readObject();
+		return o;
 	}
 	
 	/**
@@ -288,7 +346,8 @@ public class Server implements Runnable{
 	}
 	
 	/**
-	 * Appends an end character to our message
+	 * Appends an end character to our message and delegates
+	 * work to send(Bytes, Address, Port).
 	 * 
 	 * @param message - The message to send
 	 * @param address - The address to send the packet to
@@ -296,7 +355,11 @@ public class Server implements Runnable{
 	 */
 	private void send(String message, InetAddress address, int port){
 		message += "/e/";
-		send(message.getBytes(), address, port);
+		try {
+			send(getBytes(message), address, port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -310,7 +373,7 @@ public class Server implements Runnable{
 		gui.writeToLog("Sent packet to all clients");
 		for(int i = 0; i < clients.size(); i++){
 			ServerClient client = clients.get(i);
-			send(message.getBytes(), client.address, client.port);
+			send(message, client.address, client.port);
 		}
 	}
 	
@@ -350,6 +413,9 @@ public class Server implements Runnable{
 		gui.writeToLog(message);
 	}
 	
+	/**
+	 * Starts the timer for our game
+	 */
 	private void startTimer(){
 		Timer timer = new Timer(300, this);
 	}

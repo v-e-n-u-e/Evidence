@@ -1,0 +1,56 @@
+package evidence.gameworld.items;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
+
+import evidence.gameworld.Player;
+import evidence.gameworld.actions.Action;
+import evidence.gameworld.actions.PickUp;
+/**
+ * Class for a container object.
+ * Container object its one that can hold another item
+ * @author Georgina Murphy
+ *
+ */
+public class Container extends Item {
+	
+	private ArrayList<Item> containedItems = new ArrayList<Item>();
+	private int capacity;
+	
+	public Container(String name, String description, List<Action> actions, Map<String, String> images, int capacity) {
+		super(name, description, actions, images);
+		this.capacity = capacity;
+	}
+	/**
+	 * Method to put an item into this container
+	 * @param item - item to place in container
+	 * @return feedback string about what has happened
+	 */
+	public String putItem(MovableItem item, Player player){
+		if(containedItems.size() < capacity){
+			containedItems.add(item);
+			capacity+= item.getSize();
+			player.removeItem(item);
+			return item.toString() + " successfully placed in " + this.toString();
+		}
+		else{
+			return this.toString() + " is already full. Please remove an item first";
+		}
+	}
+	
+	public String getItem(MovableItem item, Player player){
+		if(containedItems.contains(item)){
+			containedItems.remove(item);
+			capacity-= item.getSize();
+			player.addItem(item);
+			return item.toString() + " was successfully removed from " + this.toString() + ". It has been added to your inventory";
+		}else{
+			return item.toString() + " is not inside " + this.toString();
+		}
+	}
+	
+}

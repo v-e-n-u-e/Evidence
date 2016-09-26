@@ -1,6 +1,8 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
+import evidence.gameworld.items.MovableItem;
 
 /**
  * Pick up action
@@ -8,32 +10,25 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
-public class PickUp implements Action {
-
-	private String name = "Pick up";
-	private String description = "Pick up this item and put it in your inventory";
+public class PickUp extends Action {
 	
+	public PickUp(){
+		super("Pick up", "Pick up this item and put it in your inventory");
+	}
 	
 	/**
 	 * Method to apply the pickup action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @return string - updated state
 	 */
 	@Override
-	public Item apply(Item item) {
-		// TODO Auto-generated method stub
-		return null;
+	public String apply(Item item, Player player) {
+		if(item instanceof MovableItem){
+			MovableItem mItem = (MovableItem) item;
+			player.addItem(mItem);
+			player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
+		}
+		return "Cannot perform " + this.toString() + " on " + item.toString();
 	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
 }

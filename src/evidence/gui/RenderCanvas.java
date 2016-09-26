@@ -8,6 +8,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class RenderCanvas extends Canvas{
+	private static final long serialVersionUID = 1L;
 	
 	ImageIcon img;
 	Image image;

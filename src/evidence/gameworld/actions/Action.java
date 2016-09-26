@@ -1,30 +1,50 @@
 package evidence.gameworld.actions;
 
+import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
 /**
- * Interface for action
+ * Abstract Class for action
  * 
  * @author Georgina Murphy
  */
-public interface Action {
+public abstract class Action {
+	
+	private String name;
+	private String description;
+	
+	public Action(String name, String description){
+		this.name = name;
+		this.description = description;
+	}
+	
+	
 	/**
 	 * Method to apply this action to the provided item
 	 * 
 	 * @param item - the item the action is being applied to
-	 * @return item - a new item with an updated state
+	 * @param player - the player performing this action
+	 * @return string - updated state
 	 */
-	public Item apply(Item item);
+	public abstract String apply(Item item, Player player);
 	
 	/**
 	 * Gets the name of this action
 	 * @return name
 	 */
-	public String getName();
+	public String getName(){
+		return name;
+	}
 	
 	/**
 	 * Gets the description of this action
 	 * @return description
 	 */
-	public String getDescription();
+	public String getDescription(){
+		return description;
+	}
+	
+	public String toString(){
+		return name;
+	}
 }
