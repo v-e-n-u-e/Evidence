@@ -89,25 +89,41 @@ public class Player {
 	public void rotateView(String direction) {
 		switch (currentDirection) {
 		case NORTH:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.WEST;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.EAST;
+				break;
+			}
 		case EAST:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.NORTH;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.SOUTH;
+				break;
+			}
 		case SOUTH:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.EAST;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.WEST;
+				break;
+			}
 		case WEST:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.SOUTH;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.NORTH;
+				break;
+			}
 		}
 	}
 
