@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TestHolder {
 
 	private List<TestClass> listTestClass = new ArrayList<TestClass>();
+	private TestClass other = new TestClass();
 
 	@XmlElement(name = "TestClass") // makes <TestClass> instead of <listTestClass>
 	public List<TestClass> getListTestClass() {
@@ -19,6 +20,15 @@ public class TestHolder {
 
 	public void setListTestClass(List<TestClass> listTestClass) {
 		this.listTestClass = listTestClass;
+	}
+	
+	@XmlElement(name = "TestClassField")
+	public TestClass getOther(){
+		return other;
+	}
+	
+	public void setOther(TestClass other){
+		this.other = other;
 	}
 	
 }

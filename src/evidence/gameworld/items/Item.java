@@ -36,6 +36,10 @@ public abstract class Item {
 		this.images = images;
 	}
 	
+	public Item(){
+		
+	}
+	
 	public List<Action> getActions(){
 		return actions;
 	}
@@ -82,8 +86,21 @@ public abstract class Item {
 		this.actions = actions;
 	}
 	
-
+	@XmlElement
 	public void setImages(Map<String, String> images){
 		this.images = images;
-	} 
+	}
+	
+	@XmlElement
+	public Map<String,String> getImages(){
+		return this.images;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public String getDescription(){
+		return this.description;
+	}
 }

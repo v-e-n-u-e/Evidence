@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
@@ -18,6 +19,7 @@ import evidence.gameworld.actions.PickUp;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class TestItem extends Item {
 	
 	private int capacity; 
@@ -25,6 +27,10 @@ public class TestItem extends Item {
 	public TestItem(String name, String description, List<Action> actions, Map<String, String> images, int capacity) {
 		super(name, description, actions, images);
 		this.capacity = capacity;
+	}
+	
+	public TestItem(){
+		
 	}
 	
 	@XmlElement
@@ -42,7 +48,6 @@ public class TestItem extends Item {
 		super.setActions(actions);
 	}
 	
-	@XmlElement
 	public void setImages(Map<String, String> images){
 		super.setImages(images);
 	}

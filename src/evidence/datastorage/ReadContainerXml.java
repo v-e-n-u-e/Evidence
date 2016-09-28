@@ -16,6 +16,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import evidence.gameworld.actions.Action;
+import evidence.gameworld.items.Container;
+import evidence.gameworld.items.TestItem;
+
 /**
  * This Class reads Information about the current state of the Game, Players and
  * items from an xml file. 
@@ -23,18 +27,23 @@ import org.xml.sax.SAXException;
  * @author Connor
  *
  */
-public class ReadXml {
+public class ReadContainerXml {
 
 	public static void main(String[] args){
 		
 		try{
 			File file = new File("testFile.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(TestHolder.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(TestItem.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			TestHolder test = (TestHolder) jaxbUnmarshaller.unmarshal(file);
-			for(TestClass t : test.getListTestClass()){
-				System.out.println(t.getName());
-			}
+			TestItem safe = (TestItem) jaxbUnmarshaller.unmarshal(file);
+			System.out.println("X position " +safe.getXPos());
+			System.out.println("Y position " +safe.getYPos());
+			System.out.println("name " + safe.getName());
+			System.out.println("description " + safe.getDescription());
+			System.out.println(safe.getImages().get("hammer.png"));
+			
+			Container container = new Container(safe.getName(),safe.getDescription(),null,safe.getImages(),3);
+			
 		}catch (JAXBException e) {
 		 e.printStackTrace();	
 		}
