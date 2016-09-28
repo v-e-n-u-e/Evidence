@@ -37,7 +37,7 @@ public abstract class Item {
 	public List<Action> getActions(){
 		return actions;
 	}
-		
+	
 	@XmlElement
 	public void setCurrentImage(String fileName){
 		currentImage = new ImageIcon(fileName, images.get(fileName));
@@ -55,5 +55,25 @@ public abstract class Item {
 	
 	public String toString(){
 		return name;
+	}
+	
+
+	public void setName(String name){
+		this.name = name;
+	}
+	
+
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+
+	public void setActions(List<Action> actions){
+		this.actions = actions;
+	}
+	
+
+	public void setImages(Map<String, String> images){
+		this.images = images;
 	}
 }
