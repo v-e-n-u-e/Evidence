@@ -11,10 +11,9 @@ public class TestItem implements Serializable{
 	int x;
 	int y;
 	
-	
-	public TestItem(String img, int ex, int wy){
+	public TestItem(String img, int x, int y){
 		this.image = img;
-		this.x=ex;
-		this.y=wy;
+		this.x = x;
+		this.y = y;
 	}
 }

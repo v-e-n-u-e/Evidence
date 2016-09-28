@@ -7,6 +7,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import evidence.testobjects.TestWall;
+
 public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +23,8 @@ public class RenderCanvas extends Canvas{
 	Image image3;
 	ImageIcon img4;
 	Image image4;
+	
+	TestWall wall;
 	
 	public RenderCanvas(){
 		super();
