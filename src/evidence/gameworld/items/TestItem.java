@@ -20,7 +20,7 @@ import evidence.gameworld.actions.PickUp;
  */
 public class TestItem extends Item {
 	
-	private int capacity;
+	private int capacity; 
 	
 	public TestItem(String name, String description, List<Action> actions, Map<String, String> images, int capacity) {
 		super(name, description, actions, images);

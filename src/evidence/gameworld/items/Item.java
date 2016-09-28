@@ -55,7 +55,7 @@ public abstract class Item {
 		this.yPos = yPos;
 	}
 	@XmlElement
-	public int getYPos(){
+	public int getYPos(){ 
 		return this.yPos;
 	}
 	@XmlElement
