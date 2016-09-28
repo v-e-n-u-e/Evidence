@@ -52,14 +52,16 @@ public class RenderCanvas extends Canvas{
 	//Again, in the future this will use a for loop but for now we have hard coded it
 	@Override
 	public void paint(Graphics g){
-		if(image == null){return;}
+		/*if(image == null){return;}
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
 		g.drawImage(image, 0, 0, null);
 		g.drawImage(image1, 20, 300, null);
 		g.drawImage(image2, 450, 130, null);
 		g.drawImage(image3, 600, 400, null);
-		g.drawImage(image4, 530, 450, null);
+		g.drawImage(image4, 530, 450, null);*/
+		
+		g.drawImage(new ImageIcon(wall.background).getImage(), 0, 0, null);
 		
 	}
 }

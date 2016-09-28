@@ -9,7 +9,7 @@ public class TestWall implements Serializable{
 	private static final long serialVersionUID = -5773920118639098391L;
 	
 	ArrayList<TestItem> items;
-	String background;
+	public String background;
 	
 	public TestWall(){
 		items = new ArrayList<TestItem>();
