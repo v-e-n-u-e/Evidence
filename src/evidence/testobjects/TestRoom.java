@@ -18,18 +18,18 @@ public class TestRoom{
 	}
 	
 	public void setupRoom(){
-		TestItem mop = new TestItem("img/bigmop.png");
-		TestItem box = new TestItem("img/bigcbbox.png");
-		TestItem fridge = new TestItem("img/bigfridge.png");
-		TestItem camera = new TestItem("img/cameraon.png");
-		TestItem painting = new TestItem("img/bigpainting.png");
+		TestItem mop = new TestItem("img/bigmop.png",600,400);
+		TestItem box = new TestItem("img/bigcbbox.png",530,450);
+		TestItem fridge = new TestItem("img/bigfridge.png",20,300);
+		//TestItem camera = new TestItem("img/cameraon.png");
+		TestItem painting = new TestItem("img/bigpainting.png",450,130);
 		
 		north.addItem(mop);
 		north.addItem(box);
 		
 		south.addItem(fridge);
 		
-		east.addItem(camera);
+		//east.addItem(camera);
 		
 		west.addItem(painting);
 	}

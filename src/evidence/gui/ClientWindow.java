@@ -311,6 +311,6 @@ public class ClientWindow extends JFrame implements Runnable{
 	}
 	
 	public void reRenderWall(){
-		
+		canvas.repaint();
 	}
 }
