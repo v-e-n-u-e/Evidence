@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
+import evidence.gameworld.Wall.Direction;
 import evidence.gui.ServerGUI;
 
 /**
@@ -112,6 +113,7 @@ public class Server implements Runnable{
 	public void run() {
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
+		game = new Game();
 		manageClients();
 		receive();
 	}
@@ -246,6 +248,11 @@ public class Server implements Runnable{
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
 					packet.getPort(), id) );
+			
+			Player toAdd = new Player();
+			toAdd.setID(id);
+			toAdd.setDirection(Direction.NORTH);
+			game.addPlayer(toAdd);
 					
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
@@ -437,22 +444,24 @@ public class Server implements Runnable{
 	}
 	
 	private void rotatePlayerViewLeft(Integer ID){
-		this.gui.writeToLog("Rotated left: " + ID);
-		//for(int i = 0; i < game.getPlayers().size(); i++){
-		//	Player p = game.getPlayers().get(i);
-		//	if(p.getID() == ID){
-		//		game.rotateLeft(p);
-		//	}
-		//}
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			Player p = game.getPlayers().get(i);
+			if(p.getID().equals(ID) ){
+				game.rotateLeft(p);
+				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+			}
+		}
 	}
 	
 	private void rotatePlayerViewRight(Integer ID){
-		this.gui.writeToLog("Rotated left: " + ID);
-		//for(int i = 0; i < game.getPlayers().size(); i++){
-		//	Player p = game.getPlayers().get(i);
-		//	if(p.getID() == ID){
-		//		game.rotateRight(p);
-		//	}
-		//}
+		gui.writeToLog("Attempting to rotate: " + ID);
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			Player p = game.getPlayers().get(i);
+			gui.writeToLog("Player ID: " + p.getID() );
+			if(p.getID().equals(ID) ){
+				game.rotateRight(p);
+				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+			}
+		}
 	}
 }

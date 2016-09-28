@@ -37,6 +37,10 @@ public class Game {
 	public List<Player> getPlayers(){
 		return this.players;
 	}
+	
+	public void addPlayer(Player p){
+		this.players.add(p);
+	}
 
 	/**
 	 * Rotate the players view left
