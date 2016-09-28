@@ -348,7 +348,7 @@ public class Server implements Runnable{
 	 * @throws IOException
 	 */
 	public byte[] getBytes(Object o) throws IOException{
-		System.out.println(o.getClass());
+		//System.out.println(o.getClass());
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();

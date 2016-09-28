@@ -209,7 +209,6 @@ public class ClientPipe{
 	private void processWall(TestWall wall){
 		gui.wall = wall;
 		gui.reRenderWall();
-		System.out.println("SET THE WALL");
 	}
 	
 	/**

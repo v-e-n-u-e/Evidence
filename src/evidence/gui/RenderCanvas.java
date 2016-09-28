@@ -60,7 +60,7 @@ public class RenderCanvas extends Canvas{
 		g.drawImage(image2, 450, 130, null);
 		g.drawImage(image3, 600, 400, null);
 		g.drawImage(image4, 530, 450, null);*/
-		
+		if(wall == null){return;}
 		g.drawImage(new ImageIcon(wall.background).getImage(), 0, 0, null);
 		
 	}
