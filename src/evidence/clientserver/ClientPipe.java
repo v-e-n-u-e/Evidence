@@ -10,6 +10,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 import evidence.gui.ClientWindow;
+import evidence.testobjects.TestWall;
 
 /**
  * The Client is responsible for mediating the interaction between
@@ -164,6 +165,7 @@ public class ClientPipe{
 		
 		// Was the serialized object a String?
 		if(o instanceof String){processString((String) o);}
+		else if(o instanceof TestWall){processWall((TestWall) o);}
 	}
 	
 	/**
@@ -202,6 +204,11 @@ public class ClientPipe{
 			gui.writeToChatLog(refusal);
 			gui.doNotAllowMessaging();
 		}
+	}
+	
+	private void processWall(TestWall wall){
+		gui.wall = wall;
+		gui.reRenderWall();
 	}
 	
 	/**

@@ -11,8 +11,13 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.gameworld.Game;
+import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
+import evidence.gameworld.Wall.Direction;
 import evidence.gui.ServerGUI;
+import evidence.testobjects.TestRoom;
+import evidence.testobjects.TestWall;
 
 /**
  * The server is responsible for keeping track of any users connected to the server
@@ -66,6 +71,10 @@ public class Server implements Runnable{
 	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
 	
+	private Game game; // The game instance
+	
+	private TestRoom room;
+	
 	/**
 	 * Constructor for a server instance
 	 * 
@@ -108,6 +117,9 @@ public class Server implements Runnable{
 	public void run() {
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
+		game = new Game();
+		room = new TestRoom();
+		room.setupRoom();
 		manageClients();
 		receive();
 	}
@@ -242,6 +254,11 @@ public class Server implements Runnable{
 			int id = UniqueIdentifier.getIdentifier();
 			clients.add(new ServerClient(string.split("/c/|/e/")[1], packet.getAddress(),
 					packet.getPort(), id) );
+			
+			Player toAdd = new Player();
+			toAdd.setID(id);
+			toAdd.setDirection(Direction.NORTH);
+			game.addPlayer(toAdd);
 					
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
@@ -261,6 +278,15 @@ public class Server implements Runnable{
 				startTimer();
 				allPlayersConnected = true;
 			}
+			
+			// INTEGRATION DAY
+			try {
+				Player p = game.getPlayers().get(0);
+				byte[] data = getBytes(room.getFacingWall(p) );
+				send(data, packet.getAddress(), packet.getPort() );
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 				
 		// Is this packet a disconnection packet?
@@ -278,6 +304,34 @@ public class Server implements Runnable{
 		else if(string.startsWith("/ping/")){
 			clientResponse.add(Integer.parseInt(string.split("/ping/|/e/")[1]) );
 		}
+		
+		// Is a client trying to rotate it's view left?
+		else if(string.startsWith("/rotLeft/") ){
+			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
+			if(rotatePlayerViewLeft(ID) ){
+				try {
+					Player p = game.getPlayers().get(0);
+					byte[] data = getBytes(room.getFacingWall(p) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		// Is a client trying to rotate it's view left?
+		else if(string.startsWith("/rotRight/") ){
+			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
+			if(rotatePlayerViewRight(ID) ){
+				try {
+					Player p = game.getPlayers().get(0);
+					byte[] data = getBytes(room.getFacingWall(p) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 				
 		// If we could not categorize the packet, print to the server log
 		else{
@@ -294,6 +348,7 @@ public class Server implements Runnable{
 	 * @throws IOException
 	 */
 	public byte[] getBytes(Object o) throws IOException{
+		//System.out.println(o.getClass());
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();
@@ -418,5 +473,31 @@ public class Server implements Runnable{
 	 */
 	private void startTimer(){
 		Timer timer = new Timer(300, this);
+	}
+	
+	private boolean rotatePlayerViewLeft(Integer ID){
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			Player p = game.getPlayers().get(i);
+			if(p.getID().equals(ID) ){
+				game.rotateLeft(p);
+				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean rotatePlayerViewRight(Integer ID){
+		gui.writeToLog("Attempting to rotate: " + ID);
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			Player p = game.getPlayers().get(i);
+			gui.writeToLog("Player ID: " + p.getID() );
+			if(p.getID().equals(ID) ){
+				game.rotateRight(p);
+				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+				return true;
+			}
+		}
+		return false;
 	}
 }

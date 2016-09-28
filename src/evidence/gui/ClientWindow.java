@@ -8,6 +8,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
+import evidence.testobjects.TestWall;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -22,6 +23,8 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -54,6 +57,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
+	
+	public TestWall wall;
 
 	/**
 	 * Create the frame and attempt to open the connection
@@ -250,7 +255,14 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 
 		setVisible(true);
-		canvas.setImage("img/testwall.png", "img/bigfridge.png");
+		//Send our RenderCanvas the appropriate images to draw based on the room/wall. For now, this is hard coded for testing. Will clean later.
+		String[] images = new String[5];
+		images[0]="img/testwall2.png";
+		images[1]="img/bigfridge.png";
+		images[2]="img/bigpainting.png";
+		images[3]="img/bigmop.png";
+		images[4]="img/bigcbbox.png";
+		canvas.setImage(images);
 		render();
 	}
 
@@ -288,11 +300,18 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	//Used for the server/client side interactions
 	public void rotateLeft(){
-		
+		String rotateLeft = "/rotLeft/" + pipe.getId() + "/e/"; 
+		pipe.send(rotateLeft);
 	}
 	
 	//Used for the server/client side interactions
 	public void rotateRight(){
-		
+		String rotateRight = "/rotRight/" + pipe.getId() + "/e/"; 
+		pipe.send(rotateRight);
+	}
+	
+	public void reRenderWall(){
+		canvas.wall = this.wall;
+		canvas.repaint();
 	}
 }

@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
@@ -9,12 +11,13 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  *
- */
+ */ 
 public class Unlock extends Action {
 
 	public Unlock() {
 		super("Unlock", "Unlock this item");
 	}
+
 
 	/**
 	 * Method to apply the Unlock action to the provided item

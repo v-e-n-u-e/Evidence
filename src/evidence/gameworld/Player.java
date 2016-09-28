@@ -18,6 +18,7 @@ public class Player {
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private Room currentRoom;
 	private Direction currentDirection;
+	private Integer ID; // Used to identify clients with a player object
 
 	public void setRoom(Room room) {
 		currentRoom = room;
@@ -29,6 +30,14 @@ public class Player {
 
 	public void setInventory(ArrayList<Item> items) {
 		inventory = items;
+	}
+	
+	public void setID(Integer ID){
+		this.ID = ID;
+	}
+	
+	public Integer getID(){
+		return this.ID;
 	}
 
 	/**
@@ -80,25 +89,41 @@ public class Player {
 	public String rotateView(String direction) {
 		switch (currentDirection) {
 		case NORTH:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.WEST;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.EAST;
+				break;
+			}
 		case EAST:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.NORTH;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.SOUTH;
+				break;
+			}
 		case SOUTH:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.EAST;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.WEST;
+				break;
+			}
 		case WEST:
-			if (direction.equals("L"))
+			if (direction.equals("L")){
 				currentDirection = Direction.SOUTH;
-			else
+				break;
+			}
+			else{
 				currentDirection = Direction.NORTH;
+				break;
+			}
 		}
 		
 		return "You are now facing the " + currentDirection.toString() + " wall in the " + currentRoom.toString();
