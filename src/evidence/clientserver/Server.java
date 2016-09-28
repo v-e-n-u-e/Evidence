@@ -11,6 +11,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.gameworld.Game;
+import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
 import evidence.gui.ServerGUI;
 
@@ -65,6 +67,8 @@ public class Server implements Runnable{
 	
 	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
+	
+	private Game game; // The game instance
 	
 	/**
 	 * Constructor for a server instance
@@ -278,6 +282,18 @@ public class Server implements Runnable{
 		else if(string.startsWith("/ping/")){
 			clientResponse.add(Integer.parseInt(string.split("/ping/|/e/")[1]) );
 		}
+		
+		// Is a client trying to rotate it's view left?
+		else if(string.startsWith("/rotLeft/") ){
+			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
+			rotatePlayerViewLeft(ID);
+		}
+		
+		// Is a client trying to rotate it's view left?
+		else if(string.startsWith("/rotRight/") ){
+			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
+			rotatePlayerViewRight(ID);
+		}
 				
 		// If we could not categorize the packet, print to the server log
 		else{
@@ -418,5 +434,25 @@ public class Server implements Runnable{
 	 */
 	private void startTimer(){
 		Timer timer = new Timer(300, this);
+	}
+	
+	private void rotatePlayerViewLeft(Integer ID){
+		this.gui.writeToLog("Rotated left: " + ID);
+		//for(int i = 0; i < game.getPlayers().size(); i++){
+		//	Player p = game.getPlayers().get(i);
+		//	if(p.getID() == ID){
+		//		game.rotateLeft(p);
+		//	}
+		//}
+	}
+	
+	private void rotatePlayerViewRight(Integer ID){
+		this.gui.writeToLog("Rotated left: " + ID);
+		//for(int i = 0; i < game.getPlayers().size(); i++){
+		//	Player p = game.getPlayers().get(i);
+		//	if(p.getID() == ID){
+		//		game.rotateRight(p);
+		//	}
+		//}
 	}
 }

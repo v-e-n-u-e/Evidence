@@ -288,11 +288,13 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	//Used for the server/client side interactions
 	public void rotateLeft(){
-		
+		String rotateLeft = "/rotLeft/" + pipe.getId() + "/e/"; 
+		pipe.send(rotateLeft);
 	}
 	
 	//Used for the server/client side interactions
 	public void rotateRight(){
-		
+		String rotateRight = "/rotRight/" + pipe.getId() + "/e/"; 
+		pipe.send(rotateRight);
 	}
 }

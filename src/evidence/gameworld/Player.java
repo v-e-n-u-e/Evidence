@@ -18,6 +18,7 @@ public class Player {
 	private List<Item> inventory;
 	private Room currentRoom;
 	private Direction currentDirection;
+	private Integer ID; // Used to identify clients with a player object
 
 	public void setRoom(Room room) {
 		currentRoom = room;
@@ -29,6 +30,14 @@ public class Player {
 
 	public void setInventory(ArrayList<Item> items) {
 		inventory = items;
+	}
+	
+	public void setID(Integer ID){
+		this.ID = ID;
+	}
+	
+	public Integer getID(){
+		return this.ID;
 	}
 
 	/**
