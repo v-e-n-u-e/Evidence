@@ -309,4 +309,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/"; 
 		pipe.send(rotateRight);
 	}
+	
+	public void reRenderWall(){
+		
+	}
 }
