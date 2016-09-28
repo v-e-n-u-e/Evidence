@@ -8,6 +8,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
+import evidence.testobjects.TestWall;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -56,6 +57,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
+	
+	public TestWall wall;
 
 	/**
 	 * Create the frame and attempt to open the connection

@@ -16,6 +16,8 @@ import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
 import evidence.gameworld.Wall.Direction;
 import evidence.gui.ServerGUI;
+import evidence.testobjects.TestRoom;
+import evidence.testobjects.TestWall;
 
 /**
  * The server is responsible for keeping track of any users connected to the server
@@ -71,6 +73,8 @@ public class Server implements Runnable{
 	
 	private Game game; // The game instance
 	
+	private TestRoom room;
+	
 	/**
 	 * Constructor for a server instance
 	 * 
@@ -114,6 +118,8 @@ public class Server implements Runnable{
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
 		game = new Game();
+		room = new TestRoom();
+		room.setupRoom();
 		manageClients();
 		receive();
 	}
@@ -272,6 +278,15 @@ public class Server implements Runnable{
 				startTimer();
 				allPlayersConnected = true;
 			}
+			
+			// INTEGRATION DAY
+			try {
+				Player p = game.getPlayers().get(0);
+				byte[] data = getBytes(room.getFacingWall(p) );
+				send(data, packet.getAddress(), packet.getPort() );
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 				
 		// Is this packet a disconnection packet?
@@ -293,13 +308,29 @@ public class Server implements Runnable{
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotLeft/") ){
 			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
-			rotatePlayerViewLeft(ID);
+			if(rotatePlayerViewLeft(ID) ){
+				try {
+					Player p = game.getPlayers().get(0);
+					byte[] data = getBytes(room.getFacingWall(p) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotRight/") ){
 			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
-			rotatePlayerViewRight(ID);
+			if(rotatePlayerViewRight(ID) ){
+				try {
+					Player p = game.getPlayers().get(0);
+					byte[] data = getBytes(room.getFacingWall(p) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 				
 		// If we could not categorize the packet, print to the server log
@@ -317,6 +348,7 @@ public class Server implements Runnable{
 	 * @throws IOException
 	 */
 	public byte[] getBytes(Object o) throws IOException{
+		System.out.println(o.getClass());
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();
@@ -443,17 +475,19 @@ public class Server implements Runnable{
 		Timer timer = new Timer(300, this);
 	}
 	
-	private void rotatePlayerViewLeft(Integer ID){
+	private boolean rotatePlayerViewLeft(Integer ID){
 		for(int i = 0; i < game.getPlayers().size(); i++){
 			Player p = game.getPlayers().get(i);
 			if(p.getID().equals(ID) ){
 				game.rotateLeft(p);
 				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+				return true;
 			}
 		}
+		return false;
 	}
 	
-	private void rotatePlayerViewRight(Integer ID){
+	private boolean rotatePlayerViewRight(Integer ID){
 		gui.writeToLog("Attempting to rotate: " + ID);
 		for(int i = 0; i < game.getPlayers().size(); i++){
 			Player p = game.getPlayers().get(i);
@@ -461,7 +495,9 @@ public class Server implements Runnable{
 			if(p.getID().equals(ID) ){
 				game.rotateRight(p);
 				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+				return true;
 			}
 		}
+		return false;
 	}
 }
