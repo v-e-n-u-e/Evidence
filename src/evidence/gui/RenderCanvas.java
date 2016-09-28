@@ -7,6 +7,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import evidence.testobjects.TestItem;
 import evidence.testobjects.TestWall;
 
 public class RenderCanvas extends Canvas{
@@ -60,8 +61,11 @@ public class RenderCanvas extends Canvas{
 		g.drawImage(image2, 450, 130, null);
 		g.drawImage(image3, 600, 400, null);
 		g.drawImage(image4, 530, 450, null);*/
-		if(wall == null){return;}
+		if(wall==null){return;}
 		g.drawImage(new ImageIcon(wall.background).getImage(), 0, 0, null);
+		for(TestItem item : wall.items){
+			g.drawImage(new ImageIcon(item.image).getImage(), item.x, item.y, null);
+		}
 		
 	}
 }

@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 public class TestItem implements Serializable{
 	private static final long serialVersionUID = -5968895252584282495L;
 	
-	String image;
-	int x;
-	int y;
+	public String image;
+	public int x;
+	public int y;
 	
 	public TestItem(String img, int x, int y){
 		this.image = img;
