@@ -37,7 +37,7 @@ public class TestItem extends Item {
 		super.setDescription(description);
 	}
 	
-	@XmlElement
+	@XmlElement 
 	public void setActions(List<Action> actions){
 		super.setActions(actions);
 	}

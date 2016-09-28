@@ -75,5 +75,5 @@ public abstract class Item {
 
 	public void setImages(Map<String, String> images){
 		this.images = images;
-	}
+	} 
 }
