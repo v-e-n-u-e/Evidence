@@ -22,6 +22,10 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -178,6 +182,32 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setBounds(10, 21, 286, 22);
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
+		
+		JPanel invPanel = new JPanel();
+		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		invPanel.setToolTipText("Inventory");
+		invPanel.setBounds(10, 60, 284, 291);
+		infoPanel.add(invPanel);
+		
+		//Button used for turning right in the room
+		JButton rightButton = new JButton("Turn Right");
+		rightButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rotateRight();
+			}
+		});
+		rightButton.setBounds(167, 361, 129, 43);
+		infoPanel.add(rightButton);
+		
+		//Button used for turning left in the room
+		JButton leftButton = new JButton("Turn Left");
+		leftButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rotateLeft();
+			}
+		});
+		leftButton.setBounds(10, 361, 129, 43);
+		infoPanel.add(leftButton);
 
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
@@ -253,5 +283,16 @@ public class ClientWindow extends JFrame implements Runnable{
 	 */
 	public void doNotAllowMessaging(){
 		messageField.setEditable(false);
+	}
+	
+	
+	//Used for the server/client side interactions
+	public void rotateLeft(){
+		
+	}
+	
+	//Used for the server/client side interactions
+	public void rotateRight(){
+		
 	}
 }
