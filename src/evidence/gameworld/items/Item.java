@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
@@ -18,6 +19,7 @@ import evidence.gameworld.actions.Action;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement(name = "Item")
 public abstract class Item {
 	private String name;
 	private String description;
@@ -37,7 +39,7 @@ public abstract class Item {
 	public List<Action> getActions(){
 		return actions;
 	}
-		
+	
 	@XmlElement
 	public void setCurrentImage(String fileName){
 		currentImage = new ImageIcon(fileName, images.get(fileName));
@@ -52,8 +54,36 @@ public abstract class Item {
 	public void setYPos(int yPos){
 		this.yPos = yPos;
 	}
+	@XmlElement
+	public int getYPos(){ 
+		return this.yPos;
+	}
+	@XmlElement
+	public int getXPos(){
+		return this.xPos;
+	}
 	
 	public String toString(){
 		return name;
 	}
+	
+
+	public void setName(String name){
+		this.name = name;
+	}
+	
+
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+
+	public void setActions(List<Action> actions){
+		this.actions = actions;
+	}
+	
+
+	public void setImages(Map<String, String> images){
+		this.images = images;
+	} 
 }
