@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
@@ -18,6 +19,7 @@ import evidence.gameworld.actions.Action;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement(name = "Item")
 public abstract class Item {
 	private String name;
 	private String description;
@@ -51,6 +53,14 @@ public abstract class Item {
 	@XmlElement
 	public void setYPos(int yPos){
 		this.yPos = yPos;
+	}
+	@XmlElement
+	public int getYPos(){
+		return this.yPos;
+	}
+	@XmlElement
+	public int getXPos(){
+		return this.xPos;
 	}
 	
 	public String toString(){
