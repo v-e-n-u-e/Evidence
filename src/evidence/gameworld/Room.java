@@ -17,11 +17,11 @@ public class Room {
 	 *
 	 */
 	public enum Name{
-		Kitchen,
-		Bathroom,
-		Bedroom,
-		Office,
-		Garage;
+		KITCHEN,
+		BATHROOM,
+		BEDROOM,
+		OFFICE,
+		GARAGE;
 	}
 	
 	private Wall[] walls = new Wall[4];
@@ -33,10 +33,10 @@ public class Room {
 	 */
 	public Room(Name name) {
 		this.name = name;
-		this.walls[0] = new Wall(Direction.NORTH);
-		this.walls[1] = new Wall(Direction.EAST);
-		this.walls[2] = new Wall(Direction.SOUTH);
-		this.walls[3] = new Wall(Direction.WEST);
+		this.walls[0] = new Wall(Direction.NORTH, "", 0, 0);
+		this.walls[1] = new Wall(Direction.SOUTH, "", 0, 0);
+		this.walls[2] = new Wall(Direction.EAST, "", 0, 0);
+		this.walls[3] = new Wall(Direction.WEST, "", 0, 0);
 	}
 	
 	public Wall[] getWalls(){

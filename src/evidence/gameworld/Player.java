@@ -15,7 +15,7 @@ import evidence.gameworld.items.MovableItem;
  */
 public class Player {
 
-	private List<Item> inventory;
+	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private Room currentRoom;
 	private Direction currentDirection;
 
@@ -77,7 +77,7 @@ public class Player {
 	 * @param direction
 	 *            - L for left or R for right
 	 */
-	public void rotateView(String direction) {
+	public String rotateView(String direction) {
 		switch (currentDirection) {
 		case NORTH:
 			if (direction.equals("L"))
@@ -100,9 +100,15 @@ public class Player {
 			else
 				currentDirection = Direction.NORTH;
 		}
+		
+		return "You are now facing the " + currentDirection.toString() + " wall in the " + currentRoom.toString();
 	}
 
 	public Direction getCurrentDirection() {
 		return currentDirection;
+	}
+	
+	public ArrayList<Item> getInventory(){
+		return inventory;
 	}
 }

@@ -3,6 +3,8 @@ package evidence.gameworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import evidence.gameworld.items.Item;
  
 /**
@@ -27,9 +29,15 @@ public class Wall {
 	}
 	private Direction direction;
 	private List<Item> items;
+	private ImageIcon currentImage;
+	private int xPos;
+	private int yPos;
 	
-	public Wall(Direction direction){
+	public Wall(Direction direction, String fileName, int x, int y){
+		this.xPos = x;
+		this.yPos = y;
 		this.direction = direction;
+		currentImage = new ImageIcon(fileName);
 		items = new ArrayList<Item>();
 	}
 	
@@ -61,5 +69,17 @@ public class Wall {
 	 */
 	public List<Item> getItems() {
 		return items;
+	}
+	
+	public ImageIcon getImage(){
+		return currentImage;
+	}
+	
+	public int getX(){
+		return xPos;
+	}
+	
+	public int getY(){
+		return yPos;
 	}
 }
