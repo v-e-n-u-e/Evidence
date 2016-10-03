@@ -1,5 +1,11 @@
 package evidence.gameworld.actions;
 
+
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
@@ -8,7 +14,14 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
-public abstract class Action {
+
+
+@XmlRootElement
+
+
+public abstract class Action implements Serializable{
+	private static final long serialVersionUID = 2467451372271352711L;
+
 	
 	private String name;
 	private String description;
@@ -16,6 +29,10 @@ public abstract class Action {
 	public Action(String name, String description){
 		this.name = name;
 		this.description = description;
+	}
+	
+	public Action(){
+		
 	}
 	
 	
@@ -32,6 +49,7 @@ public abstract class Action {
 	 * Gets the name of this action
 	 * @return name
 	 */
+	@XmlElement
 	public String getName(){
 		return name;
 	}
@@ -40,6 +58,7 @@ public abstract class Action {
 	 * Gets the description of this action
 	 * @return description
 	 */
+	@XmlElement
 	public String getDescription(){
 		return description;
 	}
@@ -47,4 +66,9 @@ public abstract class Action {
 	public String toString(){
 		return name;
 	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
 }
+

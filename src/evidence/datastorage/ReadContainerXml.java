@@ -32,17 +32,18 @@ public class ReadContainerXml {
 	public static void main(String[] args){
 		
 		try{
-			File file = new File("testFile.xml");
+			File file = new File("SavedGamed.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(TestItem.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			TestItem safe = (TestItem) jaxbUnmarshaller.unmarshal(file);
-			System.out.println("X position " +safe.getXPos());
-			System.out.println("Y position " +safe.getYPos());
-			System.out.println("name " + safe.getName());
-			System.out.println("description " + safe.getDescription());
-			System.out.println(safe.getImages().get("hammer.png"));
-			
 			Container container = new Container(safe.getName(),safe.getDescription(),null,safe.getImages(),3);
+			container.setXPos(safe.getXPos());
+			container.setYPos(safe.getYPos());
+			System.out.println("X Position: " + container.getXPos());
+			System.out.println("Y Position: " + container.getYPos());
+			System.out.println("Name: " + container.getName());
+			System.out.println("Description: " + container.getDescription());
+			System.out.println("description of image: " +safe.getImages().get(0));
 			
 		}catch (JAXBException e) {
 		 e.printStackTrace();	

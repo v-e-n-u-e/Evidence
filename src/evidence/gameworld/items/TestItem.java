@@ -52,4 +52,8 @@ public class TestItem extends Item {
 		super.setImages(images);
 	}
 	
+	public List<String> getImages(){
+		return super.getImages();
+	}
+	
 }

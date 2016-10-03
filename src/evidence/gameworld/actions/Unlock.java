@@ -12,6 +12,7 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */ 
+@XmlRootElement
 public class Unlock extends Action {
 
 	public Unlock() {

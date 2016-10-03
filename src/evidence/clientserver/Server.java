@@ -16,8 +16,6 @@ import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
 import evidence.gameworld.Wall.Direction;
 import evidence.gui.ServerGUI;
-import evidence.testobjects.TestRoom;
-import evidence.testobjects.TestWall;
 
 /**
  * The server is responsible for keeping track of any users connected to the server
@@ -116,8 +114,7 @@ public class Server implements Runnable{
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
 		game = new Game();
-		//room = new TestRoom();
-		//room.setupRoom();
+		game.setup();
 		manageClients();
 		receive();
 	}
@@ -255,7 +252,7 @@ public class Server implements Runnable{
 			
 			Player toAdd = new Player();
 			toAdd.setID(id);
-			toAdd.setDirection(Direction.NORTH);
+			toAdd.setDirection(Direction.SOUTH);
 			game.addPlayer(toAdd);
 					
 			// Record who we connected to the server
@@ -278,13 +275,12 @@ public class Server implements Runnable{
 			}
 			
 			// INTEGRATION DAY
-			//try {
-			//	Player p = game.getPlayers().get(0);
-			//	byte[] data = getBytes(room.getFacingWall(p) );
-			//	send(data, packet.getAddress(), packet.getPort() );
-			//} catch (IOException e) {
-			//	e.printStackTrace();
-			//}
+			try {
+				byte[] data = getBytes(toAdd.getWall() );
+				send(data, packet.getAddress(), packet.getPort() );
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 				
 		// Is this packet a disconnection packet?

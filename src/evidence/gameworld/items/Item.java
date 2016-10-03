@@ -1,10 +1,8 @@
 package evidence.gameworld.items;
 
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
@@ -20,7 +18,8 @@ import evidence.gameworld.actions.Action;
  *
  */
 @XmlRootElement(name = "Item")
-public abstract class Item {
+public abstract class Item implements Serializable{
+	
 	private String name;
 	private String description;
 	private List<Action> actions;
@@ -46,12 +45,12 @@ public abstract class Item {
 	
 	@XmlElement
 	public void setCurrentImage(String fileName){
-		for(String image : images){
-			if(image.equals(fileName)){
-				currentImage = image;
-			}
-					
-		}
+		//for(String image : images){
+		//	if(image.equals(fileName)){
+		//		currentImage = image;
+		//	}
+		this.currentImage = fileName;	
+		//}
 	}
 	
 	@XmlElement
@@ -74,6 +73,10 @@ public abstract class Item {
 	
 	public String toString(){
 		return name;
+	}
+	
+	public String getImageName(){
+		return this.currentImage;
 	}
 	
 
