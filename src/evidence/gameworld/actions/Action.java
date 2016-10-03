@@ -1,5 +1,8 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
@@ -8,6 +11,7 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
+@XmlRootElement
 public abstract class Action {
 	
 	private String name;
@@ -16,6 +20,10 @@ public abstract class Action {
 	public Action(String name, String description){
 		this.name = name;
 		this.description = description;
+	}
+	
+	public Action(){
+		
 	}
 	
 	
@@ -32,6 +40,7 @@ public abstract class Action {
 	 * Gets the name of this action
 	 * @return name
 	 */
+	@XmlElement
 	public String getName(){
 		return name;
 	}
@@ -40,11 +49,16 @@ public abstract class Action {
 	 * Gets the description of this action
 	 * @return description
 	 */
+	@XmlElement
 	public String getDescription(){
 		return description;
 	}
 	
 	public String toString(){
 		return name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 }

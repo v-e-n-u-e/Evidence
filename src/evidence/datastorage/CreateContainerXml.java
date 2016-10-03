@@ -16,8 +16,11 @@ import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.TestItem;
+
 /**
- * 
+ * Creates an XML file for a single container, the main method is passed the name of the
+ * Container eg Safe,Box,Chest... and the appropriate method is chosen as to what file to create.
+ * A separate XML file is made for each differn't container.
  * 
  * @author Connor
  *
@@ -39,7 +42,7 @@ public class CreateContainerXml {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(safe.getClass());
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			File file = new File("testFile.xml");
+			File file = new File("SavedGamed.xml");
 			//formats and writes to the file
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			//prints to file
