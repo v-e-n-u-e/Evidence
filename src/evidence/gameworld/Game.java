@@ -41,10 +41,10 @@ public class Game {
 		images.clear();
 		images.add("painting.png");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0), rooms.get(1), true, 123);
-		door.setCurrentImage("painting.png");
+		door.setCurrentImage("img/door.png");
 		door.setXPos(30);
 		door.setYPos(100);
-		rooms.get(0).getWalls()[2].addItem(door);
+		rooms.get(0).getWalls()[1].addItem(door);
 		rooms.get(1).getWalls()[0].addItem(door);
 		
 		//Player player = new Player();

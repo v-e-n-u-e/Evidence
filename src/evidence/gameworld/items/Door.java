@@ -1,5 +1,6 @@
 package evidence.gameworld.items;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ import evidence.gameworld.actions.Action;
  * @author Georgina Murphy
  *
  */
-public class Door extends Item {
-
+public class Door extends Item{
+	
 	private Room roomOne;
 	private Room roomTwo;
 	private boolean locked;

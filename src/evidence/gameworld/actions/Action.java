@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import java.io.Serializable;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
@@ -8,7 +10,8 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
-public abstract class Action {
+public abstract class Action implements Serializable{
+	private static final long serialVersionUID = 2467451372271352711L;
 	
 	private String name;
 	private String description;

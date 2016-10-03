@@ -2,6 +2,7 @@ package evidence.clientserver;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -132,7 +133,7 @@ public class ClientPipe{
 				while(running){
 					// Construct a byte array, and give it to a DatagramPacket object.
 					// At this stage it is currently empty
-					byte[] data = new byte[1024];
+					byte[] data = new byte[2048];
 					DatagramPacket packet = new DatagramPacket(data, data.length);
 					//
 					try {
