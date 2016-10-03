@@ -21,7 +21,8 @@ public class Room {
 		BATHROOM,
 		BEDROOM,
 		OFFICE,
-		GARAGE;
+		GARAGE,
+		LOUNGE;
 	}
 	
 	private Wall[] walls = new Wall[4];

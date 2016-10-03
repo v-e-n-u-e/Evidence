@@ -14,7 +14,7 @@ import evidence.gameworld.actions.Action;
 public class MovableItem extends Item {
 	private int size;
 	
-	public MovableItem(String name, String description, List<Action> actions, Map<String, String> images, int size) {
+	public MovableItem(String name, String description, List<Action> actions, List<String> images, int size) {
 		super(name, description, actions, images);
 		this.size = size;
 	}

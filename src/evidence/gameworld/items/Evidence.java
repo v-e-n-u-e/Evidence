@@ -21,7 +21,7 @@ import evidence.gameworld.actions.Action;
 public class Evidence extends Item{
 	private int value;
 	
-	public Evidence(String name, String description, List<Action> actions, Map<String, String> images, int value) {
+	public Evidence(String name, String description, List<Action> actions, List<String> images, int value) {
 		super(name, description, actions, images);
 		this.value = value;
 	}

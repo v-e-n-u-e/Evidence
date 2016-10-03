@@ -26,16 +26,20 @@ public class Game {
 	 */
 	public void setup() {
 		rooms.add(new Room(Name.BATHROOM));
+		rooms.add(new Room(Name.BEDROOM));
 		rooms.add(new Room(Name.KITCHEN));
+		rooms.add(new Room(Name.GARAGE));
+		rooms.add(new Room(Name.LOUNGE));
+		rooms.add(new Room(Name.OFFICE));
 		
 		List<Action> actions = new ArrayList<Action>();
-		HashMap<String, String> images = new HashMap<String, String>();
+		List<String> images = new ArrayList<String>();
 		
 		actions.add(new Enter());
 		actions.add(new Unlock());
 		actions.add(new Lock());
 		images.clear();
-		images.put("painting.png", "clean painting");
+		images.add("painting.png");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0), rooms.get(1), true, 123);
 		door.setCurrentImage("painting.png");
 		door.setXPos(30);
