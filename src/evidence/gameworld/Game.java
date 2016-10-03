@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import evidence.gameworld.Room.Name;
+import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Enter;
 import evidence.gameworld.actions.Lock;
@@ -25,39 +26,27 @@ public class Game {
 	 */
 	public void setup() {
 		rooms.add(new Room(Name.BATHROOM));
+		rooms.add(new Room(Name.KITCHEN));
 		
 		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Unlock());
 		HashMap<String, String> images = new HashMap<String, String>();
-		images.put("cbbox.png", "Clean cardboard box");
-		Item item = new Container("Cardbord Box", "A cardboard box", actions, images, 7);
-		item.setCurrentImage("cbbox.png");
-		item.setXPos(30);
-		item.setYPos(100);
-		rooms.get(0).getWalls()[0].addItem(item);
 		
-		actions.clear();
-		actions.add(new PickUp());
-		images.clear();
-		images.put("axe.png", "clean axe");
-		images.put("baxe.png", "bloodied axe");
-		item = new MovableItem("axe", "an axe", actions, images, 3);
-		item.setCurrentImage("axe.png");
-		item.setXPos(30);
-		item.setYPos(100);
-		rooms.get(0).getWalls()[1].addItem(item);
-		
-		actions.clear();
 		actions.add(new Enter());
 		actions.add(new Unlock());
 		actions.add(new Lock());
 		images.clear();
 		images.put("painting.png", "clean painting");
-		item = new Door("Door", "The door goes nowhere", actions, images, rooms.get(0), null, true, 123);
-		item.setCurrentImage("painting.png");
-		item.setXPos(30);
-		item.setYPos(100);
-		rooms.get(0).getWalls()[2].addItem(item);
+		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0), rooms.get(1), true, 123);
+		door.setCurrentImage("painting.png");
+		door.setXPos(30);
+		door.setYPos(100);
+		rooms.get(0).getWalls()[2].addItem(door);
+		rooms.get(1).getWalls()[0].addItem(door);
+		
+		Player player = new Player();
+		player.setDirection(Direction.SOUTH);
+		player.setRoom(rooms.get(0));
+		players.add(player);
 	}
 
 	/**
