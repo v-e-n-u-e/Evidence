@@ -9,7 +9,6 @@ import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
 import evidence.gameworld.Wall;
-import evidence.testobjects.TestWall;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -24,12 +23,15 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -244,6 +246,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		messageField.setColumns(10);
 
 		canvas = new RenderCanvas();
+		canvas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PopupMenu options = new PopupMenu("Options");
+				canvas.add(options);
+				options.insert(new MenuItem("Test Option"), 0);
+				options.insert(new MenuItem("Test Option2"), 1);
+				options.show(canvas, e.getX(), e.getY() );
+			}
+		});
 		canvas.setBounds(20, 18, 720, 630);
 		contentPane.add(canvas);
 
