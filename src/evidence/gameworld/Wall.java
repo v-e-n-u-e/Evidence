@@ -1,5 +1,6 @@
 package evidence.gameworld;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */
-public class Wall {
-	
+public class Wall implements Serializable{
+	private static final long serialVersionUID = 7834346011040118322L;
+
 	/**
 	 * A enum class that represents the direction of this wall
 	 *
@@ -29,7 +31,7 @@ public class Wall {
 	}
 	private Direction direction;
 	private List<Item> items;
-	private ImageIcon currentImage;
+	private String currentImage;
 	private int xPos;
 	private int yPos;
 	
@@ -37,7 +39,7 @@ public class Wall {
 		this.xPos = x;
 		this.yPos = y;
 		this.direction = direction;
-		currentImage = new ImageIcon(fileName);
+		currentImage = fileName;
 		items = new ArrayList<Item>();
 	}
 	
@@ -71,7 +73,7 @@ public class Wall {
 		return items;
 	}
 	
-	public ImageIcon getImage(){
+	public String getImageName(){
 		return currentImage;
 	}
 	

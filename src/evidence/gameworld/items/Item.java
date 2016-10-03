@@ -76,6 +76,10 @@ public abstract class Item {
 		return name;
 	}
 	
+	public String getImageName(){
+		return this.currentImage;
+	}
+	
 
 	public void setName(String name){
 		this.name = name;

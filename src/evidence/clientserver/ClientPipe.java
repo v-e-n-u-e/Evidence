@@ -9,6 +9,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import evidence.gameworld.Wall;
 import evidence.gui.ClientWindow;
 import evidence.testobjects.TestWall;
 
@@ -165,7 +166,7 @@ public class ClientPipe{
 		
 		// Was the serialized object a String?
 		if(o instanceof String){processString((String) o);}
-		else if(o instanceof TestWall){processWall((TestWall) o);}
+		else if(o instanceof Wall){processWall((Wall) o);}
 	}
 	
 	/**
@@ -206,7 +207,7 @@ public class ClientPipe{
 		}
 	}
 	
-	private void processWall(TestWall wall){
+	private void processWall(Wall wall){
 		gui.wall = wall;
 		gui.reRenderWall();
 	}

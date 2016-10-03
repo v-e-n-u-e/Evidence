@@ -47,10 +47,10 @@ public class Game {
 		rooms.get(0).getWalls()[2].addItem(door);
 		rooms.get(1).getWalls()[0].addItem(door);
 		
-		Player player = new Player();
-		player.setDirection(Direction.SOUTH);
-		player.setRoom(rooms.get(0));
-		players.add(player);
+		//Player player = new Player();
+		//player.setDirection(Direction.SOUTH);
+		//player.setRoom(rooms.get(0));
+		//players.add(player);
 	}
 
 	/**
@@ -65,6 +65,7 @@ public class Game {
 	}
 	
 	public void addPlayer(Player p){
+		p.setRoom(rooms.get(0) );
 		this.players.add(p);
 	}
 
