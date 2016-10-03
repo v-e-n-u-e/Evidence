@@ -24,11 +24,16 @@ public class PickUp extends Action {
 	 */
 	@Override
 	public String apply(Item item, Player player) {
+		String feedback = "";
 		if(item instanceof MovableItem){
 			MovableItem mItem = (MovableItem) item;
 			player.addItem(mItem);
 			player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
+			feedback =  item.toString() + " has been added to your inventory";
 		}
-		return "Cannot perform " + this.toString() + " on " + item.toString();
+		else{
+			feedback = "Cannot perform " + this.toString() + " on " + item.toString();
+		}
+		return feedback;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Room;
 import evidence.gameworld.Room.Name;
@@ -15,10 +16,13 @@ import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Enter;
 import evidence.gameworld.actions.Lock;
+import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
+import evidence.gameworld.items.Key;
+import evidence.gameworld.items.MovableItem;
 
 public class MyTestClass {
 
@@ -40,7 +44,7 @@ public class MyTestClass {
 		assertEquals(room, player.getCurrentRoom());
 		assertEquals(room.getWalls()[0], player.getWall());
 		assertEquals(0, player.getInventory().size());
-		Item item = createItem();
+		Item item = createContainer();
 		player.addItem(item);
 		assertEquals(1, player.getInventory().size());
 		player.removeItem(item);
@@ -87,6 +91,64 @@ public class MyTestClass {
 		assertEquals(kitchen, player.getCurrentRoom());
 	}
 	
+	@Test
+	public void pickUpAction(){
+		Room room = new Room(Name.BATHROOM);
+		MovableItem hammer = createMItem(room);
+		Player player = createPlayer(room);
+		assertEquals("Pick up", hammer.getActions().get(0).toString());
+		hammer.getActions().get(0).apply(hammer, player);
+		assertEquals(1, player.getInventory().size());
+		assertEquals("Hammer", player.getInventory().get(0).toString());
+	}
+	
+	@Test
+	public void putItemInContainer(){
+		Room room = new Room(Name.BATHROOM);
+		Player player = createPlayer(room);
+		Container container = createContainer();
+		String s = container.putItem(createMItem(room), player);
+		assertEquals("Hammer successfully placed in Cardboard Box", s);
+		s = container.putItem(createMItem(room), player);
+		assertEquals("Hammer is too big for Cardboard Box, try removing an item", s);
+	}
+	
+	@Test
+	public void removeItemFromContainer(){
+		Room room = new Room(Name.BATHROOM);
+		Player player = createPlayer(room);
+		Container container = createContainer();
+		MovableItem item = createMItem(room);
+		String s = container.putItem(item, player);
+		assertEquals("Hammer successfully placed in Cardboard Box", s);
+		s = container.getItem(item, player);
+		assertEquals("Hammer was successfully removed from Cardboard Box. It has been added to your inventory", s);
+		s = container.getItem(item, player);
+		assertEquals("Hammer not inside Cardboard Box", s);
+	}
+	
+	
+	@Test
+	public void lockDoor(){
+		Door door = createDoor(null, null);
+		String s = door.lock(createKey(123));
+		assertEquals("Door is locked", s);
+		s = door.lock(createKey(23));
+		assertEquals("Incorrect key. Door remains unlocked", s);
+		
+	}
+	
+	@Test
+	public void unlockDoor(){
+		Door door = createDoor(null, null);
+		String s = door.unlock(createKey(123));
+		assertEquals("Door is unlocked", s);
+		s = door.unlock(createKey(23));
+		assertEquals("Incorrect key. Door remains locked", s);
+	}
+	
+	
+
 //	@Test
 //	public void removeItemIncorrect(){
 //		Room room = new Room(Name.BATHROOM);
@@ -106,15 +168,21 @@ public class MyTestClass {
 	// Helper Methods
 	// ----------------------------------------------------
 
-	public Item createItem() {
+	private Key createKey(int code) {
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(new Unlock());
-		HashMap<String, String> images = new HashMap<String, String>();
-		images.put("cbbox.png", "Clean cardboard box");
-		Item item = new Container("Cardbord Box", "A cardboard box", actions, images, 7);
-		item.setCurrentImage("cbbox.png");
-		item.setXPos(30);
-		item.setYPos(100);
+		List<String> images = new ArrayList<String>();
+		images.add("key.png");
+		Key item = new Key("Key", "Key", actions, images, 2, code);
+		return item;
+	}
+
+	public Container createContainer() {
+		List<Action> actions = new ArrayList<Action>();
+		actions.add(new Unlock());
+		List<String> images = new ArrayList<String>();
+		images.add("cbbox.png");
+		Container item = new Container("Cardboard Box", "A cardboard box", actions, images, 2);
 		return item;
 	}
 	
@@ -123,12 +191,9 @@ public class MyTestClass {
 		actions.add(new Unlock());
 		actions.add(new Lock());
 		actions.add(new Enter());
-		HashMap<String, String> images = new HashMap<String, String>();
-		images.put("door.png", "A door between the Bathroom and the Kitchen");
-		Door door = new Door("Cardbord Box", "A cardboard box", actions, images, door1, door2, false, 7);
-		door.setCurrentImage("door.png");
-		door.setXPos(30);
-		door.setYPos(100);
+		List<String> images = new ArrayList<String>();
+		images.add("door.png");
+		Door door = new Door("Cardbord Box", "A cardboard box", actions, images, door1, door2, false, 123);
 		return door;
 	}
 
@@ -137,6 +202,15 @@ public class MyTestClass {
 		player.setDirection(Direction.NORTH);
 		player.setRoom(r);
 		return player;
-
+	}
+	
+	private MovableItem createMItem(Room door) {
+		List<Action> actions = new ArrayList<Action>();
+		actions.add(new PickUp());
+		List<String> images = new ArrayList<String>();
+		images.add("hammer.png");
+		images.add("bhammer.png");
+		MovableItem item = new MovableItem("Hammer", "A Hammer", actions, images, 2);
+		return item;
 	}
 }

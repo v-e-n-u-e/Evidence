@@ -35,24 +35,25 @@ public class Container extends Item {
 	public String putItem(MovableItem item, Player player){
 		if(containedItems.size() < capacity){
 			containedItems.add(item);
-			capacity+= item.getSize();
+			capacity-= item.getSize();
 			player.removeItem(item);
 			return item.toString() + " successfully placed in " + this.toString();
 		}
 		else{
-			return this.toString() + " is already full. Please remove an item first";
+			return item.toString() + " is too big for " + this.toString() + ", try removing an item";
 		}
 	}
 	
 	public String getItem(MovableItem item, Player player){
 		if(containedItems.contains(item)){
 			containedItems.remove(item);
-			capacity-= item.getSize();
+			capacity+= item.getSize();
 			player.addItem(item);
 			return item.toString() + " was successfully removed from " + this.toString() + ". It has been added to your inventory";
 		}else{
-			return item.toString() + " is not inside " + this.toString();
+			return item.toString() + " not inside " + this.toString();
 		}
 	}
+	
 	
 }

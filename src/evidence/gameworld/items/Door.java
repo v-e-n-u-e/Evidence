@@ -82,5 +82,9 @@ public class Door extends Item {
 	public Room getRoomTwo() {
 		return roomTwo;
 	}
+	
+	public boolean getLocked(){
+		return locked;
+	}
 
 }

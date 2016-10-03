@@ -19,14 +19,19 @@ public class CutUp extends Action {
 
 	@Override
 	public String apply(Item item, Player player) {
+		String feedback = "";
 		if (item.toString().equals("Body") ) {
+				
 			
-			// TODO weapon item from inventory
 			// TODO create body piece objects
 			// TODO delete body object
+			
+			feedback = item.toString() + " was " + this.toString();
+		}else{
+			feedback = "Cannot perform " + this.toString() + " on " + item.toString();
 		}
 
-		return "Cannot perform " + this.toString() + " on " + item.toString();
+		return feedback;
 	}
 
 }
