@@ -43,7 +43,7 @@ public class ReadContainerXml {
 			System.out.println("Y Position: " + container.getYPos());
 			System.out.println("Name: " + container.getName());
 			System.out.println("Description: " + container.getDescription());
-			System.out.println("description of image: " +safe.getImages().get("hammer.png"));
+			System.out.println("description of image: " +safe.getImages().get(0));
 			
 		}catch (JAXBException e) {
 		 e.printStackTrace();	

@@ -1,10 +1,8 @@
 package evidence.gameworld.items;
 
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
@@ -20,16 +18,17 @@ import evidence.gameworld.actions.Action;
  *
  */
 @XmlRootElement(name = "Item")
-public abstract class Item {
+public abstract class Item implements Serializable{
+	
 	private String name;
 	private String description;
 	private List<Action> actions;
-	private Map<String, String> images; //Map of image names to their descriptions
-	private ImageIcon currentImage;
+	private List<String> images; //Map of image names to their descriptions
+	private String currentImage;
 	private int xPos;
 	private int yPos;
 	
-	public Item(String name, String description, List<Action> actions, Map<String, String> images){
+	public Item(String name, String description, List<Action> actions, List<String> images){
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
@@ -46,7 +45,12 @@ public abstract class Item {
 	
 	@XmlElement
 	public void setCurrentImage(String fileName){
-		currentImage = new ImageIcon(fileName, images.get(fileName));
+		//for(String image : images){
+		//	if(image.equals(fileName)){
+		//		currentImage = image;
+		//	}
+		this.currentImage = fileName;	
+		//}
 	}
 	
 	@XmlElement
@@ -71,6 +75,10 @@ public abstract class Item {
 		return name;
 	}
 	
+	public String getImageName(){
+		return this.currentImage;
+	}
+	
 
 	public void setName(String name){
 		this.name = name;
@@ -87,12 +95,12 @@ public abstract class Item {
 	}
 	
 	@XmlElement
-	public void setImages(Map<String, String> images){
+	public void setImages(List<String> images){
 		this.images = images;
 	}
 	
 	@XmlElement
-	public Map<String,String> getImages(){
+	public List<String> getImages(){
 		return this.images;
 	}
 	

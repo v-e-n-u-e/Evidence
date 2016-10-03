@@ -2,6 +2,7 @@ package evidence.clientserver;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,6 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import evidence.gameworld.Wall;
 import evidence.gui.ClientWindow;
 import evidence.testobjects.TestWall;
 
@@ -131,7 +133,7 @@ public class ClientPipe{
 				while(running){
 					// Construct a byte array, and give it to a DatagramPacket object.
 					// At this stage it is currently empty
-					byte[] data = new byte[1024];
+					byte[] data = new byte[2048];
 					DatagramPacket packet = new DatagramPacket(data, data.length);
 					//
 					try {
@@ -165,7 +167,7 @@ public class ClientPipe{
 		
 		// Was the serialized object a String?
 		if(o instanceof String){processString((String) o);}
-		else if(o instanceof TestWall){processWall((TestWall) o);}
+		else if(o instanceof Wall){processWall((Wall) o);}
 	}
 	
 	/**
@@ -206,7 +208,7 @@ public class ClientPipe{
 		}
 	}
 	
-	private void processWall(TestWall wall){
+	private void processWall(Wall wall){
 		gui.wall = wall;
 		gui.reRenderWall();
 	}

@@ -1,5 +1,7 @@
 package evidence.gameworld;
 
+import java.io.Serializable;
+
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.Item;
 
@@ -11,7 +13,9 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */
-public class Room {
+public class Room implements Serializable{
+	private static final long serialVersionUID = -813837991125057316L;
+
 	/**
 	 * A enum class that represents the name of this room
 	 *
@@ -21,7 +25,8 @@ public class Room {
 		BATHROOM,
 		BEDROOM,
 		OFFICE,
-		GARAGE;
+		GARAGE,
+		LOUNGE;
 	}
 	
 	private Wall[] walls = new Wall[4];

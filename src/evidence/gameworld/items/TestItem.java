@@ -24,7 +24,7 @@ public class TestItem extends Item {
 	
 	private int capacity; 
 	
-	public TestItem(String name, String description, List<Action> actions, Map<String, String> images, int capacity) {
+	public TestItem(String name, String description, List<Action> actions, List<String> images, int capacity) {
 		super(name, description, actions, images);
 		this.capacity = capacity;
 	}
@@ -48,8 +48,12 @@ public class TestItem extends Item {
 		super.setActions(actions);
 	}
 	
-	public void setImages(Map<String, String> images){
+	public void setImages(List<String> images){
 		super.setImages(images);
+	}
+	
+	public List<String> getImages(){
+		return super.getImages();
 	}
 	
 }

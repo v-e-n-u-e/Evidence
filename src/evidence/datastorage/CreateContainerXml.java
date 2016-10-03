@@ -30,9 +30,8 @@ public class CreateContainerXml {
 	public static void main(String[] args){
 		
 		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Unlock());
-		HashMap<String,String> images = new HashMap<String,String>();
-		images.put("hammer.png", "picture of a hammer");
+		List<String> images = new ArrayList<String>();
+		images.add("hammer.png");
 		TestItem safe = new TestItem("safe", "Metal Safe",null,images, 3);
 		safe.setXPos(20);
 		safe.setYPos(30);
