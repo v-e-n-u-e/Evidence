@@ -73,8 +73,6 @@ public class Server implements Runnable{
 	
 	private Game game; // The game instance
 	
-	private TestRoom room;
-	
 	/**
 	 * Constructor for a server instance
 	 * 
@@ -118,8 +116,8 @@ public class Server implements Runnable{
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
 		game = new Game();
-		room = new TestRoom();
-		room.setupRoom();
+		//room = new TestRoom();
+		//room.setupRoom();
 		manageClients();
 		receive();
 	}
@@ -280,13 +278,13 @@ public class Server implements Runnable{
 			}
 			
 			// INTEGRATION DAY
-			try {
-				Player p = game.getPlayers().get(0);
-				byte[] data = getBytes(room.getFacingWall(p) );
-				send(data, packet.getAddress(), packet.getPort() );
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//try {
+			//	Player p = game.getPlayers().get(0);
+			//	byte[] data = getBytes(room.getFacingWall(p) );
+			//	send(data, packet.getAddress(), packet.getPort() );
+			//} catch (IOException e) {
+			//	e.printStackTrace();
+			//}
 		}
 				
 		// Is this packet a disconnection packet?
@@ -308,29 +306,29 @@ public class Server implements Runnable{
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotLeft/") ){
 			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
-			if(rotatePlayerViewLeft(ID) ){
-				try {
-					Player p = game.getPlayers().get(0);
-					byte[] data = getBytes(room.getFacingWall(p) );
-					send(data, packet.getAddress(), packet.getPort() );
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			//if(rotatePlayerViewLeft(ID) ){
+			//	try {
+			//		Player p = game.getPlayers().get(0);
+			//		byte[] data = getBytes(room.getFacingWall(p) );
+			//		send(data, packet.getAddress(), packet.getPort() );
+			//	} catch (IOException e) {
+			//		e.printStackTrace();
+			//	}
+			//}
 		}
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotRight/") ){
 			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
-			if(rotatePlayerViewRight(ID) ){
-				try {
-					Player p = game.getPlayers().get(0);
-					byte[] data = getBytes(room.getFacingWall(p) );
-					send(data, packet.getAddress(), packet.getPort() );
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			//if(rotatePlayerViewRight(ID) ){
+			//	try {
+			//		Player p = game.getPlayers().get(0);
+			//		byte[] data = getBytes(room.getFacingWall(p) );
+			//		send(data, packet.getAddress(), packet.getPort() );
+			//	} catch (IOException e) {
+			//		e.printStackTrace();
+			//	}
+			//}
 		}
 				
 		// If we could not categorize the packet, print to the server log
