@@ -111,6 +111,23 @@ public class Game {
 		return actionStrings;
 	}
 	
+	/**
+	 * Method to apply an action on an item by a player
+	 * 
+	 * @param item - the item that is being acted on
+	 * @param player - the player that is doing the action
+	 * @param action - the action that is being performed
+	 * @return - a string with updated state
+	 */
+	public String apply(Item item, Player player, String action){
+		String feedback = "";
+		switch(action){
+		case "Enter":
+			feedback = new Enter().apply(item, player);
+		}
+		return feedback;
+	}
+	
 	
 	/**
 	 * Looks through all the rooms for evidence

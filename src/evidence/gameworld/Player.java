@@ -48,7 +48,7 @@ public class Player {
 	public Wall getWall() {
 		Wall wall = null;
 		for (Wall w : currentRoom.getWalls()) {
-			if (wall.getDirection().equals(currentDirection)) {
+			if (w.getDirection().equals(currentDirection)) {
 				wall = w;
 			}
 		}
@@ -65,7 +65,7 @@ public class Player {
 	 * @param item
 	 *            - the item to add to the inventory
 	 */
-	public void addItem(MovableItem item) {
+	public void addItem(Item item){
 		inventory.add(item);
 	}
 
@@ -75,9 +75,9 @@ public class Player {
 	 * @param item
 	 *            - the item to remove from the inventory
 	 */
-	public void removeItem(MovableItem item) {
-		inventory.remove(item);
-	}
+	public void removeItem(Item item){
+			inventory.remove(item);
+		}
 
 	/**
 	 * A method to rotate the view of this current player by changing the wall
