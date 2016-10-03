@@ -16,7 +16,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import evidence.gameworld.actions.Action;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.TestItem;
 

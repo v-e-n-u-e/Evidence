@@ -3,21 +3,14 @@ package evidence.gameworld.tests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
 
-import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Room;
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.Wall.Direction;
-import evidence.gameworld.actions.Action;
-import evidence.gameworld.actions.Enter;
-import evidence.gameworld.actions.Lock;
-import evidence.gameworld.actions.PickUp;
-import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
@@ -87,7 +80,7 @@ public class MyTestClass {
 		Player player = createPlayer(bathroom);
 		assertEquals(bathroom, player.getCurrentRoom());
 		assertEquals("Enter", door.getActions().get(2).toString());
-		door.getActions().get(2).apply(door, player);
+		door.getAction(door.getActions().get(2)).apply(door, player);
 		assertEquals(kitchen, player.getCurrentRoom());
 	}
 	
@@ -97,7 +90,7 @@ public class MyTestClass {
 		MovableItem hammer = createMItem(room);
 		Player player = createPlayer(room);
 		assertEquals("Pick up", hammer.getActions().get(0).toString());
-		hammer.getActions().get(0).apply(hammer, player);
+		hammer.getAction(hammer.getActions().get(0)).apply(hammer, player);
 		assertEquals(1, player.getInventory().size());
 		assertEquals("Hammer", player.getInventory().get(0).toString());
 	}
@@ -169,8 +162,8 @@ public class MyTestClass {
 	// ----------------------------------------------------
 
 	private Key createKey(int code) {
-		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Unlock());
+		List<String> actions = new ArrayList<String>();
+		actions.add("Unlock");
 		List<String> images = new ArrayList<String>();
 		images.add("key.png");
 		Key item = new Key("Key", "Key", actions, images, 2, code);
@@ -178,8 +171,8 @@ public class MyTestClass {
 	}
 
 	public Container createContainer() {
-		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Unlock());
+		List<String> actions = new ArrayList<String>();
+		actions.add("Unlock");
 		List<String> images = new ArrayList<String>();
 		images.add("cbbox.png");
 		Container item = new Container("Cardboard Box", "A cardboard box", actions, images, 2);
@@ -187,10 +180,10 @@ public class MyTestClass {
 	}
 	
 	public Door createDoor(Room door1, Room door2) {
-		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Unlock());
-		actions.add(new Lock());
-		actions.add(new Enter());
+		List<String> actions = new ArrayList<String>();
+		actions.add("Unlock");
+		actions.add("Lock");
+		actions.add("Enter");
 		List<String> images = new ArrayList<String>();
 		images.add("door.png");
 		Door door = new Door("Cardbord Box", "A cardboard box", actions, images, door1, door2, false, 123);
@@ -205,8 +198,8 @@ public class MyTestClass {
 	}
 	
 	private MovableItem createMItem(Room door) {
-		List<Action> actions = new ArrayList<Action>();
-		actions.add(new PickUp());
+		List<String> actions = new ArrayList<String>();
+		actions.add("PickUp");
 		List<String> images = new ArrayList<String>();
 		images.add("hammer.png");
 		images.add("bhammer.png");

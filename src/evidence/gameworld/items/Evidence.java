@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
-import evidence.gameworld.actions.Action;
-
 /**
  * Class for pieces of evidence.
  * 
@@ -21,7 +19,7 @@ import evidence.gameworld.actions.Action;
 public class Evidence extends Item{
 	private int value;
 	
-	public Evidence(String name, String description, List<Action> actions, List<String> images, int value) {
+	public Evidence(String name, String description, List<String> actions, List<String> images, int value) {
 		super(name, description, actions, images);
 		this.value = value;
 	}

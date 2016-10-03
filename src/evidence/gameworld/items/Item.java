@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 import evidence.gameworld.actions.Action;
+import evidence.gameworld.actions.CutUp;
+import evidence.gameworld.actions.Enter;
+import evidence.gameworld.actions.Lock;
+import evidence.gameworld.actions.PickUp;
+import evidence.gameworld.actions.Unlock;
 
 /**
  * Abstract class for item.
@@ -22,13 +27,13 @@ public abstract class Item implements Serializable{
 	
 	private String name;
 	private String description;
-	private List<Action> actions;
+	private List<String> actions;
 	private List<String> images; //Map of image names to their descriptions
 	private String currentImage;
 	private int xPos;
 	private int yPos;
 	
-	public Item(String name, String description, List<Action> actions, List<String> images){
+	public Item(String name, String description, List<String> actions, List<String> images){
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
@@ -39,8 +44,31 @@ public abstract class Item implements Serializable{
 		
 	}
 	
-	public List<Action> getActions(){
+	public List<String> getActions(){
 		return actions;
+	}
+	
+	
+	public Action getAction(String actionString){
+		Action action = null;
+		switch (actionString){
+		case "CutUp":
+			action = new CutUp();
+			break;
+		case "Enter":
+			action = new Enter();
+			break;
+		case "Lock":
+			action = new Lock();
+			break;
+		case "Unlock":
+			action = new Unlock();
+			break;
+		case "PickUp":
+			action = new PickUp();
+			break;
+		}
+		return action;
 	}
 	
 	@XmlElement
@@ -90,7 +118,7 @@ public abstract class Item implements Serializable{
 	}
 	
 
-	public void setActions(List<Action> actions){
+	public void setActions(List<String> actions){
 		this.actions = actions;
 	}
 	

@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
-import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.PickUp;
 /**
  * Class for a container object.
@@ -23,7 +22,7 @@ public class Container extends Item {
 	private ArrayList<Item> containedItems = new ArrayList<Item>();
 	private int capacity;
 	
-	public Container(String name, String description, List<Action> actions, List<String> images, int capacity) {
+	public Container(String name, String description, List<String> actions, List<String> images, int capacity) {
 		super(name, description, actions, images);
 		this.capacity = capacity;
 	}

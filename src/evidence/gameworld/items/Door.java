@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import evidence.gameworld.Room;
-import evidence.gameworld.actions.Action;
 
 /**
  * Class for a door object.
@@ -22,7 +21,7 @@ public class Door extends Item{
 	private boolean locked;
 	private int keyCode;
 
-	public Door(String name, String description, List<Action> actions, List<String> images, Room roomOne,
+	public Door(String name, String description, List<String> actions, List<String> images, Room roomOne,
 			Room roomTwo, boolean locked, int keyCode) {
 		super(name, description, actions, images);
 		this.roomOne = roomOne;

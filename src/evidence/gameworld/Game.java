@@ -1,21 +1,13 @@
 package evidence.gameworld;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import evidence.gameworld.Room.Name;
-import evidence.gameworld.Wall.Direction;
-import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Enter;
-import evidence.gameworld.actions.Lock;
-import evidence.gameworld.actions.PickUp;
-import evidence.gameworld.actions.Unlock;
-import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
-import evidence.gameworld.items.MovableItem;
 
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
@@ -32,12 +24,12 @@ public class Game {
 		rooms.add(new Room(Name.LOUNGE));
 		rooms.add(new Room(Name.OFFICE));
 		
-		List<Action> actions = new ArrayList<Action>();
+		List<String> actions = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
 		
-		actions.add(new Enter());
-		actions.add(new Unlock());
-		actions.add(new Lock());
+		actions.add("Enter");
+		actions.add("Unlock");
+		actions.add("Lock");
 		images.clear();
 		images.add("painting.png");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0), rooms.get(1), true, 123);
@@ -98,11 +90,7 @@ public class Game {
 	 * @return
 	 */
 	public List<String> getActions(Item item) {
-		List<String> actionStrings = new ArrayList<String>();
-		for (Action action : item.getActions()) {
-			actionStrings.add(action.toString());
-		}
-		return actionStrings;
+		return item.getActions();
 	}
 	
 	/**

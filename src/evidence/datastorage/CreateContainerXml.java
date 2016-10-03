@@ -12,7 +12,6 @@ import javax.xml.bind.Marshaller;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
-import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.TestItem;
@@ -29,7 +28,7 @@ public class CreateContainerXml {
 
 	public static void main(String[] args){
 		
-		List<Action> actions = new ArrayList<Action>();
+		List<String> actions = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
 		images.add("hammer.png");
 		TestItem safe = new TestItem("safe", "Metal Safe",null,images, 3);

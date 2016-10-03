@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 import evidence.gameworld.Player;
-import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.PickUp;
 /**
  * Class for a container object.
@@ -24,7 +23,7 @@ public class TestItem extends Item {
 	
 	private int capacity; 
 	
-	public TestItem(String name, String description, List<Action> actions, List<String> images, int capacity) {
+	public TestItem(String name, String description, List<String> actions, List<String> images, int capacity) {
 		super(name, description, actions, images);
 		this.capacity = capacity;
 	}
@@ -44,7 +43,7 @@ public class TestItem extends Item {
 	}
 	
 	@XmlElement 
-	public void setActions(List<Action> actions){
+	public void setActions(List<String> actions){
 		super.setActions(actions);
 	}
 	
