@@ -32,7 +32,7 @@ public class CreateContainerXml {
 		List<Action> actions = new ArrayList<Action>();
 		List<String> images = new ArrayList<String>();
 		images.add("hammer.png");
-		TestItem safe = new TestItem("safe", "Metal Safe",null,images, 3);
+		Container safe = new Container("safe", "Metal Safe",null,images, 3);
 		safe.setXPos(20);
 		safe.setYPos(30);
 		safe.setCurrentImage("hammer.png");

@@ -33,17 +33,18 @@ public class TestItem extends Item {
 		
 	}
 	
-	@XmlElement
 	public void setName(String name){
 		super.setName(name);
 	}
 	
-	@XmlElement
+	public void setCapacity(int c){
+		this.capacity =c;
+	}
+	
 	public void setDescription(String description){
 		super.setDescription(description);
 	}
-	
-	@XmlElement 
+	 
 	public void setActions(List<Action> actions){
 		super.setActions(actions);
 	}
@@ -54,6 +55,11 @@ public class TestItem extends Item {
 	
 	public List<String> getImages(){
 		return super.getImages();
+	}
+	
+	@XmlElement
+	public int getCapacity(){
+		return this.capacity;
 	}
 	
 }

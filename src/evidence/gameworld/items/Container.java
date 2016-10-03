@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
@@ -17,7 +18,7 @@ import evidence.gameworld.actions.PickUp;
  * @author Georgina Murphy
  *
  */
-@XmlRootElement(name = "container")
+@XmlRootElement(name = "Container")
 public class Container extends Item {
 	
 	private ArrayList<Item> containedItems = new ArrayList<Item>();
@@ -26,6 +27,10 @@ public class Container extends Item {
 	public Container(String name, String description, List<Action> actions, List<String> images, int capacity) {
 		super(name, description, actions, images);
 		this.capacity = capacity;
+	}
+	
+	public Container(){
+		
 	}
 	/**
 	 * Method to put an item into this container
@@ -53,6 +58,15 @@ public class Container extends Item {
 		}else{
 			return item.toString() + " not inside " + this.toString();
 		}
+	}
+	
+	@XmlElement
+	public int getCapacity(){
+		return this.capacity;
+	}
+	
+	public void setCapacity(int c){
+		this.capacity=c;
 	}
 	
 	

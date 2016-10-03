@@ -39,10 +39,6 @@ public abstract class Item implements Serializable{
 		
 	}
 	
-	public List<Action> getActions(){
-		return actions;
-	}
-	
 	@XmlElement
 	public void setCurrentImage(String fileName){
 		//for(String image : images){
@@ -62,34 +58,22 @@ public abstract class Item implements Serializable{
 	public void setYPos(int yPos){
 		this.yPos = yPos;
 	}
-	@XmlElement
-	public int getYPos(){ 
-		return this.yPos;
-	}
-	@XmlElement
-	public int getXPos(){
-		return this.xPos;
-	}
 	
 	public String toString(){
 		return name;
 	}
 	
-	public String getImageName(){
-		return this.currentImage;
-	}
-	
-
+	@XmlElement
 	public void setName(String name){
 		this.name = name;
 	}
 	
-
+	@XmlElement
 	public void setDescription(String description){
 		this.description = description;
 	}
 	
-
+	@XmlElement
 	public void setActions(List<Action> actions){
 		this.actions = actions;
 	}
@@ -99,7 +83,6 @@ public abstract class Item implements Serializable{
 		this.images = images;
 	}
 	
-	@XmlElement
 	public List<String> getImages(){
 		return this.images;
 	}
@@ -110,5 +93,23 @@ public abstract class Item implements Serializable{
 	
 	public String getDescription(){
 		return this.description;
+	}
+	
+	@XmlElement
+	public String getImageName(){
+		return this.currentImage;
+	}
+	
+	@XmlElement
+	public int getYPos(){ 
+		return this.yPos;
+	}
+	@XmlElement
+	public int getXPos(){
+		return this.xPos;
+	}
+	
+	public List<Action> getActions(){
+		return actions;
 	}
 }
