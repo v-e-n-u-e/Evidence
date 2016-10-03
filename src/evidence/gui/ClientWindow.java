@@ -9,6 +9,7 @@ import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
 import evidence.gameworld.Wall;
+import evidence.gameworld.items.Item;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -23,9 +24,11 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -251,9 +254,14 @@ public class ClientWindow extends JFrame implements Runnable{
 			public void mouseClicked(MouseEvent e) {
 				PopupMenu options = new PopupMenu("Options");
 				canvas.add(options);
-				options.insert(new MenuItem("Test Option"), 0);
-				options.insert(new MenuItem("Test Option2"), 1);
-				options.show(canvas, e.getX(), e.getY() );
+				Item item = getItemClickedOn(e.getX(), e.getY() );
+				
+				if(item != null){
+					for(String action : item.getActions() ){
+						options.add(new MenuItem(action) );
+					}
+					options.show(canvas, e.getX(), e.getY() );
+				}
 			}
 		});
 		canvas.setBounds(20, 18, 720, 630);
@@ -321,6 +329,24 @@ public class ClientWindow extends JFrame implements Runnable{
 	public void rotateRight(){
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/"; 
 		pipe.send(rotateRight);
+	}
+	
+	public Item getItemClickedOn(int clickX, int clickY){
+		for(Item i : this.wall.getItems() ){
+			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
+			int width = itemImage.getWidth(null);
+			int height = itemImage.getWidth(null);
+			int x = i.getXPos();
+			int y = i.getYPos();
+			
+			if(clickX >= x && clickX <= x + width){
+				if(clickY >= y && clickY <= y + height){
+					return i;
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	public void reRenderWall(){
