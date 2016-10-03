@@ -28,7 +28,7 @@ public abstract class Item implements Serializable{
 	private String name;
 	private String description;
 	private List<String> actions;
-	private List<String> images; //Map of image names to their descriptions
+	private List<String> images;
 	private String currentImage;
 	private int xPos;
 	private int yPos;
@@ -43,11 +43,6 @@ public abstract class Item implements Serializable{
 	public Item(){
 		
 	}
-	
-	public List<String> getActions(){
-		return actions;
-	}
-	
 	
 	public Action getAction(String actionString){
 		Action action = null;
@@ -70,7 +65,6 @@ public abstract class Item implements Serializable{
 		}
 		return action;
 	}
-	
 	@XmlElement
 	public void setCurrentImage(String fileName){
 		//for(String image : images){
@@ -90,34 +84,23 @@ public abstract class Item implements Serializable{
 	public void setYPos(int yPos){
 		this.yPos = yPos;
 	}
-	@XmlElement
-	public int getYPos(){ 
-		return this.yPos;
-	}
-	@XmlElement
-	public int getXPos(){
-		return this.xPos;
-	}
 	
 	public String toString(){
 		return name;
 	}
 	
-	public String getImageName(){
-		return this.currentImage;
-	}
-	
-
+	@XmlElement
 	public void setName(String name){
 		this.name = name;
 	}
 	
-
+	@XmlElement
 	public void setDescription(String description){
 		this.description = description;
 	}
 	
 
+	@XmlElement
 	public void setActions(List<String> actions){
 		this.actions = actions;
 	}
@@ -127,7 +110,6 @@ public abstract class Item implements Serializable{
 		this.images = images;
 	}
 	
-	@XmlElement
 	public List<String> getImages(){
 		return this.images;
 	}
@@ -138,5 +120,24 @@ public abstract class Item implements Serializable{
 	
 	public String getDescription(){
 		return this.description;
+	}
+	
+	@XmlElement
+	public String getImageName(){
+		return this.currentImage;
+	}
+	
+	@XmlElement
+	public int getYPos(){ 
+		return this.yPos;
+	}
+	@XmlElement
+	public int getXPos(){
+		return this.xPos;
+	}
+	
+	@XmlElement
+	public List<String> getActions(){
+		return actions;
 	}
 }

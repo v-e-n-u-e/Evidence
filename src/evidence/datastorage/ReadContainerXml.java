@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import evidence.gameworld.items.Container;
-import evidence.gameworld.items.TestItem;
 
 /**
  * This Class reads Information about the current state of the Game, Players and
@@ -32,9 +31,9 @@ public class ReadContainerXml {
 		
 		try{
 			File file = new File("SavedGamed.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(TestItem.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Container.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			TestItem safe = (TestItem) jaxbUnmarshaller.unmarshal(file);
+			Container safe = (Container) jaxbUnmarshaller.unmarshal(file);
 			Container container = new Container(safe.getName(),safe.getDescription(),null,safe.getImages(),3);
 			container.setXPos(safe.getXPos());
 			container.setYPos(safe.getYPos());
@@ -43,6 +42,7 @@ public class ReadContainerXml {
 			System.out.println("Name: " + container.getName());
 			System.out.println("Description: " + container.getDescription());
 			System.out.println("description of image: " +safe.getImages().get(0));
+			System.out.println("Capacity: " + safe.getCapacity());
 			
 		}catch (JAXBException e) {
 		 e.printStackTrace();	

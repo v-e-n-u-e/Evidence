@@ -14,7 +14,6 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
-import evidence.gameworld.items.TestItem;
 
 /**
  * Creates an XML file for a single container, the main method is passed the name of the
@@ -31,7 +30,7 @@ public class CreateContainerXml {
 		List<String> actions = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
 		images.add("hammer.png");
-		TestItem safe = new TestItem("safe", "Metal Safe",null,images, 3);
+		Container safe = new Container("safe", "Metal Safe",null,images, 3);
 		safe.setXPos(20);
 		safe.setYPos(30);
 		safe.setCurrentImage("hammer.png");
