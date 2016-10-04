@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -200,16 +201,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		invPanel.setBounds(10, 60, 284, 291);
 		invPanel.setLayout(new GridLayout(3,3));
 		infoPanel.add(invPanel);
-		ImageIcon[][] invIcons = new ImageIcon[3][3];
-		invIcons[0][0]=new ImageIcon("img/mop.png");
-		invIcons[0][1]=new ImageIcon("img/bucket.png");
-		invIcons[0][2]=new ImageIcon("img/axe.png");
-		invIcons[1][0]=new ImageIcon("img/baxe.png");
-		for(int x =0; x<3;x++){
-			for(int y=0;y<3;y++){
-		invPanel.add(new JLabel(invIcons[x][y]));
-		}
-		}
+		inventoryRefresh(invPanel);
 		
 		//Button used for turning right in the room
 		JButton rightButton = new JButton("Turn Right");
@@ -300,6 +292,35 @@ public class ClientWindow extends JFrame implements Runnable{
 		for(Component c : contentPane.getComponents() ){
 			c.repaint();
 		}
+	}
+	
+	private void inventoryRefresh(JPanel invPanel){
+		//Gonna needa set up our own listener to make the code cleaner
+		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
+		ImageIcon[][] invIcons = new ImageIcon[3][3];
+		invIcons[0][0]=new ImageIcon("img/mop.png");
+		invIcons[0][1]=new ImageIcon("img/bucket.png");
+		invIcons[0][2]=new ImageIcon("img/axe.png");
+		invIcons[1][0]=new ImageIcon("img/baxe.png");
+		invIcons[1][1]=new ImageIcon("img/bleach.png");
+		invIcons[1][2]=new ImageIcon("img/knife.png");
+		invIcons[2][0]=new ImageIcon("img/crowbar.png");
+		invIcons[2][1]=new ImageIcon("img/toolbox.png");
+		invIcons[2][2]=new ImageIcon("img/safe.png");
+		JButton[][] invButtons = new JButton[3][3];
+		for(int x =0; x<3;x++){
+			for(int y=0;y<3;y++){
+		invButtons[x][y]=new JButton();
+		invButtons[x][y].setIcon(invIcons[x][y]);	
+		invPanel.add(invButtons[x][y]);
+		}
+		}
+		invButtons[0][0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				 System.out.println(invButtons[0][0].getIcon().toString());
+			}
+		});
+		
 	}
 	
 	/**
