@@ -67,6 +67,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	private RenderCanvas canvas;
 	
 	public Wall wall;
+	private static JButton[][] invButtons;
 
 	/**
 	 * Create the frame and attempt to open the connection
@@ -196,16 +197,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
 		
+		//Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
+		//e.g. when an item is picked up/dropped
 		JPanel invPanel = new JPanel();
 		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		invPanel.setToolTipText("Inventory");
 		invPanel.setBounds(10, 60, 284, 291);
 		infoPanel.add(invPanel);
-
 		inventoryRefresh(invPanel);
 
 
-		
 		//Button used for turning right in the room
 		JButton rightButton = new JButton("Turn Right");
 		rightButton.addActionListener(new ActionListener() {
@@ -302,10 +303,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		}
 	}
 	
+	public static JButton[][] retButtons(){
+		return invButtons;
+	}
+	
+	//This is used when you need to show a player's inventory has changed in some way.
+	//This method will remake the buttons/icons based on what the player is holding
 	private void inventoryRefresh(JPanel invPanel){
-		//Gonna needa set up our own listener to make the code cleaner
 		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
 		ImageIcon[][] invIcons = new ImageIcon[3][3];
+		//TEMPORARY
 		invIcons[0][0]=new ImageIcon("img/mop.png");
 		invIcons[0][1]=new ImageIcon("img/bucket.png");
 		invIcons[0][2]=new ImageIcon("img/axe.png");
@@ -314,20 +321,20 @@ public class ClientWindow extends JFrame implements Runnable{
 		invIcons[1][2]=new ImageIcon("img/knife.png");
 		invIcons[2][0]=new ImageIcon("img/crowbar.png");
 		invIcons[2][1]=new ImageIcon("img/toolbox.png");
-		invIcons[2][2]=new ImageIcon("img/safe.png");
-		JButton[][] invButtons = new JButton[3][3];
+		//invIcons[2][2]=new ImageIcon("img/safe.png");
+		//TEMPORARY
+		invButtons = new JButton[3][3];
 		InvListen iListen = new InvListen();
 		for(int x =0; x<3;x++){
 			for(int y=0;y<3;y++){
-		invButtons[x][y]=new JButton();
-		invButtons[x][y].setIcon(invIcons[x][y]);
-		invButtons[x][y].setPreferredSize(new Dimension(80,80));
-		invButtons[x][y].addActionListener(iListen);
-		invPanel.add(invButtons[x][y]);
-		}
+					invButtons[x][y]=new JButton();
+					invButtons[x][y].setIcon(invIcons[x][y]);
+					invButtons[x][y].setPreferredSize(new Dimension(80,80));
+					invButtons[x][y].addActionListener(iListen);
+					invPanel.add(invButtons[x][y]);
+			}
 		}
 		//invPanel.validate();
-		
 	}
 	
 	/**
