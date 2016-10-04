@@ -316,18 +316,17 @@ public class ClientWindow extends JFrame implements Runnable{
 		invIcons[2][1]=new ImageIcon("img/toolbox.png");
 		invIcons[2][2]=new ImageIcon("img/safe.png");
 		JButton[][] invButtons = new JButton[3][3];
+		InvListen iListen = new InvListen();
 		for(int x =0; x<3;x++){
 			for(int y=0;y<3;y++){
 		invButtons[x][y]=new JButton();
-		invButtons[x][y].setIcon(invIcons[x][y]);	
+		invButtons[x][y].setIcon(invIcons[x][y]);
+		invButtons[x][y].setPreferredSize(new Dimension(80,80));
+		invButtons[x][y].addActionListener(iListen);
 		invPanel.add(invButtons[x][y]);
 		}
 		}
-		invButtons[0][0].addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				 System.out.println(invButtons[0][0].getIcon().toString());
-			}
-		});
+		//invPanel.validate();
 		
 	}
 	
