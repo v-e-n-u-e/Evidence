@@ -49,6 +49,15 @@ public class Game {
 	public List<Player> getPlayers() {
 		return this.players;
 	}
+	
+	public Player getPlayerWithID(Integer ID){
+		for(Player p : players){
+			if(p.getID().equals(ID) ){
+				return p;
+			}
+		}
+		return null; // Only happens if a player disconnects
+	}
 
 	public void addPlayer(Player p) {
 		p.setRoom(rooms.get(0));

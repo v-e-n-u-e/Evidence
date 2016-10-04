@@ -10,7 +10,8 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  */
 public class Enter extends Action {
-	
+	private static final long serialVersionUID = -4219760638031297711L;
+
 	public Enter(){
 		super("Enter", "Go into this item");
 	}

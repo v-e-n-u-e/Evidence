@@ -9,6 +9,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
+import evidence.clientserver.infoholders.Event;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
 
@@ -22,6 +23,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -60,7 +62,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	private DefaultCaret caret;
 
 	// The ClientPipe that gives us a "pipe" to the server
-	private ClientPipe pipe;
+	private static ClientPipe pipe;
 
 	// A thread to run on
 	private Thread run;
@@ -68,6 +70,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	public Wall wall;
 	private static JButton[][] invButtons;
+	private static Item currentlySelected;
 
 	/**
 	 * Create the frame and attempt to open the connection
@@ -127,6 +130,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		// Send message to server
 		pipe.send(message);
 		messageField.setText("");
+	}
+	
+	/**
+	 * A user has created an Event, and now we need to communicate that event
+	 * to the Server for processing.
+	 * 
+	 * @param event - The event to send to the server
+	 */
+	public static void sendEvent(Event event){
+		pipe.send(event);
 	}
 
 	/**
@@ -274,7 +287,7 @@ public class ClientWindow extends JFrame implements Runnable{
 					
 					// Show the PopUp Menu
 					options.show(canvas, e.getX(), e.getY() );
-					options.addActionListener(new PopupActionListener() );
+					options.addActionListener(new PopupActionListener(item) );
 				}
 			}
 		});
@@ -395,6 +408,18 @@ public class ClientWindow extends JFrame implements Runnable{
 		}
 		
 		return null;
+	}
+	
+	public static Item getSelected(){
+		return currentlySelected;
+	}
+	
+	public static void setSelected(Item selected){
+		currentlySelected = selected;
+	}
+	
+	public static Integer getID(){
+		return pipe.getId();
 	}
 	
 	public void reRenderWall(){

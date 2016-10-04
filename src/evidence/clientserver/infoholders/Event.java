@@ -52,4 +52,8 @@ public class Event implements Serializable{
 	public Integer getID(){
 		return this.ID;
 	}
+	
+	public String toString(){
+		return performing + " performed " + action + " on " + on + " using ID " + ID;
+	}
 }

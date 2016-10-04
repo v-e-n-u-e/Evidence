@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.clientserver.infoholders.Event;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
@@ -34,6 +35,8 @@ import evidence.gui.ServerGUI;
  * @author Tyler Jones
  */
 public class Server implements Runnable{
+	// 
+	private final int BYTE_ARRAY_LENGTH = 2048;
 	
 	// Port number this server is running on
 	private int port;
@@ -69,7 +72,8 @@ public class Server implements Runnable{
 	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
 	
-	private Game game; // The game instance
+	// The game instance
+	private Game game;
 	
 	/**
 	 * Constructor for a server instance
@@ -193,7 +197,7 @@ public class Server implements Runnable{
 		receive = new Thread("Receiver") {
 			public void run(){
 				while(running){
-					byte[] data = new byte[1024];
+					byte[] data = new byte[BYTE_ARRAY_LENGTH];
 					DatagramPacket packet = new DatagramPacket(data, data.length);
 					//
 					try {
@@ -228,6 +232,7 @@ public class Server implements Runnable{
 		
 		// If we received a String in the form of bytes, process the String
 		if(o instanceof String){processString((String) o, packet);}
+		else if(o instanceof Event){processEvent((Event) o, packet);}
 	}
 	
 	/**
@@ -274,7 +279,7 @@ public class Server implements Runnable{
 				allPlayersConnected = true;
 			}
 			
-			// INTEGRATION DAY
+			// Send back to the client their wall object to render
 			try {
 				byte[] data = getBytes(toAdd.getWall() );
 				send(data, packet.getAddress(), packet.getPort() );
@@ -334,6 +339,17 @@ public class Server implements Runnable{
 	}
 	
 	/**
+	 * Processes an Event received over the network
+	 * 
+	 * @param e - The event received
+	 * @param packet - The packet the event arrived in
+	 */
+	private void processEvent(Event e, DatagramPacket packet){
+		// Apply the event to the game using the fields from the received Event
+		game.apply(e.getPerformedOn(), e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
+	}
+	
+	/**
 	 * Given an object, will serialize the object
 	 * using ByteArrayOutputStream and ObjectOutputStream
 	 * 
@@ -343,7 +359,7 @@ public class Server implements Runnable{
 	 */
 	public byte[] getBytes(Object o) throws IOException{
 		//System.out.println(o.getClass());
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();
 		oos.writeObject(o);

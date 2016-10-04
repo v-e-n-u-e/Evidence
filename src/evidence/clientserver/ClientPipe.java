@@ -24,6 +24,7 @@ import evidence.testobjects.TestWall;
  * @author Tyler Jones
  */
 public class ClientPipe{
+	private final int BYTE_ARRAY_LENGTH = 2048;
 
 	// Information for our connection
 	private String name; // The name of the user connecting
@@ -133,7 +134,7 @@ public class ClientPipe{
 				while(running){
 					// Construct a byte array, and give it to a DatagramPacket object.
 					// At this stage it is currently empty
-					byte[] data = new byte[2048];
+					byte[] data = new byte[BYTE_ARRAY_LENGTH];
 					DatagramPacket packet = new DatagramPacket(data, data.length);
 					//
 					try {
@@ -196,11 +197,13 @@ public class ClientPipe{
 			send(reply);
 		}
 		
+		// Is the server sending us an update to the timer?
 		else if(message.startsWith("/timer/")){
 			String timeUpdate = message.split("/timer/|/e/")[1];
 			gui.updateTime(timeUpdate);
 		}
 		
+		// Is the server refusing our connection?
 		else if(message.startsWith("/refusal/") ){
 			String refusal = message.split("/refusal/|/e/")[1];
 			gui.writeToChatLog(refusal);
@@ -255,7 +258,7 @@ public class ClientPipe{
 	 *
 	 * @param data - The array of bytes to put in our packet
 	 */
-	public void send(String message){
+	public void send(Object toSend){
 		// Create a new thread to send the data on and then start the thread
 		send = new Thread("Sender"){
 			public void run(){
@@ -265,7 +268,7 @@ public class ClientPipe{
 				
 				// Construct the byte array using our output streams in getBytes();
 				try {
-					data = getBytes(message);
+					data = getBytes(toSend);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
