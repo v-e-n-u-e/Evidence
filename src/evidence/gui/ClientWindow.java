@@ -383,7 +383,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		for(Item i : this.wall.getItems() ){
 			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
-			int height = itemImage.getWidth(null);
+			int height = itemImage.getHeight(null);
 			int x = i.getXPos();
 			int y = i.getYPos();
 			
