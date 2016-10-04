@@ -44,6 +44,12 @@ public abstract class Item implements Serializable{
 		
 	}
 	
+	/**
+	 * Method to get a new instance of an action from a string
+	 * 
+	 * @param actionString = a string of the action you are looking for
+	 * @return a new instance of the action
+	 */
 	public Action getAction(String actionString){
 		Action action = null;
 		switch (actionString){
@@ -65,6 +71,7 @@ public abstract class Item implements Serializable{
 		}
 		return action;
 	}
+	
 	@XmlElement
 	public void setCurrentImage(String fileName){
 		//for(String image : images){

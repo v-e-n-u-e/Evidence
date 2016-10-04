@@ -23,16 +23,16 @@ public class PickUp extends Action {
 	 * @return string - updated state
 	 */
 	@Override
-	public String apply(Item item, Player player) {
+	public String apply(Item gameItem, Item inventoryItem, Player player) {
 		String feedback = "";
-		if(item instanceof MovableItem){
-			MovableItem mItem = (MovableItem) item;
+		if(gameItem instanceof MovableItem){
+			MovableItem mItem = (MovableItem) gameItem;
 			player.addItem(mItem);
 			player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
-			feedback =  item.toString() + " has been added to your inventory";
+			feedback =  gameItem.toString() + " has been added to your inventory";
 		}
 		else{
-			feedback = "Cannot perform " + this.toString() + " on " + item.toString();
+			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}
 		return feedback;
 	}

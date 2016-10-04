@@ -21,7 +21,7 @@ public class MyTestClass {
 
 	@Test
 	public void createNewRoom() {
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		assertEquals("BATHROOM", room.toString());
 		assertEquals(Direction.NORTH, room.getWalls()[0].getDirection());
 		assertEquals(Direction.SOUTH, room.getWalls()[1].getDirection());
@@ -31,7 +31,7 @@ public class MyTestClass {
 
 	@Test
 	public void player() {
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		assertEquals(Direction.NORTH, player.getCurrentDirection());
 		assertEquals(room, player.getCurrentRoom());
@@ -46,7 +46,7 @@ public class MyTestClass {
 
 	@Test
 	public void rotateViewL() {
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		player.rotateView("L");
 		assertEquals(Direction.WEST, player.getCurrentDirection());
@@ -60,7 +60,7 @@ public class MyTestClass {
 	
 	@Test
 	public void rotateViewR() {
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		player.rotateView("R");
 		assertEquals(Direction.EAST, player.getCurrentDirection());
@@ -74,30 +74,30 @@ public class MyTestClass {
 	
 	@Test
 	public void enterAction(){
-		Room bathroom = new Room(Name.BATHROOM);
-		Room kitchen = new Room(Name.KITCHEN);
+		Room bathroom = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
+		Room kitchen = new Room(Name.KITCHEN, "kitchen.png", "kitchen.png", "kitchen.png", "kitchen.png");
 		Door door = createDoor(bathroom, kitchen);
 		Player player = createPlayer(bathroom);
 		assertEquals(bathroom, player.getCurrentRoom());
 		assertEquals("Enter", door.getActions().get(2).toString());
-		door.getAction(door.getActions().get(2)).apply(door, player);
+		door.getAction(door.getActions().get(2)).apply(door, null, player);
 		assertEquals(kitchen, player.getCurrentRoom());
 	}
 	
 	@Test
 	public void pickUpAction(){
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		MovableItem hammer = createMItem(room);
 		Player player = createPlayer(room);
-		assertEquals("Pick up", hammer.getActions().get(0).toString());
-		hammer.getAction(hammer.getActions().get(0)).apply(hammer, player);
+		assertEquals("PickUp", hammer.getActions().get(0));
+		hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player);
 		assertEquals(1, player.getInventory().size());
 		assertEquals("Hammer", player.getInventory().get(0).toString());
 	}
 	
 	@Test
 	public void putItemInContainer(){
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		Container container = createContainer();
 		String s = container.putItem(createMItem(room), player);
@@ -108,7 +108,7 @@ public class MyTestClass {
 	
 	@Test
 	public void removeItemFromContainer(){
-		Room room = new Room(Name.BATHROOM);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		Container container = createContainer();
 		MovableItem item = createMItem(room);

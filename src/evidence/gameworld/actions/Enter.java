@@ -22,10 +22,10 @@ public class Enter extends Action {
 	 * @return string - updated state
 	 */
 	@Override
-	public String apply(Item item,  Player player) {
+	public String apply(Item gameItem, Item inventoryItem,  Player player) {
 		String feedback = "";
-		if(item instanceof Door){
-			Door door = (Door)item;
+		if(gameItem instanceof Door){
+			Door door = (Door)gameItem;
 			if(door.getRoomOne().equals(player.getCurrentRoom())){
 				player.setRoom(door.getRoomTwo());
 			}else{
@@ -34,7 +34,7 @@ public class Enter extends Action {
 			feedback = "You are now in the" + player.getCurrentRoom().toString();
 		}
 		
-		return "Cannot perform " + this.toString() + " on " + item.toString();
+		return "Cannot perform " + this.toString() + " on " + gameItem.toString();
 	}
 
 	public String toString(){
