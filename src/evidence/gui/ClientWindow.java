@@ -1,6 +1,7 @@
 package evidence.gui;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -23,9 +24,11 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -195,7 +198,18 @@ public class ClientWindow extends JFrame implements Runnable{
 		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		invPanel.setToolTipText("Inventory");
 		invPanel.setBounds(10, 60, 284, 291);
+		invPanel.setLayout(new GridLayout(3,3));
 		infoPanel.add(invPanel);
+		ImageIcon[][] invIcons = new ImageIcon[3][3];
+		invIcons[0][0]=new ImageIcon("img/mop.png");
+		invIcons[0][1]=new ImageIcon("img/bucket.png");
+		invIcons[0][2]=new ImageIcon("img/axe.png");
+		invIcons[1][0]=new ImageIcon("img/baxe.png");
+		for(int x =0; x<3;x++){
+			for(int y=0;y<3;y++){
+		invPanel.add(new JLabel(invIcons[x][y]));
+		}
+		}
 		
 		//Button used for turning right in the room
 		JButton rightButton = new JButton("Turn Right");
