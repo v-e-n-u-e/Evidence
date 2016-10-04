@@ -22,16 +22,16 @@ public class Lock extends Action {
 	 * @param item - the item the action is being applied to
 	 * @return string - updated state
 	 */
-	public String apply(Item item, Player player) {
+	public String apply(Item gameItem, Item inventoryItem, Player player) {
 		
 		
-		if(item instanceof Door){
-			Door door = (Door)item;
+		if(gameItem instanceof Door){
+			Door door = (Door)gameItem;
 			// TODO get item from inventory
 			// TODO call lock method in the door class
 		}
 		
-		return "Cannot perform " + this.toString() + " on " + item.toString();
+		return "Cannot perform " + this.toString() + " on " + gameItem.toString();
 	}
 
 }

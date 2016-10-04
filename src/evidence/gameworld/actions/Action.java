@@ -43,7 +43,7 @@ public abstract class Action implements Serializable{
 	 * @param player - the player performing this action
 	 * @return string - updated state
 	 */
-	public abstract String apply(Item item, Player player);
+	public abstract String apply(Item gameItem, Item inventoryItem, Player player);
 	
 	/**
 	 * Gets the name of this action

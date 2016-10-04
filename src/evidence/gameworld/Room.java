@@ -36,12 +36,12 @@ public class Room implements Serializable{
 	 * Constructor for a room
 	 * Creates 4 walls - North[0], South[1], East[2] and West[3]
 	 */
-	public Room(Name name) {
+	public Room(Name name, String w1, String w2, String w3, String w4) {
 		this.name = name;
-		this.walls[0] = new Wall(Direction.NORTH, "", 0, 0);
-		this.walls[1] = new Wall(Direction.SOUTH, "", 0, 0);
-		this.walls[2] = new Wall(Direction.EAST, "", 0, 0);
-		this.walls[3] = new Wall(Direction.WEST, "", 0, 0);
+		this.walls[0] = new Wall(Direction.NORTH, w1, 0, 0);
+		this.walls[1] = new Wall(Direction.SOUTH, w2, 0, 0);
+		this.walls[2] = new Wall(Direction.EAST, w3, 0, 0);
+		this.walls[3] = new Wall(Direction.WEST, w4, 0, 0);
 	}
 	
 	public Wall[] getWalls(){
