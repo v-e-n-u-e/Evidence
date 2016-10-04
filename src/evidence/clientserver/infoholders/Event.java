@@ -36,4 +36,20 @@ public class Event implements Serializable{
 		this.action = action;
 		this.ID = ID;
 	}
+	
+	public Item getPerforming(){
+		return this.performing;
+	}
+	
+	public Item getPerformedOn(){
+		return this.on;
+	}
+	
+	public String getAction(){
+		return this.action;
+	}
+	
+	public Integer getID(){
+		return this.ID;
+	}
 }

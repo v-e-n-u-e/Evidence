@@ -16,12 +16,12 @@ public class Game {
 	 * Reads in the state of a game from a xml file
 	 */
 	public void setup() {
-		rooms.add(new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png"));
-		rooms.add(new Room(Name.BEDROOM, "bedroom.png", "bedroom.png", "bedroom.png", "bedroom.png"));
-		rooms.add(new Room(Name.KITCHEN, "kitchen.png", "kitchen.png", "kitchen.png", "kitchen.png"));
-		rooms.add(new Room(Name.GARAGE, "garage.png", "garage.png", "garage.png", "garage.png"));
-		rooms.add(new Room(Name.LOUNGE, "lounge.png", "lounge.png", "lounge.png", "lounge.png"));
-		rooms.add(new Room(Name.OFFICE, "office.png", "office.png", "office.png", "office.png"));
+		rooms.add(new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png"));
+		rooms.add(new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png"));
+		rooms.add(new Room(Name.KITCHEN, "img/kitchen.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
+		rooms.add(new Room(Name.GARAGE, "img/garage.png", "img/garage.png", "img/garage.png", "img/garage.png"));
+		rooms.add(new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "img/lounge.png", "img/lounge.png"));
+		rooms.add(new Room(Name.OFFICE, "img/office.png", "img/office.png", "img/office.png", "img/office.png"));
 
 		List<String> actions = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
@@ -32,7 +32,7 @@ public class Game {
 		images.add("painting.png");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0),
 				rooms.get(1), true, 123);
-		door.setCurrentImage("img/door.png");
+		door.setCurrentImage("img/bigdoor.png");
 		door.setXPos(30);
 		door.setYPos(100);
 		rooms.get(0).getWalls()[1].addItem(door);

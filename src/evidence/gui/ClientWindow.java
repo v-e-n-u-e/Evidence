@@ -258,15 +258,22 @@ public class ClientWindow extends JFrame implements Runnable{
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Create our PopUp Menu object
 				PopupMenu options = new PopupMenu("Options");
 				canvas.add(options);
+				
+				// Get the item we clicked on, null if we clicked on nothing
 				Item item = getItemClickedOn(e.getX(), e.getY() );
 				
+				// If we clicked on something, add all of the items available options to the pop up menu
 				if(item != null){
 					for(String action : item.getActions() ){
 						options.add(new MenuItem(action) );
 					}
+					
+					// Show the PopUp Menu
 					options.show(canvas, e.getX(), e.getY() );
+					options.addActionListener(new PopupActionListener() );
 				}
 			}
 		});
