@@ -3,11 +3,15 @@ package evidence.gameworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 
+@XmlRootElement
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
@@ -16,12 +20,12 @@ public class Game {
 	 * Reads in the state of a game from a xml file
 	 */
 	public void setup() {
-		rooms.add(new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png"));
-		rooms.add(new Room(Name.BEDROOM, "bedroom.png", "bedroom.png", "bedroom.png", "bedroom.png"));
-		rooms.add(new Room(Name.KITCHEN, "kitchen.png", "kitchen.png", "kitchen.png", "kitchen.png"));
-		rooms.add(new Room(Name.GARAGE, "garage.png", "garage.png", "garage.png", "garage.png"));
-		rooms.add(new Room(Name.LOUNGE, "lounge.png", "lounge.png", "lounge.png", "lounge.png"));
-		rooms.add(new Room(Name.OFFICE, "office.png", "office.png", "office.png", "office.png"));
+		rooms.add(new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png"));
+		rooms.add(new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png"));
+		rooms.add(new Room(Name.KITCHEN, "img/kitchen.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
+		rooms.add(new Room(Name.GARAGE, "img/garage.png", "img/garage.png", "img/garage.png", "img/garage.png"));
+		rooms.add(new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "img/lounge.png", "img/lounge.png"));
+		rooms.add(new Room(Name.OFFICE, "img/office.png", "img/office.png", "img/office.png", "img/office.png"));
 
 		List<String> actions = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
@@ -32,9 +36,9 @@ public class Game {
 		images.add("painting.png");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0),
 				rooms.get(1), true, 123);
-		door.setCurrentImage("img/door.png");
-		door.setXPos(30);
-		door.setYPos(100);
+		door.setCurrentImage("img/bigdoor.png");
+		door.setXPos(60);
+		door.setYPos(230);
 		rooms.get(0).getWalls()[1].addItem(door);
 		rooms.get(1).getWalls()[0].addItem(door);
 	}
@@ -45,15 +49,40 @@ public class Game {
 	public void start() {
 
 	}
-
-	public List<Player> getPlayers() {
+	
+	@XmlElement
+	public List<Player> getPlayers(){
 		return this.players;
 	}
-
-	public void addPlayer(Player p) {
+	
+	@XmlElement
+	public List<Room> getRoom(){
+		return this.rooms;
+	}
+	
+	public void setRooms(List<Room> r){
+		this.rooms = r;
+	}
+	
+	public void setPlayers(List<Player> p){
+		this.players =p;
+	}
+	
+	public void addPlayer(Player p){
 		p.setRoom(rooms.get(0));
 		this.players.add(p);
 	}
+	
+	public Player getPlayerWithID(Integer ID){
+		for(Player p : players){
+			if(p.getID().equals(ID) ){
+				return p;
+			}
+		}
+		return null; // Only happens if a player disconnects
+	}
+
+	
 
 	/**
 	 * Rotate the players view left

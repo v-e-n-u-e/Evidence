@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<testItem>
-    <description>Metal Safe</description>
+<key>
+    <actions>Enter</actions>
+    <actions>Unlock</actions>
+    <actions>Lock</actions>
+    <description>a hammer</description>
     <images>hammer.png</images>
-    <name>safe</name>
-    <XPos>20</XPos>
-    <YPos>30</YPos>
-</testItem>
+    <name>hammer</name>
+    <XPos>0</XPos>
+    <YPos>0</YPos>
+    <size>6</size>
+    <code>42</code>
+</key>

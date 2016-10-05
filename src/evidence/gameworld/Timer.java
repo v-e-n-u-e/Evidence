@@ -1,5 +1,8 @@
 package evidence.gameworld;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.clientserver.Server;
 
 /**
@@ -12,6 +15,7 @@ import evidence.clientserver.Server;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Timer{
 	Thread counter;
 	Server server;
@@ -31,6 +35,9 @@ public class Timer{
 			}
 		};
 		counter.start();
+		
+	}
+	public Timer(){
 		
 	}
 
@@ -96,5 +103,24 @@ public class Timer{
 		time = time + secs + " seconds";
 		
 		return time;
+	}
+	
+	@XmlElement
+	public int getSeconds(){
+		return this.seconds;
+	}
+	
+	@XmlElement
+	public Server getServer(){
+		return this.server;
+	}
+	
+	@XmlElement
+	public Thread getCounter(){
+		return this.counter;
+	}
+	
+	public void setCounter(Thread c){
+		this.counter = c;
 	}
 }

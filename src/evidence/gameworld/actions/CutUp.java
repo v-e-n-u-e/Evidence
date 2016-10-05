@@ -3,7 +3,9 @@
  */
 package evidence.gameworld.actions;
 
+
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
@@ -14,11 +16,13 @@ import evidence.gameworld.items.Weapon;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class CutUp extends Action {
 
 	public CutUp() {
 		super("Cut Up", "Cut this item up");
 	}
+	
 
 	@Override
 	public String apply(Item gameItem, Item inventoryItem, Player player) {
