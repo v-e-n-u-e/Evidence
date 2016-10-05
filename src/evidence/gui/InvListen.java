@@ -8,11 +8,12 @@ import java.awt.event.ActionListener;
 public class InvListen implements ActionListener{
 
 	
-	//Formula for getting position of the item in the players inventory as compared to the grid is 3y+x
-	//e.g. the item in grid pos [1][1] relates to position 4 in the inventory array.
+	/**
+	 * Formula for getting position of the item in the players inventory as compared to the grid is 3y+x
+	 * e.g. the item in grid pos [1][1] relates to position 4 in the inventory array.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource().equals(ClientWindow.retButtons()[0][0])){
 			resetSelected();
 			ClientWindow.retButtons()[0][0].setBackground(Color.BLACK);
@@ -60,6 +61,11 @@ public class InvListen implements ActionListener{
 		}
 	}
 	
+	
+	/**
+	 * This method is used to cleanly turn all background of icons light gray, so that you can't highlight more than one button 
+	 * at a time. 
+	 */
 	public void resetSelected(){
 		for(int x =0; x<3; x++){
 			for(int y = 0; y<3; y++){

@@ -12,6 +12,7 @@ import evidence.clientserver.ClientPipe;
 import evidence.clientserver.infoholders.Event;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
+import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
 
 import javax.swing.JTextArea;
@@ -57,6 +58,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
 	// Swing components
 	private JPanel contentPane;
+	private JPanel invPanel;
 	private JTextField messageField;
 	private JTextArea chatLog;
 	private JTextArea timeLeftArea;
@@ -183,6 +185,10 @@ public class ClientWindow extends JFrame implements Runnable{
 		}
 
 		
+		/**
+		 * This was used as a tester for adjusting game window based on screen size.
+		 * Unused - can delete
+		 */
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = new Dimension(screenSize.width-200,screenSize.height-200);
 	    // setBounds(0,0,screenSize.width, screenSize.height);
@@ -204,6 +210,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		contentPane.add(infoPanel);
 		infoPanel.setLayout(null);
 		
+		/**
+		 * Sets the count down timer in the appropriate position
+		 */
 		timeLeftArea = new JTextArea();
 		timeLeftArea.setBackground(UIManager.getColor("Button.background"));
 		timeLeftArea.setEditable(false);
@@ -211,17 +220,21 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
 		
-		//Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
-		//e.g. when an item is picked up/dropped
-		JPanel invPanel = new JPanel();
+		/**
+		 * Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
+		 * e.g. when an item is picked up/dropped
+		 */
+		invPanel = new JPanel();
 		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		invPanel.setToolTipText("Inventory");
 		invPanel.setBounds(10, 60, 284, 291);
 		infoPanel.add(invPanel);
-		inventoryRefresh(invPanel);
+		
 
-
-		//Button used for turning right in the room
+		
+		/**
+		 * Button used for turning right in the room
+		 */
 		JButton rightButton = new JButton("Turn Right");
 		rightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -231,7 +244,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		rightButton.setBounds(167, 361, 129, 43);
 		infoPanel.add(rightButton);
 		
-		//Button used for turning left in the room
+		/**
+		 * Button used for turning left in the room
+		 */
 		JButton leftButton = new JButton("Turn Left");
 		leftButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -240,13 +255,29 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		leftButton.setBounds(10, 361, 129, 43);
 		infoPanel.add(leftButton);
-
+		
+		/**
+		 * Used to display text containing information on the room/wall the player is in
+		 */
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Room Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 414, 282, 200);
+		infoPanel.add(panel);
+		panel.setLayout(null);
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setBackground(UIManager.getColor("Button.background"));
+		textArea.setBounds(12, 21, 258, 169);
+		panel.add(textArea);
+		
+		
+		//Set up for multiplayer chat
+		 
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
 		//chatPane.setBounds(frameSize.width-(frameSize.width/4), 11, (frameSize.width/4)-11, frameSize.height-11);
 		chatPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(chatPane);
-
 		chatLog = new JTextArea();
 		chatLog.setBackground(SystemColor.info);
 		chatLog.setLineWrap(true);
@@ -304,14 +335,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 
 		setVisible(true);
-		//Send our RenderCanvas the appropriate images to draw based on the room/wall. For now, this is hard coded for testing. Will clean later.
-		String[] images = new String[5];
-		images[0]="img/testwall2.png";
-		images[1]="img/bigfridge.png";
-		images[2]="img/bigpainting.png";
-		images[3]="img/bigmop.png";
-		images[4]="img/bigcbbox.png";
-		canvas.setImage(images);
 		render();
 	}
 
@@ -331,10 +354,19 @@ public class ClientWindow extends JFrame implements Runnable{
 	//This is used when you need to show a player's inventory has changed in some way.
 	//This method will remake the buttons/icons based on what the player is holding
 	private void inventoryRefresh(JPanel invPanel){
+		
 		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
 		ImageIcon[][] invIcons = new ImageIcon[3][3];
 		//TEMPORARY
-		invIcons[0][0]=new ImageIcon("img/mop.png");
+		if(rPackage==null){
+		System.out.println("package is null");
+		}
+		else if(rPackage.getInventory()==null){
+			System.out.println("iunventory is null");
+		}
+	    rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
+	    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");
+		invIcons[0][0]=new ImageIcon(rPackage.getInventory().get(0).getImageName());
 		invIcons[0][1]=new ImageIcon("img/bucket.png");
 		invIcons[0][2]=new ImageIcon("img/axe.png");
 		invIcons[1][0]=new ImageIcon("img/baxe.png");
@@ -344,6 +376,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		invIcons[2][1]=new ImageIcon("img/toolbox.png");
 		//invIcons[2][2]=new ImageIcon("img/safe.png");
 		//TEMPORARY
+		invPanel.removeAll();
 		invButtons = new JButton[3][3];
 		InvListen iListen = new InvListen();
 		for(int x =0; x<3;x++){
@@ -352,13 +385,14 @@ public class ClientWindow extends JFrame implements Runnable{
 					invButtons[x][y].setIcon(invIcons[x][y]);
 					invButtons[x][y].setPreferredSize(new Dimension(80,80));
 					invButtons[x][y].addActionListener(iListen);
-					
 					invPanel.add(invButtons[x][y]);
 			}
 		}
 		iListen.resetSelected();
 		//invPanel.validate();
 	}
+	
+	
 	
 	/**
 	 * Updates the time left displayed in the information panel
@@ -437,6 +471,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	public void reRenderWall(){
 		canvas.rPackage = this.rPackage;
+		inventoryRefresh(invPanel);
 		canvas.repaint();
 	}
 }
