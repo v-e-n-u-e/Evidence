@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package evidence.gameworld.actions;
 
@@ -22,10 +22,10 @@ public class CutUp extends Action {
 	public CutUp() {
 		super("Cut Up", "Cut this item up");
 	}
-	
+
 
 	@Override
-	public String apply(Item gameItem, Item inventoryItem, Player player) {
+	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
 		String feedback = "";
 		if (inventoryItem instanceof Weapon) {
 			if (gameItem.toString().equals("Body")) {
@@ -44,7 +44,7 @@ public class CutUp extends Action {
 
 		return feedback;
 	}
-	
+
 	public MovableItem makeBodyPart(String image, int x, int y, int size){
 		ArrayList<String> images = new ArrayList<String>();
 		images.add(image);

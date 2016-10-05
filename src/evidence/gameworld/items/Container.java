@@ -15,17 +15,19 @@ import evidence.gameworld.Player;
  */
 @XmlRootElement(name = "Container")
 public class Container extends Item {
-	
+
 	private ArrayList<Item> containedItems = new ArrayList<Item>();
+	private boolean locked;
 	private int capacity;
-	
-	public Container(String name, String description, List<String> actions, List<String> images, int capacity) {
+
+	public Container(String name, String description, List<String> actions, List<String> images, boolean locked, int capacity) {
 		super(name, description, actions, images);
+		this.locked = locked;
 		this.capacity = capacity;
 	}
-	
+
 	public Container(){
-		
+
 	}
 	/**
 	 * Method to put an item into this container
@@ -43,7 +45,7 @@ public class Container extends Item {
 			return item.toString() + " is too big for " + this.toString() + ", try removing an item";
 		}
 	}
-	
+
 	public String getItem(MovableItem item, Player player){
 		if(containedItems.contains(item)){
 			containedItems.remove(item);
@@ -54,15 +56,23 @@ public class Container extends Item {
 			return item.toString() + " not inside " + this.toString();
 		}
 	}
-	
+
 	@XmlElement
 	public int getCapacity(){
 		return this.capacity;
 	}
-	
+
 	public void setCapacity(int c){
 		this.capacity=c;
 	}
-	
-	
+
+	public boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+
 }

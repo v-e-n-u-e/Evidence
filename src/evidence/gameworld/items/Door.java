@@ -11,15 +11,15 @@ import evidence.gameworld.Room;
 
 /**
  * Class for a door object.
- * 
+ *
  * A door object links two room objects
- * 
+ *
  * @author Georgina Murphy
  *
  */
 @XmlRootElement
 public class Door extends Item{
-	
+
 	private Room roomOne;
 	private Room roomTwo;
 	private boolean locked;
@@ -33,14 +33,14 @@ public class Door extends Item{
 		this.locked = locked;
 		this.keyCode = keyCode;
 	}
-	
+
 	public Door(){
-		
+
 	}
 
 	/**
 	 * A method to check the provided key matches the door, unlock if correct
-	 * 
+	 *
 	 * @param key
 	 *            - the key that is being used to unlock the door
 	 * @return Status update
@@ -55,7 +55,7 @@ public class Door extends Item{
 
 	/**
 	 * A method to check the provided key matches the door, lock if correct
-	 * 
+	 *
 	 * @param key
 	 *            - the key that is being used to lock the door
 	 * @return Status update
@@ -68,9 +68,10 @@ public class Door extends Item{
 			return "Incorrect key. Door remains unlocked";
 	}
 
+
 	/**
 	 * Method to check the key against the doors code
-	 * 
+	 *
 	 * @param key
 	 *            - the key to check against this door
 	 * @return boolean T if correct Key, F if incorrect
@@ -82,11 +83,18 @@ public class Door extends Item{
 		else
 			return false;
 	}
+
+
+	public int getKeyCode(){
+		return keyCode;
+	}
+
+
 	@XmlElement
 	public Room getRoomOne() {
 		return roomOne;
 	}
-	
+
 	@XmlElement
 	public Room getRoomTwo() {
 		return roomTwo;
@@ -95,10 +103,10 @@ public class Door extends Item{
 	public boolean getLocked(){
 		return locked;
 	}
-	
+
 	public void setLocked(boolean l){
 		this.locked = l;
 	}
-	
+
 
 }
