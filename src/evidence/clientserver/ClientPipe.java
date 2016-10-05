@@ -24,6 +24,7 @@ import evidence.testobjects.TestWall;
  * @author Tyler Jones
  */
 public class ClientPipe{
+	// The size of byte array's for receiving packets
 	private final int BYTE_ARRAY_LENGTH = 2048;
 
 	// Information for our connection
@@ -102,7 +103,7 @@ public class ClientPipe{
 	 * Returns true if the connection succeeds, false otherwise.
 	 *
 	 * @param address - the address we are connecting to
-	 * @return
+	 * @return - True if successful, false otherwise
 	 */
 	public boolean openConnection(String address){
 		try {
@@ -119,7 +120,7 @@ public class ClientPipe{
 	}
 
 	/**
-	 * This method will receive a Datagram packet that has been sent
+	 * This method will receive a DatagramPacket that has been sent
 	 * to the ClientPipe from the server.  The program will sit at
 	 * the socket.receive(packet) line until the server send us something.
 	 * Because we have a separate Thread running this method however,
@@ -151,11 +152,12 @@ public class ClientPipe{
 
 	/**
 	 * When a packet is received, the packet is extracted
-	 * and sent to this method.  Based on our header conventions,
-	 * it will perform the appropriate actions.  The different header
-	 * conventions are explained in the "PacketBrainstorming.txt" file.
+	 * and sent to this method. An object is created from the
+	 * array of bytes contained within the packet and work 
+	 * is delegated to the appropriate method depending on
+	 * what the object was.
 	 *
-	 * @param message - The message in the received packet needing processing
+	 * @param packet - The packet to process
 	 */
 	public void process(DatagramPacket packet){
 		// Extract the serialized data into an Object
@@ -168,13 +170,21 @@ public class ClientPipe{
 		
 		// Was the serialized object a String?
 		if(o instanceof String){processString((String) o);}
+		
+		// Was the serialized object a wall?
 		else if(o instanceof Wall){processWall((Wall) o);}
 	}
 	
 	/**
 	 * Processes a String and performs the appropriate action, 
-	 * either by writing to our chat log, or sending a response
-	 * to the server
+	 * based on the header at the start of the String.
+	 * 
+	 * HEADERS:
+	 *  /c/ - A connection response
+	 *  /m/ - A chat room message
+	 *  /ping/ - The server pinging the client to make sure they are still connected
+	 *  /timer/ - An update for our timer
+	 *  /refusal/ - A connection refusal 
 	 * 
 	 * @param message - The String to process
 	 */
@@ -211,6 +221,12 @@ public class ClientPipe{
 		}
 	}
 	
+	/**
+	 * Calls the appropriate methods for processing a wall
+	 * upon receiving the wall from the server
+	 * 
+	 * @param wall - The wall to process
+	 */
 	private void processWall(Wall wall){
 		gui.wall = wall;
 		gui.reRenderWall();
@@ -252,11 +268,11 @@ public class ClientPipe{
 	}
 
 	/**
-	 * This method creates a packet, given a byte[] and sends
+	 * This method creates a packet given an object, and sends
 	 * it through the socket, to the server.  A separate thread
 	 * is created to do this.
 	 *
-	 * @param data - The array of bytes to put in our packet
+	 * @param toSend - The object to serialize and put into the packet
 	 */
 	public void send(Object toSend){
 		// Create a new thread to send the data on and then start the thread

@@ -35,7 +35,7 @@ import evidence.gui.ServerGUI;
  * @author Tyler Jones
  */
 public class Server implements Runnable{
-	// 
+	// The size of byte array's for receiving packets
 	private final int BYTE_ARRAY_LENGTH = 2048;
 	
 	// Port number this server is running on
@@ -214,7 +214,7 @@ public class Server implements Runnable{
 	
 	/**
 	 * Upon receiving a packet, this method is called.
-	 * Responsible for reading the bytes into and object
+	 * Responsible for reading the bytes into an object
 	 * and delegating the work to the appropriate method
 	 * depending on the object.
 	 * 
@@ -236,7 +236,18 @@ public class Server implements Runnable{
 	}
 	
 	/**
-	 * Processes a String received over the network
+	 * Processes a String received over the network. The Strings
+	 * the server will receive all begin with a header notation.
+	 * Different headers will cause the server to perform different 
+	 * actions.
+	 * 
+	 * HEADERS:
+	 *  /c/ - A connection request
+	 *  /dc/ - A disconnection request
+	 *  /m/ - A chat room message
+	 *  /ping/ - A Client responding to a ping by the server
+	 *  /rotLeft/ - A Client attempting to rotate their view left
+	 *  /rotRight/ - A Client attempting to rotate their view right
 	 * 
 	 * @param string - The String to process
 	 * @param packet - The packet the String arrived in
@@ -466,6 +477,7 @@ public class Server implements Runnable{
 			}
 		}
 		
+		// This shouldn't happen, just an extra check
 		if(sc == null){return;}
 		
 		// Build an appropriate message for the server log
@@ -491,6 +503,14 @@ public class Server implements Runnable{
 		Timer timer = new Timer(300, this);
 	}
 	
+	/**
+	 * Will call the series of game logic methods that
+	 * rotate's a client current view to the left.  Returns
+	 * a boolean representing the success of the rotation.
+	 * 
+	 * @param ID - The ID of the player to move
+	 * @return - True if rotate successful, false otherwise.
+	 */
 	private boolean rotatePlayerViewLeft(Integer ID){
 		gui.writeToLog("Attempting to rotate: " + ID);
 		Player p = game.getPlayerWithID(ID);
@@ -500,6 +520,14 @@ public class Server implements Runnable{
 		return true;
 	}
 	
+	/**
+	 * Will call the series of game logic methods that
+	 * rotate's a client current view to the right.  Returns
+	 * a boolean representing the success of the rotation.
+	 * 
+	 * @param ID - The ID of the player to move
+	 * @return - True if rotate successful, false otherwise.
+	 */
 	private boolean rotatePlayerViewRight(Integer ID){
 		gui.writeToLog("Attempting to rotate: " + ID);
 		Player p = game.getPlayerWithID(ID);
