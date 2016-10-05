@@ -1,16 +1,12 @@
 package evidence.gameworld.items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
-import evidence.gameworld.actions.PickUp;
 /**
  * Class for a container object.
  * Container object its one that can hold another item
