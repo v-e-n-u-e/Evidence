@@ -73,6 +73,7 @@ public class Server implements Runnable{
 
 	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
+	private ArrayList<Player> playerBuffer = new ArrayList<Player>();
 
 	// The game instance
 	private Game game;
@@ -119,8 +120,8 @@ public class Server implements Runnable{
 	public void run() {
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
-		game = new Game();
-		game.setup();
+		//game = new Game();
+		//game.setup();
 		manageClients();
 		receive();
 	}
@@ -272,6 +273,7 @@ public class Server implements Runnable{
 			toAdd.setID(id);
 			toAdd.setDirection(Direction.SOUTH);
 			game.addPlayer(toAdd);
+			playerBuffer.add(toAdd);
 
 			// Record who we connected to the server
 			gui.writeToLog("Added to clients: " + string.split("/c/|/e/")[1] + " with ID " + id);
@@ -288,6 +290,12 @@ public class Server implements Runnable{
 			// Check if we are still waiting for all the players to connect, if we are still waiting
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
+				game = new Game();
+				game.setup();
+				for(Player p : playerBuffer){
+					game.addPlayer(p);
+				}
+				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
 			}
@@ -503,6 +511,20 @@ public class Server implements Runnable{
 		Timer timer = new Timer(300, this);
 	}
 
+	private void updateAllViews(){
+		for(Player p : game.getPlayers() ){
+			for(ServerClient sc : clients){
+				if(sc.ID == p.getID() ){
+					try {
+						byte[] data = getBytes(createRenderPackage(p.getID() ) );
+						send(data, sc.address, sc.port );
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 	/**
 	 * Creates a RenderPackage for a specific Client
 	 *
