@@ -26,7 +26,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -71,7 +70,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
-	
+
 	public static RenderPackage rPackage;
 	//private static JButton[][] invButtons;
 	private static JButton[] invButtons;
@@ -131,16 +130,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		// Append the user's name to their message, writeToHistory and clear the txtMessage Area
 		message = pipe.getName() + ": " + message;
 		message = "/m/" + message;
-		
+
 		// Send message to server
 		pipe.send(message);
 		messageField.setText("");
 	}
-	
+
 	/**
 	 * A user has created an Event, and now we need to communicate that event
 	 * to the Server for processing.
-	 * 
+	 *
 	 * @param event - The event to send to the server
 	 */
 	public static void sendEvent(Event event){
@@ -186,7 +185,7 @@ public class ClientWindow extends JFrame implements Runnable{
 			e.printStackTrace();
 		}
 
-		
+
 		/**
 		 * This was used as a tester for adjusting game window based on screen size.
 		 * Unused - can delete
@@ -194,7 +193,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = new Dimension(screenSize.width-200,screenSize.height-200);
 	    // setBounds(0,0,screenSize.width, screenSize.height);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//1400 by 700
 		setBounds(100, 100, 1400, 700);
@@ -211,7 +210,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		//infoPanel.setBounds(screenSize.width/2, 11, (3/14)*screenSize.width, screenSize.height-211);
 		contentPane.add(infoPanel);
 		infoPanel.setLayout(null);
-		
+
 		/**
 		 * Sets the count down timer in the appropriate position
 		 */
@@ -221,7 +220,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setBounds(10, 21, 286, 22);
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
-		
+
 		/**
 		 * Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
 		 * e.g. when an item is picked up/dropped
@@ -231,9 +230,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		invPanel.setToolTipText("Inventory");
 		invPanel.setBounds(10, 60, 284, 291);
 		infoPanel.add(invPanel);
-		
 
-		
+
+
 		/**
 		 * Button used for turning right in the room
 		 */
@@ -245,7 +244,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		rightButton.setBounds(167, 361, 129, 43);
 		infoPanel.add(rightButton);
-		
+
 		/**
 		 * Button used for turning left in the room
 		 */
@@ -257,7 +256,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		leftButton.setBounds(10, 361, 129, 43);
 		infoPanel.add(leftButton);
-		
+
 		/**
 		 * Used to display text containing information on the room/wall the player is in
 		 */
@@ -271,10 +270,10 @@ public class ClientWindow extends JFrame implements Runnable{
 		textArea.setBackground(UIManager.getColor("Button.background"));
 		textArea.setBounds(12, 21, 258, 169);
 		panel.add(textArea);
-		
-		
+
+
 		//Set up for multiplayer chat
-		 
+
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
 		//chatPane.setBounds(frameSize.width-(frameSize.width/4), 11, (frameSize.width/4)-11, frameSize.height-11);
@@ -309,17 +308,22 @@ public class ClientWindow extends JFrame implements Runnable{
 				// Create our PopUp Menu object
 				PopupMenu options = new PopupMenu("Options");
 				canvas.add(options);
-				
+
 				// Get the item we clicked on, null if we clicked on nothing
 				Item item = getItemClickedOn(e.getX(), e.getY() );
-				
+
 				// If we clicked on something, add all of the items available options to the pop up menu
 				if(item != null){
 					for(String action : item.getActions() ){
 						options.add(new MenuItem(action) );
 					}
-					
+
 					// Show the PopUp Menu
+					options.show(canvas, e.getX(), e.getY() );
+					options.addActionListener(new PopupListener(item) );
+				}
+				else if(currentlySelected != null){
+					options.add(new MenuItem("Drop") );
 					options.show(canvas, e.getX(), e.getY() );
 					options.addActionListener(new PopupListener(item) );
 				}
@@ -348,50 +352,50 @@ public class ClientWindow extends JFrame implements Runnable{
 			c.repaint();
 		}
 	}
-	
+
 	public static JButton[] retButtons(){
 		return invButtons;
 	}
-	
+
 	//This is used when you need to show a player's inventory has changed in some way.
-	//This method will remake the buttons/icons based on what the player is holding
-	private void inventoryRefresh(){
-		ImageIcon[] invIcons = new ImageIcon[9];
-	   /*rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
-	    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");*/
-	    for(int i = 0; i < rPackage.getInventory().size(); i++){
-	    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
-	    }
-		invPanel.removeAll();
-		invButtons = new JButton[9];
-		InvListen iListen = new InvListen();
-		for(int i = 0; i < 9; i++){
-			JButton button = new JButton();
-			button.setIcon(invIcons[i]);
-			button.setPreferredSize(new Dimension(80,80));
-			button.addActionListener(iListen);
-			invButtons[i]=button;
-			invPanel.add(invButtons[i]);
+		//This method will remake the buttons/icons based on what the player is holding
+		private void inventoryRefresh(){
+			ImageIcon[] invIcons = new ImageIcon[9];
+		   /*rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
+		    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");*/
+		    for(int i = 0; i < rPackage.getInventory().size(); i++){
+		    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
+		    }
+			invPanel.removeAll();
+			invButtons = new JButton[9];
+			InvListen iListen = new InvListen();
+			for(int i = 0; i < 9; i++){
+				JButton button = new JButton();
+				button.setIcon(invIcons[i]);
+				button.setPreferredSize(new Dimension(80,80));
+				button.addActionListener(iListen);
+				invButtons[i]=button;
+				invPanel.add(invButtons[i]);
+			}
+			iListen.resetSelected();
 		}
-		iListen.resetSelected();
-	}
-	
-	
-	
+
+
+
 	/**
 	 * Updates the time left displayed in the information panel
-	 * 
+	 *
 	 * @param time - A string representing time left
 	 */
 	public void updateTime(String time){
 		timeLeftArea.setText(time);
 		String[] splitted = time.split(" ");
-		int minutes = Integer.parseInt(splitted[2]); // The minutes left 
+		int minutes = Integer.parseInt(splitted[2]); // The minutes left
 		if(minutes >= 3){timeLeftArea.setBackground(Color.green);}
 		else if(minutes >= 1){timeLeftArea.setBackground(Color.yellow);}
 		else if(minutes < 1){timeLeftArea.setBackground(Color.red);}
 	}
-	
+
 	/**
 	 * Used when a client is refused connection, stops them
 	 * from being able to send messages to the server.
@@ -399,26 +403,26 @@ public class ClientWindow extends JFrame implements Runnable{
 	public void doNotAllowMessaging(){
 		messageField.setEditable(false);
 	}
-	
-	
+
+
 	//Used for the server/client side interactions
 	public void rotateLeft(){
-		String rotateLeft = "/rotLeft/" + pipe.getId() + "/e/"; 
+		String rotateLeft = "/rotLeft/" + pipe.getId() + "/e/";
 		pipe.send(rotateLeft);
 	}
-	
+
 	//Used for the server/client side interactions
 	public void rotateRight(){
-		String rotateRight = "/rotRight/" + pipe.getId() + "/e/"; 
+		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);
 	}
-	
+
 	/**
 	 * Iterates over each item in the current wall's list and checks
 	 * the mouse click against the bounding box for that item.  If the click
 	 * was within the bounding box, it returns the item.
 	 * Returns null if no item's image was successfully clicked on.
-	 * 
+	 *
 	 * @param clickX - xPos of mouse click
 	 * @param clickY - yPos of mouse click
 	 * @return - The item clicked on, null otherwise
@@ -430,29 +434,29 @@ public class ClientWindow extends JFrame implements Runnable{
 			int height = itemImage.getHeight(null);
 			int x = i.getXPos();
 			int y = i.getYPos();
-			
+
 			if(clickX >= x && clickX <= x + width){
 				if(clickY >= y && clickY <= y + height){
 					return i;
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public static Item getSelected(){
 		return currentlySelected;
 	}
-	
+
 	public static void setSelected(Item selected){
 		currentlySelected = selected;
 	}
-	
+
 	public static Integer getID(){
 		return pipe.getId();
 	}
-	
+
 	public void reRenderWall(){
 		canvas.rPackage = this.rPackage;
 		inventoryRefresh();
