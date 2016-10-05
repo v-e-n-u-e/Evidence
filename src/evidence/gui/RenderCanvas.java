@@ -7,6 +7,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
 import evidence.testobjects.TestItem;
@@ -27,7 +28,7 @@ public class RenderCanvas extends Canvas{
 	ImageIcon img4;
 	Image image4;
 	
-	Wall wall;
+	RenderPackage rPackage;
 	
 	public RenderCanvas(){
 		super();
@@ -63,9 +64,9 @@ public class RenderCanvas extends Canvas{
 		g.drawImage(image2, 450, 130, null);
 		g.drawImage(image3, 600, 400, null);
 		g.drawImage(image4, 530, 450, null);*/
-		if(wall==null){return;}
-		g.drawImage(new ImageIcon(wall.getImageName() ).getImage(), 0, 0, null);
-		for(Item item : wall.getItems() ){
+		if(rPackage==null){return;}
+		g.drawImage(new ImageIcon(rPackage.getWall().getImageName() ).getImage(), 0, 0, null);
+		for(Item item : rPackage.getWall().getItems() ){
 			g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
 		}
 		

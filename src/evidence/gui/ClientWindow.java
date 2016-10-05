@@ -10,6 +10,7 @@ import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
 import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
 
@@ -68,7 +69,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	private Thread run;
 	private RenderCanvas canvas;
 	
-	public Wall wall;
+	public RenderPackage rPackage;
 	private static JButton[][] invButtons;
 	private static Item currentlySelected;
 
@@ -405,7 +406,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * @return - The item clicked on, null otherwise
 	 */
 	public Item getItemClickedOn(int clickX, int clickY){
-		for(Item i : this.wall.getItems() ){
+		for(Item i : this.rPackage.getWall().getItems() ){
 			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
 			int height = itemImage.getHeight(null);
@@ -435,7 +436,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	}
 	
 	public void reRenderWall(){
-		canvas.wall = this.wall;
+		canvas.rPackage = this.rPackage;
 		canvas.repaint();
 	}
 }

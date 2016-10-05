@@ -12,6 +12,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
@@ -290,9 +291,9 @@ public class Server implements Runnable{
 				allPlayersConnected = true;
 			}
 			
-			// Send back to the client their wall object to render
+			// Send back to the client their RenderPackage
 			try {
-				byte[] data = getBytes(toAdd.getWall() );
+				byte[] data = getBytes(createRenderPackage(id) );
 				send(data, packet.getAddress(), packet.getPort() );
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -323,8 +324,7 @@ public class Server implements Runnable{
 			if(rotatePlayerViewLeft(ID) ){
 				// Send the player's updated wall back to them for rendering
 				try {
-					Player p = game.getPlayerWithID(ID);
-					byte[] data = getBytes(p.getWall() );
+					byte[] data = getBytes(createRenderPackage(ID) );
 					send(data, packet.getAddress(), packet.getPort() );
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -340,8 +340,7 @@ public class Server implements Runnable{
 			if(rotatePlayerViewRight(ID) ){
 				// Send the player's updated wall back to them for rendering
 				try {
-					Player p = game.getPlayerWithID(ID);
-					byte[] data = getBytes(p.getWall() );
+					byte[] data = getBytes(createRenderPackage(ID) );
 					send(data, packet.getAddress(), packet.getPort() );
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -501,6 +500,17 @@ public class Server implements Runnable{
 	 */
 	private void startTimer(){
 		Timer timer = new Timer(300, this);
+	}
+	
+	/**
+	 * Creates a RenderPackage for a specific Client
+	 * 
+	 * @param ID - The ID of the Client the RenderPackage is for
+	 * @return - The RenderPackage we created
+	 */
+	private RenderPackage createRenderPackage(Integer ID){
+		Player p = game.getPlayerWithID(ID);
+		return new RenderPackage(p.getWall(), p.getInventory() );
 	}
 	
 	/**

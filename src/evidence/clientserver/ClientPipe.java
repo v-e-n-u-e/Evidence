@@ -10,6 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gui.ClientWindow;
 import evidence.testobjects.TestWall;
@@ -172,7 +173,7 @@ public class ClientPipe{
 		if(o instanceof String){processString((String) o);}
 		
 		// Was the serialized object a wall?
-		else if(o instanceof Wall){processWall((Wall) o);}
+		else if(o instanceof RenderPackage){processRenderPackage((RenderPackage) o);}
 	}
 	
 	/**
@@ -227,8 +228,8 @@ public class ClientPipe{
 	 * 
 	 * @param wall - The wall to process
 	 */
-	private void processWall(Wall wall){
-		gui.wall = wall;
+	private void processRenderPackage(RenderPackage rPackage){
+		gui.rPackage = rPackage;
 		gui.reRenderWall();
 	}
 	
