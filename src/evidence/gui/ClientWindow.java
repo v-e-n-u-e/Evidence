@@ -356,28 +356,13 @@ public class ClientWindow extends JFrame implements Runnable{
 	//This is used when you need to show a player's inventory has changed in some way.
 	//This method will remake the buttons/icons based on what the player is holding
 	private void inventoryRefresh(){
-		
-		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
-		//ImageIcon[][] invIcons = new ImageIcon[3][3];
 		ImageIcon[] invIcons = new ImageIcon[9];
-		//TEMPORARY
-	   rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
-	    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");
+	   /*rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
+	    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");*/
 	    for(int i = 0; i < rPackage.getInventory().size(); i++){
 	    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
 	    }
-		/*invIcons[0][0]=new ImageIcon(rPackage.getInventory().get(0).getImageName());
-		invIcons[0][1]=new ImageIcon(rPackage.getInventory().get(1).getImageName());
-		invIcons[0][2]=new ImageIcon(rPackage.getInventory().get(2).getImageName());
-		invIcons[1][0]=new ImageIcon(rPackage.getInventory().get(3).getImageName());
-		invIcons[1][1]=new ImageIcon(rPackage.getInventory().get(4).getImageName());
-		invIcons[1][2]=new ImageIcon(rPackage.getInventory().get(5).getImageName());
-		invIcons[2][0]=new ImageIcon(rPackage.getInventory().get(6).getImageName());
-		invIcons[2][1]=new ImageIcon(rPackage.getInventory().get(7).getImageName());*/
-		//invIcons[2][2]=new ImageIcon("img/safe.png");
-		//TEMPORARY
 		invPanel.removeAll();
-		//invButtons = new JButton[3][3];
 		invButtons = new JButton[9];
 		InvListen iListen = new InvListen();
 		for(int i = 0; i < 9; i++){
@@ -388,17 +373,7 @@ public class ClientWindow extends JFrame implements Runnable{
 			invButtons[i]=button;
 			invPanel.add(invButtons[i]);
 		}
-		/*for(int x =0; x<3;x++){
-			for(int y=0;y<3;y++){
-					invButtons[x][y]=new JButton();
-					invButtons[x][y].setIcon(invIcons[x][y]);
-					invButtons[x][y].setPreferredSize(new Dimension(80,80));
-					invButtons[x][y].addActionListener(iListen);
-					invPanel.add(invButtons[x][y]);
-			}
-		}*/
 		iListen.resetSelected();
-		//invPanel.validate();
 	}
 	
 	
