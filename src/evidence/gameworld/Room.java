@@ -2,6 +2,10 @@ package evidence.gameworld;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.Item;
 
@@ -13,6 +17,7 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Room implements Serializable{
 	private static final long serialVersionUID = -813837991125057316L;
 
@@ -20,6 +25,7 @@ public class Room implements Serializable{
 	 * A enum class that represents the name of this room
 	 *
 	 */
+	@XmlEnum(String.class)
 	public enum Name{
 		KITCHEN,
 		BATHROOM,
@@ -44,8 +50,16 @@ public class Room implements Serializable{
 		this.walls[3] = new Wall(Direction.WEST, "", 0, 0);
 	}
 	
+	public Room(){
+		
+	}
+	
+	@XmlElement
 	public Wall[] getWalls(){
 		return walls;
+	}
+	public void setWalls(Wall[] w){
+		this.walls = w;
 	}
 	
 	public void removeItem(Direction dir, Item item){

@@ -3,6 +3,8 @@
  */
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 
@@ -10,12 +12,14 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class CutUp extends Action {
 
 
 	public CutUp() {
 		super("Cut Up", "Cut this item up");
 	}
+	
 
 	@Override
 	public String apply(Item item, Player player) {

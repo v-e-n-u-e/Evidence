@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Room;
 
 /**
@@ -14,6 +17,7 @@ import evidence.gameworld.Room;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Door extends Item{
 	
 	private Room roomOne;
@@ -28,6 +32,10 @@ public class Door extends Item{
 		this.roomTwo = roomTwo;
 		this.locked = locked;
 		this.keyCode = keyCode;
+	}
+	
+	public Door(){
+		
 	}
 
 	/**
@@ -74,17 +82,23 @@ public class Door extends Item{
 		else
 			return false;
 	}
-
+	@XmlElement
 	public Room getRoomOne() {
 		return roomOne;
 	}
 	
+	@XmlElement
 	public Room getRoomTwo() {
 		return roomTwo;
 	}
-	
+	@XmlElement
 	public boolean getLocked(){
 		return locked;
 	}
+	
+	public void setLocked(boolean l){
+		this.locked = l;
+	}
+	
 
 }

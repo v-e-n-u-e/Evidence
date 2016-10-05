@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.items.Item;
  
@@ -16,6 +20,7 @@ import evidence.gameworld.items.Item;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Wall implements Serializable{
 	private static final long serialVersionUID = 7834346011040118322L;
 
@@ -23,6 +28,7 @@ public class Wall implements Serializable{
 	 * A enum class that represents the direction of this wall
 	 *
 	 */
+	@XmlEnum(String.class)
 	public enum Direction{
 		NORTH,
 		SOUTH,
@@ -41,6 +47,9 @@ public class Wall implements Serializable{
 		this.direction = direction;
 		currentImage = fileName;
 		items = new ArrayList<Item>();
+	}
+	public Wall(){
+		
 	}
 	
 	/**
@@ -62,6 +71,7 @@ public class Wall implements Serializable{
 	/**
 	 * @return the direction of this wall
 	 */
+	@XmlElement
 	public Direction getDirection() {
 		return direction;
 	}
@@ -69,18 +79,20 @@ public class Wall implements Serializable{
 	/**
 	 * @return the items on this wall
 	 */
+	@XmlElement
 	public List<Item> getItems() {
 		return items;
 	}
 	
+	@XmlElement
 	public String getImageName(){
 		return currentImage;
 	}
-	
+	@XmlElement
 	public int getX(){
 		return xPos;
 	}
-	
+	@XmlElement
 	public int getY(){
 		return yPos;
 	}

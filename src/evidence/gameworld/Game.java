@@ -3,12 +3,16 @@ package evidence.gameworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.actions.Enter;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 
+@XmlRootElement
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
@@ -52,8 +56,22 @@ public class Game {
 
 	}
 	
+	@XmlElement
 	public List<Player> getPlayers(){
 		return this.players;
+	}
+	
+	@XmlElement
+	public List<Room> getRoom(){
+		return this.rooms;
+	}
+	
+	public void setRooms(List<Room> r){
+		this.rooms = r;
+	}
+	
+	public void setPlayers(List<Player> p){
+		this.players =p;
 	}
 	
 	public void addPlayer(Player p){

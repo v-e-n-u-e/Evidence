@@ -17,8 +17,6 @@ import evidence.gameworld.items.Item;
 
 
 @XmlRootElement
-
-
 public abstract class Action implements Serializable{
 	private static final long serialVersionUID = 2467451372271352711L;
 
@@ -69,6 +67,10 @@ public abstract class Action implements Serializable{
 	
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	public void setDescription(String d){
+		this.description =d;
 	}
 }
 

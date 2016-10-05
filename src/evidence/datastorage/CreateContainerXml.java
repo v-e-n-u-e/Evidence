@@ -14,6 +14,9 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
+import evidence.gameworld.items.Evidence;
+import evidence.gameworld.items.Item;
+import evidence.gameworld.items.Key;
 
 /**
  * Creates an XML file for a single container, the main method is passed the name of the
@@ -28,24 +31,29 @@ public class CreateContainerXml {
 	public static void main(String[] args){
 		
 		List<String> actions = new ArrayList<String>();
+		actions.add("Enter");
+		actions.add("Unlock");
+		actions.add("Lock");
 		List<String> images = new ArrayList<String>();
 		images.add("hammer.png");
-		Container safe = new Container("safe", "Metal Safe",null,images, 3);
+		Container safe = new Container("safe", "Metal Safe",actions,images, 3);
 		safe.setXPos(20);
 		safe.setYPos(30);
 		safe.setCurrentImage("hammer.png");
+		
+		Key hammer = new Key("hammer","a hammer",actions,images,6,42);
 				
 		
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(safe.getClass());
+			JAXBContext jaxbContext = JAXBContext.newInstance(hammer.getClass());
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			File file = new File("SavedGamed.xml");
 			//formats and writes to the file
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			//prints to file
-			jaxbMarshaller.marshal(safe,file);
+			jaxbMarshaller.marshal(hammer,file);
 			//prints to the console
-			jaxbMarshaller.marshal(safe, System.out);
+			jaxbMarshaller.marshal(hammer, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

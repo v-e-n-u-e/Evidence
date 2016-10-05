@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
@@ -10,6 +12,7 @@ import evidence.gameworld.items.Key;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Lock extends Action {
 
 	public Lock() {
