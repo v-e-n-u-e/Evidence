@@ -351,9 +351,11 @@ public class ClientWindow extends JFrame implements Runnable{
 					invButtons[x][y].setIcon(invIcons[x][y]);
 					invButtons[x][y].setPreferredSize(new Dimension(80,80));
 					invButtons[x][y].addActionListener(iListen);
+					
 					invPanel.add(invButtons[x][y]);
 			}
 		}
+		iListen.resetSelected();
 		//invPanel.validate();
 	}
 	
