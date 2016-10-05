@@ -3,6 +3,9 @@ package evidence.gameworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
@@ -13,6 +16,7 @@ import evidence.gameworld.items.MovableItem;
  * @author Georgina Murphy
  *
  */
+@XmlRootElement
 public class Player {
 
 	private ArrayList<Item> inventory = new ArrayList<Item>();
@@ -36,6 +40,7 @@ public class Player {
 		this.ID = ID;
 	}
 	
+	@XmlElement
 	public Integer getID(){
 		return this.ID;
 	}
@@ -55,6 +60,7 @@ public class Player {
 		return wall;
 	}
 	
+	@XmlElement
 	public Room getCurrentRoom(){
 		return this.currentRoom;
 	}
@@ -129,10 +135,11 @@ public class Player {
 		return "You are now facing the " + currentDirection.toString() + " wall in the " + currentRoom.toString();
 	}
 
+	@XmlElement
 	public Direction getCurrentDirection() {
 		return currentDirection;
 	}
-	
+	@XmlElement
 	public ArrayList<Item> getInventory(){
 		return inventory;
 	}

@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
@@ -10,6 +12,7 @@ import evidence.gameworld.items.MovableItem;
  * 
  * @author Georgina Murphy
  */
+@XmlRootElement
 public class PickUp extends Action {
 	
 	public PickUp(){

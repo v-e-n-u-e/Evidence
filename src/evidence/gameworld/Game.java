@@ -3,11 +3,15 @@ package evidence.gameworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 
+@XmlRootElement
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
@@ -45,9 +49,28 @@ public class Game {
 	public void start() {
 
 	}
-
-	public List<Player> getPlayers() {
+	
+	@XmlElement
+	public List<Player> getPlayers(){
 		return this.players;
+	}
+	
+	@XmlElement
+	public List<Room> getRoom(){
+		return this.rooms;
+	}
+	
+	public void setRooms(List<Room> r){
+		this.rooms = r;
+	}
+	
+	public void setPlayers(List<Player> p){
+		this.players =p;
+	}
+	
+	public void addPlayer(Player p){
+		p.setRoom(rooms.get(0));
+		this.players.add(p);
 	}
 	
 	public Player getPlayerWithID(Integer ID){
@@ -59,10 +82,7 @@ public class Game {
 		return null; // Only happens if a player disconnects
 	}
 
-	public void addPlayer(Player p) {
-		p.setRoom(rooms.get(0));
-		this.players.add(p);
-	}
+	
 
 	/**
 	 * Rotate the players view left

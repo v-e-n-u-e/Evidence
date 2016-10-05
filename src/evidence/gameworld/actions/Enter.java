@@ -1,5 +1,7 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
@@ -9,6 +11,7 @@ import evidence.gameworld.items.Item;
  * 
  * @author Georgina Murphy
  */
+@XmlRootElement
 public class Enter extends Action {
 	private static final long serialVersionUID = -4219760638031297711L;
 
