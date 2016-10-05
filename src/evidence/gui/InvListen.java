@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 public class InvListen implements ActionListener{
 
-	
+
 	/**
 	 * Formula for getting position of the item in the players inventory as compared to the grid is 3y+x
 	 * e.g. the item in grid pos [1][1] relates to position 4 in the inventory array.
@@ -44,21 +44,19 @@ public class InvListen implements ActionListener{
 			performButton(8);
 		}
 	}
-	
-	
+
+
 	/**
-	 * This method is used to cleanly turn all background of icons light gray, so that you can't highlight more than one button 
-	 * at a time. 
+	 * This method is used to cleanly turn all background of icons light gray, so that you can't highlight more than one button
+	 * at a time.
 	 */
 	public void resetSelected(){
 		for(int x =0; x<9; x++){
-			
-				ClientWindow.retButtons()[x].setBackground(Color.LIGHT_GRAY);
-			
+			ClientWindow.retButtons()[x].setBackground(Color.LIGHT_GRAY);
 		}
 	}
-	
-	
+
+
 	/**
 	 * This is used just to clean up the actionPerformed method. Better to have a method here than copy and paste into each button
 	 * @param i - the position in the grid you've selected. From left-right, top-bottom, 0-8
