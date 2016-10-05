@@ -16,32 +16,32 @@ public class InvListen implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(ClientWindow.retButtons()[0][0])){
-			performButton(ClientWindow.retButtons()[0][0]);
+		if(e.getSource().equals(ClientWindow.retButtons()[0])){
+			performButton(0);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[0][1])){
-			performButton(ClientWindow.retButtons()[0][1]);
+		if(e.getSource().equals(ClientWindow.retButtons()[1])){
+			performButton(1);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[0][2])){
-			performButton(ClientWindow.retButtons()[0][2]);
+		if(e.getSource().equals(ClientWindow.retButtons()[2])){
+			performButton(2);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[1][0])){
-			performButton(ClientWindow.retButtons()[1][0]);
+		if(e.getSource().equals(ClientWindow.retButtons()[3])){
+			performButton(3);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[1][1])){
-			performButton(ClientWindow.retButtons()[1][1]);
+		if(e.getSource().equals(ClientWindow.retButtons()[4])){
+			performButton(4);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[1][2])){
-			performButton(ClientWindow.retButtons()[1][2]);
+		if(e.getSource().equals(ClientWindow.retButtons()[5])){
+			performButton(5);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[2][0])){
-			performButton(ClientWindow.retButtons()[2][0]);
+		if(e.getSource().equals(ClientWindow.retButtons()[6])){
+			performButton(6);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[2][1])){
-			performButton(ClientWindow.retButtons()[2][1]);
+		if(e.getSource().equals(ClientWindow.retButtons()[7])){
+			performButton(7);
 		}
-		if(e.getSource().equals(ClientWindow.retButtons()[2][2])){
-			performButton(ClientWindow.retButtons()[2][2]);
+		if(e.getSource().equals(ClientWindow.retButtons()[8])){
+			performButton(8);
 		}
 	}
 	
@@ -51,10 +51,10 @@ public class InvListen implements ActionListener{
 	 * at a time. 
 	 */
 	public void resetSelected(){
-		for(int x =0; x<3; x++){
-			for(int y = 0; y<3; y++){
-				ClientWindow.retButtons()[x][y].setBackground(Color.LIGHT_GRAY);
-			}
+		for(int x =0; x<9; x++){
+			
+				ClientWindow.retButtons()[x].setBackground(Color.LIGHT_GRAY);
+			
 		}
 	}
 	
@@ -63,14 +63,16 @@ public class InvListen implements ActionListener{
 	 * This is used just to clean up the actionPerformed method. Better to have a method here than copy and paste into each button
 	 * @param i - the position in the grid you've selected. From left-right, top-bottom, 0-8
 	 */
-	public void performButton(JButton b){
-		if(b.getIcon()!=null){
+	public void performButton(int i){
+		if(ClientWindow.retButtons()[i].getIcon()!=null){
 			resetSelected();
-			b.setBackground(Color.BLACK);
-			System.out.println(b.getIcon().toString());
+			ClientWindow.retButtons()[i].setBackground(Color.BLACK);
+			ClientWindow.currentlySelected=ClientWindow.rPackage.getInventory().get(i);
+			System.out.println(ClientWindow.currentlySelected);
 		}
 		else{
-			System.out.println("Empty hand");
+			ClientWindow.currentlySelected=null;
+			System.out.println(ClientWindow.currentlySelected);
 		}
 	}
 

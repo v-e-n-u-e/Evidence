@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -71,9 +72,10 @@ public class ClientWindow extends JFrame implements Runnable{
 	private Thread run;
 	private RenderCanvas canvas;
 	
-	public RenderPackage rPackage;
-	private static JButton[][] invButtons;
-	private static Item currentlySelected;
+	public static RenderPackage rPackage;
+	//private static JButton[][] invButtons;
+	private static JButton[] invButtons;
+	public static Item currentlySelected;
 
 	/**
 	 * Create the frame and attempt to open the connection
@@ -347,7 +349,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		}
 	}
 	
-	public static JButton[][] retButtons(){
+	public static JButton[] retButtons(){
 		return invButtons;
 	}
 	
@@ -356,30 +358,37 @@ public class ClientWindow extends JFrame implements Runnable{
 	private void inventoryRefresh(){
 		
 		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
-		ImageIcon[][] invIcons = new ImageIcon[3][3];
+		//ImageIcon[][] invIcons = new ImageIcon[3][3];
+		ImageIcon[] invIcons = new ImageIcon[9];
 		//TEMPORARY
-		if(rPackage==null){
-		System.out.println("package is null");
-		}
-		else if(rPackage.getInventory()==null){
-			System.out.println("iunventory is null");
-		}
-	    rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
+	   rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
 	    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");
-		invIcons[0][0]=new ImageIcon(rPackage.getInventory().get(0).getImageName());
-		invIcons[0][1]=new ImageIcon("img/bucket.png");
-		invIcons[0][2]=new ImageIcon("img/axe.png");
-		invIcons[1][0]=new ImageIcon("img/baxe.png");
-		invIcons[1][1]=new ImageIcon("img/bleach.png");
-		invIcons[1][2]=new ImageIcon("img/knife.png");
-		invIcons[2][0]=new ImageIcon("img/crowbar.png");
-		invIcons[2][1]=new ImageIcon("img/toolbox.png");
+	    for(int i = 0; i < rPackage.getInventory().size(); i++){
+	    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
+	    }
+		/*invIcons[0][0]=new ImageIcon(rPackage.getInventory().get(0).getImageName());
+		invIcons[0][1]=new ImageIcon(rPackage.getInventory().get(1).getImageName());
+		invIcons[0][2]=new ImageIcon(rPackage.getInventory().get(2).getImageName());
+		invIcons[1][0]=new ImageIcon(rPackage.getInventory().get(3).getImageName());
+		invIcons[1][1]=new ImageIcon(rPackage.getInventory().get(4).getImageName());
+		invIcons[1][2]=new ImageIcon(rPackage.getInventory().get(5).getImageName());
+		invIcons[2][0]=new ImageIcon(rPackage.getInventory().get(6).getImageName());
+		invIcons[2][1]=new ImageIcon(rPackage.getInventory().get(7).getImageName());*/
 		//invIcons[2][2]=new ImageIcon("img/safe.png");
 		//TEMPORARY
 		invPanel.removeAll();
-		invButtons = new JButton[3][3];
+		//invButtons = new JButton[3][3];
+		invButtons = new JButton[9];
 		InvListen iListen = new InvListen();
-		for(int x =0; x<3;x++){
+		for(int i = 0; i < 9; i++){
+			JButton button = new JButton();
+			button.setIcon(invIcons[i]);
+			button.setPreferredSize(new Dimension(80,80));
+			button.addActionListener(iListen);
+			invButtons[i]=button;
+			invPanel.add(invButtons[i]);
+		}
+		/*for(int x =0; x<3;x++){
 			for(int y=0;y<3;y++){
 					invButtons[x][y]=new JButton();
 					invButtons[x][y].setIcon(invIcons[x][y]);
@@ -387,7 +396,7 @@ public class ClientWindow extends JFrame implements Runnable{
 					invButtons[x][y].addActionListener(iListen);
 					invPanel.add(invButtons[x][y]);
 			}
-		}
+		}*/
 		iListen.resetSelected();
 		//invPanel.validate();
 	}
