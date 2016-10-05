@@ -272,7 +272,6 @@ public class Server implements Runnable{
 			Player toAdd = new Player();
 			toAdd.setID(id);
 			toAdd.setDirection(Direction.SOUTH);
-			game.addPlayer(toAdd);
 			playerBuffer.add(toAdd);
 
 			// Record who we connected to the server
@@ -298,14 +297,6 @@ public class Server implements Runnable{
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
-			}
-
-			// Send back to the client their RenderPackage
-			try {
-				byte[] data = getBytes(createRenderPackage(id) );
-				send(data, packet.getAddress(), packet.getPort() );
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 
@@ -525,6 +516,7 @@ public class Server implements Runnable{
 			}
 		}
 	}
+
 	/**
 	 * Creates a RenderPackage for a specific Client
 	 *
