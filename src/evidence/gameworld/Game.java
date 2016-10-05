@@ -37,8 +37,8 @@ public class Game {
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, rooms.get(0),
 				rooms.get(1), true, 123);
 		door.setCurrentImage("img/bigdoor.png");
-		door.setXPos(30);
-		door.setYPos(100);
+		door.setXPos(60);
+		door.setYPos(230);
 		rooms.get(0).getWalls()[1].addItem(door);
 		rooms.get(1).getWalls()[0].addItem(door);
 	}

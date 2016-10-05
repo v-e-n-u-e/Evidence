@@ -353,7 +353,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	//This is used when you need to show a player's inventory has changed in some way.
 	//This method will remake the buttons/icons based on what the player is holding
-	private void inventoryRefresh(JPanel invPanel){
+	private void inventoryRefresh(){
 		
 		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
 		ImageIcon[][] invIcons = new ImageIcon[3][3];
@@ -471,7 +471,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	public void reRenderWall(){
 		canvas.rPackage = this.rPackage;
-		inventoryRefresh(invPanel);
+		inventoryRefresh();
 		canvas.repaint();
 	}
 }

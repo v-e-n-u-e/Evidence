@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
+import evidence.gameworld.items.Key;
 
 /**
  * Unlock Action Allows a player to unlock and item
@@ -29,12 +30,19 @@ public class Unlock extends Action {
 	 */
 	@Override
 	public String apply(Item gameItem, Item inventoryItem, Player player) {
-		if (gameItem instanceof Door) {
-			Door door = (Door) gameItem;
-			// TODO get item from inventory
-			// TODO call unlock method in the door class
+		String feedback = "";
+		if (inventoryItem instanceof Key) {
+			Key key = (Key) inventoryItem;
+			if (gameItem instanceof Door) {
+				Door door = (Door) gameItem;
+				door.unlock(key);
+			} else {
+				feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
+			}
+		} else {
+			feedback = "Cannot perform " + this.toString() + " using " + inventoryItem.toString();
 		}
 
-		return "Cannot perform " + this.toString() + " on " + gameItem.toString();
+		return feedback;
 	}
 }
