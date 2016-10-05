@@ -288,7 +288,7 @@ public class ClientWindow extends JFrame implements Runnable{
 					
 					// Show the PopUp Menu
 					options.show(canvas, e.getX(), e.getY() );
-					options.addActionListener(new PopupActionListener(item) );
+					options.addActionListener(new PopupListener(item) );
 				}
 			}
 		});
