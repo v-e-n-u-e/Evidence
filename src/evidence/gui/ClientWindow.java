@@ -392,6 +392,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(rotateRight);
 	}
 	
+	/**
+	 * Iterates over each item in the current wall's list and checks
+	 * the mouse click against the bounding box for that item.  If the click
+	 * was within the bounding box, it returns the item.
+	 * Returns null if no item's image was successfully clicked on.
+	 * 
+	 * @param clickX - xPos of mouse click
+	 * @param clickY - yPos of mouse click
+	 * @return - The item clicked on, null otherwise
+	 */
 	public Item getItemClickedOn(int clickX, int clickY){
 		for(Item i : this.wall.getItems() ){
 			Image itemImage = new ImageIcon(i.getImageName() ).getImage();

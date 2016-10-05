@@ -306,30 +306,36 @@ public class Server implements Runnable{
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotLeft/") ){
+			// Get the player ID from the packet
 			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
-			//if(rotatePlayerViewLeft(ID) ){
-			//	try {
-			//		Player p = game.getPlayers().get(0);
-			//		byte[] data = getBytes(room.getFacingWall(p) );
-			//		send(data, packet.getAddress(), packet.getPort() );
-			//	} catch (IOException e) {
-			//		e.printStackTrace();
-			//	}
-			//}
+			// If rotatingRight returns true
+			if(rotatePlayerViewLeft(ID) ){
+				// Send the player's updated wall back to them for rendering
+				try {
+					Player p = game.getPlayerWithID(ID);
+					byte[] data = getBytes(p.getWall() );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotRight/") ){
+			// Get the player ID from the packet
 			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
-			//if(rotatePlayerViewRight(ID) ){
-			//	try {
-			//		Player p = game.getPlayers().get(0);
-			//		byte[] data = getBytes(room.getFacingWall(p) );
-			//		send(data, packet.getAddress(), packet.getPort() );
-			//	} catch (IOException e) {
-			//		e.printStackTrace();
-			//	}
-			//}
+			// If rotatingRight returns true
+			if(rotatePlayerViewRight(ID) ){
+				// Send the player's updated wall back to them for rendering
+				try {
+					Player p = game.getPlayerWithID(ID);
+					byte[] data = getBytes(p.getWall() );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 				
 		// If we could not categorize the packet, print to the server log
@@ -486,28 +492,20 @@ public class Server implements Runnable{
 	}
 	
 	private boolean rotatePlayerViewLeft(Integer ID){
-		for(int i = 0; i < game.getPlayers().size(); i++){
-			Player p = game.getPlayers().get(i);
-			if(p.getID().equals(ID) ){
-				game.rotateLeft(p);
-				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
-				return true;
-			}
-		}
-		return false;
+		gui.writeToLog("Attempting to rotate: " + ID);
+		Player p = game.getPlayerWithID(ID);
+		if(p == null){return false;} // Shouldn't happen unless a disconnection has occurred
+		game.rotateLeft(p);
+		gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+		return true;
 	}
 	
 	private boolean rotatePlayerViewRight(Integer ID){
 		gui.writeToLog("Attempting to rotate: " + ID);
-		for(int i = 0; i < game.getPlayers().size(); i++){
-			Player p = game.getPlayers().get(i);
-			gui.writeToLog("Player ID: " + p.getID() );
-			if(p.getID().equals(ID) ){
-				game.rotateRight(p);
-				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
-				return true;
-			}
-		}
-		return false;
+		Player p = game.getPlayerWithID(ID);
+		if(p == null){return false;} // Shouldn't happen unless a disconnection has occurred
+		game.rotateRight(p);
+		gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+		return true;
 	}
 }
