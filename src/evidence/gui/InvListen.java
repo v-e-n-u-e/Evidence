@@ -71,6 +71,7 @@ public class InvListen implements ActionListener{
 			System.out.println(ClientWindow.currentlySelected);
 		}
 		else{
+			resetSelected();
 			ClientWindow.currentlySelected=null;
 			System.out.println(ClientWindow.currentlySelected);
 		}
