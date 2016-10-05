@@ -28,13 +28,13 @@ public class Unlock extends Action {
 	 * @return string - updated state
 	 */
 	@Override
-	public String apply(Item item, Player player) {
-		if (item instanceof Door) {
-			Door door = (Door) item;
+	public String apply(Item gameItem, Item inventoryItem, Player player) {
+		if (gameItem instanceof Door) {
+			Door door = (Door) gameItem;
 			// TODO get item from inventory
 			// TODO call unlock method in the door class
 		}
 
-		return "Cannot perform " + this.toString() + " on " + item.toString();
+		return "Cannot perform " + this.toString() + " on " + gameItem.toString();
 	}
 }

@@ -36,7 +36,7 @@ public class ServerMain {
 	
 	/**
 	 * The main method that the user should run to start the server.
-	 * Must provide a port number via the command line arguments or
+	 * Must provide a port number via the command line arguments orr
 	 * run configurations in the user's IDE, as well as the numOfPlayers
 	 * to start the game at.  
 	 * 

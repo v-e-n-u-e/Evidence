@@ -1,6 +1,7 @@
 package evidence.gui;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -8,7 +9,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
+import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
+import evidence.gameworld.items.Item;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -20,18 +24,22 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -55,13 +63,15 @@ public class ClientWindow extends JFrame implements Runnable{
 	private DefaultCaret caret;
 
 	// The ClientPipe that gives us a "pipe" to the server
-	private ClientPipe pipe;
+	private static ClientPipe pipe;
 
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
 	
-	public Wall wall;
+	public RenderPackage rPackage;
+	private static JButton[][] invButtons;
+	private static Item currentlySelected;
 
 	/**
 	 * Create the frame and attempt to open the connection
@@ -121,6 +131,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		// Send message to server
 		pipe.send(message);
 		messageField.setText("");
+	}
+	
+	/**
+	 * A user has created an Event, and now we need to communicate that event
+	 * to the Server for processing.
+	 * 
+	 * @param event - The event to send to the server
+	 */
+	public static void sendEvent(Event event){
+		pipe.send(event);
 	}
 
 	/**
@@ -191,12 +211,16 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
 		
+		//Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
+		//e.g. when an item is picked up/dropped
 		JPanel invPanel = new JPanel();
 		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		invPanel.setToolTipText("Inventory");
 		invPanel.setBounds(10, 60, 284, 291);
 		infoPanel.add(invPanel);
-		
+		inventoryRefresh(invPanel);
+
+
 		//Button used for turning right in the room
 		JButton rightButton = new JButton("Turn Right");
 		rightButton.addActionListener(new ActionListener() {
@@ -249,11 +273,23 @@ public class ClientWindow extends JFrame implements Runnable{
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Create our PopUp Menu object
 				PopupMenu options = new PopupMenu("Options");
 				canvas.add(options);
-				options.insert(new MenuItem("Test Option"), 0);
-				options.insert(new MenuItem("Test Option2"), 1);
-				options.show(canvas, e.getX(), e.getY() );
+				
+				// Get the item we clicked on, null if we clicked on nothing
+				Item item = getItemClickedOn(e.getX(), e.getY() );
+				
+				// If we clicked on something, add all of the items available options to the pop up menu
+				if(item != null){
+					for(String action : item.getActions() ){
+						options.add(new MenuItem(action) );
+					}
+					
+					// Show the PopUp Menu
+					options.show(canvas, e.getX(), e.getY() );
+					options.addActionListener(new PopupListener(item) );
+				}
 			}
 		});
 		canvas.setBounds(20, 18, 720, 630);
@@ -286,6 +322,42 @@ public class ClientWindow extends JFrame implements Runnable{
 		for(Component c : contentPane.getComponents() ){
 			c.repaint();
 		}
+	}
+	
+	public static JButton[][] retButtons(){
+		return invButtons;
+	}
+	
+	//This is used when you need to show a player's inventory has changed in some way.
+	//This method will remake the buttons/icons based on what the player is holding
+	private void inventoryRefresh(JPanel invPanel){
+		//Initial setup for including inventory icons. Will need to change to reflect what state the players inventroy is like
+		ImageIcon[][] invIcons = new ImageIcon[3][3];
+		//TEMPORARY
+		invIcons[0][0]=new ImageIcon("img/mop.png");
+		invIcons[0][1]=new ImageIcon("img/bucket.png");
+		invIcons[0][2]=new ImageIcon("img/axe.png");
+		invIcons[1][0]=new ImageIcon("img/baxe.png");
+		invIcons[1][1]=new ImageIcon("img/bleach.png");
+		invIcons[1][2]=new ImageIcon("img/knife.png");
+		invIcons[2][0]=new ImageIcon("img/crowbar.png");
+		invIcons[2][1]=new ImageIcon("img/toolbox.png");
+		//invIcons[2][2]=new ImageIcon("img/safe.png");
+		//TEMPORARY
+		invButtons = new JButton[3][3];
+		InvListen iListen = new InvListen();
+		for(int x =0; x<3;x++){
+			for(int y=0;y<3;y++){
+					invButtons[x][y]=new JButton();
+					invButtons[x][y].setIcon(invIcons[x][y]);
+					invButtons[x][y].setPreferredSize(new Dimension(80,80));
+					invButtons[x][y].addActionListener(iListen);
+					
+					invPanel.add(invButtons[x][y]);
+			}
+		}
+		iListen.resetSelected();
+		//invPanel.validate();
 	}
 	
 	/**
@@ -323,8 +395,48 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(rotateRight);
 	}
 	
+	/**
+	 * Iterates over each item in the current wall's list and checks
+	 * the mouse click against the bounding box for that item.  If the click
+	 * was within the bounding box, it returns the item.
+	 * Returns null if no item's image was successfully clicked on.
+	 * 
+	 * @param clickX - xPos of mouse click
+	 * @param clickY - yPos of mouse click
+	 * @return - The item clicked on, null otherwise
+	 */
+	public Item getItemClickedOn(int clickX, int clickY){
+		for(Item i : this.rPackage.getWall().getItems() ){
+			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
+			int width = itemImage.getWidth(null);
+			int height = itemImage.getHeight(null);
+			int x = i.getXPos();
+			int y = i.getYPos();
+			
+			if(clickX >= x && clickX <= x + width){
+				if(clickY >= y && clickY <= y + height){
+					return i;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	public static Item getSelected(){
+		return currentlySelected;
+	}
+	
+	public static void setSelected(Item selected){
+		currentlySelected = selected;
+	}
+	
+	public static Integer getID(){
+		return pipe.getId();
+	}
+	
 	public void reRenderWall(){
-		canvas.wall = this.wall;
+		canvas.rPackage = this.rPackage;
 		canvas.repaint();
 	}
 }

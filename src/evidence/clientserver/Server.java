@@ -11,6 +11,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
@@ -34,6 +36,8 @@ import evidence.gui.ServerGUI;
  * @author Tyler Jones
  */
 public class Server implements Runnable{
+	// The size of byte array's for receiving packets
+	private final int BYTE_ARRAY_LENGTH = 2048;
 	
 	// Port number this server is running on
 	private int port;
@@ -69,7 +73,8 @@ public class Server implements Runnable{
 	// Boolean that keeps track of when our specified number of players have connected
 	private boolean allPlayersConnected;
 	
-	private Game game; // The game instance
+	// The game instance
+	private Game game;
 	
 	/**
 	 * Constructor for a server instance
@@ -193,7 +198,7 @@ public class Server implements Runnable{
 		receive = new Thread("Receiver") {
 			public void run(){
 				while(running){
-					byte[] data = new byte[1024];
+					byte[] data = new byte[BYTE_ARRAY_LENGTH];
 					DatagramPacket packet = new DatagramPacket(data, data.length);
 					//
 					try {
@@ -210,7 +215,7 @@ public class Server implements Runnable{
 	
 	/**
 	 * Upon receiving a packet, this method is called.
-	 * Responsible for reading the bytes into and object
+	 * Responsible for reading the bytes into an object
 	 * and delegating the work to the appropriate method
 	 * depending on the object.
 	 * 
@@ -228,10 +233,22 @@ public class Server implements Runnable{
 		
 		// If we received a String in the form of bytes, process the String
 		if(o instanceof String){processString((String) o, packet);}
+		else if(o instanceof Event){processEvent((Event) o, packet);}
 	}
 	
 	/**
-	 * Processes a String received over the network
+	 * Processes a String received over the network. The Strings
+	 * the server will receive all begin with a header notation.
+	 * Different headers will cause the server to perform different 
+	 * actions.
+	 * 
+	 * HEADERS:
+	 *  /c/ - A connection request
+	 *  /dc/ - A disconnection request
+	 *  /m/ - A chat room message
+	 *  /ping/ - A Client responding to a ping by the server
+	 *  /rotLeft/ - A Client attempting to rotate their view left
+	 *  /rotRight/ - A Client attempting to rotate their view right
 	 * 
 	 * @param string - The String to process
 	 * @param packet - The packet the String arrived in
@@ -274,9 +291,9 @@ public class Server implements Runnable{
 				allPlayersConnected = true;
 			}
 			
-			// INTEGRATION DAY
+			// Send back to the client their RenderPackage
 			try {
-				byte[] data = getBytes(toAdd.getWall() );
+				byte[] data = getBytes(createRenderPackage(id) );
 				send(data, packet.getAddress(), packet.getPort() );
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -301,36 +318,51 @@ public class Server implements Runnable{
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotLeft/") ){
+			// Get the player ID from the packet
 			Integer ID = Integer.parseInt(string.split("/rotLeft/|/e/")[1]);
-			//if(rotatePlayerViewLeft(ID) ){
-			//	try {
-			//		Player p = game.getPlayers().get(0);
-			//		byte[] data = getBytes(room.getFacingWall(p) );
-			//		send(data, packet.getAddress(), packet.getPort() );
-			//	} catch (IOException e) {
-			//		e.printStackTrace();
-			//	}
-			//}
+			// If rotatingRight returns true
+			if(rotatePlayerViewLeft(ID) ){
+				// Send the player's updated wall back to them for rendering
+				try {
+					byte[] data = getBytes(createRenderPackage(ID) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		// Is a client trying to rotate it's view left?
 		else if(string.startsWith("/rotRight/") ){
+			// Get the player ID from the packet
 			Integer ID = Integer.parseInt(string.split("/rotRight/|/e/")[1]);
-			//if(rotatePlayerViewRight(ID) ){
-			//	try {
-			//		Player p = game.getPlayers().get(0);
-			//		byte[] data = getBytes(room.getFacingWall(p) );
-			//		send(data, packet.getAddress(), packet.getPort() );
-			//	} catch (IOException e) {
-			//		e.printStackTrace();
-			//	}
-			//}
+			// If rotatingRight returns true
+			if(rotatePlayerViewRight(ID) ){
+				// Send the player's updated wall back to them for rendering
+				try {
+					byte[] data = getBytes(createRenderPackage(ID) );
+					send(data, packet.getAddress(), packet.getPort() );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 				
 		// If we could not categorize the packet, print to the server log
 		else{
 			gui.writeToLog("Could not categorize packet from " + packet.getAddress() + ":" + packet.getPort());
 		}
+	}
+	
+	/**
+	 * Processes an Event received over the network
+	 * 
+	 * @param e - The event received
+	 * @param packet - The packet the event arrived in
+	 */
+	private void processEvent(Event e, DatagramPacket packet){
+		// Apply the event to the game using the fields from the received Event
+		game.apply(e.getPerformedOn(), e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
 	}
 	
 	/**
@@ -343,7 +375,7 @@ public class Server implements Runnable{
 	 */
 	public byte[] getBytes(Object o) throws IOException{
 		//System.out.println(o.getClass());
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();
 		oos.writeObject(o);
@@ -444,6 +476,7 @@ public class Server implements Runnable{
 			}
 		}
 		
+		// This shouldn't happen, just an extra check
 		if(sc == null){return;}
 		
 		// Build an appropriate message for the server log
@@ -469,29 +502,48 @@ public class Server implements Runnable{
 		Timer timer = new Timer(300, this);
 	}
 	
-	private boolean rotatePlayerViewLeft(Integer ID){
-		for(int i = 0; i < game.getPlayers().size(); i++){
-			Player p = game.getPlayers().get(i);
-			if(p.getID().equals(ID) ){
-				game.rotateLeft(p);
-				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
-				return true;
-			}
-		}
-		return false;
+	/**
+	 * Creates a RenderPackage for a specific Client
+	 * 
+	 * @param ID - The ID of the Client the RenderPackage is for
+	 * @return - The RenderPackage we created
+	 */
+	private RenderPackage createRenderPackage(Integer ID){
+		Player p = game.getPlayerWithID(ID);
+		return new RenderPackage(p.getWall(), p.getInventory() );
 	}
 	
+	/**
+	 * Will call the series of game logic methods that
+	 * rotate's a client current view to the left.  Returns
+	 * a boolean representing the success of the rotation.
+	 * 
+	 * @param ID - The ID of the player to move
+	 * @return - True if rotate successful, false otherwise.
+	 */
+	private boolean rotatePlayerViewLeft(Integer ID){
+		gui.writeToLog("Attempting to rotate: " + ID);
+		Player p = game.getPlayerWithID(ID);
+		if(p == null){return false;} // Shouldn't happen unless a disconnection has occurred
+		game.rotateLeft(p);
+		gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+		return true;
+	}
+	
+	/**
+	 * Will call the series of game logic methods that
+	 * rotate's a client current view to the right.  Returns
+	 * a boolean representing the success of the rotation.
+	 * 
+	 * @param ID - The ID of the player to move
+	 * @return - True if rotate successful, false otherwise.
+	 */
 	private boolean rotatePlayerViewRight(Integer ID){
 		gui.writeToLog("Attempting to rotate: " + ID);
-		for(int i = 0; i < game.getPlayers().size(); i++){
-			Player p = game.getPlayers().get(i);
-			gui.writeToLog("Player ID: " + p.getID() );
-			if(p.getID().equals(ID) ){
-				game.rotateRight(p);
-				gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
-				return true;
-			}
-		}
-		return false;
+		Player p = game.getPlayerWithID(ID);
+		if(p == null){return false;} // Shouldn't happen unless a disconnection has occurred
+		game.rotateRight(p);
+		gui.writeToLog(ID + " now facing: " + p.getCurrentDirection() );
+		return true;
 	}
 }

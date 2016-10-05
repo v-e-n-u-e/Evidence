@@ -22,17 +22,17 @@ public class CutUp extends Action {
 	
 
 	@Override
-	public String apply(Item item, Player player) {
+	public String apply(Item gameItem, Item inventoryItem, Player player) {
 		String feedback = "";
-		if (item.toString().equals("Body") ) {
+		if (gameItem.toString().equals("Body") ) {
 				
 			
 			// TODO create body piece objects
 			// TODO delete body object
 			
-			feedback = item.toString() + " was " + this.toString();
+			feedback = gameItem.toString() + " was " + this.toString();
 		}else{
-			feedback = "Cannot perform " + this.toString() + " on " + item.toString();
+			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}
 
 		return feedback;
