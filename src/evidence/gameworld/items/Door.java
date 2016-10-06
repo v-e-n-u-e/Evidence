@@ -17,7 +17,7 @@ import evidence.gameworld.Room;
  * @author Georgina Murphy
  *
  */
-@XmlRootElement(name ="Door")
+@XmlRootElement
 public class Door extends Item{
 	
 	private Room roomOne;
@@ -99,13 +99,6 @@ public class Door extends Item{
 	public void setLocked(boolean l){
 		this.locked = l;
 	}
-	public void setRoomOne(Room r){
-		this.roomOne=r;
-	}
-	public void setRoomtwo(Room r){
-		this.roomTwo=r;
-	}
-	
-	
+	//
 
 }

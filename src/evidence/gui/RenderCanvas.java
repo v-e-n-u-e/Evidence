@@ -16,7 +16,7 @@ import evidence.testobjects.TestWall;
 public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	
-	//Create images/imgicons for later use. Will clean later.
+/*	//Create images/imgicons for later use. Will clean later.
 	ImageIcon img;
 	Image image;
 	ImageIcon img1;
@@ -26,7 +26,7 @@ public class RenderCanvas extends Canvas{
 	ImageIcon img3;
 	Image image3;
 	ImageIcon img4;
-	Image image4;
+	Image image4;*/
 	
 	RenderPackage rPackage;
 	
@@ -34,12 +34,12 @@ public class RenderCanvas extends Canvas{
 		super();
 	}
 	
-	//Create the imageIcons that we'll use to draw using the array list of file names we get passed
+/*	//Create the imageIcons that we'll use to draw using the array list of file names we get passed
 	//We'll use a for loop through this in the future, but for now we're hard coding it
 	public void setImage(String[] images){
-		/*for(int i =0; i<images.length;i++){
+		for(int i =0; i<images.length;i++){
 			
-		}*/
+		}
 		img = new ImageIcon(images[0]);
 		image = img.getImage();
 		img1 = new ImageIcon(images[1]);
@@ -50,7 +50,7 @@ public class RenderCanvas extends Canvas{
 		image3 = img3.getImage();
 		img4 = new ImageIcon(images[4]);
 		image4 = img4.getImage();
-	}
+	}*/
 	
 	//This will draw the images to the canvas in order of the image arraylist created above
 	//Again, in the future this will use a for loop but for now we have hard coded it

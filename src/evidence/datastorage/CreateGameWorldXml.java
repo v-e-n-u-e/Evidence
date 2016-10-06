@@ -29,7 +29,7 @@ public class CreateGameWorldXml {
 	actions.add("Unlock");
 	actions.add("Lock");
 	images.add("painting.png");
-	Container container = new Container("box", "CardboardBox",actions,images,3);
+	Container container = new Container("box", "CardboardBox",actions,images,false, 3);
 	container.setXPos(20);
 	container.setYPos(30);
 	Wall[] walls = bathroom.getWalls();
