@@ -49,7 +49,7 @@ public class Wall implements Serializable{
 		items = new ArrayList<Item>();
 	}
 	public Wall(){
-		
+		items = new ArrayList<Item>();
 	}
 	
 	/**
@@ -75,6 +75,9 @@ public class Wall implements Serializable{
 	public Direction getDirection() {
 		return direction;
 	}
+	public void setDirection(Direction d){
+		this.direction = d;
+	}
 
 	/**
 	 * @return the items on this wall
@@ -83,10 +86,16 @@ public class Wall implements Serializable{
 	public List<Item> getItems() {
 		return items;
 	}
+	public void setitems(List<Item> i){
+		this.items = i;
+	}
 	
-	@XmlElement
+	@XmlElement(name = "currentImage")
 	public String getImageName(){
 		return currentImage;
+	}
+	public void setImageName(String c){
+		this.currentImage = c;
 	}
 	@XmlElement
 	public int getX(){
@@ -95,5 +104,11 @@ public class Wall implements Serializable{
 	@XmlElement
 	public int getY(){
 		return yPos;
+	}
+	public void setX(int x){
+		this.xPos=x;
+	}
+	public void setY(int y){
+		this.yPos = y;
 	}
 }

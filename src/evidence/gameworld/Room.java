@@ -37,6 +37,10 @@ public class Room implements Serializable{
 	
 	private Wall[] walls = new Wall[4];
 	private Name name;
+	private String w1;
+	private String w2;
+	private String w3;
+	private String w4;
 	
 	/**
 	 * Constructor for a room
@@ -44,6 +48,10 @@ public class Room implements Serializable{
 	 */
 	public Room(Name name, String w1, String w2, String w3, String w4) {
 		this.name = name;
+		this.w1 = w1;
+		this.w2 = w2;
+		this.w3 = w3;
+		this.w4 = w4;
 		this.walls[0] = new Wall(Direction.NORTH, w1, 0, 0);
 		this.walls[1] = new Wall(Direction.SOUTH, w2, 0, 0);
 		this.walls[2] = new Wall(Direction.EAST, w3, 0, 0);
@@ -61,6 +69,13 @@ public class Room implements Serializable{
 	public void setWalls(Wall[] w){
 		this.walls = w;
 	}
+	@XmlElement
+	public Name getName(){
+		return this.name;
+	}
+	public void setName(Name n){
+		this.name = n;
+	}
 	
 	public void removeItem(Direction dir, Item item){
 		for(Wall wall : walls){
@@ -68,6 +83,10 @@ public class Room implements Serializable{
 				wall.removeItem(item);
 			}
 		}
+	}
+	
+	public void setUp(Wall w1,Wall w2,Wall w3, Wall w4){
+		
 	}
 	
 	public String toString(){
