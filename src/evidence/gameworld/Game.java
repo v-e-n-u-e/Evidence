@@ -14,8 +14,8 @@ import evidence.gameworld.items.Furniture;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 import evidence.gameworld.items.Weapon;
-import sun.lwawt.macosx.CCheckboxMenuItem;
-import sun.security.krb5.internal.ccache.CCacheInputStream;
+//import sun.lwawt.macosx.CCheckboxMenuItem;
+//import sun.security.krb5.internal.ccache.CCacheInputStream;
 
 @XmlRootElement
 public class Game {

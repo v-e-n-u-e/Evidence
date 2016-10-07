@@ -38,7 +38,7 @@ import evidence.gui.ServerGUI;
  */
 public class Server implements Runnable{
 	// The size of byte array's for receiving packets
-	private final int BYTE_ARRAY_LENGTH = 2048;
+	private final int BYTE_ARRAY_LENGTH = 2048 * 4;
 
 	// Port number this server is running on
 	private int port;
