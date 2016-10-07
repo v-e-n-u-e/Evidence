@@ -78,14 +78,14 @@ public class Game {
 		door = new Door("Door", "Door between the office and the bedroom", actions, null, getRoom(Name.OFFICE),
 				getRoom(Name.BEDROOM), true, 123);
 		door.setCurrentImage("img/bigdoor.png");
-		door.setXPos(60);
+		door.setXPos(260);
 		door.setYPos(230);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the office and the kitchen", actions, null, getRoom(Name.OFFICE),
 				getRoom(Name.KITCHEN), true, 123);
 		door.setCurrentImage("img/bigdoor.png");
-		door.setXPos(60);
+		door.setXPos(460);
 		door.setYPos(230);
 		doors.add(door);
 
@@ -137,7 +137,7 @@ public class Game {
 		getRoom(Name.BATHROOM).getWalls()[2].addItem(trashCan);
 
 		// Bathroom West Wall
-		getRoom(Name.BATHROOM).getWalls()[3].addItem(doors.get(3));
+		getRoom(Name.BATHROOM).getWalls()[3].addItem(doors.get(2));
 
 		Container sink = new Container("Sink", "A sink", actions, images, false, 1);
 		sink.setCurrentImage("img/sink.png");
@@ -173,10 +173,10 @@ public class Game {
 		getRoom(Name.BEDROOM).getWalls()[1].addItem(doors.get(2));
 
 		// Bedroom South Wall
-		//getRoom(Name.BEDROOM).getWalls()[3].addItem(doors.get(3));
+		getRoom(Name.BEDROOM).getWalls()[2].addItem(doors.get(3));
 
 		// Bedroom West Wall
-		//getRoom(Name.BEDROOM).getWalls()[3].addItem(doors.get(0));
+		getRoom(Name.BEDROOM).getWalls()[3].addItem(doors.get(0));
 	}
 
 	private void setupKitchen(ArrayList<Door> doors) {
@@ -199,11 +199,10 @@ public class Game {
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(stoolOne);
 
 		// Kitchen East Wall
-
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(doors.get(4));
 
 		Container fridge = new Container("Fridge", "A Fridge", actions, images, false, 5);
-		fridge.setCurrentImage("img/fridge.png");
+		fridge.setCurrentImage("img/bigfridge.png");
 		fridge.setXPos(0);
 		fridge.setYPos(0);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
@@ -374,40 +373,40 @@ public class Game {
 
 		Furniture potplant = new Furniture("Pot Plant", "A pot plant", actions, images);
 		potplant.setCurrentImage("img/potplant.png");
-		potplant.setXPos(0);
-		potplant.setYPos(0);
+		potplant.setXPos(300);
+		potplant.setYPos(500);
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
 		Evidence body = new Evidence("Body", "Victim's Body", actions, images, 20);
 		body.setCurrentImage("img/body.png");
-		body.setXPos(0);
-		body.setYPos(0);
+		body.setXPos(100);
+		body.setYPos(400);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(body);
 
 		Weapon knife = new Weapon("Knife", "A kitchen kinfe", actions, images, 2);
 		knife.setCurrentImage("img/bknife.png");
-		knife.setXPos(0);
-		knife.setYPos(0);
+		knife.setXPos(300);
+		knife.setYPos(400);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
 		// Office South Wall
 		Evidence camera = new Evidence("Camera", "A security camera", actions, images, 20);
 		camera.setCurrentImage("img/cameraon.png");
-		camera.setXPos(0);
-		camera.setYPos(0);
+		camera.setXPos(550);
+		camera.setYPos(30);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(camera);
 
 		Container safe = new Container("Safe", "A safe", actions, images, true, 6);
 		safe.setCurrentImage("img/safe.png");
-		safe.setXPos(0);
-		safe.setYPos(0);
+		safe.setXPos(300);
+		safe.setYPos(500);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(safe);
 
 		Furniture computer = new Furniture("Computer", "A computer", actions, images);
 		computer.setCurrentImage("img/computer.png");
-		computer.setXPos(0);
-		computer.setYPos(0);
+		computer.setXPos(100);
+		computer.setYPos(420);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
 
 		// Office West Wall
@@ -415,8 +414,8 @@ public class Game {
 
 		Furniture painting = new Furniture("Painting", "A painting", actions, images);
 		painting.setCurrentImage("img/painting.png");
-		painting.setXPos(0);
-		painting.setYPos(0);
+		painting.setXPos(200);
+		painting.setYPos(200);
 		getRoom(Name.OFFICE).getWalls()[3].addItem(painting);
 	}
 

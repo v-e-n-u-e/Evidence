@@ -111,4 +111,8 @@ public class Wall implements Serializable{
 	public void setY(int y){
 		this.yPos = y;
 	}
+	
+	public String toString(){
+		return direction.toString();
+	}
 }
