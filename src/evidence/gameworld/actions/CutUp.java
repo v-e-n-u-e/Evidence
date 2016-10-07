@@ -26,6 +26,12 @@ public class CutUp extends Action {
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
+		if(inventoryItem == null){
+			return "Need an item from the inventory";
+		}
 		String feedback = "";
 		if (inventoryItem instanceof Weapon) {
 			if (gameItem.toString().equals("Body")) {

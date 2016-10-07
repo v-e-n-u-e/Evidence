@@ -56,6 +56,11 @@ public class Container extends Item {
 			return item.toString() + " not inside " + this.toString();
 		}
 	}
+	
+	
+	public List<Item> getContainedItems(){
+		return containedItems;
+	}
 
 	@XmlElement
 	public int getCapacity(){

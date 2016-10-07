@@ -2,9 +2,6 @@ package evidence.gameworld.items;
 
 
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;

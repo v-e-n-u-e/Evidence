@@ -30,6 +30,12 @@ public class Lock extends Action {
 	 * @return string - updated state
 	 */
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
+		if(inventoryItem == null){
+			return "Need an item from the inventory";
+		}
 		String feedback = "";
 		if (inventoryItem instanceof Key) {
 			Key key = (Key) inventoryItem;
