@@ -190,7 +190,7 @@ public class MyTestClass {
 		Item blood = new Evidence("Blood", null, actions, null, 10);
 		String s = body.getAction(body.getActions().get(0)).apply(blood, weapon, player);
 		assertEquals("Cannot perform Cut Up on Blood", s);
-		 s = body.getAction(body.getActions().get(0)).apply(body, blood, player);
+		 s = body.getAction(body.getActions().get(0)).apply(body, (MovableItem)blood, player);
 		assertEquals("Cannot perform Cut Up using Blood", s);
 	}
 	
@@ -229,7 +229,7 @@ public class MyTestClass {
 		actions.add("Unlock");
 		List<String> images = new ArrayList<String>();
 		images.add("cbbox.png");
-		Container item = new Container("Cardboard Box", "A cardboard box", actions, images, 2);
+		Container item = new Container("Cardboard Box", "A cardboard box", actions, images, true, 2);
 		return item;
 	}
 	

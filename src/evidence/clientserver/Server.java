@@ -17,6 +17,7 @@ import evidence.gameworld.Game;
 import evidence.gameworld.Player;
 import evidence.gameworld.Timer;
 import evidence.gameworld.Wall.Direction;
+import evidence.gameworld.items.MovableItem;
 import evidence.gui.ServerGUI;
 
 /**
@@ -37,7 +38,7 @@ import evidence.gui.ServerGUI;
  */
 public class Server implements Runnable{
 	// The size of byte array's for receiving packets
-	private final int BYTE_ARRAY_LENGTH = 2048;
+	private final int BYTE_ARRAY_LENGTH = 2048 * 4;
 
 	// Port number this server is running on
 	private int port;
@@ -361,7 +362,8 @@ public class Server implements Runnable{
 	 */
 	private void processEvent(Event e, DatagramPacket packet){
 		// Apply the event to the game using the fields from the received Event
-		game.apply(e.getPerformedOn(), e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
+		game.apply(e.getPerformedOn(), (MovableItem)e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
+		updateAllViews();
 	}
 
 	/**
@@ -501,7 +503,7 @@ public class Server implements Runnable{
 		Timer timer = new Timer(300, this);
 	}
 
-	private void updateAllViews(){
+	public void updateAllViews(){
 		for(Player p : game.getPlayers() ){
 			for(ServerClient sc : clients){
 				if(sc.ID == p.getID() ){

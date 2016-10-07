@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<key>
-    <actions>Enter</actions>
-    <actions>Unlock</actions>
-    <actions>Lock</actions>
-    <description>a hammer</description>
-    <images>hammer.png</images>
-    <name>hammer</name>
-    <XPos>0</XPos>
-    <YPos>0</YPos>
-    <size>6</size>
-    <code>42</code>
-</key>
+<room>
+    <name>BATHROOM</name>
+    <walls>
+        <direction>NORTH</direction>
+        <currentImage>img/bathroom.png</currentImage>
+        <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+            <actions>Enter</actions>
+            <actions>Unlock</actions>
+            <actions>Lock</actions>
+            <capacity>3</capacity>
+            <description>CardboardBox</description>
+            <images>painting.png</images>
+            <name>box</name>
+            <XPos>20</XPos>
+            <YPos>30</YPos>
+        </items>
+        <x>0</x>
+        <y>0</y>
+    </walls>
+    <walls>
+        <direction>SOUTH</direction>
+        <currentImage>img/bathroom.png</currentImage>
+        <x>0</x>
+        <y>0</y>
+    </walls>
+    <walls>
+        <direction>EAST</direction>
+        <currentImage>img/bathroom.png</currentImage>
+        <x>0</x>
+        <y>0</y>
+    </walls>
+    <walls>
+        <direction>WEST</direction>
+        <currentImage>img/bathroom.png</currentImage>
+        <x>0</x>
+        <y>0</y>
+    </walls>
+</room>

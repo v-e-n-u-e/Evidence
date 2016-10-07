@@ -96,9 +96,11 @@ public class Door extends Item{
 		return locked;
 	}
 	
+	public int getKeyCode(){
+		return keyCode;
+	}
+	
 	public void setLocked(boolean l){
 		this.locked = l;
 	}
-	
-
 }

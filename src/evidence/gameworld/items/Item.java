@@ -4,6 +4,8 @@ package evidence.gameworld.items;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
@@ -22,7 +24,8 @@ import evidence.gameworld.actions.Unlock;
  * @author Georgina Murphy
  *
  */
-@XmlRootElement(name = "Item")
+@XmlTransient
+@XmlSeeAlso({Container.class,Door.class,Evidence.class,Key.class,MovableItem.class})
 public abstract class Item implements Serializable{
 	
 	private String name;
