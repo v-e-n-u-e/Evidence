@@ -19,7 +19,9 @@ import evidence.gameworld.items.MovableItem;
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
-
+public Game(){
+	
+}
 	/**
 	 * Reads in the state of a game from a xml file
 	 */

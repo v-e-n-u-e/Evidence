@@ -8,46 +8,35 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import evidence.gameworld.Game;
+import evidence.gameworld.Player;
 import evidence.gameworld.Room;
 import evidence.gameworld.Wall;
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Container;
-
+import evidence.gameworld.items.Evidence;
+/**
+ * 
+ * @author Connor
+ *
+ */
 public class TestCreateXml {
 	
-	public static void main(String[] args){
-		
-		
-	Room bathroom = new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png");
-	List<String> actions = new ArrayList<String>();
-	actions.add("Enter");
-	actions.add("Unlock");
-	actions.add("Lock");
-	Container container = new Container("box", "CardboardBox",actions,false, 3);
-	container.setXPos(20);
-	container.setYPos(30);
-	Wall[] walls = bathroom.getWalls();
-	walls[0].addItem(container);
-	bathroom.setWalls(walls);
-	
-	
-			
-	
-	try {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Wall.class);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		File file = new File("SavedGamed.xml");
-		//formats and writes to the file
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		//prints to file
-		jaxbMarshaller.marshal(bathroom,file);
-		//prints to the console
-		jaxbMarshaller.marshal(bathroom, System.out);
-	} catch (JAXBException e) {
-		e.printStackTrace();
+	public static void main(String args[]){
+		Game game = new Game();
+		game.setup();
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			File file = new File("SavedGamed.xml");
+			//formats and writes to the file
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			//prints to file
+			jaxbMarshaller.marshal(game,file);
+			//prints to the console
+			jaxbMarshaller.marshal(game, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 	}
-
-	}
-	
-
 }
