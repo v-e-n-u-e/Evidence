@@ -52,11 +52,9 @@ public class CutUp extends Action {
 	}
 
 	public MovableItem makeBodyPart(String image, int x, int y, int size){
-		ArrayList<String> images = new ArrayList<String>();
-		images.add(image);
 		ArrayList<String> actions = new ArrayList<String>();
-		images.add("Pickup");
-		MovableItem item =  new MovableItem("Body Part", "This is a body part", images, actions, size);
+		actions.add("Pickup");
+		MovableItem item =  new MovableItem("Body Part", "This is a body part", actions, size);
 		item.setCurrentImage(image);
 		item.setXPos(x);
 		item.setYPos(y);

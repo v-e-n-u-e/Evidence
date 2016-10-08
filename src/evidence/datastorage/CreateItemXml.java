@@ -20,15 +20,13 @@ public class CreateItemXml {
 		Room bedroom =new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png");
 
 		List<String> actions = new ArrayList<String>();
-		List<String> images = new ArrayList<String>();
 
 		actions.add("Enter");
 		actions.add("Unlock");
 		actions.add("Lock");
-		images.add("painting.png");
-		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, images, bathroom,
+		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, bathroom,
 				bedroom, true, 123);
-		Door door2 = new Door("Doofsdsr", "Door between the bathroosdgsgdssm and the kitchen", actions, images, bathroom,
+		Door door2 = new Door("Doofsdsr", "Door between the bathroosdgsgdssm and the kitchen", actions, bathroom,
 				bedroom, true, 123444);
 		door.setCurrentImage("img/bigdoor.png");
 		door.setXPos(30);

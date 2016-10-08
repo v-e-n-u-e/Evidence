@@ -31,16 +31,14 @@ public abstract class Item implements Serializable{
 	private String name;
 	private String description;
 	private List<String> actions;
-	private List<String> images;
 	private String currentImage;
 	private int xPos;
 	private int yPos;
 	
-	public Item(String name, String description, List<String> actions, List<String> images){
+	public Item(String name, String description, List<String> actions){
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
-		this.images = images;
 	}
 	
 	public Item(){
@@ -85,6 +83,18 @@ public abstract class Item implements Serializable{
 		//}
 	}
 	
+	public void clearActions(){
+		actions.clear();
+	}
+	
+	public void removeAction(String action){
+		actions.remove(action);
+	}
+	
+	public void addAction(String action){
+		actions.add(action);
+	}
+	
 	@XmlElement
 	public void setXPos(int xPos){
 		this.xPos = xPos;
@@ -113,15 +123,6 @@ public abstract class Item implements Serializable{
 	@XmlElement
 	public void setActions(List<String> actions){
 		this.actions = actions;
-	}
-	
-	@XmlElement
-	public void setImages(List<String> images){
-		this.images = images;
-	}
-	
-	public List<String> getImages(){
-		return this.images;
 	}
 	
 	public String getName(){

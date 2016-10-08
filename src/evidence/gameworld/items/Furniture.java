@@ -7,7 +7,7 @@ import evidence.gameworld.actions.Action;
 
 public class Furniture extends Item {
 
-	public Furniture(String name, String description, List<String> actions, List<String> images){
-		super(name, description, actions, images);
+	public Furniture(String name, String description, List<String> actions){
+		super(name, description, actions);
 	}
 }

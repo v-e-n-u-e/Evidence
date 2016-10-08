@@ -18,8 +18,8 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 public class Evidence extends Item{
 	private int value;
 	
-	public Evidence(String name, String description, List<String> actions, List<String> images, int value) {
-		super(name, description, actions, images);
+	public Evidence(String name, String description, List<String> actions, int value) {
+		super(name, description, actions);
 		this.value = value;
 	}
 	public Evidence(){

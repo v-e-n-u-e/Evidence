@@ -361,7 +361,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		//This method will remake the buttons/icons based on what the player is holding
 		private void inventoryRefresh(){
 			ImageIcon[] invIcons = new ImageIcon[9];
-			rPackage.getInventory().add(new Door("lol","loL",null,null,null,null,false,123));
+			rPackage.getInventory().add(new Door("lol","loL",null,null,null,false,123));
 		    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");
 		    for(int i = 0; i < rPackage.getInventory().size(); i++){
 		    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
