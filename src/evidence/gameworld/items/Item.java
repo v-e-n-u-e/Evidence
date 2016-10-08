@@ -12,9 +12,12 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.CutUp;
 import evidence.gameworld.actions.Enter;
+import evidence.gameworld.actions.Flush;
+import evidence.gameworld.actions.Kick;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.Unlock;
+import evidence.gameworld.actions.Inspect;
 
 /**
  * Abstract class for item.
@@ -68,6 +71,15 @@ public abstract class Item implements Serializable{
 			break;
 		case "PickUp":
 			action = new PickUp();
+			break;
+		case "Flush":
+			action = new Flush();
+			break;
+		case "Kick":
+			action = new Kick();
+			break;
+		case "Inspect":
+			action = new Inspect();
 			break;
 		}
 		return action;

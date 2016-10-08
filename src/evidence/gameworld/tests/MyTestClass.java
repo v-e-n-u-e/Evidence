@@ -17,7 +17,6 @@ import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
-import evidence.gameworld.items.Weapon;
 
 public class MyTestClass {
 
@@ -184,7 +183,7 @@ public class MyTestClass {
 		Item body = new Evidence("Body", "The body", actions, 10);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
-		Weapon weapon = new Weapon(null, null, null, 0);
+		MovableItem weapon = new MovableItem(null, null, null, 0);
 		body.getAction(body.getActions().get(0)).apply(body, weapon, player);
 		assertEquals(false, player.getWall().getItems().contains(body));
 		Item blood = new MovableItem("Blood", null, actions, 10);
