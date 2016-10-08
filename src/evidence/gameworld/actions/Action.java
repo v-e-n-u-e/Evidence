@@ -21,7 +21,6 @@ import evidence.gameworld.items.MovableItem;
 public abstract class Action implements Serializable{
 	private static final long serialVersionUID = 2467451372271352711L;
 
-
 	private String name;
 	private String description;
 

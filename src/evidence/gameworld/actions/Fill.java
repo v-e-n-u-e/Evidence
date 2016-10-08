@@ -8,7 +8,10 @@ import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 
 public class Fill extends Action {
-
+	public Fill() {
+		super("Fill", "Fill this item");
+	}
+	
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
 		String feedback = "";

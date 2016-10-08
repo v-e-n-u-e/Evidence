@@ -7,8 +7,8 @@ import evidence.gameworld.items.MovableItem;
 
 public class RemoveItem extends Action {
 
-	public RemoveItem(){
-		super("Remove Item", "Remove an item from a container");
+	public RemoveItem(String name){
+		super("Remove " + name, "Remove an item from a container");
 	}
 
 	@Override
@@ -16,13 +16,21 @@ public class RemoveItem extends Action {
 		if(gameItem == null ){
 			return "Need an item from the game";
 		}
-		if(inventoryItem == null){
-			return "Need an item from the inventory";
-		}
 		String feedback = "";
 		if(gameItem instanceof Container){
 			Container container = (Container)gameItem;
-			feedback = container.getItem(inventoryItem, player);
+			String[] s = super.getName().split(" ", 2);
+			for(int i = 0; i<container.getContainedItems().size(); i++){
+				Item item = container.getContainedItems().get(i);
+				if(item.toString().equals(s[1].trim())){
+					container.removeItem((MovableItem) item, player);
+					container.removeAction("remove "+item.toString());
+				}
+			}
+			
+			
+			
+		//	feedback = container.removeItem(inventoryItem, player);
 		}else
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 

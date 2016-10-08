@@ -121,9 +121,9 @@ public class MyTestClass {
 		MovableItem item = createMItem();
 		String s = container.putItem(item, player);
 		assertEquals("Hammer successfully placed in Cardboard Box", s);
-		s = container.getItem(item, player);
+		s = container.removeItem(item, player);
 		assertEquals("Hammer was successfully removed from Cardboard Box. It has been added to your inventory", s);
-		s = container.getItem(item, player);
+		s = container.removeItem(item, player);
 		assertEquals("Hammer not inside Cardboard Box", s);
 	}
 	
