@@ -20,8 +20,8 @@ public class Container extends Item {
 	private boolean locked;
 	private int capacity;
 
-	public Container(String name, String description, List<String> actions, List<String> images, boolean locked, int capacity) {
-		super(name, description, actions, images);
+	public Container(String name, String description, List<String> actions, boolean locked, int capacity) {
+		super(name, description, actions);
 		this.locked = locked;
 		this.capacity = capacity;
 	}
@@ -55,6 +55,11 @@ public class Container extends Item {
 		}else{
 			return item.toString() + " not inside " + this.toString();
 		}
+	}
+	
+	
+	public List<Item> getContainedItems(){
+		return containedItems;
 	}
 
 	@XmlElement

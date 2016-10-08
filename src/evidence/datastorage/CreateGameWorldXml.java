@@ -24,12 +24,10 @@ public class CreateGameWorldXml {
 		
 	Room bathroom = new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png");
 	List<String> actions = new ArrayList<String>();
-	List<String> images = new ArrayList<String>();
 	actions.add("Enter");
 	actions.add("Unlock");
 	actions.add("Lock");
-	images.add("painting.png");
-	Container container = new Container("box", "CardboardBox",actions,images,false, 3);
+	Container container = new Container("box", "CardboardBox",actions,false, 3);
 	container.setXPos(20);
 	container.setYPos(30);
 	Wall[] walls = bathroom.getWalls();

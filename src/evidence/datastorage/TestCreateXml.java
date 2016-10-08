@@ -24,7 +24,7 @@ public class TestCreateXml {
 	
 	public static void main(String args[]){
 		Game game = new Game();
-		game.setup2();
+		game.setup();
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -39,6 +39,4 @@ public class TestCreateXml {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

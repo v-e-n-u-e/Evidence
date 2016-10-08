@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Key extends MovableItem {
 	private int code;
-	public Key(String name, String description, List<String> actions, List<String> images, int size , int code) {
-		super(name, description, actions, images, size);
+	public Key(String name, String description, List<String> actions, int size , int code) {
+		super(name, description, actions, size);
 		this.code = code;
 	}
 	public Key(){

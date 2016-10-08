@@ -28,6 +28,9 @@ public class Enter extends Action {
 	 */
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem,  Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
 		String feedback = "";
 		if(gameItem instanceof Door){
 			Door door = (Door)gameItem;

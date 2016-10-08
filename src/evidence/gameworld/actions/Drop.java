@@ -8,6 +8,9 @@ public class Drop extends Action {
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(inventoryItem == null){
+			return "Need an item from the inventory";
+		}
 		player.getWall().getItems().add(inventoryItem);
 		player.removeItem(inventoryItem);
 		return inventoryItem + " was dropped";

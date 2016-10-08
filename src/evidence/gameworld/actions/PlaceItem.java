@@ -13,6 +13,12 @@ public class PlaceItem extends Action {
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
+		if(inventoryItem == null){
+			return "Need an item from the inventory";
+		}
 		String feedback = "";
 		if(gameItem instanceof Container){
 			Container container = (Container)gameItem;

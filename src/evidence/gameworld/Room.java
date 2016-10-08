@@ -53,8 +53,8 @@ public class Room implements Serializable{
 		this.w3 = w3;
 		this.w4 = w4;
 		this.walls[0] = new Wall(Direction.NORTH, w1, 0, 0);
-		this.walls[1] = new Wall(Direction.SOUTH, w2, 0, 0);
-		this.walls[2] = new Wall(Direction.EAST, w3, 0, 0);
+		this.walls[1] = new Wall(Direction.EAST, w2, 0, 0);
+		this.walls[2] = new Wall(Direction.SOUTH, w3, 0, 0);
 		this.walls[3] = new Wall(Direction.WEST, w4, 0, 0);
 	}
 	

@@ -25,9 +25,9 @@ public class Door extends Item{
 	private boolean locked;
 	private int keyCode;
 
-	public Door(String name, String description, List<String> actions, List<String> images, Room roomOne,
+	public Door(String name, String description, List<String> actions, Room roomOne,
 			Room roomTwo, boolean locked, int keyCode) {
-		super(name, description, actions, images);
+		super(name, description, actions);
 		this.roomOne = roomOne;
 		this.roomTwo = roomTwo;
 		this.locked = locked;
@@ -96,9 +96,11 @@ public class Door extends Item{
 		return locked;
 	}
 	
+	public int getKeyCode(){
+		return keyCode;
+	}
+	
 	public void setLocked(boolean l){
 		this.locked = l;
 	}
-	//
-
 }

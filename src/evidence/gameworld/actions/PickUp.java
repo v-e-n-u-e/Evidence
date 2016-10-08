@@ -27,6 +27,9 @@ public class PickUp extends Action {
 	 */
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
 		String feedback = "";
 		if(gameItem instanceof MovableItem){
 			MovableItem mItem = (MovableItem) gameItem;
