@@ -11,7 +11,10 @@ import evidence.gameworld.items.MovableItem;
 
 @XmlRootElement
 public class Fill extends Action {
-
+	public Fill() {
+		super("Fill", "Fill this item");
+	}
+	
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
 		String feedback = "";

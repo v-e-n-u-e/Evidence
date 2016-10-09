@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
+import evidence.gameworld.actions.Action;
 /**
  * Class for a container object.
  * Container object its one that can hold another item
@@ -16,7 +17,7 @@ import evidence.gameworld.Player;
 @XmlRootElement(name = "Container")
 public class Container extends Item {
 
-	private ArrayList<Item> containedItems = new ArrayList<Item>();
+	private ArrayList<MovableItem> containedItems = new ArrayList<MovableItem>();
 	private boolean locked;
 	private int capacity;
 
@@ -35,18 +36,26 @@ public class Container extends Item {
 	 * @return feedback string about what has happened
 	 */
 	public String putItem(MovableItem item, Player player){
-		if(containedItems.size() < capacity){
+		int size = 0;
+		for(MovableItem i: containedItems){
+			size += i.getSize();
+		}
+		
+		size+= item.getSize();
+		
+		if(size <= capacity){
 			containedItems.add(item);
 			capacity-= item.getSize();
 			player.removeItem(item);
+			this.addAction("remove " + item.toString());
 			return item.toString() + " successfully placed in " + this.toString();
 		}
 		else{
-			return item.toString() + " is too big for " + this.toString() + ", try removing an item";
+			return "There is not enough room in " + this.toString() + " for " + item.toString();
 		}
 	}
 
-	public String getItem(MovableItem item, Player player){
+	public String removeItem(MovableItem item, Player player){
 		if(containedItems.contains(item)){
 			containedItems.remove(item);
 			capacity+= item.getSize();
@@ -58,7 +67,8 @@ public class Container extends Item {
 	}
 	
 	
-	public List<Item> getContainedItems(){
+	
+	public List<MovableItem> getContainedItems(){
 		return containedItems;
 	}
 

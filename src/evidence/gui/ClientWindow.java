@@ -411,7 +411,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(rotateLeft);
 	}
 
-	//Used for the server/client side interactions
+	//Used for the server/client side interactionso
 	public void rotateRight(){
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);

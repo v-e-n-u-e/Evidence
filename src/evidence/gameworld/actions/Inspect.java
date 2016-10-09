@@ -20,14 +20,16 @@ public class Inspect extends Action {
 		if (gameItem == null) {
 			return "Need an item from the game";
 		}
-		String feedback = gameItem.getDescription();
+		String feedback = "\n" + gameItem.getDescription();
 		if (gameItem instanceof Door) {
 			Door door = (Door) gameItem;
 			if (door.getLocked())
-				feedback += " it is locked";
+				feedback += ". It is locked";
 			else
-				feedback += " it is unlocked";
+				feedback += ". It is unlocked";
 		}
+		System.out.println(feedback);
+		
 		return feedback;
 	}
 

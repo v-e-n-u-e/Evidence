@@ -8,10 +8,13 @@ import evidence.gameworld.items.MovableItem;
 
 @XmlRootElement
 public class Drop extends Action {
+	public Drop() {
+		super("Drop", "Drop item here");
+	}
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
-		if(inventoryItem == null){
+		if (inventoryItem == null) {
 			return "Need an item from the inventory";
 		}
 		player.getWall().getItems().add(inventoryItem);
