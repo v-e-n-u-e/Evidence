@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import evidence.gameworld.Room;
 
@@ -83,10 +84,12 @@ public class Door extends Item{
 			return false;
 	}
 
+	@XmlTransient
 	public Room getRoomOne() {
 		return roomOne;
 	}
 	
+	@XmlTransient
 	public Room getRoomTwo() {
 		return roomTwo;
 	}

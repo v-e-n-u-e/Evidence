@@ -59,10 +59,7 @@ public Game(){
 	
 	private ArrayList<Door> setupDoors() {
 		doors = new ArrayList<Door>();
-		List<String> actions = new ArrayList<String>();
-		ArrayList<Door> doors = new ArrayList<Door>();
 
-		
 		Door door = new Door("Door", "Door between the lounge and the bedroom", new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), getRoom(Name.BEDROOM), true, 1);
 		door.setCurrentImage("img/bigdoor.png");
 		door.setXPos(60);
@@ -520,7 +517,7 @@ public Game(){
 	 * @return
 	 */
 	public List<String> getActions(Item item) {
-		return item.getActions();
+		return item.getActionsString();
 	}
 
 	/**

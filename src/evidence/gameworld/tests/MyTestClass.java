@@ -93,11 +93,11 @@ public class MyTestClass {
 		Door door = createDoor(bathroom, kitchen, false);
 		Player player = createPlayer(bathroom);
 		assertEquals(bathroom, player.getCurrentRoom());
-		assertEquals("Enter", door.getActions().get(2).toString());
-		door.getAction(door.getActions().get(2)).apply(door, null, player);
+		assertEquals("Enter", door.getActionsString().get(2).toString());
+		door.getAction(door.getActionsString().get(2)).apply(door, null, player);
 		assertEquals(kitchen, player.getCurrentRoom());
 		
-		door.getAction(door.getActions().get(2)).apply(door, null, player);
+		door.getAction(door.getActionsString().get(2)).apply(door, null, player);
 		assertEquals(bathroom, player.getCurrentRoom());
 	}
 	
@@ -106,12 +106,12 @@ public class MyTestClass {
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		MovableItem hammer = createMItem();
 		Player player = createPlayer(room);
-		assertEquals("Pick up", hammer.getActions().get(0));
-		hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player);
+		assertEquals("Pick up", hammer.getActionsString().get(0));
+		hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player);
 		assertEquals(1, player.getInventory().size());
 		assertEquals("Hammer", player.getInventory().get(0).toString());
-		hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player);
-		String s = hammer.getAction(hammer.getActions().get(0)).apply(createContainer(), null, player);
+		hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player);
+		String s = hammer.getAction(hammer.getActionsString().get(0)).apply(createContainer(), null, player);
 		assertEquals("Cannot perform Pick up on Cardboard Box", s);
 	}
 	
@@ -127,9 +127,9 @@ public class MyTestClass {
 		assertEquals(true, player.addItem(hammer));
 		assertEquals(true, player.addItem(hammer));
 		assertEquals(true, player.addItem(hammer));
-		assertEquals("Hammer has been added to your inventory",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
+		assertEquals("Hammer has been added to your inventory",hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player));
 		assertEquals(8, player.getInventory().size());
-		assertEquals("Your inventory is full. You can't pick this item up.",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
+		assertEquals("Your inventory is full. You can't pick this item up.",hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player));
 	}
 	
 	@Test
@@ -172,13 +172,13 @@ public class MyTestClass {
 	public void lockAction(){
 		Door door = createDoor(null, null, false);
 		Player player = createPlayer(null);
-		assertEquals("Lock", door.getActions().get(1));
-		door.getAction(door.getActions().get(1)).apply(door, createKey(123), player);
+		assertEquals("Lock", door.getActionsString().get(1));
+		door.getAction(door.getActionsString().get(1)).apply(door, createKey(123), player);
 		assertEquals(true, door.getLocked());
 		door = createDoor(null, null, false);
-		String s = door.getAction(door.getActions().get(1)).apply(door, createMItem(), player);
+		String s = door.getAction(door.getActionsString().get(1)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Lock using Hammer", s);
-		s = door.getAction(door.getActions().get(1)).apply(createMItem(), createKey(123), player);
+		s = door.getAction(door.getActionsString().get(1)).apply(createMItem(), createKey(123), player);
 		assertEquals("Cannot perform Lock on Hammer", s);
 		assertEquals(false, door.getLocked());
 	}
@@ -196,12 +196,12 @@ public class MyTestClass {
 	public void unlockAction(){
 		Door door = createDoor(null, null, true);
 		Player player = createPlayer(null);
-		assertEquals("Unlock", door.getActions().get(0));
-		door.getAction(door.getActions().get(0)).apply(door, createKey(123), player);
+		assertEquals("Unlock", door.getActionsString().get(0));
+		door.getAction(door.getActionsString().get(0)).apply(door, createKey(123), player);
 		assertEquals(false, door.getLocked());
-		String s = door.getAction(door.getActions().get(0)).apply(door, createMItem(), player);
+		String s = door.getAction(door.getActionsString().get(0)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Unlock using Hammer", s);
-		s = door.getAction(door.getActions().get(0)).apply(createMItem(), createKey(123), player);
+		s = door.getAction(door.getActionsString().get(0)).apply(createMItem(), createKey(123), player);
 		assertEquals("Cannot perform Unlock on Hammer", s);
 	}
 	
