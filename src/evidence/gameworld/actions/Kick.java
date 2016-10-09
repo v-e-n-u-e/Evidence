@@ -1,14 +1,19 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
+
+@XmlRootElement
 /**
  * Places all the objects in a container at random positions next to the item that was kicked
  * @author Georgina Murphy
  *
  */
+
 public class Kick extends Action {
 
 	public Kick() {
@@ -17,6 +22,10 @@ public class Kick extends Action {
 	
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
+		
 		String feedback = "";
 		if(gameItem.toString().equals("Trash Can")){
 			Container trashCan = (Container)gameItem;

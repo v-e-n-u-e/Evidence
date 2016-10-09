@@ -31,10 +31,10 @@ public class Unlock extends Action {
 	 */
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
-		if(gameItem == null ){
+		if (gameItem == null) {
 			return "Need an item from the game";
 		}
-		if(inventoryItem == null){
+		if (inventoryItem == null) {
 			return "Need an item from the inventory";
 		}
 		String feedback = "";
@@ -45,17 +45,26 @@ public class Unlock extends Action {
 				Door door = (Door) gameItem;
 				if (checkKey(key, door.getKeyCode())) {
 					door.setLocked(false);
+					door.addAction("lock");
+					door.addAction("enter");
+					door.removeAction("unlock");
 					feedback = "Door is unlocked";
-				}else{
-					feedback =  "Incorrect key. Door remains locked";
+				} else {
+					feedback = "Incorrect key. Door remains locked";
 				}
-			}else if (gameItem.toString().equals("Safe")) {
+			} else if (gameItem.toString().equals("Safe")) {
 				Container safe = (Container) gameItem;
 				if (checkKey(key, 555)) {
 					safe.setLocked(false);
-					feedback =  "Safe is unlocked";
-				} else{
-					feedback =  "Incorrect key. Safe remains locked";
+					for (int i = 0; i < safe.getContainedItems().size(); i++) {
+						safe.addAction("remove " + safe.getContainedItems().get(i).toString());
+					}
+					safe.addAction("lock");
+					safe.addAction("placeitem");
+					safe.removeAction("unlock");
+					feedback = "Safe is unlocked";
+				} else {
+					feedback = "Incorrect key. Safe remains locked";
 				}
 			} else {
 				feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
