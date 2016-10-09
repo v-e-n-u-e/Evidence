@@ -110,10 +110,6 @@ public abstract class Item implements Serializable{
 		// }
 	}
 
-	public void clearActions() {
-		actions.clear();
-	}
-
 	public void removeAction(String action) {
 		actions.remove(action);
 	}

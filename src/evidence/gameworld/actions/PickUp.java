@@ -33,9 +33,10 @@ public class PickUp extends Action {
 		}
 		String feedback = "";
 		if (gameItem instanceof MovableItem) {
-			MovableItem mItem = (MovableItem) gameItem;
-			if (player.addItem(mItem)) {
+			MovableItem mItem = (MovableItem) gameItem;			
+			if (player.getInventory().size() < 8){
 				player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
+				player.addItem(mItem);
 				feedback = gameItem.toString() + " has been added to your inventory";
 			}else
 				feedback = "Your inventory is full. You can't pick this item up.";

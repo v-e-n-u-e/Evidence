@@ -80,13 +80,8 @@ public class Player {
 	 * @param item
 	 *            - the item to add to the inventory
 	 */
-	public boolean addItem(Item item){
-		if(inventory.size() < 8){
-			inventory.add(item);
-			return true;
-		}
-		else 
-			return false;
+	public void addItem(Item item){
+		inventory.add(item);
 	}
 
 	/**

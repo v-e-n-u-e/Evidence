@@ -121,13 +121,20 @@ public class GameLogicTestClass {
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		MovableItem hammer = createMItem();
 		Player player = createPlayer(room);
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
+		player.addItem(hammer);
+		assertEquals(1, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(2, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(3, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(4, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(5, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(6, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(7, player.getInventory().size());
 		assertEquals("Hammer has been added to your inventory",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
 		assertEquals(8, player.getInventory().size());
 		assertEquals("Your inventory is full. You can't pick this item up.",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
@@ -314,9 +321,12 @@ public class GameLogicTestClass {
 		Container trashCan = new Container("Trash Can", null, new ArrayList<>(Arrays.asList("placeitem")), false, 5);
 		MovableItem item = new MovableItem("Item", null, null, 3);
 		Player player = new Player();
+		player.addItem(item);
+		assertEquals(1, player.getInventory().size());
 		new PlaceItem().apply(trashCan, item, player);
 		assertEquals(1, trashCan.getContainedItems().size());
 		assertEquals(2, trashCan.getActions().size());
+		assertEquals(0, player.getInventory().size());
 
 		Furniture table = new Furniture("Table", null, new ArrayList<>(Arrays.asList("placeitem")));
 		
