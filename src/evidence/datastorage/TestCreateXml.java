@@ -16,6 +16,8 @@ import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Evidence;
 /**
+ * Copies and writes the current version of the Game class to an XML file. This includes all the Items,
+ * Rooms,Walls,Doors.
  * 
  * @author Connor
  *
@@ -23,6 +25,7 @@ import evidence.gameworld.items.Evidence;
 public class TestCreateXml {
 	
 	public static void main(String args[]){
+		/*To create a new XMl make sure to remove the Set methods from wall.*/
 		Game game = new Game();
 		game.setup();
 		try {

@@ -1,9 +1,12 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 
+@XmlRootElement
 public class Drop extends Action {
 
 	@Override

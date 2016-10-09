@@ -82,20 +82,21 @@ public class Door extends Item{
 		else
 			return false;
 	}
-	@XmlElement
+
 	public Room getRoomOne() {
 		return roomOne;
 	}
 	
-	@XmlElement
 	public Room getRoomTwo() {
 		return roomTwo;
 	}
+	
 	@XmlElement
 	public boolean getLocked(){
 		return locked;
 	}
 	
+	@XmlElement
 	public int getKeyCode(){
 		return keyCode;
 	}
@@ -103,4 +104,13 @@ public class Door extends Item{
 	public void setLocked(boolean l){
 		this.locked = l;
 	}
+	
+	public void setRoomOne(Room r){
+		this.roomOne = r;
+	}
+	
+	public void setRoomTwo(Room r2){
+		this.roomTwo = r2;
+	}
+	
 }
