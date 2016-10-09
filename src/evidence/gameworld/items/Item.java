@@ -30,8 +30,8 @@ import evidence.gameworld.actions.Inspect;
  *
  */
 @XmlTransient
-@XmlSeeAlso({ Container.class, Door.class, Evidence.class, Key.class, MovableItem.class })
-public abstract class Item implements Serializable {
+@XmlSeeAlso({Container.class,Door.class,Evidence.class,Key.class,MovableItem.class,Furniture.class})
+public abstract class Item implements Serializable{
 
 	private String name;
 	private String description;

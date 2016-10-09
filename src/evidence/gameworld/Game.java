@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import evidence.datastorage.TestReadXml;
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
@@ -20,12 +21,22 @@ import evidence.gameworld.items.MovableItem;
 public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
+	private ArrayList<Door> doors = new ArrayList<Door>();
 public Game(){
 	
 }
 	/**
 	 * Reads in the state of a game from a xml file
+	 * @throws Exception 
 	 */
+	public void ReadFromXml(String FileName) throws Exception{
+		TestReadXml t = new TestReadXml();
+		t.ReadInGame(FileName);
+		this.players = t.getPlayers();
+		this.rooms = t.getRoom();
+	}
+	
+	
 	public void setup() {
 		setupRooms();
 		ArrayList<Door> doors = setupDoors();
@@ -47,7 +58,10 @@ public Game(){
 	}
 	
 	private ArrayList<Door> setupDoors() {
+		doors = new ArrayList<Door>();
+		List<String> actions = new ArrayList<String>();
 		ArrayList<Door> doors = new ArrayList<Door>();
+
 		
 		Door door = new Door("Door", "Door between the lounge and the bedroom", new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), getRoom(Name.BEDROOM), true, 1);
 		door.setCurrentImage("img/bigdoor.png");
@@ -444,6 +458,15 @@ public Game(){
 	@XmlElement
 	public List<Room> getRoom() {
 		return this.rooms;
+	}
+	
+	@XmlElement
+	public ArrayList<Door> getDoors(){
+		return this.doors;
+	}
+	
+	public void setDoors(ArrayList<Door> d){
+		this.doors = d;
 	}
 
 	public void setRooms(List<Room> r) {

@@ -85,10 +85,6 @@ public class Room implements Serializable{
 		}
 	}
 	
-	public void setUp(Wall w1,Wall w2,Wall w3, Wall w4){
-		
-	}
-	
 	public String toString(){
 		return name.toString();
 	}

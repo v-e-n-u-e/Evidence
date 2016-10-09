@@ -1,14 +1,19 @@
 package evidence.gameworld.actions;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
+
+@XmlRootElement
 /**
  * Places all the objects in a container at random positions next to the item that was kicked
  * @author Georgina Murphy
  *
  */
+
 public class Kick extends Action {
 
 	public Kick() {
