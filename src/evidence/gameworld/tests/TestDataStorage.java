@@ -31,10 +31,10 @@ public class TestDataStorage {
 		}
 	}
 	
-	@Test
-	/**
+	/*@Test
+	*//**
 	 * This test makes sure that an error is thrown when the wrong file is read in.
-	 */
+	 *//*
 	public void WrongFileName(){
 		Game initialGame = new Game();
 		initialGame.setup();
@@ -46,5 +46,5 @@ public class TestDataStorage {
 		}catch(Exception e){
 			assertEquals(1,1);
 		}
-	}
+	}*/
 }

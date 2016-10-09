@@ -66,6 +66,8 @@ public void ReadInGame(String FileName) throws Exception{
 		game.getRoom(Name.OFFICE).getWalls()[0].getItems().set(0,doors.get(3));
 		game.getRoom(Name.OFFICE).getWalls()[3].getItems().set(0,doors.get(4));
 		
+		System.out.println(doors.get(0).getActionsString().get(0));
+		
 	}catch (JAXBException e) {
 	 e.printStackTrace();
 	 throw e;
