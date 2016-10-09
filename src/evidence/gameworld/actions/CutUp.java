@@ -33,12 +33,16 @@ public class CutUp extends Action {
 		}
 		String feedback = "";
 		if (gameItem.toString().equals("Body")) {
-			player.getWall().addItem(makeBodyPart("img/barm.png", gameItem.getXPos(), gameItem.getYPos(), 2));
-			player.getWall().addItem(makeBodyPart("img/bhead.png", gameItem.getXPos() + 10, gameItem.getYPos() + 5, 2));
-			player.getWall().addItem(makeBodyPart("img/arm.png", gameItem.getXPos(), gameItem.getYPos(), 3));
-			player.getWall().removeItem(gameItem);
+			if (inventoryItem.toString().equals("Saw") || inventoryItem.toString().equals("Knife")) {
+				player.getWall().addItem(makeBodyPart("img/barm.png", gameItem.getXPos() * 2, gameItem.getYPos(), 1));
+				player.getWall().addItem(makeBodyPart("img/bhead.png", gameItem.getXPos(), gameItem.getYPos(), 4));
+				player.getWall()
+						.addItem(makeBodyPart("img/arm.png", (gameItem.getXPos() * 2), gameItem.getYPos() + 50, 1));
+				player.getWall().removeItem(gameItem);
 
-			feedback = gameItem.toString() + " was " + this.toString();
+				feedback = gameItem.toString() + " was " + this.toString();
+			} else
+				feedback = "Cannot perform " + this.toString() + " using " + inventoryItem.toString();
 		} else {
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}

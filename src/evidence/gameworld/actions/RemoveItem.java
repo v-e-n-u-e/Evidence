@@ -28,7 +28,6 @@ public class RemoveItem extends Action {
 				if(item.toString().equals(s[1].trim())){
 					container.removeItem((MovableItem) item, player);
 					container.removeAction("remove "+item.toString());
-					player.addItem(item);
 				}
 			}
 			

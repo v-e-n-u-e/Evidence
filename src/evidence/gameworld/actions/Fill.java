@@ -25,7 +25,7 @@ public class Fill extends Action {
 		if (gameItem.toString().equals("Bath")) {
 			Container bath = (Container) gameItem;
 			if (bath.getContainedItems().size() != 0) {
-				feedback = "Bath needs to be empty to fill";
+				feedback = "Bath must be empty to fill";
 			} else {
 				bath.setCapacity(0);
 				feedback = "Bath full";
@@ -35,7 +35,7 @@ public class Fill extends Action {
 		}
 		
 		
-		if (inventoryItem == null) {
+		else if (inventoryItem == null) {
 			return "Need an item from the inventory";
 		}
 

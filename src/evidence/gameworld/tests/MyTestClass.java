@@ -120,16 +120,23 @@ public class MyTestClass {
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		MovableItem hammer = createMItem();
 		Player player = createPlayer(room);
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals(true, player.addItem(hammer));
-		assertEquals("Hammer has been added to your inventory",hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player));
+		player.addItem(hammer);
+		assertEquals(1, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(2, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(3, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(4, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(5, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(6, player.getInventory().size());
+		player.addItem(hammer);
+		assertEquals(7, player.getInventory().size());
+		assertEquals("Hammer has been added to your inventory",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
 		assertEquals(8, player.getInventory().size());
-		assertEquals("Your inventory is full. You can't pick this item up.",hammer.getAction(hammer.getActionsString().get(0)).apply(hammer, null, player));
+		assertEquals("Your inventory is full. You can't pick this item up.",hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player));
 	}
 	
 	@Test
