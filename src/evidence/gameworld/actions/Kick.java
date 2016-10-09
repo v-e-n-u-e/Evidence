@@ -17,6 +17,10 @@ public class Kick extends Action {
 	
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		if(gameItem == null ){
+			return "Need an item from the game";
+		}
+		
 		String feedback = "";
 		if(gameItem.toString().equals("Trash Can")){
 			Container trashCan = (Container)gameItem;

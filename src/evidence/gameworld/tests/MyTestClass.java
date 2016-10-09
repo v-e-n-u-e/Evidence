@@ -27,6 +27,7 @@ import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
+import evidence.gameworld.items.Furniture;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
@@ -175,8 +176,10 @@ public class MyTestClass {
 		assertEquals("Lock", door.getActions().get(1));
 		door.getAction(door.getActions().get(1)).apply(door, createKey(123), player);
 		assertEquals(true, door.getLocked());
+		String s = new Lock().apply(door, createKey(23), player);
+		assertEquals("Incorrect key.", s);
 		door = createDoor(null, null, false);
-		String s = door.getAction(door.getActions().get(1)).apply(door, createMItem(), player);
+		s = door.getAction(door.getActions().get(1)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Lock using Hammer", s);
 		s = door.getAction(door.getActions().get(1)).apply(createMItem(), createKey(123), player);
 		assertEquals("Cannot perform Lock on Hammer", s);
@@ -202,6 +205,24 @@ public class MyTestClass {
 		String s = door.getAction(door.getActions().get(0)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Unlock using Hammer", s);
 		s = door.getAction(door.getActions().get(0)).apply(createMItem(), createKey(123), player);
+		assertEquals("Cannot perform Unlock on Hammer", s);
+	}
+	
+	@Test
+	public void unlockSafeAction(){
+		Container safe = new Container("Safe", null, new ArrayList<String>(), true, 5);
+		Player player = createPlayer(null);
+		new Unlock().apply(safe, createKey(5), player);
+		assertEquals(true, safe.getLocked());
+		new Unlock().apply(safe, createKey(555), player);
+		assertEquals(false, safe.getLocked());
+		assertEquals(false, safe.getActions().contains(new Unlock().toString()));
+		assertEquals(true, safe.getActions().contains(new Lock().toString()));
+
+		assertEquals(true, safe.getActions().contains(new PlaceItem().toString()));
+		String s = new Unlock().apply(safe, createMItem(), player);
+		assertEquals("Cannot perform Unlock using Hammer", s);
+		s = new Unlock().apply(createMItem(), createKey(123), player);
 		assertEquals("Cannot perform Unlock on Hammer", s);
 	}
 	
@@ -269,22 +290,97 @@ public class MyTestClass {
 		new Unlock().apply(item, null, player);
 	}
 	
-//	@Test
-//	public void cutUpAction(){
-//		ArrayList<String> actions = new ArrayList<String>();
-//		actions.add("CutUp");
-//		Item body = new Evidence("Body", "The body", actions, 10);
-//		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
-//		Player player = createPlayer(room);
-//		MovableItem weapon = new MovableItem(null, null, null, 0);
-//		body.getAction(body.getActions().get(0)).apply(body, weapon, player);
-//		assertEquals(false, player.getWall().getItems().contains(body));
-//		Item blood = new MovableItem("Blood", null, actions, 10);
-//		String s = body.getAction(body.getActions().get(0)).apply(blood, weapon, player);
-//		assertEquals("Cannot perform Cut Up on Blood", s);
-//		 s = body.getAction(body.getActions().get(0)).apply(body, (MovableItem)blood, player);
-//		assertEquals("Cannot perform Cut Up using Blood", s);
-//	}
+	@Test
+	public void cutUpAction(){
+		ArrayList<String> actions = new ArrayList<String>();
+		actions.add("CutUp");
+		Item body = new Evidence("Body", "The body", actions, 10);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
+		Player player = createPlayer(room);
+		MovableItem weapon = new MovableItem("Knife", null, null, 0);
+		new CutUp().apply(body, weapon, player);
+		weapon = new MovableItem("Saw", null, null, 0);
+		new CutUp().apply(body, weapon, player);
+		assertEquals(false, player.getWall().getItems().contains(body));
+		Item blood = new MovableItem("Blood", null, actions, 10);
+		String s = body.getAction(body.getActions().get(0)).apply(blood, weapon, player);
+		assertEquals("Cannot perform Cut Up on Blood", s);
+		 s = body.getAction(body.getActions().get(0)).apply(body, (MovableItem)blood, player);
+		assertEquals("Cannot perform Cut Up using Blood", s);
+	}
+	
+	@Test
+	public void placeItemAction(){
+		Container trashCan = new Container("Trash Can", null, new ArrayList<>(Arrays.asList("placeitem")), false, 5);
+		MovableItem item = new MovableItem("Item", null, null, 3);
+		Player player = new Player();
+		new PlaceItem().apply(trashCan, item, player);
+		assertEquals(1, trashCan.getContainedItems().size());
+		assertEquals(2, trashCan.getActions().size());
+
+		Furniture table = new Furniture("Table", null, new ArrayList<>(Arrays.asList("placeitem")));
+		
+		assertEquals("Cannot perform Place Item on Table", new PlaceItem().apply(table, item, player));
+	}
+	
+	@Test
+	public void kickAction(){
+		Container trashCan = new Container("Trash Can", null, new ArrayList<String>(), false, 5);
+		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 0);
+		item.setXPos(0);
+		item.setYPos(0);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
+		Player player = createPlayer(room);
+		new PlaceItem().apply(trashCan, item, player);
+		new Kick().apply(trashCan, null, player);
+		assertEquals(0, trashCan.getContainedItems().size());
+		assertEquals(false, trashCan.getActions().contains(new Kick().toString()));
+		assertEquals(false, trashCan.getActions().contains(new PlaceItem().toString()));
+	}
+	
+	@Test
+	public void fillBathAction(){
+		Container bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5);
+		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 3);
+		Player player = createPlayer(null);
+		new PlaceItem().apply(bath, item, player);
+		String s = new Fill().apply(bath, null, player);
+		assertEquals("Bath must be empty to fill", s);
+		assertEquals(true, bath.getActions().contains(new Fill().toString()));
+		assertEquals(true, bath.getActions().contains(new RemoveItem("Item").toString()));
+		bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5);
+		assertEquals(true, bath.getActions().contains(new PlaceItem().toString()));
+		new Fill().apply(bath, null, player);
+		assertEquals(false, bath.getActions().contains(new PlaceItem().toString()));
+		assertEquals(false, bath.getActions().contains(new Fill().toString()));
+	}
+	
+	@Test
+	public void InspectAction(){
+		Furniture item = new Furniture("Name", "Description", null);
+		String s = new Inspect().apply(item, null, null);
+		assertEquals("\n" + item.getDescription(), s);
+		Door door = new Door("", "Locked door", null, null, null, true, 0);
+		s = new Inspect().apply(door, null, null);
+		assertEquals("\n" + door.getDescription() + ". It is locked", s);
+		door.setLocked(false);
+		s = new Inspect().apply(door, null, null);
+		assertEquals("\n" + door.getDescription() + ". It is unlocked", s);
+	}
+	
+	@Test
+	public void RemoveItemAction(){
+		Container container = new Container("Name", "Description", new ArrayList<>(Arrays.asList("placeitem")), false, 0);
+		MovableItem item = new MovableItem("", null, new ArrayList<>(Arrays.asList("pickup")), 0);
+		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
+		Player player = createPlayer(room);
+		new PlaceItem().apply(container, item, player);
+		assertEquals(true, container.getContainedItems().contains(item));
+		assertEquals(true, container.getActions().contains(new RemoveItem(item.getName()).toString()));
+		new RemoveItem(item.getName()).apply(container, item, player);
+		assertEquals(false, container.getContainedItems().contains(item));
+		assertEquals(false, container.getActions().contains(new RemoveItem(item.getName()).toString()));		
+	}
 	
 
 //	@Test

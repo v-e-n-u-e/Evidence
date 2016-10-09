@@ -11,6 +11,7 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.CutUp;
 import evidence.gameworld.actions.Enter;
+import evidence.gameworld.actions.Fill;
 import evidence.gameworld.actions.Flush;
 import evidence.gameworld.actions.Kick;
 import evidence.gameworld.actions.Lock;
@@ -90,6 +91,9 @@ public abstract class Item implements Serializable {
 				break;
 			case "placeitem":
 				action = new PlaceItem();
+				break;
+			case "fill":
+				action = new Fill();
 				break;
 			}
 		}

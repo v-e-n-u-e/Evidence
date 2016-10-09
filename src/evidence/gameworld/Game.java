@@ -105,7 +105,7 @@ public Game(){
 
 		
 		// Bathroom East Wall
-		Container bath = new Container("Bath", "A bath tub. Things can be hidden in here", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 6);
+		Container bath = new Container("Bath", "A bath tub. Things can be hidden in here", new ArrayList<>(Arrays.asList("inspect", "placeitem", "fill")), false, 6);
 		bath.setCurrentImage("img/bath.png");
 		bath.setXPos(300);
 		bath.setYPos(510);
@@ -144,7 +144,7 @@ public Game(){
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
 		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555);
-		key.setCurrentImage("img/key.png");
+		key.setCurrentImage("img/numpad.png");
 		key.setXPos(300);
 		key.setYPos(400);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(key);
@@ -370,7 +370,7 @@ public Game(){
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect")), 20);
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 20);
 		body.setCurrentImage("img/body.png");
 		body.setXPos(100);
 		body.setYPos(400);

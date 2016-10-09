@@ -45,13 +45,17 @@ public class Lock extends Action {
 					door.setLocked(true);
 					feedback = "Correct Key.";
 					door.clearActions();
-					door.addAction("Unlock");
+					door.addAction("unlock");
+					door.removeAction("lock");
 				} else
 					feedback = "Incorrect key.";
 			} else if (gameItem.toString().equals("Safe")) {
 				Container safe = (Container) gameItem;
 				if (checkKey(key, 555)) {
 					safe.setLocked(true);
+					safe.addAction("unlock");
+					safe.removeAction("placeitem");
+					safe.removeAction("lock");
 					feedback = "Correct Key.";
 				} else
 					feedback = "Incorrect key.";
