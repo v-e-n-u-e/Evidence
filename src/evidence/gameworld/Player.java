@@ -23,6 +23,7 @@ public class Player {
 	private Room currentRoom;
 	private Direction currentDirection;
 	private Integer ID; // Used to identify clients with a player object
+	private String feedback = "";
 
 	public void setRoom(Room room) {
 		currentRoom = room;
@@ -43,6 +44,14 @@ public class Player {
 	@XmlElement
 	public Integer getID(){
 		return this.ID;
+	}
+	
+	public String getFeedback(){
+		return this.feedback;
+	}
+	
+	public void setFeedback(String feedback){
+		this.feedback = feedback;
 	}
 
 	/**

@@ -8,7 +8,7 @@ import evidence.gameworld.items.Item;
 
 /**
  * A RenderPackage is a class that holds the objects a client needs to render 
- * the game view to the user.  Currently, a RenderPackage holda a wall, and a list
+ * the game view to the user.  Currently, a RenderPackage hold a wall, and a list
  * of items.  The wall represents the Wall in the game the user is currently looking at,
  * and the list of items represents the player's inventory.
  * 
@@ -27,15 +27,19 @@ public class RenderPackage implements Serializable{
 	// The player's inventory of items
 	private List<Item> inventory;
 	
+	// String containing feedback for the event that just happened
+	String feedback;
+	
 	/**
 	 * A constructor for a RenderPackage
 	 * 
 	 * @param wall - The wall to render
 	 * @param inventory - The inventory to render
 	 */
-	public RenderPackage(Wall wall, List<Item> inventory){
+	public RenderPackage(Wall wall, List<Item> inventory, String feedback){
 		this.wall = wall;
 		this.inventory = inventory;
+		this.feedback = feedback;
 	}
 	
 	/**
@@ -55,5 +59,8 @@ public class RenderPackage implements Serializable{
 	public List<Item> getInventory(){
 		return this.inventory;
 	}
-
+	
+	public String getFeedback(){
+		return this.feedback;
+	}
 }
