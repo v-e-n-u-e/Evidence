@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.Collections;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -428,7 +429,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * @return - The item clicked on, null otherwise
 	 */
 	public Item getItemClickedOn(int clickX, int clickY){
-		for(Item i : this.rPackage.getWall().getItems() ){
+		for(int index = this.rPackage.getWall().getItems().size() - 1; index > -1; index++ ){
+			Item i = this.rPackage.getWall().getItems().get(index);
 			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
 			int height = itemImage.getHeight(null);
