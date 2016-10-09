@@ -32,7 +32,7 @@ import evidence.gameworld.items.Item;
 import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
 
-public class MyTestClass {
+public class GameLogicTestClass {
 
 	@Test
 	public void createNewRoom() {
@@ -374,12 +374,17 @@ public class MyTestClass {
 		MovableItem item = new MovableItem("", null, new ArrayList<>(Arrays.asList("pickup")), 0);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
+		player.addItem(item);
+		assertEquals(1, player.getInventory().size());
 		new PlaceItem().apply(container, item, player);
+		assertEquals(0, player.getInventory().size());
 		assertEquals(true, container.getContainedItems().contains(item));
 		assertEquals(true, container.getActions().contains(new RemoveItem(item.getName()).toString()));
 		new RemoveItem(item.getName()).apply(container, item, player);
+		assertEquals(1, player.getInventory().size());
 		assertEquals(false, container.getContainedItems().contains(item));
-		assertEquals(false, container.getActions().contains(new RemoveItem(item.getName()).toString()));		
+		assertEquals(false, container.getActions().contains(new RemoveItem(item.getName()).toString()));	
+		
 	}
 	
 
