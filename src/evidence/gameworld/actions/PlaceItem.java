@@ -8,7 +8,7 @@ import evidence.gameworld.items.MovableItem;
 public class PlaceItem extends Action {
 
 	public PlaceItem(){
-		super("Place Item", "Place an item into a container");
+		super("Place Item", "Place an item from your inventroy into a container");
 	}
 
 	@Override
@@ -26,6 +26,7 @@ public class PlaceItem extends Action {
 		}else
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 
+	
 		return feedback;
 	}
 

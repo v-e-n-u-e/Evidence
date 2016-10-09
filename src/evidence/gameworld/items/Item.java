@@ -15,6 +15,7 @@ import evidence.gameworld.actions.Flush;
 import evidence.gameworld.actions.Kick;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
+import evidence.gameworld.actions.PlaceItem;
 import evidence.gameworld.actions.RemoveItem;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.actions.Inspect;
@@ -87,6 +88,9 @@ public abstract class Item implements Serializable {
 			case "inspect":
 				action = new Inspect();
 				break;
+			case "placeitem":
+				action = new PlaceItem();
+				break;
 			}
 		}
 		return action;
@@ -107,11 +111,7 @@ public abstract class Item implements Serializable {
 	}
 
 	public void removeAction(String action) {
-		System.out.println("Removing: "+ action);
 		actions.remove(action);
-		for(String a: actions){
-			System.out.println(a);
-		}
 	}
 
 	public void addAction(String action) {

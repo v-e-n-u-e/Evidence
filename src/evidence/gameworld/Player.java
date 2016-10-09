@@ -19,7 +19,7 @@ import evidence.gameworld.items.MovableItem;
 @XmlRootElement
 public class Player {
 
-	private ArrayList<Item> inventory = new ArrayList<Item>();
+	private ArrayList<Item> inventory = new ArrayList<Item>(8);
 	private Room currentRoom;
 	private Direction currentDirection;
 	private Integer ID; // Used to identify clients with a player object
@@ -71,8 +71,13 @@ public class Player {
 	 * @param item
 	 *            - the item to add to the inventory
 	 */
-	public void addItem(Item item){
-		inventory.add(item);
+	public boolean addItem(Item item){
+		if(inventory.size() < 8){
+			inventory.add(item);
+			return true;
+		}
+		else 
+			return false;
 	}
 
 	/**

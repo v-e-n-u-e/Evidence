@@ -39,10 +39,11 @@ public class Enter extends Action {
 			}else{
 				player.setRoom(door.getRoomOne());
 			}
-			feedback = "You are now in the" + player.getCurrentRoom().toString();
+			feedback = "You are now in the " + player.getCurrentRoom().toString();
+		}else{
+			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}
-
-		return "Cannot perform " + this.toString() + " on " + gameItem.toString();
+		return feedback;
 	}
 
 	public String toString(){
