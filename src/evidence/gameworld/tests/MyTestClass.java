@@ -17,7 +17,6 @@ import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
-import evidence.gameworld.items.Weapon;
 
 public class MyTestClass {
 
@@ -26,8 +25,8 @@ public class MyTestClass {
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		assertEquals("BATHROOM", room.toString());
 		assertEquals(Direction.NORTH, room.getWalls()[0].getDirection());
-		assertEquals(Direction.SOUTH, room.getWalls()[1].getDirection());
-		assertEquals(Direction.EAST, room.getWalls()[2].getDirection());
+		assertEquals(Direction.EAST, room.getWalls()[1].getDirection());
+		assertEquals(Direction.SOUTH, room.getWalls()[2].getDirection());
 		assertEquals(Direction.WEST, room.getWalls()[3].getDirection());
 	}
 
@@ -122,9 +121,9 @@ public class MyTestClass {
 		MovableItem item = createMItem();
 		String s = container.putItem(item, player);
 		assertEquals("Hammer successfully placed in Cardboard Box", s);
-		s = container.getItem(item, player);
+		s = container.removeItem(item, player);
 		assertEquals("Hammer was successfully removed from Cardboard Box. It has been added to your inventory", s);
-		s = container.getItem(item, player);
+		s = container.removeItem(item, player);
 		assertEquals("Hammer not inside Cardboard Box", s);
 	}
 	
@@ -181,13 +180,13 @@ public class MyTestClass {
 	public void cutUpAction(){
 		ArrayList<String> actions = new ArrayList<String>();
 		actions.add("CutUp");
-		Item body = new Evidence("Body", "The body", actions, null, 10);
+		Item body = new Evidence("Body", "The body", actions, 10);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
-		Weapon weapon = new Weapon(null, null, null, null, 0);
+		MovableItem weapon = new MovableItem(null, null, null, 0);
 		body.getAction(body.getActions().get(0)).apply(body, weapon, player);
 		assertEquals(false, player.getWall().getItems().contains(body));
-		Item blood = new Evidence("Blood", null, actions, null, 10);
+		Item blood = new MovableItem("Blood", null, actions, 10);
 		String s = body.getAction(body.getActions().get(0)).apply(blood, weapon, player);
 		assertEquals("Cannot perform Cut Up on Blood", s);
 		 s = body.getAction(body.getActions().get(0)).apply(body, (MovableItem)blood, player);
@@ -218,18 +217,14 @@ public class MyTestClass {
 	private Key createKey(int code) {
 		List<String> actions = new ArrayList<String>();
 		actions.add("Unlock");
-		List<String> images = new ArrayList<String>();
-		images.add("key.png");
-		Key item = new Key("Key", "Key", actions, images, 2, code);
+		Key item = new Key("Key", "Key", actions, 2, code);
 		return item;
 	}
 
 	public Container createContainer() {
 		List<String> actions = new ArrayList<String>();
 		actions.add("Unlock");
-		List<String> images = new ArrayList<String>();
-		images.add("cbbox.png");
-		Container item = new Container("Cardboard Box", "A cardboard box", actions, images, true, 2);
+		Container item = new Container("Cardboard Box", "A cardboard box", actions, true, 2);
 		return item;
 	}
 	
@@ -238,9 +233,7 @@ public class MyTestClass {
 		actions.add("Unlock");
 		actions.add("Lock");
 		actions.add("Enter");
-		List<String> images = new ArrayList<String>();
-		images.add("door.png");
-		Door door = new Door("Cardbord Box", "A cardboard box", actions, images, room1, room2, locked, 123);
+		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, room2, locked, 123);
 		return door;
 	}
 
@@ -254,10 +247,7 @@ public class MyTestClass {
 	private MovableItem createMItem() {
 		List<String> actions = new ArrayList<String>();
 		actions.add("PickUp");
-		List<String> images = new ArrayList<String>();
-		images.add("hammer.png");
-		images.add("bhammer.png");
-		MovableItem item = new MovableItem("Hammer", "A Hammer", actions, images, 2);
+		MovableItem item = new MovableItem("Hammer", "A Hammer", actions, 2);
 		return item;
 	}
 }

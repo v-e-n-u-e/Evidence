@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MovableItem extends Item {
 	private int size;
 	
-	public MovableItem(String name, String description, List<String> actions, List<String> images, int size) {
-		super(name, description, actions, images);
+	public MovableItem(String name, String description, List<String> actions, int size) {
+		super(name, description, actions);
 		this.size = size;
 	}
 	public MovableItem(){

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
+import evidence.gameworld.actions.Action;
 /**
  * Class for a container object.
  * Container object its one that can hold another item
@@ -20,8 +21,8 @@ public class Container extends Item {
 	private boolean locked;
 	private int capacity;
 
-	public Container(String name, String description, List<String> actions, List<String> images, boolean locked, int capacity) {
-		super(name, description, actions, images);
+	public Container(String name, String description, List<String> actions, boolean locked, int capacity) {
+		super(name, description, actions);
 		this.locked = locked;
 		this.capacity = capacity;
 	}
@@ -46,7 +47,7 @@ public class Container extends Item {
 		}
 	}
 
-	public String getItem(MovableItem item, Player player){
+	public String removeItem(MovableItem item, Player player){
 		if(containedItems.contains(item)){
 			containedItems.remove(item);
 			capacity+= item.getSize();
@@ -56,6 +57,7 @@ public class Container extends Item {
 			return item.toString() + " not inside " + this.toString();
 		}
 	}
+	
 	
 	
 	public List<Item> getContainedItems(){

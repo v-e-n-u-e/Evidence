@@ -44,6 +44,8 @@ public class Lock extends Action {
 				if (checkKey(key, door.getKeyCode())) {
 					door.setLocked(true);
 					feedback = "Correct Key.";
+					door.clearActions();
+					door.addAction("Unlock");
 				} else
 					feedback = "Incorrect key.";
 			} else if (gameItem.toString().equals("Safe")) {
