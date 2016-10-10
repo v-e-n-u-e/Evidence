@@ -42,7 +42,7 @@ public class Player {
 		currentRoom = room;
 	}
 
-	public void setDirection(Direction direction) {
+	public void setCurrentDirection(Direction direction) {
 		currentDirection = direction;
 	}
 
@@ -59,6 +59,7 @@ public class Player {
 		return this.ID;
 	}
 
+	@XmlElement
 	public String getFeedback() {
 		return this.feedback;
 	}

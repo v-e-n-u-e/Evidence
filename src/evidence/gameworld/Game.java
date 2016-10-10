@@ -56,11 +56,11 @@ public Game(){
 	public void UpdatePlayersInv(){
 		for(int i = 0; i<storedPlayers.size();i++){
 			//Set Direction
-			players.get(i).setDirection(storedPlayers.get(i).getCurrentDirection());
+			players.get(i).setCurrentDirection(storedPlayers.get(i).getCurrentDirection());
 			//Set Inventory
 			players.get(i).setInventory(storedPlayers.get(i).getInventory());
 			//Set Room
-			players.get(i).setCurrentRoom(storedPlayers.get(i).getCurrentRoom());
+			players.get(i).setCurrentRoom(this.getRoom(Name.BATHROOM)); //storedPlayers.get(i).getCurrentRoom());
 			//Set FeedBack
 			players.get(i).setFeedback(storedPlayers.get(i).getFeedback());
 		}
@@ -86,7 +86,7 @@ public Game(){
 		rooms.add( new Room(Name.OFFICE, "obj/office.png", "obj/office.png", "obj/office.png", "obj/office.png"));
 	}
 
-	public ArrayList<Door> setupDoors() {
+	private ArrayList<Door> setupDoors() {
 		doors = new ArrayList<Door>();
 
 		Door door = new Door("Door", "Door between the lounge and the bedroom",

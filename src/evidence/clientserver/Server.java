@@ -275,7 +275,7 @@ public class Server implements Runnable{
 
 			Player toAdd = new Player();
 			toAdd.setID(id);
-			toAdd.setDirection(Direction.SOUTH);
+			toAdd.setCurrentDirection(Direction.SOUTH);
 			playerBuffer.add(toAdd);
 
 			// Record who we connected to the server
