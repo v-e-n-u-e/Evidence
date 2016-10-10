@@ -42,13 +42,13 @@ public abstract class Item implements Serializable {
 	private String currentImage;
 	private int xPos;
 	private int yPos;
-	private boolean bloodie;
+	private boolean bloody;
 
-	public Item(String name, String description, List<String> actions, boolean bloodie) {
+	public Item(String name, String description, List<String> actions, boolean bloody) {
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
-		this.bloodie = bloodie;
+		this.bloody = bloody;
 	}
 
 	public Item() {
@@ -114,8 +114,8 @@ public abstract class Item implements Serializable {
 		return action;
 	}
 
-	public void setBloodie(boolean bloodie) {
-		this.bloodie = bloodie;
+	public void setBloodie(boolean bloody) {
+		this.bloody = bloody;
 	}
 
 	@XmlElement
@@ -197,10 +197,10 @@ public abstract class Item implements Serializable {
 	}
 
 	/**
-	 * gets this items bloodie image
+	 * gets this items bloody image
 	 * @return
 	 */
-	public String getBloodieImage() {
+	public String getBloodyImage() {
 		return "b" + currentImage;
 	}
 
@@ -208,19 +208,19 @@ public abstract class Item implements Serializable {
 		return currentImage;
 	}
 
-	public boolean getBloodie() {
-		return bloodie;
+	public boolean getBloody() {
+		return bloody;
 	}
 
 	/**
-	 * Makes this item bloodie. 
+	 * Makes this item bloody. 
 	 * Changes its state
 	 * Changes its image
 	 * Adds, clean action
 	 */
-	public void makeBloodie() {
+	public void makeBloody() {
 		setBloodie(true);
-		setCurrentImage(this.getBloodieImage());
+		setCurrentImage(this.getBloodyImage());
 		addAction("clean");
 	}
 

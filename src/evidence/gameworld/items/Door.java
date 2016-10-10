@@ -21,16 +21,15 @@ import evidence.gameworld.Room;
 @XmlRootElement
 public class Door extends Item{
 	
-	private Room roomOne;
-	private Room roomTwo;
+	private Room room;
 	private boolean locked;
 	private int keyCode;
+	private Door door;
 
-	public Door(String name, String description, List<String> actions, Room roomOne,
-			Room roomTwo, boolean locked, int keyCode, boolean bloodied) {
+	public Door(String name, String description, List<String> actions, Room room,
+			 boolean locked, int keyCode, boolean bloodied) {
 		super(name, description, actions, bloodied);
-		this.roomOne = roomOne;
-		this.roomTwo = roomTwo;
+		this.room = room;
 		this.locked = locked;
 		this.keyCode = keyCode;
 	}
@@ -83,15 +82,10 @@ public class Door extends Item{
 		else
 			return false;
 	}
-
-	@XmlTransient
-	public Room getRoomOne() {
-		return roomOne;
-	}
 	
 	@XmlTransient
-	public Room getRoomTwo() {
-		return roomTwo;
+	public Room getRoom() {
+		return room;
 	}
 	
 	@XmlElement
@@ -109,11 +103,14 @@ public class Door extends Item{
 	}
 	
 	public void setRoomOne(Room r){
-		this.roomOne = r;
+		this.room = r;
+	}
+
+	public void setOtherDoor(Door door) {
+		this.door = door;
 	}
 	
-	public void setRoomTwo(Room r2){
-		this.roomTwo = r2;
+	public Door getDoor(){
+		return door;
 	}
-	
 }

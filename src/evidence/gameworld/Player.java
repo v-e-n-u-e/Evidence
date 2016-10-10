@@ -24,14 +24,14 @@ public class Player {
 	private Direction currentDirection;
 	private Integer ID; // Used to identify clients with a player object
 	private String feedback = "";
-	private boolean bloodie = false;
+	private boolean bloody = false;
 
-	public void makeBloodie() {
-		this.bloodie = true;
+	public void makeBloody() {
+		this.bloody = true;
 	}
 
-	public boolean getBloodie() {
-		return bloodie;
+	public boolean getBloody() {
+		return bloody;
 	}
 
 	public void setCurrentRoom(Room room) {
@@ -161,7 +161,7 @@ public class Player {
 	}
 
 	public void setBloodie(boolean b) {
-		this.bloodie = b;
+		this.bloody = b;
 
 	}
 }
