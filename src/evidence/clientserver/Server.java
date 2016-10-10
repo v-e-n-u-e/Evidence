@@ -15,7 +15,10 @@ import evidence.clientserver.infoholders.Event;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
+import evidence.gameworld.Room;
+import evidence.gameworld.Room.Name;
 import evidence.gameworld.Timer;
+import evidence.gameworld.Wall;
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.MovableItem;
 import evidence.gui.ServerGUI;
@@ -524,14 +527,24 @@ public class Server implements Runnable{
 	}
 
 	/**
-	 * Creates a RenderPackage for a specific Client
+	 * Creates a RenderPackage for a specific Client.
 	 *
 	 * @param ID - The ID of the Client the RenderPackage is for
 	 * @return - The RenderPackage we created
 	 */
 	private RenderPackage createRenderPackage(Integer ID){
 		Player p = game.getPlayerWithID(ID);
-		return new RenderPackage(p.getWall(), p.getInventory(), p.getFeedback() );
+		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
+			Room lounge = game.getRoom(Name.LOUNGE);
+			Wall loungeNorth = lounge.getWalls()[0];
+			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback() );
+		}
+		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
+			Room kitchen = game.getRoom(Name.KITCHEN);
+			Wall kitchenNorth = kitchen.getWalls()[0];
+			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback() );
+		}
+		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback() );
 	}
 
 	/**

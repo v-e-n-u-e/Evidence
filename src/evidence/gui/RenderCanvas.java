@@ -26,8 +26,8 @@ public class RenderCanvas extends Canvas{
 	@Override
 	public void paint(Graphics g){
 		if(rPackage==null){return;}
-		g.drawImage(new ImageIcon(rPackage.getWall().getImageName() ).getImage(), 0, 0, null);
-		for(Item item : rPackage.getWall().getItems() ){
+		g.drawImage(new ImageIcon(rPackage.getFrontWall().getImageName() ).getImage(), 0, 0, null);
+		for(Item item : rPackage.getFrontWall().getItems() ){
 			g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
 		}
 		

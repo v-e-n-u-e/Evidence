@@ -22,7 +22,7 @@ public class RenderPackage implements Serializable{
 	private static final long serialVersionUID = -2017422499501784164L;
 	
 	// The wall the player is facing
-	private Wall wall;
+	private Wall front, back;
 	
 	// The player's inventory of items
 	private List<Item> inventory;
@@ -33,11 +33,12 @@ public class RenderPackage implements Serializable{
 	/**
 	 * A constructor for a RenderPackage
 	 * 
-	 * @param wall - The wall to render
+	 * @param frontWall - The wall to render
 	 * @param inventory - The inventory to render
 	 */
-	public RenderPackage(Wall wall, List<Item> inventory, String feedback){
-		this.wall = wall;
+	public RenderPackage(Wall frontWall, Wall backWall, List<Item> inventory, String feedback){
+		this.front = frontWall;
+		this.back = backWall;
 		this.inventory = inventory;
 		this.feedback = feedback;
 	}
@@ -47,8 +48,17 @@ public class RenderPackage implements Serializable{
 	 * 
 	 * @return - The wall to render
 	 */
-	public Wall getWall(){
-		return this.wall;
+	public Wall getFrontWall(){
+		return this.front;
+	}
+	
+	/**
+	 * Getter for the wall field
+	 * 
+	 * @return - The wall to render
+	 */
+	public Wall getBackWall(){
+		return this.back;
 	}
 	
 	/**
