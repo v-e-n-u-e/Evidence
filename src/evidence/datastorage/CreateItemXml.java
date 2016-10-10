@@ -25,9 +25,9 @@ public class CreateItemXml {
 		actions.add("Unlock");
 		actions.add("Lock");
 		Door door = new Door("Door", "Door between the bathroom and the kitchen", actions, bathroom,
-				bedroom, true, 123);
+				bedroom, true, 123, false);
 		Door door2 = new Door("Doofsdsr", "Door between the bathroosdgsgdssm and the kitchen", actions, bathroom,
-				bedroom, true, 123444);
+				bedroom, true, 123444, false);
 		door.setCurrentImage("img/bigdoor.png");
 		door.setXPos(30);
 		door.setYPos(100);

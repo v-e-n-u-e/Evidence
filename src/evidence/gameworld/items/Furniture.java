@@ -10,8 +10,8 @@ import evidence.gameworld.actions.Action;
 @XmlRootElement
 public class Furniture extends Item {
 
-	public Furniture(String name, String description, List<String> actions){
-		super(name, description, actions);
+	public Furniture(String name, String description, List<String> actions, boolean bloodied){
+		super(name, description, actions, bloodied);
 	}
 	public Furniture(){
 		
