@@ -51,9 +51,9 @@ public Game(){
 	private void setupRooms(){
 		rooms.add( new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png"));
 		rooms.add( new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png"));
-		rooms.add( new Room(Name.KITCHEN, "img/kitchen.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
+		rooms.add( new Room(Name.KITCHEN, "obj/kitchenhole.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
 		rooms.add( new Room(Name.GARAGE, "img/garage.png", "img/garage.png", "img/garage.png", "img/garage.png"));
-		rooms.add( new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "img/lounge.png", "img/lounge.png"));
+		rooms.add( new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "obj/loungehole.png", "img/lounge.png"));
 		rooms.add( new Room(Name.OFFICE, "img/office.png", "img/office.png", "img/office.png", "img/office.png"));
 	}
 	

@@ -1,12 +1,9 @@
 package evidence.gui;
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
-
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
@@ -17,7 +14,6 @@ public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	
 	RenderPackage rPackage;
-	
 	public RenderCanvas(){
 		super();
 	}
@@ -33,8 +29,6 @@ public class RenderCanvas extends Canvas{
 				g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
 			}
 		}
-		
-		
 		g.drawImage(new ImageIcon(rPackage.getFrontWall().getImageName() ).getImage(), 0, 0, null);
 		for(Item item : rPackage.getFrontWall().getItems() ){
 			g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
