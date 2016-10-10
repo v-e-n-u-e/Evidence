@@ -296,7 +296,7 @@ public class Server implements Runnable{
 				game = new Game();
 				//game.setup();
 				try {
-					game.ReadFromXml("Savedgame.xml");
+					game.ReadFromXml("NewGame.xml");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
