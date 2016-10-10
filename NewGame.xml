@@ -61,7 +61,7 @@
         <keyCode>5</keyCode>
         <locked>false</locked>
         <name>Door</name>
-        <XPos>460</XPos>
+        <XPos>200</XPos>
         <YPos>44</YPos>
     </doors>
     <doors>
@@ -354,7 +354,7 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>460</XPos>
+                <XPos>200</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
@@ -752,8 +752,8 @@ It just might conceal some evidence</description>
                 <currentImage>potplant.png</currentImage>
                 <description>A pot plant</description>
                 <name>Pot Plant</name>
-                <XPos>300</XPos>
-                <YPos>500</YPos>
+                <XPos>0</XPos>
+                <YPos>0</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -846,7 +846,7 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>460</XPos>
+                <XPos>200</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -855,8 +855,8 @@ It just might conceal some evidence</description>
                 <currentImage>painting.png</currentImage>
                 <description>A painting</description>
                 <name>Painting</name>
-                <XPos>200</XPos>
-                <YPos>200</YPos>
+                <XPos>70</XPos>
+                <YPos>70</YPos>
             </items>
             <x>0</x>
             <y>0</y>

@@ -303,16 +303,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				//game.setup();
-				try {
-					game.ReadFromXml("NewGame.xml");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				game.setup();
+//				try {
+//					game.ReadFromXml("NewGame.xml");
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				game.UpdatePlayersInv();
+				//game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -545,7 +545,7 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		this.timer = new Timer(300, this);
+		this.timer = new Timer(20, this);
 	}
 	
 	/**
@@ -554,7 +554,10 @@ public class Server implements Runnable{
 	 */
 	public void timeEnd(){
 		Wall wall = createEndScreenWall();
-		RenderPackage end = new RenderPackage(wall, null, null, "Game Ended!");
+		System.out.println(game.timeUp());
+		RenderPackage end = new RenderPackage(wall, null, null, game.timeUp());
+		
+		
 	}
 	
 	/**

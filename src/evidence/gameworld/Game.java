@@ -137,7 +137,7 @@ public class Game {
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), getRoom(Name.KITCHEN),
 				false, 5, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(460);
+		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
 
@@ -493,12 +493,12 @@ public class Game {
 		Furniture potplant = new Furniture("Pot Plant", "A pot plant", new ArrayList<>(Arrays.asList("inspect")),
 				false);
 		potplant.setCurrentImage("potplant.png");
-		potplant.setXPos(300);
-		potplant.setYPos(500);
+		potplant.setXPos(0);
+		potplant.setYPos(0);
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 20,
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 110,
 				true);
 		body.setCurrentImage("nbbody.png");
 		body.setXPos(12);
@@ -544,11 +544,21 @@ public class Game {
 
 		Furniture painting = new Furniture("Painting", "A painting", new ArrayList<>(Arrays.asList("inspect")), false);
 		painting.setCurrentImage("painting.png");
-		painting.setXPos(200);
-		painting.setYPos(200);
+		painting.setXPos(70);
+		painting.setYPos(100);
 		getRoom(Name.OFFICE).getWalls()[3].addItem(painting);
 	}
 
+	
+	public String timeUp(){
+		int score = calculateScore();
+		if(score < 100){
+			return "Congratualtions you concealed enough evidence, you have all evaded capture";
+		}else{
+			return "Enough evidence was found at the house to convict all of you. Enjoy prison";
+		}
+	}
+	
 	/**
 	 * Gets a room based on the given name
 	 * 
@@ -681,12 +691,24 @@ public class Game {
 	 */
 	public int calculateScore() {
 		int score = 0;
+		for(Player player: players){
+			for(Item item: player.getInventory()){
+				rooms.get(0).addItem(item);
+			}
+			if(player.getBloodie()){
+				score+=10;
+			}
+		}
+		
 		for (Room room : rooms) {
 			for (Wall wall : room.getWalls()) {
 				for (Item item : wall.getItems()) {
-					if (item instanceof Evidence) {
+					if (item.getBloodie()) {
+						score += 5;
+					}
+					if(item instanceof Evidence){
 						Evidence evidence = (Evidence) item;
-						score += evidence.getValue();
+						score+=evidence.getValue();
 					}
 				}
 			}
