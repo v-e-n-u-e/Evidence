@@ -26,7 +26,7 @@ public class TestDataStorage {
 		Game initialGame = new Game();
 		initialGame.setup();
 		Game readIn = new Game();
-		readIn.ReadFromXml("SavedGamed.xml");
+		readIn.ReadFromXml("NewGame.xml");
 		
 		for(int i = 0; i<initialGame.getRoom().size();i++){
 			assertEquals(initialGame.getRoom().get(i).getName(),readIn.getRoom().get(i).getName());
@@ -63,8 +63,8 @@ public class TestDataStorage {
 		Game game = new Game();
 		Game game2 = new Game();
 		game.setup();
-		game.CreateXml("SavedGamed.xml");
-		game2.ReadFromXml("SavedGamed.xml");
+		game.CreateXml("NewGame.xml");
+		game2.ReadFromXml("NewGame.xml");
 		
 		for(int i = 0; i<game.getRoom().size();i++){
 			assertEquals(game.getRoom().get(i).getName(),game2.getRoom().get(i).getName());

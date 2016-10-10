@@ -42,6 +42,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -148,6 +151,16 @@ public class ClientWindow extends JFrame implements Runnable{
 	public static void sendEvent(EventPackage event){
 		pipe.send(event);
 	}
+	
+	public void sendSaveGame(){
+		String saveMessage = "/save//e/";
+		pipe.send(saveMessage);
+	}
+	
+	public void loadGame(){
+		String loadMessage = "/load//e/";
+		pipe.send(loadMessage);
+	}
 
 	/**
 	 * Called when disconnecting intentionally. Will close the socket
@@ -199,8 +212,30 @@ public class ClientWindow extends JFrame implements Runnable{
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//1400 by 700
-		setBounds(100, 100, 1400, 700);
+		setBounds(100, 100, 1400, 711);
 		setLocationRelativeTo(null);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sendSaveGame();
+			}
+		});
+		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mntmLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadGame();
+			}
+		});
+		mnFile.add(mntmLoad);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

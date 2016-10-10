@@ -26,7 +26,7 @@ import evidence.testobjects.TestWall;
  */
 public class ClientPipe{
 	// The size of byte array's for receiving packets
-	private final int BYTE_ARRAY_LENGTH = 2048 * 4;
+	private final int BYTE_ARRAY_LENGTH = 2048 * 6;
 
 	// Information for our connection
 	private String name; // The name of the user connecting

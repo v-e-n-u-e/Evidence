@@ -41,7 +41,7 @@ import evidence.gui.ServerGUI;
  */
 public class Server implements Runnable{
 	// The size of byte array's for receiving packets
-	private final int BYTE_ARRAY_LENGTH = 2048 * 4;
+	private final int BYTE_ARRAY_LENGTH = 2048 * 6;
 
 	// Port number this server is running on
 	private int port;
@@ -91,6 +91,7 @@ public class Server implements Runnable{
 		this.port = port;
 		this.gui = gui;
 		this.numPlayers = numPlayers;
+		this.game = null;
 
 		// Try to create a socket for the port given in the command line arguments
 		try {
@@ -293,10 +294,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				game.setup();
+				//game.setup();
+				try {
+					game.ReadFromXml("Savedgame.xml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
+				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -348,6 +355,25 @@ public class Server implements Runnable{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}
+		}
+		
+		else if(string.startsWith("/save/") ){
+			if(game != null){
+				try {
+					game.CreateXml("Savedgame.xml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		else if(string.startsWith("/load/") ){
+			try {
+				game.ReadFromXml("Savedgame.xml");
+				game.UpdatePlayersInv();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -512,7 +538,12 @@ public class Server implements Runnable{
 	 * client rendering the end game screen.
 	 */
 	public void timeEnd(){
-		
+		Wall wall = createEndScreenWall();
+		RenderPackage end = new RenderPackage(wall, null, null, "Game Ended!");
+	}
+	
+	public Wall createEndScreenWall(){
+		return new Wall();
 	}
 
 	/**
