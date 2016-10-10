@@ -16,6 +16,7 @@ import evidence.gameworld.actions.Enter;
 import evidence.gameworld.actions.Fill;
 import evidence.gameworld.actions.Flush;
 import evidence.gameworld.actions.Kick;
+import evidence.gameworld.actions.Light;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.PlaceItem;
@@ -32,8 +33,8 @@ import evidence.gameworld.actions.Inspect;
  *
  */
 @XmlTransient
-@XmlSeeAlso({Container.class,Door.class,Evidence.class,Key.class,MovableItem.class,Furniture.class})
-public abstract class Item implements Serializable{
+@XmlSeeAlso({ Container.class, Door.class, Evidence.class, Key.class, MovableItem.class, Furniture.class })
+public abstract class Item implements Serializable {
 
 	private String name;
 	private String description;
@@ -41,13 +42,13 @@ public abstract class Item implements Serializable{
 	private String currentImage;
 	private int xPos;
 	private int yPos;
-	private boolean bloodied;
+	private boolean bloodie;
 
-	public Item(String name, String description, List<String> actions, boolean bloodied) {
+	public Item(String name, String description, List<String> actions, boolean bloodie) {
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
-		this.bloodied = bloodied;
+		this.bloodie = bloodie;
 	}
 
 	public Item() {
@@ -64,7 +65,7 @@ public abstract class Item implements Serializable{
 	public Action getAction(String actionString) {
 		Action action = new Inspect();
 		if (actionString.toLowerCase().startsWith("remove")) {
-			String[] itemString =  actionString.split(" ", 2);
+			String[] itemString = actionString.split(" ", 2);
 			return new RemoveItem(itemString[1]);
 		} else {
 			actionString = actionString.toLowerCase().replaceAll("\\s+", "");
@@ -105,13 +106,16 @@ public abstract class Item implements Serializable{
 			case "clean":
 				action = new Clean();
 				break;
+			case "light":
+				action = new Light();
+				break;
 			}
 		}
 		return action;
 	}
-	
-	public void setBloodie(boolean bloodie){
-		this.bloodied = bloodie;
+
+	public void setBloodie(boolean bloodie) {
+		this.bloodie = bloodie;
 	}
 
 	@XmlElement
@@ -178,13 +182,11 @@ public abstract class Item implements Serializable{
 	public int getXPos() {
 		return this.xPos;
 	}
-	
-	public List<String> getActions(){
+
+	public List<String> getActions() {
 		return this.actions;
 	}
-	
 
-	
 	public List<String> getActionsString() {
 		List<String> actionsStrings = new ArrayList<String>();
 		for (String actionString : this.actions) {
@@ -194,11 +196,32 @@ public abstract class Item implements Serializable{
 		return actionsStrings;
 	}
 
+	/**
+	 * gets this items bloodie image
+	 * @return
+	 */
 	public String getBloodieImage() {
 		return "b" + currentImage;
 	}
-	
+
 	public String getCurrentImage() {
 		return currentImage;
 	}
+
+	public boolean getBloodie() {
+		return bloodie;
+	}
+
+	/**
+	 * Makes this item bloodie. 
+	 * Changes its state
+	 * Changes its image
+	 * Adds, clean action
+	 */
+	public void makeBloodie() {
+		setBloodie(true);
+		setCurrentImage(this.getBloodieImage());
+		addAction("clean");
+	}
+
 }

@@ -263,13 +263,19 @@ public class Game {
 		gloves.setXPos(0);
 		gloves.setYPos(0);
 
-		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach",
-				new ArrayList<>(Arrays.asList("Inspect", "pickup")), 2, false);
+		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach, can be used to clean blood off items",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		bleach.setCurrentImage("bleach.png");
 		bleach.setXPos(0);
 		gloves.setYPos(0);
-
-		getRoom(Name.OFFICE).getWalls()[2].addItem(bleach);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(bleach);
+		
+		MovableItem cloth = new MovableItem("Cloth", "A cloth, can be used to clean blood off items",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
+		cloth.setCurrentImage("shirt.png");
+		cloth.setXPos(0);
+		gloves.setYPos(0);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(cloth);
 
 		Container cabnet = new Container("Cabnet", "A cabnet", new ArrayList<>(
 				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString())),
@@ -278,7 +284,6 @@ public class Game {
 		cabnet.setXPos(0);
 		cabnet.setYPos(0);
 		cabnet.getContainedItems().add(gloves);
-		cabnet.getContainedItems().add(bleach);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
 		MovableItem scissors = new MovableItem("Scissors", "A pair of Kitchen scissors",
@@ -463,7 +468,7 @@ public class Game {
 				false);
 		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
-		camera.setYPos(30);
+		camera.setYPos(30);  
 		getRoom(Name.OFFICE).getWalls()[2].addItem(camera);
 
 		Container safe = new Container("Safe", "A safe", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 6,

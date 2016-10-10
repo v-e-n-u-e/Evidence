@@ -33,13 +33,16 @@ public class PickUp extends Action {
 		}
 		String feedback = "";
 		if (gameItem instanceof MovableItem) {
-			MovableItem mItem = (MovableItem) gameItem;			
-			if (player.getInventory().size() < 8){
+			MovableItem mItem = (MovableItem) gameItem;
+			if (player.getInventory().size() < 8) {
 				player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
 				player.addItem(mItem);
-				player.bloodie(mItem);
+				if(player.getBloodie() || mItem.getBloodie()){
+					mItem.makeBloodie();
+					player.makeBloodie();
+				}
 				feedback = gameItem.toString() + " has been added to your inventory";
-			}else
+			} else
 				feedback = "Your inventory is full. You can't pick this item up.";
 		} else {
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
