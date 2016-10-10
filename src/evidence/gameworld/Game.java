@@ -214,7 +214,7 @@ public Game(){
 
 		Furniture bedsideTable = new Furniture("Bedside Table", "A bedside table that doesn't do much",
 				new ArrayList<>(Arrays.asList("inspect")), false);
-		bedsideTable.setCurrentImage("bedsidetabel.png");
+		bedsideTable.setCurrentImage("bedsidetable.png");
 		bedsideTable.setXPos(511);
 		bedsideTable.setYPos(389);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bedsideTable);
@@ -261,7 +261,7 @@ public Game(){
 
 		Container fridge = new Container("Fridge", "A Fridge", new ArrayList<>(Arrays.asList("inspect", "placeitem")),
 				false, 5, false);
-		fridge.setCurrentImage("bigfridge.png");
+		fridge.setCurrentImage("fridge.png");
 		fridge.setXPos(394);
 		fridge.setYPos(106);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
@@ -367,7 +367,7 @@ public Game(){
 
 		// Garage West Wall
 		Furniture bench = new Furniture("Bench", "Work bench", new ArrayList<>(Arrays.asList("inspect")), false);
-		bench.setCurrentImage("bencg.png");
+		bench.setCurrentImage("bench.png");
 		bench.setXPos(200);
 		bench.setYPos(450);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(bench);
@@ -380,7 +380,7 @@ public Game(){
 		getRoom(Name.GARAGE).getWalls()[3].addItem(saw);
 
 		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("remove")), 1, false);
-		wrench.setCurrentImage("wrech.png");
+		wrench.setCurrentImage("wrench.png");
 		wrench.setXPos(0);
 		wrench.setYPos(0);
 

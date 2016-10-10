@@ -208,7 +208,7 @@ It just might conceal some evidence</description>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <currentImage>bedsidetabel.png</currentImage>
+                <currentImage>bedsidetable.png</currentImage>
                 <description>A bedside table that doesn't do much</description>
                 <name>Bedside Table</name>
                 <XPos>511</XPos>
@@ -337,7 +337,7 @@ It just might conceal some evidence</description>
                 <actions>inspect</actions>
                 <actions>placeitem</actions>
                 <capacity>5</capacity>
-                <currentImage>bigfridge.png</currentImage>
+                <currentImage>fridge.png</currentImage>
                 <description>A Fridge</description>
                 <locked>false</locked>
                 <name>Fridge</name>
@@ -507,7 +507,7 @@ It just might conceal some evidence</description>
             <currentImage>obj/garage.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <currentImage>bencg.png</currentImage>
+                <currentImage>bench.png</currentImage>
                 <description>Work bench</description>
                 <name>Bench</name>
                 <XPos>200</XPos>
