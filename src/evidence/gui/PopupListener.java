@@ -35,5 +35,6 @@ class PopupListener implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		EventPackage event = new EventPackage(ClientWindow.getSelected(), item, actionEvent.getActionCommand(), ClientWindow.getID());
 		ClientWindow.sendEvent(event);
+		ClientWindow.currentlySelected = null;
 	}
 }
