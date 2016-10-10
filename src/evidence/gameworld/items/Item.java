@@ -173,11 +173,16 @@ public abstract class Item implements Serializable{
 	public int getXPos() {
 		return this.xPos;
 	}
+	
+	public List<String> getActions(){
+		return this.actions;
+	}
+	
 
-	@XmlElement
-	public List<String> getActions() {
+	
+	public List<String> getActionsString() {
 		List<String> actionsStrings = new ArrayList<String>();
-		for (String actionString : actions) {
+		for (String actionString : this.actions) {
 			Action action = getAction(actionString);
 			actionsStrings.add(action.toString());
 		}

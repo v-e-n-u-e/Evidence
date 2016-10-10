@@ -314,7 +314,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
 				// If we clicked on something, add all of the items available options to the pop up menu
 				if(item != null){
-					for(String action : item.getActions() ){
+					for(String action : item.getActionsString() ){
 						options.add(new MenuItem(action) );
 					}
 
@@ -361,14 +361,15 @@ public class ClientWindow extends JFrame implements Runnable{
 		//This method will remake the buttons/icons based on what the player is holding
 		private void inventoryRefresh(){
 			ImageIcon[] invIcons = new ImageIcon[9];
-/*			rPackage.getInventory().add(new Door("lol","loL",null,null,null,false,123));
-		    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");*/
+			//Go through the players current inventory and get their images
 		    for(int i = 0; i < rPackage.getInventory().size(); i++){
 		    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
 		    }
+		    //Remove previous buttons that were here
 			invPanel.removeAll();
 			invButtons = new JButton[9];
 			InvListen iListen = new InvListen();
+			//set up all the buttons and give them listeners/icons
 			for(int i = 0; i < 9; i++){
 				JButton button = new JButton();
 				button.setIcon(invIcons[i]);
@@ -377,6 +378,7 @@ public class ClientWindow extends JFrame implements Runnable{
 				invButtons[i]=button;
 				invPanel.add(invButtons[i]);
 			}
+			//Gets rid of border around selected item
 			iListen.resetSelected();
 		}
 
