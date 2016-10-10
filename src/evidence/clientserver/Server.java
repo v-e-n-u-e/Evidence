@@ -305,14 +305,14 @@ public class Server implements Runnable{
 				game = new Game();
 				game.setup();
 //				try {
-//					game.ReadFromXml("NewGame.xml");
+//					game.ReadFromXml("Savedgame.xml");
 //				} catch (Exception e) {
 //					e.printStackTrace();
 //				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				//game.UpdatePlayersInv();
+//				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -615,14 +615,14 @@ public class Server implements Runnable{
 		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
 			Room lounge = game.getRoom(Name.LOUNGE);
 			Wall loungeNorth = lounge.getWalls()[0];
-			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString());
+			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 		}
 		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
 			Room kitchen = game.getRoom(Name.KITCHEN);
-			Wall kitchenNorth = kitchen.getWalls()[0];
-			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
+			Wall kitchenNorth = kitchen.getWalls()[2];
+			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() );
 		}
-		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
+		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 	}
 
 	/**

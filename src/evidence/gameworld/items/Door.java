@@ -102,7 +102,7 @@ public class Door extends Item{
 		this.locked = l;
 	}
 	
-	public void setRoomOne(Room r){
+	public void setRoom(Room r){
 		this.room = r;
 	}
 

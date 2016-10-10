@@ -48,7 +48,7 @@ public class Game {
 		ReadXml t = new ReadXml();
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
-		this.rooms = t.getRoom();
+		this.rooms = t.getRooms();
 		this.seconds = t.getSeconds();
 	}
 

@@ -33,7 +33,7 @@ public class RenderPackage implements Serializable{
 	String feedback;
 	
 	// A string representing the current room a player is in
-	String currentRoom;
+	private String currentRoom;
 	
 	/**
 	 * A constructor for a RenderPackage
@@ -86,5 +86,12 @@ public class RenderPackage implements Serializable{
 	 */
 	public String getFeedback(){
 		return this.feedback;
+	}
+
+	/**
+	 * @return the currentRoom
+	 */
+	public String getCurrentRoom() {
+		return currentRoom;
 	}
 }
