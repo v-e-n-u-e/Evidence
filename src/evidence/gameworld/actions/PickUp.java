@@ -38,8 +38,8 @@ public class PickUp extends Action {
 				player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
 				player.addItem(mItem);
 				if(player.getBloodie() || mItem.getBloodie()){
-					mItem.makeBloodie();
-					player.makeBloodie();
+					if(!mItem.getBloodie() ){mItem.makeBloodie();}
+					if(!player.getBloodie()){player.makeBloodie();}
 				}
 				feedback = gameItem.toString() + " has been added to your inventory";
 			} else

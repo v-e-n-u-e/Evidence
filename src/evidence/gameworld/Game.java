@@ -24,9 +24,20 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
-public Game(){
+	private int seconds;
 	
-}
+	public Game(){
+	
+	}
+	
+	public void setSeconds(int secondsLeft){
+		this.seconds = secondsLeft;
+	}
+	
+	@XmlElement
+	public int getSeconds(){
+		return this.seconds;
+	}
 
 
 	/**
@@ -39,6 +50,7 @@ public Game(){
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
+		this.seconds = t.getSeconds();
 	}
 
 	/**
@@ -265,11 +277,17 @@ public Game(){
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
 
 		// Kitchen South Wall
+		Furniture kBench = new Furniture("Kitchen bench", "A kitchen bench", new ArrayList<>(Arrays.asList("inspect")), false);
+		kBench.setCurrentImage("kbench.png");
+		kBench.setXPos(244);
+		kBench.setYPos(279);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(kBench);
+		
 		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false,
 				3, false);
 		oven.setCurrentImage("oven.png");
-		oven.setXPos(0);
-		oven.setYPos(0);
+		oven.setXPos(-18);
+		oven.setYPos(279);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
 		MovableItem gloves = new MovableItem("Gloves", "Rubber gloves",
@@ -371,15 +389,15 @@ public Game(){
 		// Garage West Wall
 		Furniture bench = new Furniture("Bench", "Work bench", new ArrayList<>(Arrays.asList("inspect")), false);
 		bench.setCurrentImage("bench.png");
-		bench.setXPos(200);
-		bench.setYPos(450);
+		bench.setXPos(111);
+		bench.setYPos(293);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(bench);
 
 		MovableItem saw = new MovableItem("Saw", "A saw", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3,
 				false);
 		saw.setCurrentImage("saw.png");
-		saw.setXPos(100);
-		saw.setYPos(100);
+		saw.setXPos(240);
+		saw.setYPos(307);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(saw);
 
 		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("remove")), 1, false);
@@ -403,13 +421,12 @@ public Game(){
 						"remove " + hammer.toString(), "remove " + screwdriver.toString())),
 				false, 7, false);
 		toolbox.setCurrentImage("toolbox.png");
-		toolbox.setXPos(300);
-		toolbox.setYPos(300);
+		toolbox.setXPos(132);
+		toolbox.setYPos(242);
 		toolbox.getContainedItems().add(screwdriver);
 		toolbox.getContainedItems().add(wrench);
 		toolbox.getContainedItems().add(hammer);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(toolbox);
-
 	}
 
 	private void setupLounge(ArrayList<Door> doors) {
@@ -418,8 +435,8 @@ public Game(){
 		Furniture fireplace = new Furniture("Fireplace", "A Fireplace",
 				new ArrayList<>(Arrays.asList("inspect", "light")), false);
 		fireplace.setCurrentImage("fireplace.png");
-		fireplace.setXPos(0);
-		fireplace.setYPos(0);
+		fireplace.setXPos(98);
+		fireplace.setYPos(119);
 		getRoom(Name.LOUNGE).getWalls()[0].addItem(fireplace);
 
 		// Lounge East Wall

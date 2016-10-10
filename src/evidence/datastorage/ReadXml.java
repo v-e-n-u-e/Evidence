@@ -28,99 +28,106 @@ public class ReadXml {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Door> doors = new ArrayList<Door>();
+	private int seconds;
 
-public void ReadInGame(String FileName) throws Exception{
-	try{
-		File file = new File(FileName);
-		JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		Game game = (Game) jaxbUnmarshaller.unmarshal(file);
-		doors = game.getDoors();
-		players = game.getPlayers();
-		rooms = game.getRoom();
-		//Manually set roomOne and roomTwo for doors.
-		//System.out.println(game.getRoom(Name.LOUNGE).getWalls()[1].getImageName());
+	public void ReadInGame(String FileName) throws Exception{
+		try{
+			File file = new File(FileName);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Game game = (Game) jaxbUnmarshaller.unmarshal(file);
+			doors = game.getDoors();
+			players = game.getPlayers();
+			rooms = game.getRoom();
+			seconds = game.getSeconds();
+			//Manually set roomOne and roomTwo for doors.
+			//System.out.println(game.getRoom(Name.LOUNGE).getWalls()[1].getImageName());
 		
-		setupDoors(game);
+			setupDoors(game);
 		
 		
-	}catch (JAXBException e) {
-	 e.printStackTrace();
-	 throw e;
+		}catch (JAXBException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
-}
 
-public List<Room> getRoom() {
-	return this.rooms;
-}
+	public List<Room> getRoom() {
+		return this.rooms;
+	}
 
-public List<Player> getPlayers() {
-	return this.players;
-}
+	public List<Player> getPlayers() {
+		return this.players;
+	}
+
+	public int getSeconds() {
+		return seconds;
+	}
 
 
-private void setupDoors(Game game) {
-	this.doors = new ArrayList<Door>();
+	private void setupDoors(Game game) {
+		this.doors = new ArrayList<Door>();
 
-	Door door = new Door("Door", "Door between the lounge and the bedroom",
-			new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.BEDROOM), true,
-			1, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(60);
-	door.setYPos(44);
-	doors.add(door);
+		Door door = new Door("Door", "Door between the lounge and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.BEDROOM), true,
+				1, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(60);
+		door.setYPos(44);
+		doors.add(door);
 
-	door = new Door("Door", "Door between the lounge and the kitchen",
-			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.KITCHEN),
-			false, 2, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(60);
-	door.setYPos(44);
-	doors.add(door);
+		door = new Door("Door", "Door between the lounge and the kitchen",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.KITCHEN),
+				false, 2, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(60);
+		door.setYPos(44);
+		doors.add(door);
 
-	door = new Door("Door", "Door between the bathroom and the bedroom",
-			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BATHROOM),game.getRoom(Name.BEDROOM), false, 3, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(60);
-	door.setYPos(44);
-	doors.add(door);
+		door = new Door("Door", "Door between the bathroom and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BATHROOM),game.getRoom(Name.BEDROOM), false, 3, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(60);
+		door.setYPos(44);
+		doors.add(door);
+		
+		door = new Door("Door", "Door between the office and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), game.getRoom(Name.BEDROOM),
+				false, 4, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(260);
+		door.setYPos(44);
+		doors.add(door);
 
-	door = new Door("Door", "Door between the office and the bedroom",
-			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), game.getRoom(Name.BEDROOM),
-			false, 4, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(260);
-	door.setYPos(44);
-	doors.add(door);
-
-	door = new Door("Door", "Door between the office and the kitchen",
+		door = new Door("Door", "Door between the office and the kitchen",
 			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), game.getRoom(Name.KITCHEN),
 			false, 5, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(460);
-	door.setYPos(44);
-	doors.add(door);
+		door.setCurrentImage("door.png");
+		door.setXPos(460);
+		door.setYPos(44);
+		doors.add(door);
 
-	door = new Door("Door", "Door between the garage and the kitchen",
+		door = new Door("Door", "Door between the garage and the kitchen",
 			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.GARAGE), game.getRoom(Name.KITCHEN),
 			false, 6, false);
-	door.setCurrentImage("door.png");
-	door.setXPos(60);
-	door.setYPos(44);
-	doors.add(door);
+		
+		door.setCurrentImage("door.png");
+		door.setXPos(60);
+		door.setYPos(44);
+		doors.add(door);
 	
-	game.getRoom(Name.BATHROOM).getWalls()[3].getItems().set(0, doors.get(2));
-	game.getRoom(Name.BEDROOM).getWalls()[1].getItems().set(1, doors.get(2));
-	game.getRoom(Name.BEDROOM).getWalls()[2].getItems().set(0, doors.get(3));
-	game.getRoom(Name.BEDROOM).getWalls()[3].getItems().set(0,doors.get(0));
-	game.getRoom(Name.KITCHEN).getWalls()[0].getItems().set(0,doors.get(1));
-	game.getRoom(Name.KITCHEN).getWalls()[1].getItems().set(0,doors.get(4));
-	game.getRoom(Name.KITCHEN).getWalls()[3].getItems().set(0,doors.get(5));
-	game.getRoom(Name.GARAGE).getWalls()[1].getItems().set(0,doors.get(5));
-	game.getRoom(Name.LOUNGE).getWalls()[1].getItems().set(0,doors.get(0));
-	game.getRoom(Name.LOUNGE).getWalls()[2].getItems().set(0,doors.get(1));
-	game.getRoom(Name.OFFICE).getWalls()[0].getItems().set(0,doors.get(3));
-	game.getRoom(Name.OFFICE).getWalls()[3].getItems().set(0,doors.get(4));
-}
+		game.getRoom(Name.BATHROOM).getWalls()[3].getItems().set(0, doors.get(2));
+		game.getRoom(Name.BEDROOM).getWalls()[1].getItems().set(1, doors.get(2));
+		game.getRoom(Name.BEDROOM).getWalls()[2].getItems().set(0, doors.get(3));
+		game.getRoom(Name.BEDROOM).getWalls()[3].getItems().set(0,doors.get(0));
+		game.getRoom(Name.KITCHEN).getWalls()[0].getItems().set(0,doors.get(1));
+		game.getRoom(Name.KITCHEN).getWalls()[1].getItems().set(0,doors.get(4));
+		game.getRoom(Name.KITCHEN).getWalls()[3].getItems().set(0,doors.get(5));
+		game.getRoom(Name.GARAGE).getWalls()[1].getItems().set(0,doors.get(5));
+		game.getRoom(Name.LOUNGE).getWalls()[1].getItems().set(0,doors.get(0));
+		game.getRoom(Name.LOUNGE).getWalls()[2].getItems().set(0,doors.get(1));
+		game.getRoom(Name.OFFICE).getWalls()[0].getItems().set(0,doors.get(3));
+		game.getRoom(Name.OFFICE).getWalls()[3].getItems().set(0,doors.get(4));
+	}
 	
 }
