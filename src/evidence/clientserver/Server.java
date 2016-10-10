@@ -91,6 +91,7 @@ public class Server implements Runnable{
 		this.port = port;
 		this.gui = gui;
 		this.numPlayers = numPlayers;
+		this.game = null;
 
 		// Try to create a socket for the port given in the command line arguments
 		try {
@@ -351,6 +352,16 @@ public class Server implements Runnable{
 					byte[] data = getBytes(createRenderPackage(ID) );
 					send(data, packet.getAddress(), packet.getPort() );
 				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		else if(string.startsWith("/save/") ){
+			if(game != null){
+				try {
+					game.CreateXml("Savedgame.xml");
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
