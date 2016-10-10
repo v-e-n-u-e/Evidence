@@ -9,7 +9,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
-import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.EventPackage;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Door;
@@ -71,9 +71,11 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
-
+	
+	// The current RenderPackage that is rendered / being rendered
 	public static RenderPackage rPackage;
-	//private static JButton[][] invButtons;
+	
+	// Buttons for the inventory items and a field for the currently selected item.
 	private static JButton[] invButtons;
 	public static Item currentlySelected;
 
@@ -143,7 +145,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 *
 	 * @param event - The event to send to the server
 	 */
-	public static void sendEvent(Event event){
+	public static void sendEvent(EventPackage event){
 		pipe.send(event);
 	}
 
@@ -414,7 +416,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(rotateLeft);
 	}
 
-	//Used for the server/client side interactionso
+	//Used for the server/client side interactions
 	public void rotateRight(){
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);
