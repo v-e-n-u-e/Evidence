@@ -362,7 +362,7 @@ public class Server implements Runnable{
 	 */
 	private void processEvent(Event e, DatagramPacket packet){
 		// Apply the event to the game using the fields from the received Event
-		String feedback = game.apply(e.getPerformedOn(), (MovableItem)e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
+		String feedback = game.apply(e.getPerformedOn(), (MovableItem) e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
 		game.getPlayerWithID(e.getID() ).setFeedback(feedback);
 		updateAllViews();
 	}
@@ -502,6 +502,10 @@ public class Server implements Runnable{
 	 */
 	private void startTimer(){
 		Timer timer = new Timer(300, this);
+	}
+	
+	public void timeEnd(){
+		
 	}
 
 	public void updateAllViews(){

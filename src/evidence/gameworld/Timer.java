@@ -65,7 +65,7 @@ public class Timer{
 			
 		}
 		
-		System.out.println("Times up"); //make cops arrive here
+		server.timeEnd();
 		
 	}
 	
