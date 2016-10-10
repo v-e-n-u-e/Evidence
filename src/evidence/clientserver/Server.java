@@ -367,6 +367,14 @@ public class Server implements Runnable{
 				}
 			}
 		}
+		
+		else if(string.startsWith("/load/") ){
+			try {
+				game.ReadFromXml("Savedgame.xml");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		// If we could not categorize the packet, print to the server log
 		else{

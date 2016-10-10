@@ -36,6 +36,8 @@ public Game(){
 	 */
 	public void ReadFromXml(String FileName) throws Exception {
 		ReadXml t = new ReadXml();
+		this.doors = new ArrayList<Door>();
+		this.setDoors(doors);
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();

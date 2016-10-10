@@ -156,6 +156,11 @@ public class ClientWindow extends JFrame implements Runnable{
 		String saveMessage = "/save//e/";
 		pipe.send(saveMessage);
 	}
+	
+	public void loadGame(){
+		String loadMessage = "/load//e/";
+		pipe.send(loadMessage);
+	}
 
 	/**
 	 * Called when disconnecting intentionally. Will close the socket
@@ -223,6 +228,14 @@ public class ClientWindow extends JFrame implements Runnable{
 			}
 		});
 		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mntmLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadGame();
+			}
+		});
+		mnFile.add(mntmLoad);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
