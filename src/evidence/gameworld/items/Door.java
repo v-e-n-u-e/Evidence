@@ -27,8 +27,8 @@ public class Door extends Item{
 	private int keyCode;
 
 	public Door(String name, String description, List<String> actions, Room roomOne,
-			Room roomTwo, boolean locked, int keyCode) {
-		super(name, description, actions);
+			Room roomTwo, boolean locked, int keyCode, boolean bloodied) {
+		super(name, description, actions, bloodied);
 		this.roomOne = roomOne;
 		this.roomTwo = roomTwo;
 		this.locked = locked;

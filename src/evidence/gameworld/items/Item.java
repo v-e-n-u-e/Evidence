@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 import evidence.gameworld.actions.Action;
+import evidence.gameworld.actions.Clean;
 import evidence.gameworld.actions.CutUp;
 import evidence.gameworld.actions.Drop;
 import evidence.gameworld.actions.Enter;
@@ -40,11 +41,13 @@ public abstract class Item implements Serializable{
 	private String currentImage;
 	private int xPos;
 	private int yPos;
+	private boolean bloodied;
 
-	public Item(String name, String description, List<String> actions) {
+	public Item(String name, String description, List<String> actions, boolean bloodied) {
 		this.name = name;
 		this.description = description;
 		this.actions = actions;
+		this.bloodied = bloodied;
 	}
 
 	public Item() {
@@ -99,19 +102,21 @@ public abstract class Item implements Serializable{
 			case "drop":
 				action = new Drop();
 				break;
+			case "clean":
+				action = new Clean();
+				break;
 			}
 		}
 		return action;
 	}
+	
+	public void setBloodie(boolean bloodie){
+		this.bloodied = bloodie;
+	}
 
 	@XmlElement
 	public void setCurrentImage(String fileName) {
-		// for(String image : images){
-		// if(image.equals(fileName)){
-		// currentImage = image;
-		// }
 		this.currentImage = fileName;
-		// }
 	}
 
 	public void removeAction(String action) {
@@ -187,5 +192,13 @@ public abstract class Item implements Serializable{
 			actionsStrings.add(action.toString());
 		}
 		return actionsStrings;
+	}
+
+	public String getBloodieImage() {
+		return "b" + currentImage;
+	}
+	
+	public String getCurrentImage() {
+		return currentImage;
 	}
 }

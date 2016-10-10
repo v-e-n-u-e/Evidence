@@ -29,7 +29,7 @@ public class Fill extends Action {
 			} else {
 				bath.setCapacity(0);
 				feedback = "Bath full";
-				bath.setCurrentImage("img/fullbath.png");
+				bath.setCurrentImage("fullbath.png");
 				bath.setActions(new ArrayList<String>());
 			}
 		}

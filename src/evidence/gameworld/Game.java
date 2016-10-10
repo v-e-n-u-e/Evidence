@@ -27,26 +27,31 @@ public class Game {
 public Game(){
 	
 }
+
+
 	/**
 	 * Reads in the state of a game from a Xml file
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
-	public void ReadFromXml(String FileName) throws Exception{
+	public void ReadFromXml(String FileName) throws Exception {
 		ReadXml t = new ReadXml();
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
 	}
-	
+
 	/**
 	 * Writes the current instance of this game to an Xml file.
+	 * 
 	 * @param FileName
 	 * @throws Exception
 	 */
-	public void CreateXml(String FileName) throws Exception{
+	public void CreateXml(String FileName) throws Exception {
 		CreateXml t = new CreateXml();
 		t.CreateGame(FileName, this);
 	}
+
 	
 	public void UpdatePlayersInv(){
 		for(int i = 0; i<storedPlayers.size();i++){
@@ -61,7 +66,6 @@ public Game(){
 		}
 	}
 	
-	
 	public void setup() {
 		setupRooms();
 		ArrayList<Door> doors = setupDoors();
@@ -74,49 +78,61 @@ public Game(){
 	}
 
 	private void setupRooms(){
-		rooms.add( new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png"));
-		rooms.add( new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png"));
-		rooms.add( new Room(Name.KITCHEN, "obj/kitchenhole.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
-		rooms.add( new Room(Name.GARAGE, "img/garage.png", "img/garage.png", "img/garage.png", "img/garage.png"));
-		rooms.add( new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "obj/loungehole.png", "img/lounge.png"));
-		rooms.add( new Room(Name.OFFICE, "img/office.png", "img/office.png", "img/office.png", "img/office.png"));
+		rooms.add( new Room(Name.BATHROOM, "obj/bathroom.png", "obj/bathroom.png", "obj/bathroom.png", "obj/bathroom.png"));
+		rooms.add( new Room(Name.BEDROOM, "obj/bedroom.png", "obj/bedroom.png", "obj/bedroom.png", "obj/bedroom.png"));
+		rooms.add( new Room(Name.KITCHEN, "obj/kitchenhole.png", "obj/kitchen.png", "obj/kitchen.png", "obj/kitchen.png"));
+		rooms.add( new Room(Name.GARAGE, "obj/garage.png", "obj/garage.png", "obj/garage.png", "obj/garage.png"));
+		rooms.add( new Room(Name.LOUNGE, "obj/lounge.png", "obj/lounge.png", "obj/loungehole.png", "obj/lounge.png"));
+		rooms.add( new Room(Name.OFFICE, "obj/office.png", "obj/office.png", "obj/office.png", "obj/office.png"));
 	}
-	
+
 	private ArrayList<Door> setupDoors() {
 		doors = new ArrayList<Door>();
 
-		Door door = new Door("Door", "Door between the lounge and the bedroom", new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), getRoom(Name.BEDROOM), true, 1);
-		door.setCurrentImage("img/bigdoor.png");
+		Door door = new Door("Door", "Door between the lounge and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), getRoom(Name.BEDROOM), true,
+				1, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
 
-		door = new Door("Door", "Door between the lounge and the kitchen", new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.LOUNGE), getRoom(Name.KITCHEN), false, 2);
-		door.setCurrentImage("img/bigdoor.png");
+		door = new Door("Door", "Door between the lounge and the kitchen",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.LOUNGE), getRoom(Name.KITCHEN),
+				false, 2, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
 
-		door = new Door("Door", "Door between the bathroom and the bedroom", new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BATHROOM),	getRoom(Name.BEDROOM), false, 3);
-		door.setCurrentImage("img/bigdoor.png");
+		door = new Door("Door", "Door between the bathroom and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BATHROOM),
+				getRoom(Name.BEDROOM), false, 3, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
 
-		door = new Door("Door", "Door between the office and the bedroom", new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE),	getRoom(Name.BEDROOM), false, 4);
-		door.setCurrentImage("img/bigdoor.png");
+		door = new Door("Door", "Door between the office and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), getRoom(Name.BEDROOM),
+				false, 4, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(260);
 		door.setYPos(230);
 		doors.add(door);
-		
-		door = new Door("Door", "Door between the office and the kitchen", new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE),	getRoom(Name.KITCHEN), false, 5);
-		door.setCurrentImage("img/bigdoor.png");
+
+		door = new Door("Door", "Door between the office and the kitchen",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), getRoom(Name.KITCHEN),
+				false, 5, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(460);
 		door.setYPos(230);
 		doors.add(door);
-		
-		door = new Door("Door", "Door between the garage and the kitchen", new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.GARAGE),	getRoom(Name.KITCHEN), false, 6);
-		door.setCurrentImage("img/bigdoor.png");
+
+		door = new Door("Door", "Door between the garage and the kitchen",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.GARAGE), getRoom(Name.KITCHEN),
+				false, 6, false);
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
@@ -124,38 +140,43 @@ public Game(){
 		return doors;
 	}
 
-	private void setupBathroom(ArrayList<Door> doors){
-		
+	private void setupBathroom(ArrayList<Door> doors) {
+
 		// Bathroom North Wall
-		MovableItem mop = new MovableItem("Mop", "A mop. This mop can be used for cleaning up and concealing evidence", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3);
-		mop.setCurrentImage("img/mop.png");
+		MovableItem mop = new MovableItem("Mop", "A mop. This mop can be used for cleaning up and concealing evidence",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
+		mop.setCurrentImage("mop.png");
 		mop.setXPos(160);
 		mop.setYPos(490);
 		getRoom(Name.BATHROOM).getWalls()[0].addItem(mop);
 
-		Container bucket = new Container("Bucket", "A bucket. Things can be hidden in here", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 2);
-		bucket.setCurrentImage("img/bucket.png");
+		Container bucket = new Container("Bucket", "A bucket. Things can be hidden in here",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 2, false);
+		bucket.setCurrentImage("bucket.png");
 		bucket.setXPos(180);
 		bucket.setYPos(510);
 		getRoom(Name.BATHROOM).getWalls()[0].addItem(bucket);
 
-		
 		// Bathroom East Wall
-		Container bath = new Container("Bath", "A bath tub. Things can be hidden in here", new ArrayList<>(Arrays.asList("inspect", "placeitem", "fill")), false, 6);
-		bath.setCurrentImage("img/bath.png");
+		Container bath = new Container("Bath", "A bath tub. Things can be hidden in here",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem", "fill")), false, 6, false);
+		bath.setCurrentImage("bath.png");
 		bath.setXPos(300);
 		bath.setYPos(510);
 		getRoom(Name.BATHROOM).getWalls()[1].addItem(bath);
 
-		//South Wall
-		Container toilet = new Container("Toilet", "A toilet. This toilet can be flushed", new ArrayList<>(Arrays.asList("inspect", "flush", "placeitem")), false, 2);
-		toilet.setCurrentImage("img/toilet.png");
+		// South Wall
+		Container toilet = new Container("Toilet", "A toilet. This toilet can be flushed",
+				new ArrayList<>(Arrays.asList("inspect", "flush", "placeitem")), false, 2, false);
+		toilet.setCurrentImage("toilet.png");
 		toilet.setXPos(450);
 		toilet.setYPos(500);
 		getRoom(Name.BATHROOM).getWalls()[2].addItem(toilet);
 
-		Container trashCan = new Container("Trash Can", "A trash can. You can kick this trash can over if you are feeling frustrated", new ArrayList<>(Arrays.asList("inspect", "kick", "placeitem")), false, 5);
-		trashCan.setCurrentImage("img/trashcan.png");
+		Container trashCan = new Container("Trash Can",
+				"A trash can. You can kick this trash can over if you are feeling frustrated",
+				new ArrayList<>(Arrays.asList("inspect", "kick", "placeitem")), false, 5, false);
+		trashCan.setCurrentImage("trashcan.png");
 		trashCan.setXPos(200);
 		trashCan.setYPos(500);
 		getRoom(Name.BATHROOM).getWalls()[2].addItem(trashCan);
@@ -163,41 +184,48 @@ public Game(){
 		// Bathroom West Wall
 		getRoom(Name.BATHROOM).getWalls()[3].addItem(doors.get(2));
 
-		Container sink = new Container("Sink", "A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 1);
-		sink.setCurrentImage("img/sink.png");
+		Container sink = new Container("Sink",
+				"A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 1, false);
+		sink.setCurrentImage("sink.png");
 		sink.setXPos(450);
 		sink.setYPos(380);
 		getRoom(Name.BATHROOM).getWalls()[3].addItem(sink);
 	}
 
 	private void setupBedroom(ArrayList<Door> doors) {
-		
+
 		// Bedroom North Wall
-		Container bed = new Container("Bed", "A bed. You may take a nap here, or you could hide something underneath this bed.", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 6);
-		bed.setCurrentImage("img/bed.png");
+		Container bed = new Container("Bed",
+				"A bed. You may take a nap here, or you could hide something underneath this bed.",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 6, false);
+		bed.setCurrentImage("bed.png");
 		bed.setXPos(200);
 		bed.setYPos(400);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
-		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555);
-		key.setCurrentImage("img/numpad.png");
+		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
+		key.setCurrentImage("numpad.png");
 		key.setXPos(300);
 		key.setYPos(400);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(key);
-		
-		Furniture bedsideTable = new Furniture("Bedside Table", "A bedside table that doesn't do much", new ArrayList<>(Arrays.asList("inspect")));
-		bedsideTable.setCurrentImage("img/bedsidetabel.png");
+
+		Furniture bedsideTable = new Furniture("Bedside Table", "A bedside table that doesn't do much",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		bedsideTable.setCurrentImage("bedsidetabel.png");
 		bedsideTable.setXPos(400);
 		bedsideTable.setYPos(450);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bedsideTable);
 
 		// Bedroom East Wall
-		Container cupboard = new Container("Cupboard", "A Cupboard. This cupboard is quite large and can hide many things", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 7);
-		cupboard.setCurrentImage("img/cupboard.png");
+		Container cupboard = new Container("Cupboard",
+				"A Cupboard. This cupboard is quite large and can hide many things",
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 7, false);
+		cupboard.setCurrentImage("cupboard.png");
 		cupboard.setXPos(200);
 		cupboard.setYPos(200);
 		getRoom(Name.BEDROOM).getWalls()[1].addItem(cupboard);
-		
+
 		getRoom(Name.BEDROOM).getWalls()[1].addItem(doors.get(2));
 
 		// Bedroom South Wall
@@ -212,14 +240,16 @@ public Game(){
 		// Kitchen North Wall
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(doors.get(1));
 
-		Furniture stool = new Furniture("Stool", "A stool. Take a seat and strech your legs", new ArrayList<>(Arrays.asList("inspect")));
-		stool.setCurrentImage("img/stool.png");
+		Furniture stool = new Furniture("Stool", "A stool. Take a seat and strech your legs",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		stool.setCurrentImage("stool.png");
 		stool.setXPos(300);
 		stool.setYPos(400);
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(stool);
 
-		Furniture stoolOne = new Furniture("Stool", "A stool. Only lift this stool once!", new ArrayList<>(Arrays.asList("inspect")));
-		stoolOne.setCurrentImage("img/stool.png");
+		Furniture stoolOne = new Furniture("Stool", "A stool. Only lift this stool once!",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		stoolOne.setCurrentImage("stool.png");
 		stoolOne.setXPos(400);
 		stoolOne.setYPos(400);
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(stoolOne);
@@ -227,39 +257,48 @@ public Game(){
 		// Kitchen East Wall
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(doors.get(4));
 
-		Container fridge = new Container("Fridge", "A Fridge", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 5);
-		fridge.setCurrentImage("img/bigfridge.png");
+		Container fridge = new Container("Fridge", "A Fridge", new ArrayList<>(Arrays.asList("inspect", "placeitem")),
+				false, 5, false);
+		fridge.setCurrentImage("bigfridge.png");
 		fridge.setXPos(300);
 		fridge.setYPos(400);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
 
 		// Kitchen South Wall
-		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 3);
-		oven.setCurrentImage("img/oven.png");
+		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false,
+				3, false);
+		oven.setCurrentImage("oven.png");
 		oven.setXPos(0);
 		oven.setYPos(0);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
-		MovableItem gloves = new MovableItem("Gloves", "Rubber gloves", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1);
-		gloves.setCurrentImage("img/gloves.png");
+		MovableItem gloves = new MovableItem("Gloves", "Rubber gloves",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, false);
+		gloves.setCurrentImage("gloves.png");
 		gloves.setXPos(0);
 		gloves.setYPos(0);
 
-		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach", new ArrayList<>(Arrays.asList("Inspect", "pickup")), 2);
-		bleach.setCurrentImage("img/bleach.png");
+		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach",
+				new ArrayList<>(Arrays.asList("Inspect", "pickup")), 2, false);
+		bleach.setCurrentImage("bleach.png");
 		bleach.setXPos(0);
 		gloves.setYPos(0);
 
-		Container cabnet = new Container("Cabnet", "A cabnet", new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString())), false, 3);
-		cabnet.setCurrentImage("img/cabnet.png");
+		getRoom(Name.OFFICE).getWalls()[2].addItem(bleach);
+
+		Container cabnet = new Container("Cabnet", "A cabnet", new ArrayList<>(
+				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString())),
+				false, 3, false);
+		cabnet.setCurrentImage("cabnet.png");
 		cabnet.setXPos(0);
 		cabnet.setYPos(0);
 		cabnet.getContainedItems().add(gloves);
 		cabnet.getContainedItems().add(bleach);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
-		MovableItem scissors = new MovableItem("Scissors", "A pair of Kitchen scissors", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1);
-		scissors.setCurrentImage("img/scissors.png");
+		MovableItem scissors = new MovableItem("Scissors", "A pair of Kitchen scissors",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, false);
+		scissors.setCurrentImage("scissors.png");
 		scissors.setXPos(0);
 		scissors.setYPos(0);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(scissors);
@@ -267,13 +306,13 @@ public Game(){
 		// Kitchen West Wall
 		getRoom(Name.KITCHEN).getWalls()[3].addItem(doors.get(5));
 
-		Furniture table = new Furniture("Table", "Dining Table", new ArrayList<>(Arrays.asList("inspect")));
-		table.setCurrentImage("img/table2.png");
+		Furniture table = new Furniture("Table", "Dining Table", new ArrayList<>(Arrays.asList("inspect")), false);
+		table.setCurrentImage("table2.png");
 		table.setXPos(400);
 		table.setYPos(400);
 		getRoom(Name.KITCHEN).getWalls()[3].addItem(table);
 	}
-	
+
 	private void setupGarage(ArrayList<Door> doors) {
 
 		// Garage North Wall
@@ -282,60 +321,72 @@ public Game(){
 		getRoom(Name.GARAGE).getWalls()[1].addItem(doors.get(5));
 
 		// Garage South Wall
-		MovableItem axe = new MovableItem("Axe", "An Axe. HINT - clean this to conceal evidence", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3);
-		axe.setCurrentImage("img/baxe.png");
+		MovableItem axe = new MovableItem("Axe", "An Axe. HINT - clean this to conceal evidence",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
+		axe.setCurrentImage("baxe.png");
 		axe.setXPos(200);
 		axe.setYPos(200);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(axe);
 
-		MovableItem sledgeHammer = new MovableItem("Sledge Hammer", "A Sledge Hammer. Try not to get your finger prints on this. \n HINT gloves are in the kitchen cupboard", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3);
-		sledgeHammer.setCurrentImage("img/sledgehammer.png");
+		MovableItem sledgeHammer = new MovableItem("Sledge Hammer",
+				"A Sledge Hammer. Try not to get your finger prints on this. \n HINT gloves are in the kitchen cupboard",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
+		sledgeHammer.setCurrentImage("sledgehammer.png");
 		sledgeHammer.setXPos(350);
 		sledgeHammer.setYPos(200);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(sledgeHammer);
 
-		Container cbBox = new Container("CardboardBox", "A cardboard box. Nice and roomy. Lots of space to hide bloody clothes. \n maybe the police will think its a costume box...", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 4);
-		cbBox.setCurrentImage("img/cbbox.png");
+		Container cbBox = new Container("CardboardBox",
+				"A cardboard box. Nice and roomy. Lots of space to hide bloody clothes. \n maybe the police will think its a costume box...",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 4, false);
+		cbBox.setCurrentImage("cbbox.png");
 		cbBox.setXPos(300);
 		cbBox.setYPos(300);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(cbBox);
-		
-		Evidence clothes = new Evidence("Bloodied Clothing", "Bloody clothes. The police probably wont like seeing this", new ArrayList<>(Arrays.asList("inspect")), 4);
-		clothes.setCurrentImage("img/bpants.png");
+
+		Evidence clothes = new Evidence("Bloodied Clothing",
+				"Bloody clothes. The police probably wont like seeing this", new ArrayList<>(Arrays.asList("inspect")),
+				4, false);
+		clothes.setCurrentImage("bpants.png");
 		clothes.setXPos(400);
 		clothes.setYPos(400);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(clothes);
 
 		// Garage West Wall
-		Furniture bench = new Furniture("Bench", "Work bench", new ArrayList<>(Arrays.asList("inspect")));
-		bench.setCurrentImage("img/bencg.png");
+		Furniture bench = new Furniture("Bench", "Work bench", new ArrayList<>(Arrays.asList("inspect")), false);
+		bench.setCurrentImage("bencg.png");
 		bench.setXPos(200);
 		bench.setYPos(450);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(bench);
 
-		MovableItem saw = new MovableItem("Saw", "A saw", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3);
-		saw.setCurrentImage("img/saw.png");
+		MovableItem saw = new MovableItem("Saw", "A saw", new ArrayList<>(Arrays.asList("inspect", "pickup")), 3,
+				false);
+		saw.setCurrentImage("saw.png");
 		saw.setXPos(100);
 		saw.setYPos(100);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(saw);
-		
-		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("remove")), 1);
-		wrench.setCurrentImage("img/wrech.png");
+
+		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("remove")), 1, false);
+		wrench.setCurrentImage("wrech.png");
 		wrench.setXPos(0);
 		wrench.setYPos(0);
 
-		MovableItem hammer = new MovableItem("Hammer", "A Hammer", new ArrayList<>(Arrays.asList("remove")), 1);
-		hammer.setCurrentImage("img/hammer.png");
+		MovableItem hammer = new MovableItem("Hammer", "A Hammer", new ArrayList<>(Arrays.asList("remove")), 1, false);
+		hammer.setCurrentImage("hammer.png");
 		hammer.setXPos(0);
 		hammer.setYPos(0);
 
-		MovableItem screwdriver = new MovableItem("Screw Driver", "A screw driver", new ArrayList<>(Arrays.asList("remove")), 1);
-		screwdriver.setCurrentImage("img/screwdriver.png");
+		MovableItem screwdriver = new MovableItem("Screw Driver", "A screw driver",
+				new ArrayList<>(Arrays.asList("remove")), 1, false);
+		screwdriver.setCurrentImage("screwdriver.png");
 		screwdriver.setXPos(0);
 		screwdriver.setYPos(0);
 
-		Container toolbox = new Container("Tool Box", "A tool Box", new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(), "remove " + hammer.toString(), "remove " + screwdriver.toString())), false, 7);
-		toolbox.setCurrentImage("img/toolbox.png");
+		Container toolbox = new Container("Tool Box", "A tool Box",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(),
+						"remove " + hammer.toString(), "remove " + screwdriver.toString())),
+				false, 7, false);
+		toolbox.setCurrentImage("toolbox.png");
 		toolbox.setXPos(300);
 		toolbox.setYPos(300);
 		toolbox.getContainedItems().add(screwdriver);
@@ -343,14 +394,14 @@ public Game(){
 		toolbox.getContainedItems().add(hammer);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(toolbox);
 
-		
 	}
-	
+
 	private void setupLounge(ArrayList<Door> doors) {
 
 		// Lounge North Wall
-		Furniture fireplace = new Furniture("Fireplace", "A Fireplace", new ArrayList<>(Arrays.asList("inspect", "light")));
-		fireplace.setCurrentImage("img/fireplace.png");
+		Furniture fireplace = new Furniture("Fireplace", "A Fireplace",
+				new ArrayList<>(Arrays.asList("inspect", "light")), false);
+		fireplace.setCurrentImage("fireplace.png");
 		fireplace.setXPos(0);
 		fireplace.setYPos(0);
 		getRoom(Name.LOUNGE).getWalls()[0].addItem(fireplace);
@@ -359,88 +410,92 @@ public Game(){
 
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(doors.get(0));
 
-		Furniture tv = new Furniture("TV", "A Television", new ArrayList<>(Arrays.asList("inspect")));
-		tv.setCurrentImage("img/tv.png");
+		Furniture tv = new Furniture("TV", "A Television", new ArrayList<>(Arrays.asList("inspect")), false);
+		tv.setCurrentImage("tv.png");
 		tv.setXPos(400);
 		tv.setYPos(300);
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(tv);
 
 		// Lounge South Wall
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(doors.get(1));
-		
-		Furniture stool = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")));
-		stool.setCurrentImage("img/stool.png");
+
+		Furniture stool = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")), false);
+		stool.setCurrentImage("stool.png");
 		stool.setXPos(200);
 		stool.setYPos(200);
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(stool);
 
-		Furniture stoolOne = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")));
-		stoolOne.setCurrentImage("img/stool.png");
+		Furniture stoolOne = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")), false);
+		stoolOne.setCurrentImage("stool.png");
 		stoolOne.setXPos(350);
 		stoolOne.setYPos(200);
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(stool);
 
 		// Lounge West Wall
-		Furniture sofa = new Furniture("Sofa", "A sofa", new ArrayList<>(Arrays.asList("inspect")));
-		sofa.setCurrentImage("img/sofa.png");
+		Furniture sofa = new Furniture("Sofa", "A sofa", new ArrayList<>(Arrays.asList("inspect")), false);
+		sofa.setCurrentImage("sofa.png");
 		sofa.setXPos(200);
 		sofa.setYPos(300);
 		getRoom(Name.LOUNGE).getWalls()[3].addItem(sofa);
 
-		Furniture coffeeTable = new Furniture("Coffee Table", "A coffee table", new ArrayList<>(Arrays.asList("inspect")));
-		coffeeTable.setCurrentImage("img/table.png");
+		Furniture coffeeTable = new Furniture("Coffee Table", "A coffee table",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		coffeeTable.setCurrentImage("table.png");
 		coffeeTable.setXPos(350);
 		coffeeTable.setYPos(300);
 		getRoom(Name.LOUNGE).getWalls()[3].addItem(coffeeTable);
 	}
-	
+
 	private void setupOffice(ArrayList<Door> doors) {
-		
+
 		// Office North Wall
 		getRoom(Name.OFFICE).getWalls()[0].addItem(doors.get(3));
 
-		Furniture potplant = new Furniture("Pot Plant", "A pot plant", new ArrayList<>(Arrays.asList("inspect")));
-		potplant.setCurrentImage("img/potplant.png");
+		Furniture potplant = new Furniture("Pot Plant", "A pot plant", new ArrayList<>(Arrays.asList("inspect")),
+				false);
+		potplant.setCurrentImage("potplant.png");
 		potplant.setXPos(300);
 		potplant.setYPos(500);
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 20);
-		body.setCurrentImage("img/body.png");
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 20,
+				true);
+		body.setCurrentImage("body.png");
 		body.setXPos(100);
 		body.setYPos(400);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(body);
 
-		MovableItem knife = new MovableItem("Knife", "A kitchen kinfe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 2);
-		knife.setCurrentImage("img/bknife.png");
+		MovableItem knife = new MovableItem("Knife", "A kitchen kinfe",
+				new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 2, true);
+		knife.setCurrentImage("bknife.png");
 		knife.setXPos(300);
 		knife.setYPos(400);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
 		// Office South Wall
-		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect")), 20);
-		camera.setCurrentImage("img/cameraon.png");
+		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect")), 20,
+				false);
+		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
 		camera.setYPos(30);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(camera);
 
-		Container safe = new Container("Safe", "A safe", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 6);
-		safe.setCurrentImage("img/safe.png");
+		Container safe = new Container("Safe", "A safe", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 6,
+				false);
+		safe.setCurrentImage("safe.png");
 		safe.setXPos(300);
 		safe.setYPos(500);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(safe);
 
-		
-		
-		Furniture desk = new Furniture("Desk", "Office desk", new ArrayList<>(Arrays.asList("inspect")));
-		desk.setCurrentImage("img/desk.png");
+		Furniture desk = new Furniture("Desk", "Office desk", new ArrayList<>(Arrays.asList("inspect")), false);
+		desk.setCurrentImage("desk.png");
 		desk.setXPos(150);
 		desk.setYPos(400);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(desk);
-		
-		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect")));
-		computer.setCurrentImage("img/computer.png");
+
+		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect")), false);
+		computer.setCurrentImage("computer.png");
 		computer.setXPos(100);
 		computer.setYPos(420);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
@@ -448,30 +503,30 @@ public Game(){
 		// Office West Wall
 		getRoom(Name.OFFICE).getWalls()[3].addItem(doors.get(4));
 
-		Furniture painting = new Furniture("Painting", "A painting", new ArrayList<>(Arrays.asList("inspect")));
-		painting.setCurrentImage("img/painting.png");
+		Furniture painting = new Furniture("Painting", "A painting", new ArrayList<>(Arrays.asList("inspect")), false);
+		painting.setCurrentImage("painting.png");
 		painting.setXPos(200);
 		painting.setYPos(200);
 		getRoom(Name.OFFICE).getWalls()[3].addItem(painting);
 	}
 
-	
-	
 	/**
 	 * Gets a room based on the given name
-	 * @param name - name of the room you are looking for
+	 * 
+	 * @param name
+	 *            - name of the room you are looking for
 	 * @return
 	 */
 	public Room getRoom(Name name) {
 		Room room = null;
-		for(Room r : rooms){
-			if(r.getName().equals(name)){
+		for (Room r : rooms) {
+			if (r.getName().equals(name)) {
 				room = r;
 			}
 		}
 		return room;
 	}
-	
+
 	@XmlElement
 	public List<Player> getPlayers() {
 		return this.players;
@@ -481,13 +536,13 @@ public Game(){
 	public List<Room> getRoom() {
 		return this.rooms;
 	}
-	
+
 	@XmlElement
-	public ArrayList<Door> getDoors(){
+	public ArrayList<Door> getDoors() {
 		return this.doors;
 	}
-	
-	public void setDoors(ArrayList<Door> d){
+
+	public void setDoors(ArrayList<Door> d) {
 		this.doors = d;
 	}
 
@@ -572,9 +627,9 @@ public Game(){
 				}
 			}
 		}
-		if(gameItem ==  null){
+		if (gameItem == null) {
 			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
-		}else
+		} else
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
 		System.out.println(feedback);
 		return feedback;

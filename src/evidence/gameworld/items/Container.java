@@ -21,8 +21,8 @@ public class Container extends Item {
 	private boolean locked;
 	private int capacity;
 
-	public Container(String name, String description, List<String> actions, boolean locked, int capacity) {
-		super(name, description, actions);
+	public Container(String name, String description, List<String> actions, boolean locked, int capacity, boolean bloodied) {
+		super(name, description, actions, bloodied);
 		this.locked = locked;
 		this.capacity = capacity;
 	}

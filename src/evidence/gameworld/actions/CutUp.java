@@ -34,10 +34,9 @@ public class CutUp extends Action {
 		String feedback = "";
 		if (gameItem.toString().equals("Body")) {
 			if (inventoryItem.toString().equals("Saw") || inventoryItem.toString().equals("Knife")) {
-				player.getWall().addItem(makeBodyPart("img/barm.png", gameItem.getXPos() * 2, gameItem.getYPos(), 1));
-				player.getWall().addItem(makeBodyPart("img/bhead.png", gameItem.getXPos(), gameItem.getYPos(), 4));
-				player.getWall()
-						.addItem(makeBodyPart("img/arm.png", (gameItem.getXPos() * 2), gameItem.getYPos() + 50, 1));
+				player.getWall().addItem(makeBodyPart("barm.png", gameItem.getXPos() * 2, gameItem.getYPos(), 1, true));
+				player.getWall().addItem(makeBodyPart("bhead.png", gameItem.getXPos(), gameItem.getYPos(), 4, true));
+				player.setBloodie(true);
 				player.getWall().removeItem(gameItem);
 
 				feedback = gameItem.toString() + " was " + this.toString();
@@ -50,10 +49,11 @@ public class CutUp extends Action {
 		return feedback;
 	}
 
-	public MovableItem makeBodyPart(String image, int x, int y, int size) {
+	public MovableItem makeBodyPart(String image, int x, int y, int size, boolean blood) {
 		ArrayList<String> actions = new ArrayList<String>();
-		actions.add("Pickup");
-		MovableItem item = new MovableItem("Body Part", "This is a body part", actions, size);
+		actions.add("pickup");
+		actions.add("clean");
+		MovableItem item = new MovableItem("Body Part", "This is a body part", actions, size, blood);
 		item.setCurrentImage(image);
 		item.setXPos(x);
 		item.setYPos(y);
