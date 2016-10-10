@@ -314,7 +314,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
 				// If we clicked on something, add all of the items available options to the pop up menu
 				if(item != null){
-					for(String action : item.getActions() ){
+					for(String action : item.getActionsString() ){
 						options.add(new MenuItem(action) );
 					}
 

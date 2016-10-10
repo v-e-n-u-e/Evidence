@@ -123,4 +123,12 @@ public class Timer{
 	public void setCounter(Thread c){
 		this.counter = c;
 	}
+	
+	public Server setServer(){
+		return this.server;
+	}
+	
+	public int setSeconds(){
+		return this.seconds;
+	}
 }
