@@ -11,11 +11,14 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.EventPackage;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
+import evidence.gameworld.Room;
+import evidence.gameworld.Room.Name;
 import evidence.gameworld.Timer;
+import evidence.gameworld.Wall;
 import evidence.gameworld.Wall.Direction;
 import evidence.gameworld.items.MovableItem;
 import evidence.gui.ServerGUI;
@@ -235,7 +238,7 @@ public class Server implements Runnable{
 
 		// If we received a String in the form of bytes, process the String
 		if(o instanceof String){processString((String) o, packet);}
-		else if(o instanceof Event){processEvent((Event) o, packet);}
+		else if(o instanceof EventPackage){processEvent((EventPackage) o, packet);}
 	}
 
 	/**
@@ -360,9 +363,9 @@ public class Server implements Runnable{
 	 * @param e - The event received
 	 * @param packet - The packet the event arrived in
 	 */
-	private void processEvent(Event e, DatagramPacket packet){
+	private void processEvent(EventPackage e, DatagramPacket packet){
 		// Apply the event to the game using the fields from the received Event
-		String feedback = game.apply(e.getPerformedOn(), (MovableItem)e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
+		String feedback = game.apply(e.getPerformedOn(), (MovableItem) e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
 		game.getPlayerWithID(e.getID() ).setFeedback(feedback);
 		updateAllViews();
 	}
@@ -501,9 +504,20 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		Timer timer = new Timer(300, this);
+		this.timer = new Timer(300, this);
+	}
+	
+	/**
+	 * Called when the timer runs out, starts the process of each
+	 * client rendering the end game screen.
+	 */
+	public void timeEnd(){
+		
 	}
 
+	/**
+	 * Resends every player a new Render Package for themselves.
+	 */
 	public void updateAllViews(){
 		for(Player p : game.getPlayers() ){
 			for(ServerClient sc : clients){
@@ -520,14 +534,24 @@ public class Server implements Runnable{
 	}
 
 	/**
-	 * Creates a RenderPackage for a specific Client
+	 * Creates a RenderPackage for a specific Client.
 	 *
 	 * @param ID - The ID of the Client the RenderPackage is for
 	 * @return - The RenderPackage we created
 	 */
 	private RenderPackage createRenderPackage(Integer ID){
 		Player p = game.getPlayerWithID(ID);
-		return new RenderPackage(p.getWall(), p.getInventory(), p.getFeedback() );
+		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
+			Room lounge = game.getRoom(Name.LOUNGE);
+			Wall loungeNorth = lounge.getWalls()[0];
+			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback() );
+		}
+		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
+			Room kitchen = game.getRoom(Name.KITCHEN);
+			Wall kitchenNorth = kitchen.getWalls()[0];
+			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback() );
+		}
+		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback() );
 	}
 
 	/**

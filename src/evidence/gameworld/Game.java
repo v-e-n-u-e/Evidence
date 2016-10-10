@@ -62,9 +62,9 @@ public Game(){
 	private void setupRooms(){
 		rooms.add( new Room(Name.BATHROOM, "img/bathroom.png", "img/bathroom.png", "img/bathroom.png", "img/bathroom.png"));
 		rooms.add( new Room(Name.BEDROOM, "img/bedroom.png", "img/bedroom.png", "img/bedroom.png", "img/bedroom.png"));
-		rooms.add( new Room(Name.KITCHEN, "img/kitchen.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
+		rooms.add( new Room(Name.KITCHEN, "obj/kitchenhole.png", "img/kitchen.png", "img/kitchen.png", "img/kitchen.png"));
 		rooms.add( new Room(Name.GARAGE, "img/garage.png", "img/garage.png", "img/garage.png", "img/garage.png"));
-		rooms.add( new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "img/lounge.png", "img/lounge.png"));
+		rooms.add( new Room(Name.LOUNGE, "img/lounge.png", "img/lounge.png", "obj/loungehole.png", "img/lounge.png"));
 		rooms.add( new Room(Name.OFFICE, "img/office.png", "img/office.png", "img/office.png", "img/office.png"));
 	}
 	
@@ -552,13 +552,16 @@ public Game(){
 			}
 		}
 		if (inventoryItem != null) {
-			for (Item i : player.getWall().getItems()) {
+			for (Item i : player.getInventory()) {
 				if (inventoryItem.toString().equals(i.toString())) {
 					inventoryItem = (MovableItem) i;
 				}
 			}
 		}
-		feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
+		if(gameItem ==  null){
+			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
+		}else
+			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
 		System.out.println(feedback);
 		return feedback;
 	}

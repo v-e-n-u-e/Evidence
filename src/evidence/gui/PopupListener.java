@@ -3,7 +3,7 @@ package evidence.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.EventPackage;
 import evidence.gameworld.items.Item;
 
 /**
@@ -33,7 +33,7 @@ class PopupListener implements ActionListener {
 	 * and send it to the server via the ClientPipe.
 	 */
 	public void actionPerformed(ActionEvent actionEvent) {
-		Event event = new Event(ClientWindow.getSelected(), item, actionEvent.getActionCommand(), ClientWindow.getID());
+		EventPackage event = new EventPackage(ClientWindow.getSelected(), item, actionEvent.getActionCommand(), ClientWindow.getID());
 		ClientWindow.sendEvent(event);
 	}
 }

@@ -9,7 +9,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import evidence.clientserver.ClientPipe;
-import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.EventPackage;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Door;
@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.Collections;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -70,9 +71,11 @@ public class ClientWindow extends JFrame implements Runnable{
 	// A thread to run on
 	private Thread run;
 	private RenderCanvas canvas;
-
+	
+	// The current RenderPackage that is rendered / being rendered
 	public static RenderPackage rPackage;
-	//private static JButton[][] invButtons;
+	
+	// Buttons for the inventory items and a field for the currently selected item.
 	private static JButton[] invButtons;
 	public static Item currentlySelected;
 
@@ -142,7 +145,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	 *
 	 * @param event - The event to send to the server
 	 */
-	public static void sendEvent(Event event){
+	public static void sendEvent(EventPackage event){
 		pipe.send(event);
 	}
 
@@ -361,14 +364,15 @@ public class ClientWindow extends JFrame implements Runnable{
 		//This method will remake the buttons/icons based on what the player is holding
 		private void inventoryRefresh(){
 			ImageIcon[] invIcons = new ImageIcon[9];
-/*			rPackage.getInventory().add(new Door("lol","loL",null,null,null,false,123));
-		    rPackage.getInventory().get(0).setCurrentImage("img/baxe.png");*/
+			//Go through the players current inventory and get their images
 		    for(int i = 0; i < rPackage.getInventory().size(); i++){
 		    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
 		    }
+		    //Remove previous buttons that were here
 			invPanel.removeAll();
 			invButtons = new JButton[9];
 			InvListen iListen = new InvListen();
+			//set up all the buttons and give them listeners/icons
 			for(int i = 0; i < 9; i++){
 				JButton button = new JButton();
 				button.setIcon(invIcons[i]);
@@ -377,6 +381,7 @@ public class ClientWindow extends JFrame implements Runnable{
 				invButtons[i]=button;
 				invPanel.add(invButtons[i]);
 			}
+			//Gets rid of border around selected item
 			iListen.resetSelected();
 		}
 
@@ -411,7 +416,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		pipe.send(rotateLeft);
 	}
 
-	//Used for the server/client side interactionso
+	//Used for the server/client side interactions
 	public void rotateRight(){
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);
@@ -428,7 +433,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * @return - The item clicked on, null otherwise
 	 */
 	public Item getItemClickedOn(int clickX, int clickY){
-		for(Item i : this.rPackage.getWall().getItems() ){
+		for(int index = this.rPackage.getFrontWall().getItems().size() - 1; index > -1; index-- ){
+			Item i = this.rPackage.getFrontWall().getItems().get(index);
 			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
 			int height = itemImage.getHeight(null);

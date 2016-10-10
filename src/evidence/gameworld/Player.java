@@ -36,21 +36,21 @@ public class Player {
 	public void setInventory(ArrayList<Item> items) {
 		inventory = items;
 	}
-	
-	public void setID(Integer ID){
+
+	public void setID(Integer ID) {
 		this.ID = ID;
 	}
-	
+
 	@XmlElement
-	public Integer getID(){
+	public Integer getID() {
 		return this.ID;
 	}
-	
-	public String getFeedback(){
+
+	public String getFeedback() {
 		return this.feedback;
 	}
-	
-	public void setFeedback(String feedback){
+
+	public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
 
@@ -68,19 +68,19 @@ public class Player {
 		}
 		return wall;
 	}
-	
+
 	@XmlElement
-	public Room getCurrentRoom(){
+	public Room getCurrentRoom() {
 		return this.currentRoom;
 	}
-	
+
 	/**
 	 * Add the provided item to this players inventory
 	 * 
 	 * @param item
 	 *            - the item to add to the inventory
 	 */
-	public void addItem(Item item){
+	public void addItem(Item item) {
 		inventory.add(item);
 	}
 
@@ -90,9 +90,9 @@ public class Player {
 	 * @param item
 	 *            - the item to remove from the inventory
 	 */
-	public void removeItem(Item item){
-			inventory.remove(item);
-		}
+	public void removeItem(Item item) {
+		inventory.remove(item);
+	}
 
 	/**
 	 * A method to rotate the view of this current player by changing the wall
@@ -104,43 +104,39 @@ public class Player {
 	public String rotateView(String direction) {
 		switch (currentDirection) {
 		case NORTH:
-			if (direction.equals("L")){
+			if (direction.equals("L")) {
 				currentDirection = Direction.WEST;
 				break;
-			}
-			else{
+			} else {
 				currentDirection = Direction.EAST;
 				break;
 			}
 		case EAST:
-			if (direction.equals("L")){
+			if (direction.equals("L")) {
 				currentDirection = Direction.NORTH;
 				break;
-			}
-			else{
+			} else {
 				currentDirection = Direction.SOUTH;
 				break;
 			}
 		case SOUTH:
-			if (direction.equals("L")){
+			if (direction.equals("L")) {
 				currentDirection = Direction.EAST;
 				break;
-			}
-			else{
+			} else {
 				currentDirection = Direction.WEST;
 				break;
 			}
 		case WEST:
-			if (direction.equals("L")){
+			if (direction.equals("L")) {
 				currentDirection = Direction.SOUTH;
 				break;
-			}
-			else{
+			} else {
 				currentDirection = Direction.NORTH;
 				break;
 			}
 		}
-		
+
 		return "You are now facing the " + currentDirection.toString() + " wall in the " + currentRoom.toString();
 	}
 
@@ -148,8 +144,9 @@ public class Player {
 	public Direction getCurrentDirection() {
 		return currentDirection;
 	}
+
 	@XmlElement
-	public ArrayList<Item> getInventory(){
+	public ArrayList<Item> getInventory() {
 		return inventory;
 	}
 }
