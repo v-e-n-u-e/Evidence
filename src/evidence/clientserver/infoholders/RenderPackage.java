@@ -32,6 +32,9 @@ public class RenderPackage implements Serializable{
 	// is being sent to.
 	String feedback;
 	
+	// A string representing the current room a player is in
+	String currentRoom;
+	
 	/**
 	 * A constructor for a RenderPackage
 	 * 
@@ -39,12 +42,14 @@ public class RenderPackage implements Serializable{
 	 * @param backWall - The backWall to render
 	 * @param inventory - The inventory to render
 	 * @param feedback - The feedbackString to render
+	 * @param currentRoom - The currentRoom of the player
 	 */
-	public RenderPackage(Wall frontWall, Wall backWall, List<Item> inventory, String feedback){
+	public RenderPackage(Wall frontWall, Wall backWall, List<Item> inventory, String feedback, String currentRoom){
 		this.front = frontWall;
 		this.back = backWall;
 		this.inventory = inventory;
 		this.feedback = feedback;
+		this.currentRoom = currentRoom;
 	}
 	
 	/**

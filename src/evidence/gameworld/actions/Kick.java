@@ -36,8 +36,8 @@ public class Kick extends Action {
 				MovableItem item = trashCan.getContainedItems().get(i);
 				trashCan.removeAction("remove " + item.toString());
 				trashCan.getContainedItems().remove(i);
-				item.setXPos(i*100);
-				item.setYPos(400);
+				item.setXPos(i*50);
+				item.setYPos(200);
 				player.getWall().addItem(item);
 				feedback += item.toString() + " ";
 			}

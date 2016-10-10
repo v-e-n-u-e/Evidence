@@ -303,16 +303,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				//game.setup();
-				try {
-					game.ReadFromXml("NewGame.xml");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				game.setup();
+//				try {
+//					game.ReadFromXml("NewGame.xml");
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				game.UpdatePlayersInv();
+				//game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -545,7 +545,7 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		this.timer = new Timer(300, this);
+		this.timer = new Timer(20, this);
 	}
 	
 	/**
@@ -554,7 +554,9 @@ public class Server implements Runnable{
 	 */
 	public void timeEnd(){
 		Wall wall = createEndScreenWall();
-		RenderPackage end = new RenderPackage(wall, null, null, "Game Ended!");
+		System.out.println(game.timeUp());
+		RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "");
+		updateAllViews(end);
 	}
 	
 	/**
@@ -583,6 +585,24 @@ public class Server implements Runnable{
 			}
 		}
 	}
+	
+	/**
+	 * Resends every player a new Render Package for themselves.
+	 */
+	public void updateAllViews(RenderPackage rp){
+		for(Player p : game.getPlayers() ){
+			for(ServerClient sc : clients){
+				if(sc.ID == p.getID() ){
+					try {
+						byte[] data = getBytes(rp);
+						send(data, sc.address, sc.port );
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 
 	/**
 	 * Creates a RenderPackage for a specific Client.
@@ -595,14 +615,14 @@ public class Server implements Runnable{
 		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
 			Room lounge = game.getRoom(Name.LOUNGE);
 			Wall loungeNorth = lounge.getWalls()[0];
-			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback() );
+			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString());
 		}
 		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
 			Room kitchen = game.getRoom(Name.KITCHEN);
 			Wall kitchenNorth = kitchen.getWalls()[0];
-			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback() );
+			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
 		}
-		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback() );
+		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
 	}
 
 	/**

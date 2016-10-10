@@ -85,6 +85,14 @@ public class Room implements Serializable{
 		}
 	}
 	
+	public void addItem(Item item){
+		for(Wall wall : walls){
+			if(wall.getDirection().equals(Direction.WEST)){
+				wall.removeItem(item);
+			}
+		}
+	}
+	
 	public String toString(){
 		return name.toString();
 	}
