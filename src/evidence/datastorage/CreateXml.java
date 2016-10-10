@@ -22,22 +22,20 @@ import evidence.gameworld.items.Evidence;
  * @author Connor
  *
  */
-public class TestCreateXml {
+public class CreateXml {
 	
-	public static void main(String args[]){
+	public void CreateGame(String FileName,Game game) throws Exception{
 		/*To create a new XMl make sure to remove the Set methods from wall.*/
-		Game game = new Game();
-		game.setup();
+		//Game game = new Game();
+		//game.setup();
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			File file = new File("SavedGamed.xml");
+			File file = new File(FileName);
 			//formats and writes to the file
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			//prints to file
 			jaxbMarshaller.marshal(game,file);
-			//prints to the console
-			jaxbMarshaller.marshal(game, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

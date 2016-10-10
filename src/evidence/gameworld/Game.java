@@ -7,7 +7,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import evidence.datastorage.TestReadXml;
+import evidence.datastorage.CreateXml;
+import evidence.datastorage.ReadXml;
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
@@ -26,14 +27,24 @@ public Game(){
 	
 }
 	/**
-	 * Reads in the state of a game from a xml file
+	 * Reads in the state of a game from a Xml file
 	 * @throws Exception 
 	 */
 	public void ReadFromXml(String FileName) throws Exception{
-		TestReadXml t = new TestReadXml();
+		ReadXml t = new ReadXml();
 		t.ReadInGame(FileName);
 		this.players = t.getPlayers();
 		this.rooms = t.getRoom();
+	}
+	
+	/**
+	 * Writes the current instance of this game to an Xml file.
+	 * @param FileName
+	 * @throws Exception
+	 */
+	public void CreateXml(String FileName) throws Exception{
+		CreateXml t = new CreateXml();
+		t.CreateGame(FileName, this);
 	}
 	
 	
