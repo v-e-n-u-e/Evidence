@@ -24,9 +24,20 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
-public Game(){
+	private int seconds;
 	
-}
+	public Game(){
+	
+	}
+	
+	public void setSeconds(int secondsLeft){
+		this.seconds = secondsLeft;
+	}
+	
+	@XmlElement
+	public int getSeconds(){
+		return this.seconds;
+	}
 
 
 	/**
@@ -39,6 +50,7 @@ public Game(){
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
+		this.seconds = t.getSeconds();
 	}
 
 	/**
