@@ -94,7 +94,7 @@ public Game(){
 				1, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(60);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the lounge and the kitchen",
@@ -102,7 +102,7 @@ public Game(){
 				false, 2, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(60);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the bathroom and the bedroom",
@@ -110,7 +110,7 @@ public Game(){
 				getRoom(Name.BEDROOM), false, 3, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(60);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the office and the bedroom",
@@ -118,7 +118,7 @@ public Game(){
 				false, 4, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(260);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the office and the kitchen",
@@ -126,7 +126,7 @@ public Game(){
 				false, 5, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(460);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the garage and the kitchen",
@@ -134,7 +134,7 @@ public Game(){
 				false, 6, false);
 		door.setCurrentImage("door.png");
 		door.setXPos(60);
-		door.setYPos(230);
+		door.setYPos(44);
 		doors.add(door);
 
 		return doors;
@@ -146,39 +146,39 @@ public Game(){
 		MovableItem mop = new MovableItem("Mop", "A mop. This mop can be used for cleaning up and concealing evidence",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
 		mop.setCurrentImage("mop.png");
-		mop.setXPos(160);
-		mop.setYPos(490);
+		mop.setXPos(30);
+		mop.setYPos(240);
 		getRoom(Name.BATHROOM).getWalls()[0].addItem(mop);
 
 		Container bucket = new Container("Bucket", "A bucket. Things can be hidden in here",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 2, false);
 		bucket.setCurrentImage("bucket.png");
-		bucket.setXPos(180);
-		bucket.setYPos(510);
+		bucket.setXPos(87);
+		bucket.setYPos(466);
 		getRoom(Name.BATHROOM).getWalls()[0].addItem(bucket);
 
 		// Bathroom East Wall
 		Container bath = new Container("Bath", "A bath tub. Things can be hidden in here",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem", "fill")), false, 6, false);
 		bath.setCurrentImage("bath.png");
-		bath.setXPos(300);
-		bath.setYPos(510);
+		bath.setXPos(130);
+		bath.setYPos(292);
 		getRoom(Name.BATHROOM).getWalls()[1].addItem(bath);
 
 		// South Wall
 		Container toilet = new Container("Toilet", "A toilet. This toilet can be flushed",
 				new ArrayList<>(Arrays.asList("inspect", "flush", "placeitem")), false, 2, false);
 		toilet.setCurrentImage("toilet.png");
-		toilet.setXPos(450);
-		toilet.setYPos(500);
+		toilet.setXPos(383);
+		toilet.setYPos(290);
 		getRoom(Name.BATHROOM).getWalls()[2].addItem(toilet);
 
 		Container trashCan = new Container("Trash Can",
 				"A trash can. You can kick this trash can over if you are feeling frustrated",
 				new ArrayList<>(Arrays.asList("inspect", "kick", "placeitem")), false, 5, false);
 		trashCan.setCurrentImage("trashcan.png");
-		trashCan.setXPos(200);
-		trashCan.setYPos(500);
+		trashCan.setXPos(120);
+		trashCan.setYPos(473);
 		getRoom(Name.BATHROOM).getWalls()[2].addItem(trashCan);
 
 		// Bathroom West Wall
@@ -188,8 +188,8 @@ public Game(){
 				"A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 1, false);
 		sink.setCurrentImage("sink.png");
-		sink.setXPos(450);
-		sink.setYPos(380);
+		sink.setXPos(383);
+		sink.setYPos(157);
 		getRoom(Name.BATHROOM).getWalls()[3].addItem(sink);
 	}
 
@@ -200,8 +200,8 @@ public Game(){
 				"A bed. You may take a nap here, or you could hide something underneath this bed.",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 6, false);
 		bed.setCurrentImage("bed.png");
-		bed.setXPos(200);
-		bed.setYPos(400);
+		bed.setXPos(24);
+		bed.setYPos(293);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
 		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
@@ -213,8 +213,8 @@ public Game(){
 		Furniture bedsideTable = new Furniture("Bedside Table", "A bedside table that doesn't do much",
 				new ArrayList<>(Arrays.asList("inspect")), false);
 		bedsideTable.setCurrentImage("bedsidetabel.png");
-		bedsideTable.setXPos(400);
-		bedsideTable.setYPos(450);
+		bedsideTable.setXPos(511);
+		bedsideTable.setYPos(389);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bedsideTable);
 
 		// Bedroom East Wall
@@ -243,15 +243,15 @@ public Game(){
 		Furniture stool = new Furniture("Stool", "A stool. Take a seat and strech your legs",
 				new ArrayList<>(Arrays.asList("inspect")), false);
 		stool.setCurrentImage("stool.png");
-		stool.setXPos(300);
-		stool.setYPos(400);
+		stool.setXPos(314);
+		stool.setYPos(381);
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(stool);
 
 		Furniture stoolOne = new Furniture("Stool", "A stool. Only lift this stool once!",
 				new ArrayList<>(Arrays.asList("inspect")), false);
 		stoolOne.setCurrentImage("stool.png");
-		stoolOne.setXPos(400);
-		stoolOne.setYPos(400);
+		stoolOne.setXPos(513);
+		stoolOne.setYPos(381);
 		getRoom(Name.KITCHEN).getWalls()[0].addItem(stoolOne);
 
 		// Kitchen East Wall
@@ -260,8 +260,8 @@ public Game(){
 		Container fridge = new Container("Fridge", "A Fridge", new ArrayList<>(Arrays.asList("inspect", "placeitem")),
 				false, 5, false);
 		fridge.setCurrentImage("bigfridge.png");
-		fridge.setXPos(300);
-		fridge.setYPos(400);
+		fridge.setXPos(394);
+		fridge.setYPos(106);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
 
 		// Kitchen South Wall
@@ -308,14 +308,25 @@ public Game(){
 
 		Furniture table = new Furniture("Table", "Dining Table", new ArrayList<>(Arrays.asList("inspect")), false);
 		table.setCurrentImage("table2.png");
-		table.setXPos(400);
-		table.setYPos(400);
+		table.setXPos(357);
+		table.setYPos(337);
 		getRoom(Name.KITCHEN).getWalls()[3].addItem(table);
 	}
 
 	private void setupGarage(ArrayList<Door> doors) {
 
 		// Garage North Wall
+		Furniture gDoor = new Furniture("Door", "Garage door", new ArrayList<>(Arrays.asList("inspect")), false);
+		gDoor.setCurrentImage("garagedoor.png");
+		gDoor.setXPos(76);
+		gDoor.setYPos(70);
+		getRoom(Name.GARAGE).getWalls()[0].addItem(gDoor);
+		
+		Furniture numpad = new Furniture("Numpad", "Numpad", new ArrayList<>(Arrays.asList("inspect")), false);
+		numpad.setCurrentImage("numpad.png");
+		numpad.setXPos(635);
+		numpad.setYPos(259);
+		getRoom(Name.GARAGE).getWalls()[0].addItem(numpad);
 
 		// Garage East Wall
 		getRoom(Name.GARAGE).getWalls()[1].addItem(doors.get(5));
@@ -323,25 +334,25 @@ public Game(){
 		// Garage South Wall
 		MovableItem axe = new MovableItem("Axe", "An Axe. HINT - clean this to conceal evidence",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
-		axe.setCurrentImage("baxe.png");
-		axe.setXPos(200);
-		axe.setYPos(200);
+		axe.setCurrentImage("axe.png");
+		axe.setXPos(54);
+		axe.setYPos(350);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(axe);
 
 		MovableItem sledgeHammer = new MovableItem("Sledge Hammer",
 				"A Sledge Hammer. Try not to get your finger prints on this. \n HINT gloves are in the kitchen cupboard",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 3, false);
 		sledgeHammer.setCurrentImage("sledgehammer.png");
-		sledgeHammer.setXPos(350);
-		sledgeHammer.setYPos(200);
+		sledgeHammer.setXPos(440);
+		sledgeHammer.setYPos(330);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(sledgeHammer);
 
 		Container cbBox = new Container("CardboardBox",
 				"A cardboard box. Nice and roomy. Lots of space to hide bloody clothes. \n maybe the police will think its a costume box...",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 4, false);
 		cbBox.setCurrentImage("cbbox.png");
-		cbBox.setXPos(300);
-		cbBox.setYPos(300);
+		cbBox.setXPos(462);
+		cbBox.setYPos(347);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(cbBox);
 
 		Evidence clothes = new Evidence("Bloodied Clothing",
@@ -409,11 +420,17 @@ public Game(){
 		// Lounge East Wall
 
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(doors.get(0));
+		
+		Furniture tvTable = new Furniture("Coffee Table", "A table", new ArrayList<>(Arrays.asList("inspect")), false);
+		tvTable.setCurrentImage("table.png");
+		tvTable.setXPos(0);
+		tvTable.setYPos(428);
+		getRoom(Name.LOUNGE).getWalls()[1].addItem(tvTable);
 
 		Furniture tv = new Furniture("TV", "A Television", new ArrayList<>(Arrays.asList("inspect")), false);
 		tv.setCurrentImage("tv.png");
-		tv.setXPos(400);
-		tv.setYPos(300);
+		tv.setXPos(70);
+		tv.setYPos(241);
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(tv);
 
 		// Lounge South Wall
@@ -421,28 +438,28 @@ public Game(){
 
 		Furniture stool = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")), false);
 		stool.setCurrentImage("stool.png");
-		stool.setXPos(200);
-		stool.setYPos(200);
+		stool.setXPos(30);
+		stool.setYPos(381);
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(stool);
 
 		Furniture stoolOne = new Furniture("Stool", "A stool", new ArrayList<>(Arrays.asList("inspect")), false);
 		stoolOne.setCurrentImage("stool.png");
-		stoolOne.setXPos(350);
-		stoolOne.setYPos(200);
+		stoolOne.setXPos(252);
+		stoolOne.setYPos(381);
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(stool);
 
 		// Lounge West Wall
 		Furniture sofa = new Furniture("Sofa", "A sofa", new ArrayList<>(Arrays.asList("inspect")), false);
 		sofa.setCurrentImage("sofa.png");
-		sofa.setXPos(200);
-		sofa.setYPos(300);
+		sofa.setXPos(63);
+		sofa.setYPos(308);
 		getRoom(Name.LOUNGE).getWalls()[3].addItem(sofa);
 
 		Furniture coffeeTable = new Furniture("Coffee Table", "A coffee table",
 				new ArrayList<>(Arrays.asList("inspect")), false);
 		coffeeTable.setCurrentImage("table.png");
-		coffeeTable.setXPos(350);
-		coffeeTable.setYPos(300);
+		coffeeTable.setXPos(132);
+		coffeeTable.setYPos(450);
 		getRoom(Name.LOUNGE).getWalls()[3].addItem(coffeeTable);
 	}
 
@@ -461,16 +478,16 @@ public Game(){
 		// Office East Wall
 		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 20,
 				true);
-		body.setCurrentImage("body.png");
-		body.setXPos(100);
-		body.setYPos(400);
+		body.setCurrentImage("nbbody.png");
+		body.setXPos(12);
+		body.setYPos(466);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(body);
 
 		MovableItem knife = new MovableItem("Knife", "A kitchen kinfe",
 				new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 2, true);
 		knife.setCurrentImage("bknife.png");
-		knife.setXPos(300);
-		knife.setYPos(400);
+		knife.setXPos(445);
+		knife.setYPos(532);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
 		// Office South Wall
@@ -484,20 +501,20 @@ public Game(){
 		Container safe = new Container("Safe", "A safe", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 6,
 				false);
 		safe.setCurrentImage("safe.png");
-		safe.setXPos(300);
-		safe.setYPos(500);
+		safe.setXPos(448);
+		safe.setYPos(366);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(safe);
 
 		Furniture desk = new Furniture("Desk", "Office desk", new ArrayList<>(Arrays.asList("inspect")), false);
 		desk.setCurrentImage("desk.png");
-		desk.setXPos(150);
-		desk.setYPos(400);
+		desk.setXPos(7);
+		desk.setYPos(330);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(desk);
 
 		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect")), false);
 		computer.setCurrentImage("computer.png");
-		computer.setXPos(100);
-		computer.setYPos(420);
+		computer.setXPos(41);
+		computer.setYPos(165);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
 
 		// Office West Wall

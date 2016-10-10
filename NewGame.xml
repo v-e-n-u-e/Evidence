@@ -9,7 +9,7 @@
         <locked>true</locked>
         <name>Door</name>
         <XPos>60</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
@@ -21,7 +21,7 @@
         <locked>false</locked>
         <name>Door</name>
         <XPos>60</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
@@ -33,7 +33,7 @@
         <locked>false</locked>
         <name>Door</name>
         <XPos>60</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
@@ -45,7 +45,7 @@
         <locked>false</locked>
         <name>Door</name>
         <XPos>260</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
@@ -57,7 +57,7 @@
         <locked>false</locked>
         <name>Door</name>
         <XPos>460</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
@@ -69,7 +69,7 @@
         <locked>false</locked>
         <name>Door</name>
         <XPos>60</XPos>
-        <YPos>230</YPos>
+        <YPos>44</YPos>
     </doors>
     <room>
         <name>BATHROOM</name>
@@ -83,8 +83,8 @@
                 <description>A mop. This mop can be used for cleaning up and concealing evidence</description>
                 <name>Mop</name>
                 <size>3</size>
-                <XPos>160</XPos>
-                <YPos>490</YPos>
+                <XPos>30</XPos>
+                <YPos>240</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -94,8 +94,8 @@
                 <description>A bucket. Things can be hidden in here</description>
                 <locked>false</locked>
                 <name>Bucket</name>
-                <XPos>180</XPos>
-                <YPos>510</YPos>
+                <XPos>87</XPos>
+                <YPos>466</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -112,8 +112,8 @@
                 <description>A bath tub. Things can be hidden in here</description>
                 <locked>false</locked>
                 <name>Bath</name>
-                <XPos>300</XPos>
-                <YPos>510</YPos>
+                <XPos>130</XPos>
+                <YPos>292</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -130,8 +130,8 @@
                 <description>A toilet. This toilet can be flushed</description>
                 <locked>false</locked>
                 <name>Toilet</name>
-                <XPos>450</XPos>
-                <YPos>500</YPos>
+                <XPos>383</XPos>
+                <YPos>290</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -142,8 +142,8 @@
                 <description>A trash can. You can kick this trash can over if you are feeling frustrated</description>
                 <locked>false</locked>
                 <name>Trash Can</name>
-                <XPos>200</XPos>
-                <YPos>500</YPos>
+                <XPos>120</XPos>
+                <YPos>473</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -161,7 +161,7 @@
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -172,8 +172,8 @@
 It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Sink</name>
-                <XPos>450</XPos>
-                <YPos>380</YPos>
+                <XPos>383</XPos>
+                <YPos>157</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -192,8 +192,8 @@ It just might conceal some evidence</description>
                 <description>A bed. You may take a nap here, or you could hide something underneath this bed.</description>
                 <locked>false</locked>
                 <name>Bed</name>
-                <XPos>200</XPos>
-                <YPos>400</YPos>
+                <XPos>24</XPos>
+                <YPos>293</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
                 <actions>inspect</actions>
@@ -211,8 +211,8 @@ It just might conceal some evidence</description>
                 <currentImage>bedsidetabel.png</currentImage>
                 <description>A bedside table that doesn't do much</description>
                 <name>Bedside Table</name>
-                <XPos>400</XPos>
-                <YPos>450</YPos>
+                <XPos>511</XPos>
+                <YPos>389</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -241,7 +241,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -259,7 +259,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>260</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -276,7 +276,7 @@ It just might conceal some evidence</description>
                 <locked>true</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -297,23 +297,23 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>stool.png</currentImage>
                 <description>A stool. Take a seat and strech your legs</description>
                 <name>Stool</name>
-                <XPos>300</XPos>
-                <YPos>400</YPos>
+                <XPos>314</XPos>
+                <YPos>381</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>stool.png</currentImage>
                 <description>A stool. Only lift this stool once!</description>
                 <name>Stool</name>
-                <XPos>400</XPos>
-                <YPos>400</YPos>
+                <XPos>513</XPos>
+                <YPos>381</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -331,7 +331,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>460</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -341,8 +341,8 @@ It just might conceal some evidence</description>
                 <description>A Fridge</description>
                 <locked>false</locked>
                 <name>Fridge</name>
-                <XPos>300</XPos>
-                <YPos>400</YPos>
+                <XPos>394</XPos>
+                <YPos>106</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -398,15 +398,15 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>table2.png</currentImage>
                 <description>Dining Table</description>
                 <name>Table</name>
-                <XPos>400</XPos>
-                <YPos>400</YPos>
+                <XPos>357</XPos>
+                <YPos>337</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -417,6 +417,22 @@ It just might conceal some evidence</description>
         <walls>
             <direction>NORTH</direction>
             <currentImage>obj/garage.png</currentImage>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>garagedoor.png</currentImage>
+                <description>Garage door</description>
+                <name>Door</name>
+                <XPos>76</XPos>
+                <YPos>70</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>numpad.png</currentImage>
+                <description>Numpad</description>
+                <name>Numpad</name>
+                <XPos>635</XPos>
+                <YPos>259</YPos>
+            </items>
             <x>0</x>
             <y>0</y>
         </walls>
@@ -433,7 +449,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -444,12 +460,12 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
                 <actions>pickup</actions>
-                <currentImage>baxe.png</currentImage>
+                <currentImage>axe.png</currentImage>
                 <description>An Axe. HINT - clean this to conceal evidence</description>
                 <name>Axe</name>
                 <size>3</size>
-                <XPos>200</XPos>
-                <YPos>200</YPos>
+                <XPos>54</XPos>
+                <YPos>350</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
@@ -459,8 +475,8 @@ It just might conceal some evidence</description>
  HINT gloves are in the kitchen cupboard</description>
                 <name>Sledge Hammer</name>
                 <size>3</size>
-                <XPos>350</XPos>
-                <YPos>200</YPos>
+                <XPos>440</XPos>
+                <YPos>330</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -471,8 +487,8 @@ It just might conceal some evidence</description>
  maybe the police will think its a costume box...</description>
                 <locked>false</locked>
                 <name>CardboardBox</name>
-                <XPos>300</XPos>
-                <YPos>300</YPos>
+                <XPos>462</XPos>
+                <YPos>347</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
@@ -554,15 +570,23 @@ It just might conceal some evidence</description>
                 <locked>true</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>table.png</currentImage>
+                <description>A table</description>
+                <name>Coffee Table</name>
+                <XPos>0</XPos>
+                <YPos>428</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>tv.png</currentImage>
                 <description>A Television</description>
                 <name>TV</name>
-                <XPos>400</XPos>
-                <YPos>300</YPos>
+                <XPos>70</XPos>
+                <YPos>241</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -580,23 +604,23 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>60</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>stool.png</currentImage>
                 <description>A stool</description>
                 <name>Stool</name>
-                <XPos>200</XPos>
-                <YPos>200</YPos>
+                <XPos>30</XPos>
+                <YPos>381</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>stool.png</currentImage>
                 <description>A stool</description>
                 <name>Stool</name>
-                <XPos>200</XPos>
-                <YPos>200</YPos>
+                <XPos>30</XPos>
+                <YPos>381</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -609,16 +633,16 @@ It just might conceal some evidence</description>
                 <currentImage>sofa.png</currentImage>
                 <description>A sofa</description>
                 <name>Sofa</name>
-                <XPos>200</XPos>
-                <YPos>300</YPos>
+                <XPos>63</XPos>
+                <YPos>308</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>table.png</currentImage>
                 <description>A coffee table</description>
                 <name>Coffee Table</name>
-                <XPos>350</XPos>
-                <YPos>300</YPos>
+                <XPos>132</XPos>
+                <YPos>450</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -639,7 +663,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>260</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
@@ -658,12 +682,12 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
                 <actions>cutup</actions>
-                <currentImage>body.png</currentImage>
+                <currentImage>nbbody.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
                 <value>20</value>
-                <XPos>100</XPos>
-                <YPos>400</YPos>
+                <XPos>12</XPos>
+                <YPos>466</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
@@ -673,8 +697,8 @@ It just might conceal some evidence</description>
                 <description>A kitchen kinfe</description>
                 <name>Knife</name>
                 <size>2</size>
-                <XPos>300</XPos>
-                <YPos>400</YPos>
+                <XPos>445</XPos>
+                <YPos>532</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -709,24 +733,24 @@ It just might conceal some evidence</description>
                 <description>A safe</description>
                 <locked>true</locked>
                 <name>Safe</name>
-                <XPos>300</XPos>
-                <YPos>500</YPos>
+                <XPos>448</XPos>
+                <YPos>366</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>desk.png</currentImage>
                 <description>Office desk</description>
                 <name>Desk</name>
-                <XPos>150</XPos>
-                <YPos>400</YPos>
+                <XPos>7</XPos>
+                <YPos>330</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>computer.png</currentImage>
                 <description>A computer</description>
                 <name>Computer</name>
-                <XPos>100</XPos>
-                <YPos>420</YPos>
+                <XPos>41</XPos>
+                <YPos>165</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -744,7 +768,7 @@ It just might conceal some evidence</description>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>460</XPos>
-                <YPos>230</YPos>
+                <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
