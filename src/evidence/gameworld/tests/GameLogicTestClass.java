@@ -217,7 +217,7 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void unlockSafeAction(){
-		Container safe = new Container("Safe", null, new ArrayList<String>(), true, 5);
+		Container safe = new Container("Safe", null, new ArrayList<String>(), true, 5, false);
 		Player player = createPlayer(null);
 		new Unlock().apply(safe, createKey(5), player);
 		assertEquals(true, safe.getLocked());
@@ -235,8 +235,8 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void flushAction(){
-		Container toilet = new Container("Toilet", null, new ArrayList<>(Arrays.asList( "flush")), false, 2);
-		MovableItem item = new MovableItem("Hammer", null, null, 2);
+		Container toilet = new Container("Toilet", null, new ArrayList<>(Arrays.asList( "flush")), false, 2, false);
+		MovableItem item = new MovableItem("Hammer", null, null, 2, false);
 		toilet.putItem(item, new Player());
 		new Flush().apply(toilet, item, null);
 		assertEquals(0, toilet.getContainedItems().size());
@@ -301,15 +301,15 @@ public class GameLogicTestClass {
 	public void cutUpAction(){
 		ArrayList<String> actions = new ArrayList<String>();
 		actions.add("CutUp");
-		Item body = new Evidence("Body", "The body", actions, 10);
+		Item body = new Evidence("Body", "The body", actions, 10, false);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
-		MovableItem weapon = new MovableItem("Knife", null, null, 0);
+		MovableItem weapon = new MovableItem("Knife", null, null, 0, false);
 		new CutUp().apply(body, weapon, player);
-		weapon = new MovableItem("Saw", null, null, 0);
+		weapon = new MovableItem("Saw", null, null, 0, false);
 		new CutUp().apply(body, weapon, player);
 		assertEquals(false, player.getWall().getItems().contains(body));
-		Item blood = new MovableItem("Blood", null, actions, 10);
+		Item blood = new MovableItem("Blood", null, actions, 10, false);
 		String s = body.getAction(body.getActions().get(0)).apply(blood, weapon, player);
 		assertEquals("Cannot perform Cut Up on Blood", s);
 		 s = body.getAction(body.getActions().get(0)).apply(body, (MovableItem)blood, player);
@@ -318,8 +318,8 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void placeItemAction(){
-		Container trashCan = new Container("Trash Can", null, new ArrayList<>(Arrays.asList("placeitem")), false, 5);
-		MovableItem item = new MovableItem("Item", null, null, 3);
+		Container trashCan = new Container("Trash Can", null, new ArrayList<>(Arrays.asList("placeitem")), false, 5, false);
+		MovableItem item = new MovableItem("Item", null, null, 3, false);
 		Player player = new Player();
 		player.addItem(item);
 		assertEquals(1, player.getInventory().size());
@@ -328,15 +328,15 @@ public class GameLogicTestClass {
 		assertEquals(2, trashCan.getActions().size());
 		assertEquals(0, player.getInventory().size());
 
-		Furniture table = new Furniture("Table", null, new ArrayList<>(Arrays.asList("placeitem")));
+		Furniture table = new Furniture("Table", null, new ArrayList<>(Arrays.asList("placeitem")), false);
 		
 		assertEquals("Cannot perform Place Item on Table", new PlaceItem().apply(table, item, player));
 	}
 	
 	@Test
 	public void kickAction(){
-		Container trashCan = new Container("Trash Can", null, new ArrayList<String>(), false, 5);
-		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 0);
+		Container trashCan = new Container("Trash Can", null, new ArrayList<String>(), false, 5, false);
+		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 0, false);
 		item.setXPos(0);
 		item.setYPos(0);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
@@ -350,15 +350,15 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void fillBathAction(){
-		Container bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5);
-		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 3);
+		Container bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5, false);
+		MovableItem item = new MovableItem("Item", null, new ArrayList<String>(), 3, false);
 		Player player = createPlayer(null);
 		new PlaceItem().apply(bath, item, player);
 		String s = new Fill().apply(bath, null, player);
 		assertEquals("Bath must be empty to fill", s);
 		assertEquals(true, bath.getActions().contains(new Fill().toString()));
 		assertEquals(true, bath.getActions().contains(new RemoveItem("Item").toString()));
-		bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5);
+		bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5, false);
 		assertEquals(true, bath.getActions().contains(new PlaceItem().toString()));
 		new Fill().apply(bath, null, player);
 		assertEquals(false, bath.getActions().contains(new PlaceItem().toString()));
@@ -367,10 +367,10 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void InspectAction(){
-		Furniture item = new Furniture("Name", "Description", null);
+		Furniture item = new Furniture("Name", "Description", null, false);
 		String s = new Inspect().apply(item, null, null);
 		assertEquals("\n" + item.getDescription(), s);
-		Door door = new Door("", "Locked door", null, null, null, true, 0);
+		Door door = new Door("", "Locked door", null, null, null, true, 0, false);
 		s = new Inspect().apply(door, null, null);
 		assertEquals("\n" + door.getDescription() + ". It is locked", s);
 		door.setLocked(false);
@@ -380,8 +380,8 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void RemoveItemAction(){
-		Container container = new Container("Name", "Description", new ArrayList<>(Arrays.asList("placeitem")), false, 0);
-		MovableItem item = new MovableItem("", null, new ArrayList<>(Arrays.asList("pickup")), 0);
+		Container container = new Container("Name", "Description", new ArrayList<>(Arrays.asList("placeitem")), false, 0, false);
+		MovableItem item = new MovableItem("", null, new ArrayList<>(Arrays.asList("pickup")), 0, false);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		player.addItem(item);
@@ -420,14 +420,14 @@ public class GameLogicTestClass {
 	private Key createKey(int code) {
 		List<String> actions = new ArrayList<String>();
 		actions.add("Unlock");
-		Key item = new Key("Key", "Key", actions, 2, code);
+		Key item = new Key("Key", "Key", actions, 2, code, false);
 		return item;
 	}
 
 	public Container createContainer() {
 		List<String> actions = new ArrayList<String>();
 		actions.add("Unlock");
-		Container item = new Container("Cardboard Box", "A cardboard box", actions, true, 2);
+		Container item = new Container("Cardboard Box", "A cardboard box", actions, true, 2, false);
 		return item;
 	}
 	
@@ -436,7 +436,7 @@ public class GameLogicTestClass {
 		actions.add("Unlock");
 		actions.add("Lock");
 		actions.add("Enter");
-		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, room2, locked, 123);
+		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, room2, locked, 123, false);
 		return door;
 	}
 
@@ -450,7 +450,7 @@ public class GameLogicTestClass {
 	private MovableItem createMItem() {
 		List<String> actions = new ArrayList<String>();
 		actions.add("PickUp");
-		MovableItem item = new MovableItem("Hammer", "A Hammer", actions, 2);
+		MovableItem item = new MovableItem("Hammer", "A Hammer", actions, 2, false);
 		return item;
 	}
 }

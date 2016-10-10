@@ -24,6 +24,19 @@ public class Player {
 	private Direction currentDirection;
 	private Integer ID; // Used to identify clients with a player object
 	private String feedback = "";
+	private boolean bloodie = false;
+	
+	public void bloodie(Item item){
+		if(this.bloodie){
+			item.setBloodie(true);
+			item.setCurrentImage(item.getBloodieImage());
+			item.addAction("clean");
+		}
+	}
+	
+	public boolean getBloodie(){
+		return bloodie;
+	}
 
 	public void setRoom(Room room) {
 		currentRoom = room;
@@ -148,5 +161,10 @@ public class Player {
 	@XmlElement
 	public ArrayList<Item> getInventory() {
 		return inventory;
+	}
+
+	public void setBloodie(boolean b) {
+		this.bloodie = b;
+		
 	}
 }

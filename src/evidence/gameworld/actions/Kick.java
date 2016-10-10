@@ -29,7 +29,7 @@ public class Kick extends Action {
 		String feedback = "";
 		if(gameItem.toString().equals("Trash Can")){
 			Container trashCan = (Container)gameItem;
-			trashCan.setCurrentImage("img/trashcanside.png");
+			trashCan.setCurrentImage("trashcanside.png");
 			trashCan.removeAction("kick");
 			trashCan.removeAction("placeitem");
 			for(int i = 0; i < trashCan.getContainedItems().size(); i++){

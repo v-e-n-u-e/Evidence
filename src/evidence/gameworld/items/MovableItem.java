@@ -24,8 +24,8 @@ public class MovableItem extends Item {
 	 * @param actions
 	 * @param size
 	 */
-	public MovableItem(String name, String description, List<String> actions, int size) {
-		super(name, description, actions);
+	public MovableItem(String name, String description, List<String> actions, int size, boolean bloodied) {
+		super(name, description, actions, bloodied);
 		this.size = size;
 	}
 	public MovableItem(){
