@@ -11,8 +11,7 @@ public class InvListen implements ActionListener{
 
 
 	/**
-	 * Formula for getting position of the item in the players inventory as compared to the grid is 3y+x
-	 * e.g. the item in grid pos [1][1] relates to position 4 in the inventory array.
+	 * This simply passes which button is pressed into performButton so code isn't copy+pasted into each case
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

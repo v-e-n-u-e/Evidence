@@ -545,7 +545,7 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		this.timer = new Timer(20, this);
+		this.timer = new Timer(300, this);
 	}
 	
 	/**
@@ -615,14 +615,14 @@ public class Server implements Runnable{
 		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
 			Room lounge = game.getRoom(Name.LOUNGE);
 			Wall loungeNorth = lounge.getWalls()[0];
-			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString());
+			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 		}
 		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
 			Room kitchen = game.getRoom(Name.KITCHEN);
-			Wall kitchenNorth = kitchen.getWalls()[0];
-			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
+			Wall kitchenNorth = kitchen.getWalls()[2];
+			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() );
 		}
-		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() + " " + p.getCurrentDirection().toString() );
+		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 	}
 
 	/**

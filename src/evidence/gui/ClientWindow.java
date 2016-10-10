@@ -80,6 +80,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	// Buttons for the inventory items and a field for the currently selected item.
 	private static JButton[] invButtons;
+	private JPanel feedbackPanel;
+	private JTextArea roomText;
 	public static Item currentlySelected;
 
 	/**
@@ -244,8 +246,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new TitledBorder(null, "Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setBounds(768, 11, 306, 639);
-		//infoPanel.setBounds(frameSize.width/2, 11, (frameSize.width/4)-10, frameSize.height-11);
-		//infoPanel.setBounds(screenSize.width/2, 11, (3/14)*screenSize.width, screenSize.height-211);
 		contentPane.add(infoPanel);
 		infoPanel.setLayout(null);
 
@@ -298,20 +298,20 @@ public class ClientWindow extends JFrame implements Runnable{
 		/**
 		 * Used to display text containing information on the room/wall the player is in
 		 */
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Room Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 414, 282, 200);
-		infoPanel.add(panel);
-		panel.setLayout(null);
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBackground(UIManager.getColor("Button.background"));
-		textArea.setBounds(12, 21, 258, 169);
-		panel.add(textArea);
-
+		feedbackPanel = new JPanel();
+		feedbackPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		feedbackPanel.setBounds(10, 414, 282, 200);
+		infoPanel.add(feedbackPanel);
+		feedbackPanel.setLayout(null);
+		roomText = new JTextArea();
+		roomText.setLineWrap(true);
+		roomText.setEditable(false);
+		roomText.setBackground(UIManager.getColor("Button.background"));
+		roomText.setBounds(12, 21, 258, 169);
+		feedbackPanel.add(roomText);
+		
 
 		//Set up for multiplayer chat
-
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
 		//chatPane.setBounds(frameSize.width-(frameSize.width/4), 11, (frameSize.width/4)-11, frameSize.height-11);
@@ -396,7 +396,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	}
 
 	//This is used when you need to show a player's inventory has changed in some way.
-		//This method will remake the buttons/icons based on what the player is holding
+		//This method will re-make the buttons/icons based on what the player is holding
 		private void inventoryRefresh(){
 			ImageIcon[] invIcons = new ImageIcon[9];
 			//Go through the players current inventory and get their images
@@ -456,6 +456,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);
 	}
+	
+	
 
 	/**
 	 * Iterates over each item in the current wall's list and checks
@@ -482,8 +484,13 @@ public class ClientWindow extends JFrame implements Runnable{
 				}
 			}
 		}
-
 		return null;
+	}
+	
+	//Refreshes the information in the info panel. Give room/actions feedback
+	public void refreshInfo(){
+		this.roomText.setText("Location: "+rPackage.getFrontWall().getDirection()+" wall of the "+rPackage.getCurrentRoom()+"\n\n");
+		this.roomText.append(rPackage.getFeedback());
 	}
 
 	public static Item getSelected(){
@@ -498,9 +505,11 @@ public class ClientWindow extends JFrame implements Runnable{
 		return pipe.getId();
 	}
 
+	//Called whenever a visible change needs to be shown to players
 	public void reRenderWall(){
 		canvas.rPackage = this.rPackage;
 		inventoryRefresh();
+		refreshInfo();
 		canvas.repaint();
 	}
 }

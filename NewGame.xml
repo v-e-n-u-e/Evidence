@@ -401,7 +401,11 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
+<<<<<<< HEAD
                 <XPos>20</XPos>
+=======
+                <XPos>400</XPos>
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
