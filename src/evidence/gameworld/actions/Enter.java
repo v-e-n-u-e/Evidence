@@ -35,9 +35,9 @@ public class Enter extends Action {
 		if(gameItem instanceof Door){
 			Door door = (Door)gameItem;
 			if(door.getRoomOne().equals(player.getCurrentRoom())){
-				player.setRoom(door.getRoomTwo());
+				player.setCurrentRoom(door.getRoomTwo());
 			}else{
-				player.setRoom(door.getRoomOne());
+				player.setCurrentRoom(door.getRoomOne());
 			}
 			feedback = "You are now in the " + player.getCurrentRoom().toString();
 		}else{

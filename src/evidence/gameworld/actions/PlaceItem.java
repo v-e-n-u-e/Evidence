@@ -25,7 +25,13 @@ public class PlaceItem extends Action {
 		String feedback = "";
 		if(gameItem instanceof Container){
 			Container container = (Container)gameItem;
+			if(container.getBloodie()){
+				inventoryItem.makeBloodie();
+			}
 			feedback = container.putItem(inventoryItem, player);
+			if(inventoryItem.getBloodie()){
+				container.makeBloodie();
+			}
 		}else
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 

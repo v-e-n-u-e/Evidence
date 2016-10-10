@@ -114,6 +114,15 @@ public class Server implements Runnable{
 	public ServerGUI getGUI(){
 		return this.gui;
 	}
+	
+	/**
+	 * Returns the Game object for this server
+	 * 
+	 * @return - The game object for the server
+	 */
+	public Game getGame(){
+		return this.game;
+	}
 
 	/**
 	 * Called when the run thread is started
@@ -275,7 +284,7 @@ public class Server implements Runnable{
 
 			Player toAdd = new Player();
 			toAdd.setID(id);
-			toAdd.setDirection(Direction.SOUTH);
+			toAdd.setCurrentDirection(Direction.SOUTH);
 			playerBuffer.add(toAdd);
 
 			// Record who we connected to the server
@@ -371,6 +380,11 @@ public class Server implements Runnable{
 		else if(string.startsWith("/load/") ){
 			try {
 				game.ReadFromXml("Savedgame.xml");
+				game.UpdatePlayersInv();
+				this.timer.kill();
+				this.timer = new Timer(game.getSeconds(), this);
+				System.out.println(game.getSeconds() );
+				updateAllViews();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

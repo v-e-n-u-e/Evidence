@@ -37,9 +37,6 @@ public class Timer{
 		counter.start();
 		
 	}
-	public Timer(){
-		
-	}
 
 	/**
 	 * 
@@ -52,6 +49,7 @@ public class Timer{
 	public void countdown(){
 		for(; seconds >= 0; seconds--){
 			try {
+				if(seconds < 0){return;}
 				counter.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -59,13 +57,14 @@ public class Timer{
 			}
 			String time = toString();
 			server.getGUI().writeToLog(time);
-			server.sendToAll("/timer/" + time + "/e/");
+			server.getGame().setSeconds(seconds);
+			if(seconds >= 0)server.sendToAll("/timer/" + time + "/e/");
 			//System.out.println(this.toString());  //send timer here
 			
 			
 		}
 		
-		server.timeEnd();
+		if(seconds == 0)server.timeEnd();
 		
 	}
 	
@@ -103,6 +102,10 @@ public class Timer{
 		time = time + secs + " seconds";
 		
 		return time;
+	}
+	
+	public void kill(){
+		this.seconds = -1;
 	}
 	
 	@XmlElement

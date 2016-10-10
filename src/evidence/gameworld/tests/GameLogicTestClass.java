@@ -442,8 +442,8 @@ public class GameLogicTestClass {
 
 	public Player createPlayer(Room r) {
 		Player player = new Player();
-		player.setDirection(Direction.NORTH);
-		player.setRoom(r);
+		player.setCurrentDirection(Direction.NORTH);
+		player.setCurrentRoom(r);
 		return player;
 	}
 	

@@ -20,13 +20,24 @@ import evidence.gameworld.items.MovableItem;
 
 @XmlRootElement
 public class Game {
-	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
+	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
-public Game(){
+	private int seconds;
 	
-}
+	public Game(){
+	
+	}
+	
+	public void setSeconds(int secondsLeft){
+		this.seconds = secondsLeft;
+	}
+	
+	@XmlElement
+	public int getSeconds(){
+		return this.seconds;
+	}
 
 
 	/**
@@ -36,11 +47,10 @@ public Game(){
 	 */
 	public void ReadFromXml(String FileName) throws Exception {
 		ReadXml t = new ReadXml();
-		this.doors = new ArrayList<Door>();
-		this.setDoors(doors);
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
+		this.seconds = t.getSeconds();
 	}
 
 	/**
@@ -58,11 +68,11 @@ public Game(){
 	public void UpdatePlayersInv(){
 		for(int i = 0; i<storedPlayers.size();i++){
 			//Set Direction
-			players.get(i).setDirection(storedPlayers.get(i).getCurrentDirection());
+			players.get(i).setCurrentDirection(storedPlayers.get(i).getCurrentDirection());
 			//Set Inventory
 			players.get(i).setInventory(storedPlayers.get(i).getInventory());
 			//Set Room
-			players.get(i).setRoom(storedPlayers.get(i).getCurrentRoom());
+			players.get(i).setCurrentRoom(this.getRoom(Name.BATHROOM)); //storedPlayers.get(i).getCurrentRoom());
 			//Set FeedBack
 			players.get(i).setFeedback(storedPlayers.get(i).getFeedback());
 		}
@@ -286,13 +296,19 @@ public Game(){
 		gloves.setXPos(0);
 		gloves.setYPos(0);
 
-		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach",
-				new ArrayList<>(Arrays.asList("Inspect", "pickup")), 2, false);
+		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach, can be used to clean blood off items",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		bleach.setCurrentImage("bleach.png");
 		bleach.setXPos(0);
 		gloves.setYPos(0);
-
-		getRoom(Name.OFFICE).getWalls()[2].addItem(bleach);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(bleach);
+		
+		MovableItem cloth = new MovableItem("Cloth", "A cloth, can be used to clean blood off items",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
+		cloth.setCurrentImage("shirt.png");
+		cloth.setXPos(0);
+		gloves.setYPos(0);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(cloth);
 
 		Container cabnet = new Container("Cabnet", "A cabnet", new ArrayList<>(
 				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString())),
@@ -301,7 +317,6 @@ public Game(){
 		cabnet.setXPos(0);
 		cabnet.setYPos(0);
 		cabnet.getContainedItems().add(gloves);
-		cabnet.getContainedItems().add(bleach);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
 		MovableItem scissors = new MovableItem("Scissors", "A pair of Kitchen scissors",
@@ -502,7 +517,7 @@ public Game(){
 				false);
 		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
-		camera.setYPos(30);
+		camera.setYPos(30);  
 		getRoom(Name.OFFICE).getWalls()[2].addItem(camera);
 
 		Container safe = new Container("Safe", "A safe", new ArrayList<>(Arrays.asList("inspect", "unlock")), true, 6,
@@ -550,15 +565,15 @@ public Game(){
 		}
 		return room;
 	}
+	
+	@XmlElement
+	public List<Room> getRoom() {
+		return this.rooms;
+	}
 
 	@XmlElement
 	public List<Player> getPlayers() {
 		return this.players;
-	}
-
-	@XmlElement
-	public List<Room> getRoom() {
-		return this.rooms;
 	}
 
 	@XmlElement
@@ -579,7 +594,7 @@ public Game(){
 	}
 
 	public void addPlayer(Player p) {
-		p.setRoom(rooms.get(0));
+		p.setCurrentRoom(rooms.get(0));
 		this.players.add(p);
 	}
 
