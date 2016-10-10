@@ -305,14 +305,14 @@ public class Server implements Runnable{
 				game = new Game();
 				game.setup();
 //				try {
-//					game.ReadFromXml("NewGame.xml");
+//					game.ReadFromXml("Savedgame.xml");
 //				} catch (Exception e) {
 //					e.printStackTrace();
 //				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				//game.UpdatePlayersInv();
+//				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;

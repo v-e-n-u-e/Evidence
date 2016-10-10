@@ -1,4 +1,4 @@
-package evidence.datastorage;
+/*package evidence.datastorage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class CreateItemXml {
 		door2.setYPos(10000);
 		door2.setXPos(322);
 		
-		/*Container container = new Container("box", "CardboardBox",actions,images,3);
+		Container container = new Container("box", "CardboardBox",actions,images,3);
 		container.setXPos(20);
-		container.setYPos(30);*/
+		container.setYPos(30);
 		
 				
 		
@@ -56,4 +56,4 @@ public class CreateItemXml {
 		
 	}
 	
-}
+}*/

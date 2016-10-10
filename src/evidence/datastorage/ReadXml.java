@@ -52,7 +52,7 @@ public class ReadXml {
 		}
 	}
 
-	public List<Room> getRoom() {
+	public List<Room> getRooms() {
 		return this.rooms;
 	}
 
@@ -66,55 +66,98 @@ public class ReadXml {
 
 
 	private void setupDoors(Game game) {
-		this.doors = new ArrayList<Door>();
+		doors = new ArrayList<Door>();
 
 		Door door = new Door("Door", "Door between the lounge and the bedroom",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.BEDROOM), true,
-				1, false);
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.BEDROOM), true, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(60);
+		door.setXPos(400);
+		door.setYPos(44);
+		doors.add(door);
+
+		door = new Door("Door", "Door between the bedroom and the lounge",
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.LOUNGE), true, 1, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the lounge and the kitchen",
-				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.LOUNGE), game.getRoom(Name.KITCHEN),
-				false, 2, false);
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.KITCHEN), false, 2, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(60);
+		door.setXPos(400);
+		door.setYPos(44);
+		doors.add(door);
+
+		door = new Door("Door", "Door between the kitchen and the lounge",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.LOUNGE), false, 2, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the bathroom and the bedroom",
-				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BATHROOM),game.getRoom(Name.BEDROOM), false, 3, false);
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BEDROOM), false, 3, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(60);
+		door.setXPos(0);
 		door.setYPos(44);
 		doors.add(door);
-		
-		door = new Door("Door", "Door between the office and the bedroom",
-				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), game.getRoom(Name.BEDROOM),
-				false, 4, false);
+
+		door = new Door("Door", "Door between the bedroom and the bathroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BATHROOM), false, 3, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(260);
+		door.setXPos(400);
+		door.setYPos(44);
+		doors.add(door);
+
+		door = new Door("Door", "Door between the bedroom and the office",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), false, 4, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(220);
+		door.setYPos(44);
+		doors.add(door);
+
+		door = new Door("Door", "Door between the office and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BEDROOM), false, 4, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(220);
 		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the office and the kitchen",
-			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), game.getRoom(Name.KITCHEN),
-			false, 5, false);
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.KITCHEN), false, 5, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(460);
+		door.setXPos(400);
+		door.setYPos(44);
+		doors.add(door);
+
+		door = new Door("Door", "Door between the kitchen and the office",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.OFFICE), false, 5, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door between the garage and the kitchen",
-			new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.GARAGE), game.getRoom(Name.KITCHEN),
-			false, 6, false);
-		
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.KITCHEN), false, 6, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(60);
+		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
+
+		door = new Door("Door", "Door between the kitchen and the garage",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.GARAGE), false, 6, false);
+		door.setCurrentImage("door.png");
+		door.setXPos(20);
+		door.setYPos(44);
+		doors.add(door);
+
+		
+		for (int i = 0; i < doors.size()-1; i++) {
+			doors.get(i).setOtherDoor(doors.get(i+1));
+			doors.get(i+1).setOtherDoor(doors.get(i));
+		}
+		
 	
 		game.getRoom(Name.BATHROOM).getWalls()[3].getItems().set(0, doors.get(2));
 		game.getRoom(Name.BEDROOM).getWalls()[1].getItems().set(1, doors.get(2));
