@@ -367,6 +367,7 @@ public class Server implements Runnable{
 			}
 		}
 		
+		// Is a client telling us to save the game?
 		else if(string.startsWith("/save/") ){
 			if(game != null){
 				try {
@@ -377,6 +378,7 @@ public class Server implements Runnable{
 			}
 		}
 		
+		// Is a client telling us to load a game?
 		else if(string.startsWith("/load/") ){
 			try {
 				game.ReadFromXml("Savedgame.xml");
@@ -555,6 +557,11 @@ public class Server implements Runnable{
 		RenderPackage end = new RenderPackage(wall, null, null, "Game Ended!");
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public Wall createEndScreenWall(){
 		return new Wall();
 	}
