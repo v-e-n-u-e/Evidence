@@ -9,8 +9,9 @@ import evidence.gameworld.items.Item;
 /**
  * A RenderPackage is a class that holds the objects a client needs to render 
  * the game view to the user.  Currently, a RenderPackage holds two walls, a list
- * of items and a String.  The wall represents the Wall in the game the user is currently looking at,
- * and the list of items represents the player's inventory.
+ * of items and a String.  The walls represent wall's in the player's view that they 
+ * may need to render, the inventory is the player's inventory and the String is a
+ * string that represents the last action the user performed.
  * 
  * These are put into a RenderPackage to make serialization of all render components easier,
  * and easily accessible through one instance of a RenderPackage.
@@ -27,7 +28,7 @@ public class RenderPackage implements Serializable{
 	// The player's inventory of items
 	private List<Item> inventory;
 	
-	// String containing feedback for the last event that occured for the player this RenderPackage
+	// String containing feedback for the last event that occurred for the player this RenderPackage
 	// is being sent to.
 	String feedback;
 	
