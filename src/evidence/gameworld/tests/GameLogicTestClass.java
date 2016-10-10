@@ -91,7 +91,7 @@ public class GameLogicTestClass {
 	public void enterAction(){
 		Room bathroom = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Room kitchen = new Room(Name.KITCHEN, "kitchen.png", "kitchen.png", "kitchen.png", "kitchen.png");
-		Door door = createDoor(bathroom, kitchen, false);
+		Door door = createDoor(kitchen, false);
 		Player player = createPlayer(bathroom);
 		assertEquals(bathroom, player.getCurrentRoom());
 		assertEquals("Enter", door.getActions().get(2).toString());
@@ -167,10 +167,10 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void lockDoor(){
-		Door door = createDoor(null, null, false);
+		Door door = createDoor(null, false);
 		String s = door.lock(createKey(123));
 		assertEquals("Door is locked", s);
-		door = createDoor(null, null, false);
+		door = createDoor(null, false);
 		s = door.lock(createKey(23));
 		assertEquals("Incorrect key. Door remains unlocked", s);
 		assertEquals(false, door.getLocked());
@@ -178,14 +178,14 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void lockAction(){
-		Door door = createDoor(null, null, false);
+		Door door = createDoor(null, false);
 		Player player = createPlayer(null);
 		assertEquals("Lock", door.getActions().get(1));
 		door.getAction(door.getActions().get(1)).apply(door, createKey(123), player);
 		assertEquals(true, door.getLocked());
 		String s = new Lock().apply(door, createKey(23), player);
 		assertEquals("Incorrect key.", s);
-		door = createDoor(null, null, false);
+		door = createDoor(null, false);
 		s = door.getAction(door.getActions().get(1)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Lock using Hammer", s);
 		s = door.getAction(door.getActions().get(1)).apply(createMItem(), createKey(123), player);
@@ -195,7 +195,7 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void unlockDoor(){
-		Door door = createDoor(null, null, true);
+		Door door = createDoor(null, true);
 		String s = door.unlock(createKey(123));
 		assertEquals("Door is unlocked", s);
 		s = door.unlock(createKey(23));
@@ -204,7 +204,7 @@ public class GameLogicTestClass {
 	
 	@Test
 	public void unlockAction(){
-		Door door = createDoor(null, null, true);
+		Door door = createDoor(null, true);
 		Player player = createPlayer(null);
 		assertEquals("Unlock", door.getActions().get(0));
 		door.getAction(door.getActions().get(0)).apply(door, createKey(123), player);
@@ -370,7 +370,7 @@ public class GameLogicTestClass {
 		Furniture item = new Furniture("Name", "Description", null, false);
 		String s = new Inspect().apply(item, null, null);
 		assertEquals("\n" + item.getDescription(), s);
-		Door door = new Door("", "Locked door", null, null, null, true, 0, false);
+		Door door = new Door("", "Locked door", null, null, true, 0, false);
 		s = new Inspect().apply(door, null, null);
 		assertEquals("\n" + door.getDescription() + ". It is locked", s);
 		door.setLocked(false);
@@ -431,12 +431,12 @@ public class GameLogicTestClass {
 		return item;
 	}
 	
-	public Door createDoor(Room room1, Room room2, boolean locked) {
+	public Door createDoor(Room room1, boolean locked) {
 		List<String> actions = new ArrayList<String>();
 		actions.add("Unlock");
 		actions.add("Lock");
 		actions.add("Enter");
-		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, room2, locked, 123, false);
+		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, locked, 123, false);
 		return door;
 	}
 

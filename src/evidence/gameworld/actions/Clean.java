@@ -36,7 +36,7 @@ public class Clean extends Action {
 			gameItem.setCurrentImage(gameItem.getCurrentImage().substring(1));
 			inventoryItem.setBloodie(true);
 			inventoryItem.addAction("clean");
-			inventoryItem.setCurrentImage(inventoryItem.getBloodieImage());
+			inventoryItem.setCurrentImage(inventoryItem.getBloodyImage());
 			
 		}
 		return feedback;

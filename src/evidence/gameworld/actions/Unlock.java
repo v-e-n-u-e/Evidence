@@ -48,6 +48,12 @@ public class Unlock extends Action {
 					door.addAction("lock");
 					door.addAction("enter");
 					door.removeAction("unlock");
+					
+					door.getDoor().setLocked(false);
+					door.getDoor().addAction("lock");
+					door.getDoor().addAction("enter");
+					door.getDoor().removeAction("unlock");
+					
 					feedback = "Door is unlocked";
 				} else {
 					feedback = "Incorrect key. Door remains locked";
