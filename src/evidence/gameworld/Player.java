@@ -38,7 +38,7 @@ public class Player {
 		return bloodie;
 	}
 
-	public void setRoom(Room room) {
+	public void setCurrentRoom(Room room) {
 		currentRoom = room;
 	}
 

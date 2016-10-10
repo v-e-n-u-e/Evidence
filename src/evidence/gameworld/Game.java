@@ -20,8 +20,8 @@ import evidence.gameworld.items.MovableItem;
 
 @XmlRootElement
 public class Game {
-	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
+	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
 public Game(){
@@ -36,8 +36,6 @@ public Game(){
 	 */
 	public void ReadFromXml(String FileName) throws Exception {
 		ReadXml t = new ReadXml();
-		this.doors = new ArrayList<Door>();
-		this.setDoors(doors);
 		t.ReadInGame(FileName);
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
@@ -62,7 +60,7 @@ public Game(){
 			//Set Inventory
 			players.get(i).setInventory(storedPlayers.get(i).getInventory());
 			//Set Room
-			players.get(i).setRoom(storedPlayers.get(i).getCurrentRoom());
+			players.get(i).setCurrentRoom(storedPlayers.get(i).getCurrentRoom());
 			//Set FeedBack
 			players.get(i).setFeedback(storedPlayers.get(i).getFeedback());
 		}
@@ -88,7 +86,7 @@ public Game(){
 		rooms.add( new Room(Name.OFFICE, "obj/office.png", "obj/office.png", "obj/office.png", "obj/office.png"));
 	}
 
-	private ArrayList<Door> setupDoors() {
+	public ArrayList<Door> setupDoors() {
 		doors = new ArrayList<Door>();
 
 		Door door = new Door("Door", "Door between the lounge and the bedroom",
@@ -545,15 +543,15 @@ public Game(){
 		}
 		return room;
 	}
+	
+	@XmlElement
+	public List<Room> getRoom() {
+		return this.rooms;
+	}
 
 	@XmlElement
 	public List<Player> getPlayers() {
 		return this.players;
-	}
-
-	@XmlElement
-	public List<Room> getRoom() {
-		return this.rooms;
 	}
 
 	@XmlElement
@@ -574,7 +572,7 @@ public Game(){
 	}
 
 	public void addPlayer(Player p) {
-		p.setRoom(rooms.get(0));
+		p.setCurrentRoom(rooms.get(0));
 		this.players.add(p);
 	}
 

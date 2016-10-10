@@ -26,20 +26,22 @@ public class ReadXml {
 	
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
-
+	private List<Door> doors = new ArrayList<Door>();
 
 public void ReadInGame(String FileName) throws Exception{
 	try{
 		File file = new File(FileName);
-		Door d = new Door();
 		JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		Game game = (Game) jaxbUnmarshaller.unmarshal(file);
-		List<Door> doors = new ArrayList<Door>();
 		doors = game.getDoors();
 		players = game.getPlayers();
 		rooms = game.getRoom();
 		//Manually set roomOne and roomTwo for doors.
+		//System.out.println(game.getRoom(Name.LOUNGE).getWalls()[1].getImageName());
+		System.out.println(game.getPlayers().get(0).getInventory().get(0));
+		doors = game.setupDoors();
+		System.out.println(doors.get(0).getDescription());
 		doors.get(0).setRoomOne(game.getRoom(Name.LOUNGE));
 		doors.get(0).setRoomTwo(game.getRoom(Name.BEDROOM));
 		doors.get(1).setRoomOne(game.getRoom(Name.LOUNGE));

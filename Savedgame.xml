@@ -102,7 +102,7 @@ It just might conceal some evidence</description>
             </walls>
         </currentRoom>
         <feedback>Mop has been added to your inventory</feedback>
-        <ID>3421</ID>
+        <ID>2282</ID>
         <inventory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
             <actions>inspect</actions>
             <actions>pickup</actions>

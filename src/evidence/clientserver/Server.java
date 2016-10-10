@@ -296,7 +296,7 @@ public class Server implements Runnable{
 				game = new Game();
 				//game.setup();
 				try {
-					game.ReadFromXml("NewGame.xml");
+					game.ReadFromXml("Savedgame.xml");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -371,6 +371,7 @@ public class Server implements Runnable{
 		else if(string.startsWith("/load/") ){
 			try {
 				game.ReadFromXml("Savedgame.xml");
+				game.UpdatePlayersInv();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
