@@ -538,7 +538,12 @@ public class Server implements Runnable{
 	 * client rendering the end game screen.
 	 */
 	public void timeEnd(){
-		
+		Wall wall = createEndScreenWall();
+		RenderPackage end = new RenderPackage(wall, null, null, "Game Ended!");
+	}
+	
+	public Wall createEndScreenWall(){
+		return new Wall();
 	}
 
 	/**
