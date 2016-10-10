@@ -266,7 +266,7 @@ It just might conceal some evidence</description>
         <name>KITCHEN</name>
         <walls>
             <direction>NORTH</direction>
-            <currentImage>img/kitchen.png</currentImage>
+            <currentImage>obj/kitchenhole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
                 <actions>enter</actions>
@@ -528,7 +528,7 @@ It just might conceal some evidence</description>
         </walls>
         <walls>
             <direction>SOUTH</direction>
-            <currentImage>img/lounge.png</currentImage>
+            <currentImage>obj/loungehole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
                 <actions>enter</actions>

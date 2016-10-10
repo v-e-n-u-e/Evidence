@@ -23,6 +23,7 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
+	private List<Player> storedPlayers = new ArrayList<Player>();
 public Game(){
 	
 }
@@ -33,7 +34,7 @@ public Game(){
 	public void ReadFromXml(String FileName) throws Exception{
 		ReadXml t = new ReadXml();
 		t.ReadInGame(FileName);
-		this.players = t.getPlayers();
+		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRoom();
 	}
 	
@@ -45,6 +46,19 @@ public Game(){
 	public void CreateXml(String FileName) throws Exception{
 		CreateXml t = new CreateXml();
 		t.CreateGame(FileName, this);
+	}
+	
+	public void UpdatePlayersInv(){
+		for(int i = 0; i<storedPlayers.size();i++){
+			//Set Direction
+			players.get(i).setDirection(storedPlayers.get(i).getCurrentDirection());
+			//Set Inventory
+			players.get(i).setInventory(storedPlayers.get(i).getInventory());
+			//Set Room
+			players.get(i).setRoom(storedPlayers.get(i).getCurrentRoom());
+			//Set FeedBack
+			players.get(i).setFeedback(storedPlayers.get(i).getFeedback());
+		}
 	}
 	
 	

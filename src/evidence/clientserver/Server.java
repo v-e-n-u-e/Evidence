@@ -293,10 +293,15 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				game.setup();
+				try {
+					game.ReadFromXml("NewGame.xml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
+				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
