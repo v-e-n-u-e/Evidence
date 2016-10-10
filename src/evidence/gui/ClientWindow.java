@@ -366,7 +366,7 @@ public class ClientWindow extends JFrame implements Runnable{
 			ImageIcon[] invIcons = new ImageIcon[9];
 			//Go through the players current inventory and get their images
 		    for(int i = 0; i < rPackage.getInventory().size(); i++){
-		    	invIcons[i]=(new ImageIcon(rPackage.getInventory().get(i).getImageName()));
+		    	invIcons[i]=(new ImageIcon("icon/"+rPackage.getInventory().get(i).getImageName()));
 		    }
 		    //Remove previous buttons that were here
 			invPanel.removeAll();
@@ -435,7 +435,7 @@ public class ClientWindow extends JFrame implements Runnable{
 	public Item getItemClickedOn(int clickX, int clickY){
 		for(int index = this.rPackage.getFrontWall().getItems().size() - 1; index > -1; index-- ){
 			Item i = this.rPackage.getFrontWall().getItems().get(index);
-			Image itemImage = new ImageIcon(i.getImageName() ).getImage();
+			Image itemImage = new ImageIcon("obj/"+i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
 			int height = itemImage.getHeight(null);
 			int x = i.getXPos();

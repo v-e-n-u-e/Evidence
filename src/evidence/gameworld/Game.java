@@ -63,12 +63,12 @@ public class Game {
 	}
 
 	private void setupRooms(){
-		rooms.add( new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png"));
-		rooms.add( new Room(Name.BEDROOM, "bedroom.png", "bedroom.png", "bedroom.png", "bedroom.png"));
-		rooms.add( new Room(Name.KITCHEN, "kitchenhole.png", "kitchen.png", "kitchen.png", "kitchen.png"));
-		rooms.add( new Room(Name.GARAGE, "garage.png", "garage.png", "garage.png", "garage.png"));
-		rooms.add( new Room(Name.LOUNGE, "lounge.png", "lounge.png", "loungehole.png", "lounge.png"));
-		rooms.add( new Room(Name.OFFICE, "office.png", "office.png", "office.png", "office.png"));
+		rooms.add( new Room(Name.BATHROOM, "obj/bathroom.png", "obj/bathroom.png", "obj/bathroom.png", "obj/bathroom.png"));
+		rooms.add( new Room(Name.BEDROOM, "obj/bedroom.png", "obj/bedroom.png", "obj/bedroom.png", "obj/bedroom.png"));
+		rooms.add( new Room(Name.KITCHEN, "obj/kitchenhole.png", "obj/kitchen.png", "obj/kitchen.png", "obj/kitchen.png"));
+		rooms.add( new Room(Name.GARAGE, "obj/garage.png", "obj/garage.png", "obj/garage.png", "obj/garage.png"));
+		rooms.add( new Room(Name.LOUNGE, "obj/lounge.png", "obj/lounge.png", "obj/loungehole.png", "obj/lounge.png"));
+		rooms.add( new Room(Name.OFFICE, "obj/office.png", "obj/office.png", "obj/office.png", "obj/office.png"));
 	}
 
 	private ArrayList<Door> setupDoors() {
