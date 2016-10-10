@@ -77,7 +77,7 @@ public class Game {
 		Door door = new Door("Door", "Door between the lounge and the bedroom",
 				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), getRoom(Name.BEDROOM), true,
 				1, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
@@ -85,7 +85,7 @@ public class Game {
 		door = new Door("Door", "Door between the lounge and the kitchen",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.LOUNGE), getRoom(Name.KITCHEN),
 				false, 2, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
@@ -93,7 +93,7 @@ public class Game {
 		door = new Door("Door", "Door between the bathroom and the bedroom",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BATHROOM),
 				getRoom(Name.BEDROOM), false, 3, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
@@ -101,7 +101,7 @@ public class Game {
 		door = new Door("Door", "Door between the office and the bedroom",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), getRoom(Name.BEDROOM),
 				false, 4, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(260);
 		door.setYPos(230);
 		doors.add(door);
@@ -109,7 +109,7 @@ public class Game {
 		door = new Door("Door", "Door between the office and the kitchen",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), getRoom(Name.KITCHEN),
 				false, 5, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(460);
 		door.setYPos(230);
 		doors.add(door);
@@ -117,7 +117,7 @@ public class Game {
 		door = new Door("Door", "Door between the garage and the kitchen",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.GARAGE), getRoom(Name.KITCHEN),
 				false, 6, false);
-		door.setCurrentImage("bigdoor.png");
+		door.setCurrentImage("door.png");
 		door.setXPos(60);
 		door.setYPos(230);
 		doors.add(door);
