@@ -350,16 +350,13 @@ It just might conceal some evidence</description>
         <walls>
             <direction>SOUTH</direction>
             <currentImage>obj/kitchen.png</currentImage>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <actions>placeitem</actions>
-                <capacity>3</capacity>
-                <currentImage>oven.png</currentImage>
-                <description>An oven</description>
-                <locked>false</locked>
-                <name>Oven</name>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
+                <currentImage>kbench.png</currentImage>
+                <description>A kitchen bench</description>
+                <name>Kitchen bench</name>
+                <XPos>244</XPos>
+                <YPos>279</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -369,8 +366,19 @@ It just might conceal some evidence</description>
                 <description>An oven</description>
                 <locked>false</locked>
                 <name>Oven</name>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
+                <XPos>-18</XPos>
+                <YPos>279</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+                <actions>inspect</actions>
+                <actions>placeitem</actions>
+                <capacity>3</capacity>
+                <currentImage>oven.png</currentImage>
+                <description>An oven</description>
+                <locked>false</locked>
+                <name>Oven</name>
+                <XPos>-18</XPos>
+                <YPos>279</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
@@ -510,8 +518,8 @@ It just might conceal some evidence</description>
                 <currentImage>bench.png</currentImage>
                 <description>Work bench</description>
                 <name>Bench</name>
-                <XPos>200</XPos>
-                <YPos>450</YPos>
+                <XPos>111</XPos>
+                <YPos>293</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
@@ -520,8 +528,8 @@ It just might conceal some evidence</description>
                 <description>A saw</description>
                 <name>Saw</name>
                 <size>3</size>
-                <XPos>100</XPos>
-                <YPos>100</YPos>
+                <XPos>240</XPos>
+                <YPos>307</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -534,8 +542,8 @@ It just might conceal some evidence</description>
                 <description>A tool Box</description>
                 <locked>false</locked>
                 <name>Tool Box</name>
-                <XPos>300</XPos>
-                <YPos>300</YPos>
+                <XPos>132</XPos>
+                <YPos>242</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -552,8 +560,8 @@ It just might conceal some evidence</description>
                 <currentImage>fireplace.png</currentImage>
                 <description>A Fireplace</description>
                 <name>Fireplace</name>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
+                <XPos>98</XPos>
+                <YPos>119</YPos>
             </items>
             <x>0</x>
             <y>0</y>
