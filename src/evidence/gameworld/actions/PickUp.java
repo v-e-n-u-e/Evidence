@@ -43,6 +43,7 @@ public class PickUp extends Action {
 		} else {
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}
+		System.out.println(player.getInventory());
 		return feedback;
 	}
 }
