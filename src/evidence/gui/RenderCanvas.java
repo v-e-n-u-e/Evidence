@@ -26,6 +26,15 @@ public class RenderCanvas extends Canvas{
 	@Override
 	public void paint(Graphics g){
 		if(rPackage==null){return;}
+		if(rPackage.getBackWall() != null){
+			System.out.println("backwalled");
+			g.drawImage(new ImageIcon(rPackage.getBackWall().getImageName() ).getImage(), 0, 0, null);
+			for(Item item : rPackage.getBackWall().getItems() ){
+				g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
+			}
+		}
+		
+		
 		g.drawImage(new ImageIcon(rPackage.getFrontWall().getImageName() ).getImage(), 0, 0, null);
 		for(Item item : rPackage.getFrontWall().getItems() ){
 			g.drawImage(new ImageIcon(item.getImageName() ).getImage(), item.getXPos(), item.getYPos(), null);
