@@ -619,7 +619,7 @@ public class Server implements Runnable{
 		}
 		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
 			Room kitchen = game.getRoom(Name.KITCHEN);
-			Wall kitchenNorth = kitchen.getWalls()[0];
+			Wall kitchenNorth = kitchen.getWalls()[2];
 			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() );
 		}
 		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
