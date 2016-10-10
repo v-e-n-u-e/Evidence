@@ -545,7 +545,7 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		this.timer = new Timer(20, this);
+		this.timer = new Timer(300, this);
 	}
 	
 	/**

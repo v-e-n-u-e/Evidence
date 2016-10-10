@@ -24,7 +24,7 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
-	private int seconds;
+	private int seconds;  
 
 	public Game() {
 
@@ -101,17 +101,17 @@ public class Game {
 	private ArrayList<Door> setupDoors() {
 		doors = new ArrayList<Door>();
 
-		Door door = new Door("Door", "Door between the lounge and the bedroom",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.BEDROOM), true, 1, false);
+		Door door = new Door("Door", "Door between the bedroom and the lounge",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.LOUNGE), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(400);
+		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
-		door = new Door("Door", "Door between the bedroom and the lounge",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.LOUNGE), true, 1, false);
+		door = new Door("Door", "Door between the lounge and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BEDROOM), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(20);
+		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
 
@@ -258,7 +258,7 @@ public class Game {
 		bed.setYPos(293);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
-		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
+		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 1, false);
 		key.setCurrentImage("numpad.png");
 		key.setXPos(300);
 		key.setYPos(400);
