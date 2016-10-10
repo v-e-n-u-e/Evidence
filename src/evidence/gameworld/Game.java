@@ -544,13 +544,16 @@ public Game(){
 			}
 		}
 		if (inventoryItem != null) {
-			for (Item i : player.getWall().getItems()) {
+			for (Item i : player.getInventory()) {
 				if (inventoryItem.toString().equals(i.toString())) {
 					inventoryItem = (MovableItem) i;
 				}
 			}
 		}
-		feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
+		if(gameItem ==  null){
+			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
+		}else
+			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
 		System.out.println(feedback);
 		return feedback;
 	}
