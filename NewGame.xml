@@ -61,7 +61,7 @@
         <keyCode>5</keyCode>
         <locked>false</locked>
         <name>Door</name>
-        <XPos>200</XPos>
+        <XPos>400</XPos>
         <YPos>44</YPos>
     </doors>
     <doors>
@@ -354,7 +354,7 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>200</XPos>
+                <XPos>400</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
@@ -768,7 +768,7 @@ It just might conceal some evidence</description>
                 <currentImage>nbbody.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
-                <value>20</value>
+                <value>110</value>
                 <XPos>12</XPos>
                 <YPos>466</YPos>
             </items>
@@ -846,7 +846,7 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>200</XPos>
+                <XPos>400</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -856,7 +856,7 @@ It just might conceal some evidence</description>
                 <description>A painting</description>
                 <name>Painting</name>
                 <XPos>70</XPos>
-                <YPos>70</YPos>
+                <YPos>100</YPos>
             </items>
             <x>0</x>
             <y>0</y>
