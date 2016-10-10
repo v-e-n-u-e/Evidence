@@ -377,7 +377,7 @@ It just might conceal some evidence</description>
             <currentImage>obj/kitchen.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-<<<<<<< HEAD
+                <bloodie>false</bloodie>
                 <currentImage>kbench.png</currentImage>
                 <description>A kitchen bench</description>
                 <name>Kitchen bench</name>
@@ -387,21 +387,7 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
                 <actions>placeitem</actions>
-=======
-                <actions>placeitem</actions>
                 <bloodie>false</bloodie>
->>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
-                <capacity>3</capacity>
-                <currentImage>oven.png</currentImage>
-                <description>An oven</description>
-                <locked>false</locked>
-                <name>Oven</name>
-                <XPos>-18</XPos>
-                <YPos>279</YPos>
-            </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
-                <actions>inspect</actions>
-                <actions>placeitem</actions>
                 <capacity>3</capacity>
                 <currentImage>oven.png</currentImage>
                 <description>An oven</description>
@@ -441,8 +427,8 @@ It just might conceal some evidence</description>
                 <description>An oven</description>
                 <locked>false</locked>
                 <name>Oven</name>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
+                <XPos>-18</XPos>
+                <YPos>279</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
@@ -876,4 +862,5 @@ It just might conceal some evidence</description>
             <y>0</y>
         </walls>
     </room>
+    <seconds>0</seconds>
 </game>
