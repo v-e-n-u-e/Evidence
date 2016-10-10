@@ -8,8 +8,8 @@ import evidence.gameworld.items.Item;
 
 /**
  * A RenderPackage is a class that holds the objects a client needs to render 
- * the game view to the user.  Currently, a RenderPackage hold a wall, and a list
- * of items.  The wall represents the Wall in the game the user is currently looking at,
+ * the game view to the user.  Currently, a RenderPackage holds two walls, a list
+ * of items and a String.  The wall represents the Wall in the game the user is currently looking at,
  * and the list of items represents the player's inventory.
  * 
  * These are put into a RenderPackage to make serialization of all render components easier,
@@ -27,14 +27,17 @@ public class RenderPackage implements Serializable{
 	// The player's inventory of items
 	private List<Item> inventory;
 	
-	// String containing feedback for the event that just happened
+	// String containing feedback for the last event that occured for the player this RenderPackage
+	// is being sent to.
 	String feedback;
 	
 	/**
 	 * A constructor for a RenderPackage
 	 * 
-	 * @param frontWall - The wall to render
+	 * @param frontWall - The frontWall to render
+	 * @param backWall - The backWall to render
 	 * @param inventory - The inventory to render
+	 * @param feedback - The feedbackString to render
 	 */
 	public RenderPackage(Wall frontWall, Wall backWall, List<Item> inventory, String feedback){
 		this.front = frontWall;
@@ -44,9 +47,9 @@ public class RenderPackage implements Serializable{
 	}
 	
 	/**
-	 * Getter for the wall field
+	 * Getter for the frontWall
 	 * 
-	 * @return - The wall to render
+	 * @return - The backWall to render
 	 */
 	public Wall getFrontWall(){
 		return this.front;
@@ -55,7 +58,7 @@ public class RenderPackage implements Serializable{
 	/**
 	 * Getter for the wall field
 	 * 
-	 * @return - The wall to render
+	 * @return - The frontWall to render
 	 */
 	public Wall getBackWall(){
 		return this.back;
@@ -70,6 +73,11 @@ public class RenderPackage implements Serializable{
 		return this.inventory;
 	}
 	
+	/**
+	 * Getter for the feedback field
+	 * 
+	 * @return - The feedback String to render
+	 */
 	public String getFeedback(){
 		return this.feedback;
 	}

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import evidence.gameworld.items.Item;
 
 /**
- * An Event object is used to communicate to the server information about an
+ * An EventPackage object is used to communicate to the server information about an
  * interaction in the game.  Whether this is a player performing an action on a single item,
  * or the user making two items interact with each other. 
  * 
@@ -13,7 +13,7 @@ import evidence.gameworld.items.Item;
  * @author Tyler Jones
  *
  */
-public class Event implements Serializable{
+public class EventPackage implements Serializable{
 	private static final long serialVersionUID = -2938561407292199922L;
 	
 	// Information about the event that the user is trying to perform
@@ -30,7 +30,7 @@ public class Event implements Serializable{
 	 * @param action - A string representing the action being performed
 	 * @param ID - The ID of the player performing the action
 	 */
-	public Event(Item performing, Item on, String action, Integer ID){
+	public EventPackage(Item performing, Item on, String action, Integer ID){
 		this.performing = performing;
 		this.on = on;
 		this.action = action;

@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-import evidence.clientserver.infoholders.Event;
+import evidence.clientserver.infoholders.EventPackage;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Game;
 import evidence.gameworld.Player;
@@ -238,7 +238,7 @@ public class Server implements Runnable{
 
 		// If we received a String in the form of bytes, process the String
 		if(o instanceof String){processString((String) o, packet);}
-		else if(o instanceof Event){processEvent((Event) o, packet);}
+		else if(o instanceof EventPackage){processEvent((EventPackage) o, packet);}
 	}
 
 	/**
@@ -363,7 +363,7 @@ public class Server implements Runnable{
 	 * @param e - The event received
 	 * @param packet - The packet the event arrived in
 	 */
-	private void processEvent(Event e, DatagramPacket packet){
+	private void processEvent(EventPackage e, DatagramPacket packet){
 		// Apply the event to the game using the fields from the received Event
 		String feedback = game.apply(e.getPerformedOn(), (MovableItem) e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
 		game.getPlayerWithID(e.getID() ).setFeedback(feedback);
@@ -504,13 +504,20 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		Timer timer = new Timer(300, this);
+		this.timer = new Timer(300, this);
 	}
 	
+	/**
+	 * Called when the timer runs out, starts the process of each
+	 * client rendering the end game screen.
+	 */
 	public void timeEnd(){
 		
 	}
 
+	/**
+	 * Resends every player a new Render Package for themselves.
+	 */
 	public void updateAllViews(){
 		for(Player p : game.getPlayers() ){
 			for(ServerClient sc : clients){

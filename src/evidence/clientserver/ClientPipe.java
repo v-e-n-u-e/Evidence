@@ -226,7 +226,7 @@ public class ClientPipe{
 	 * Calls the appropriate methods for processing a wall
 	 * upon receiving the wall from the server
 	 * 
-	 * @param wall - The wall to process
+	 * @param rPackage - The RednerPackage we need to render
 	 */
 	private void processRenderPackage(RenderPackage rPackage){
 		gui.rPackage = rPackage;
