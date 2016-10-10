@@ -25,16 +25,12 @@ public class Player {
 	private Integer ID; // Used to identify clients with a player object
 	private String feedback = "";
 	private boolean bloodie = false;
-	
-	public void bloodie(Item item){
-		if(this.bloodie){
-			item.setBloodie(true);
-			item.setCurrentImage(item.getBloodieImage());
-			item.addAction("clean");
-		}
+
+	public void makeBloodie() {
+		this.bloodie = true;
 	}
-	
-	public boolean getBloodie(){
+
+	public boolean getBloodie() {
 		return bloodie;
 	}
 
@@ -166,6 +162,6 @@ public class Player {
 
 	public void setBloodie(boolean b) {
 		this.bloodie = b;
-		
+
 	}
 }
