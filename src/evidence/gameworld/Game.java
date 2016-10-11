@@ -609,7 +609,7 @@ public class Game {
 		knife.setCurrentImage("bknife.png");
 		knife.setXPos(445);
 		knife.setYPos(532);
-		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
+		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);  
 
 		// Office South Wall  
 		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect", "turnoff","unscrew")), 30,
