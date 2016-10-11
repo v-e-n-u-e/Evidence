@@ -796,7 +796,7 @@ public class Game {
 		} else{
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
 		System.out.println(gameItem.getActions());
-		 System.out.println(action);
+		System.out.println(action);
 		System.out.println( gameItem.getAction(action));
 		}
 		return feedback;
@@ -831,6 +831,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println("SCORE WAS " + score);
 		return score;
 	}
 	
