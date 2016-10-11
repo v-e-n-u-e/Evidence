@@ -262,9 +262,9 @@ public class ClientWindow extends JFrame implements Runnable{
 
 
 
-		/**
-		 * Button used for turning right in the room
-		 */
+		
+		//Button used for turning right in the room
+		
 		JButton rightButton = new JButton("Turn Right");
 		rightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,9 +274,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		rightButton.setBounds(167, 361, 129, 43);
 		infoPanel.add(rightButton);
 
-		/**
-		 * Button used for turning left in the room
-		 */
+		
+		//Button used for turning left in the room
+		
 		JButton leftButton = new JButton("Turn Left");
 		leftButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -442,13 +442,19 @@ public class ClientWindow extends JFrame implements Runnable{
 	}
 
 
-	//Used for the server/client side interactions
+	/**
+	 * Button used for turning left in the room
+	 * Used in server-client communication
+	 */
 	public void rotateLeft(){
 		String rotateLeft = "/rotLeft/" + pipe.getId() + "/e/";
 		pipe.send(rotateLeft);
 	}
 
-	//Used for the server/client side interactions
+	/**
+	 * Button used for turning left in the room
+	 * Used in server-client communication
+	 */
 	public void rotateRight(){
 		String rotateRight = "/rotRight/" + pipe.getId() + "/e/";
 		pipe.send(rotateRight);
@@ -484,7 +490,9 @@ public class ClientWindow extends JFrame implements Runnable{
 		return null;
 	}
 	
-	//Refreshes the information in the info panel. Give room/actions feedback
+	/**
+	 * Refreshes the information in the info panel. Give room/actions feedback
+	 */
 	public void refreshInfo(){
 		if(rPackage.getFrontWall().getImageName().equals("obj/gameover.png") ){
 			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
