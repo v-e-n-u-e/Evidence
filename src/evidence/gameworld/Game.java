@@ -612,7 +612,7 @@ public class Game {
 		knife.setCurrentImage("bknife.png");
 		knife.setXPos(445);
 		knife.setYPos(532);
-		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
+		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);  
 
 		// Office South Wall  
 		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect", "turnoff","unscrew")), 30,
@@ -798,9 +798,6 @@ public class Game {
 			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
 		} else{
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
-		System.out.println(gameItem.getActions());
-		System.out.println(action);
-		System.out.println( gameItem.getAction(action));
 		}
 		return feedback;
 	}
@@ -834,7 +831,6 @@ public class Game {
 				}
 			}
 		}
-		System.out.println("SCORE WAS " + score);
 		return score;
 	}
 	
