@@ -13,7 +13,6 @@ import java.net.InetAddress;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gui.ClientWindow;
-import evidence.testobjects.TestWall;
 
 /**
  * The Client is responsible for mediating the interaction between
