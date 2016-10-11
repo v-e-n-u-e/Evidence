@@ -1,0 +1,33 @@
+README
+
+How to run:
+	!IF NOT RUNNING THE SERVER ON YOUR LOCAL MACHINE, SKIP TO STEP 3!
+	
+	1. ServerMain will require two arguments in the Run Configurations, a port number to run the server on and and how many players the server should wait to connect
+		before it starts the game.  I have been running the server on port 8192.
+		EXAMPLE ARGUMENTS: 8192 1
+	
+	2. A small GUI interface for the server should appear if the server successfully starts, this will log the server's activity.
+	
+	3. Run login and give yourself a name, type in the address and port number for the server we are connecting to.  Port = the port number from step 1.
+		IF YOU ARE RUNNING THE SERVER LOCALLY ON YOUR OWN PC: Address = localhost   
+		IF YOU ARE NOT RUNNING THE SERVER LOCALLY ON YOUR OWN PC: You need the actual IP Address of the server
+	
+	4. The main window should appear, if the chat panel does not display "Successful connection" anywhere, then a connection has not been established with the server.
+	
+	5. Assuming a connection was established, you should now be able to send messages and have them appear to every client connected to the server.
+	
+	6. The game will start when the number of clients specified by the second argument for ServerMain have connected.  You know the game has started
+		if you render a view to the main window and the timer starts ticking down.
+		
+		
+	Objective of the Game:
+		You are a robber who has committed a horrible crime.  You have murdered a young, wealthy man in his home and now have 5 minutes to get rid of all evidence.
+		Evidence comes in various forms, there is blood on floors, bloody items around the house, a body to hide/dispose of are an example of a few.  There are
+		less obvious forms of evidence but I don't want to give too much away...  Before the timer expires, you should aim to leave the house through the garage door,
+		note if you leave the house you may not return.  When all players have left the house, or the timer expirse, the game will calculate a score for your group.
+		There may also be a special treasure for you to find.
+		
+		If your score is not low enough, you will all be arrested and sent to prison.  If your score IS low enough, you will escape conviction for your horrible crime.
+		
+	

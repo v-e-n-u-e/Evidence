@@ -591,7 +591,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 60,
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 0,
 				true);
 		body.setCurrentImage("nbbody.png");
 		body.setXPos(12);
@@ -790,7 +790,7 @@ public class Game {
 		} else{
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
 		System.out.println(gameItem.getActions());
-		 System.out.println(action);
+		System.out.println(action);
 		System.out.println( gameItem.getAction(action));
 		}
 		return feedback;
@@ -825,6 +825,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println("SCORE WAS " + score);
 		return score;
 	}
 	
