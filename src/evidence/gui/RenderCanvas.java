@@ -7,8 +7,7 @@ import javax.swing.ImageIcon;
 import evidence.clientserver.infoholders.RenderPackage;
 import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
-import evidence.testobjects.TestItem;
-import evidence.testobjects.TestWall;
+
 
 public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
