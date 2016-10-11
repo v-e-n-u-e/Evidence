@@ -236,14 +236,12 @@
                 <XPos>0</XPos>
                 <YPos>44</YPos>
             </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <actions>placeitem</actions>
-                <capacity>1</capacity>
+                <actions>wash</actions>
                 <currentImage>sink.png</currentImage>
                 <description>A sink. Go ahead and wash your hands here. 
 It just might conceal some evidence</description>
-                <locked>false</locked>
                 <name>Sink</name>
                 <XPos>383</XPos>
                 <YPos>157</YPos>
@@ -424,44 +422,19 @@ It just might conceal some evidence</description>
         <walls>
             <direction>SOUTH</direction>
             <currentImage>obj/kitchen.png</currentImage>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
-                <actions>inspect</actions>
-                <currentImage>kbench.png</currentImage>
-                <description>A kitchen bench</description>
-                <name>Kitchen bench</name>
-                <XPos>244</XPos>
-                <YPos>279</YPos>
-            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
                 <actions>placeitem</actions>
+                <actions>remove Gloves</actions>
+                <actions>remove Bleach</actions>
+                <actions>remove Matches</actions>
                 <capacity>3</capacity>
-                <currentImage>oven.png</currentImage>
-                <description>An oven</description>
+                <currentImage>kbench.png</currentImage>
+                <description>This kitchen bench is filled with cleaning products</description>
                 <locked>false</locked>
-                <name>Oven</name>
-                <XPos>-18</XPos>
+                <name>Kitchen Bench</name>
+                <XPos>244</XPos>
                 <YPos>279</YPos>
-            </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
-                <actions>inspect</actions>
-                <actions>pickup</actions>
-                <currentImage>bleach.png</currentImage>
-                <description>Kitchen Bleach, can be used to clean blood off items</description>
-                <name>Bleach</name>
-                <size>2</size>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
-            </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
-                <actions>inspect</actions>
-                <actions>pickup</actions>
-                <currentImage>shirt.png</currentImage>
-                <description>A cloth, can be used to clean blood off items</description>
-                <name>Cloth</name>
-                <size>2</size>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
@@ -592,14 +565,16 @@ It just might conceal some evidence</description>
                 <XPos>462</XPos>
                 <YPos>347</YPos>
             </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
                 <actions>inspect</actions>
+                <actions>pickup</actions>
+                <actions>clean</actions>
                 <currentImage>bpants.png</currentImage>
                 <description>Bloody clothes. The police probably wont like seeing this</description>
                 <name>Bloodied Clothing</name>
-                <value>4</value>
-                <XPos>400</XPos>
-                <YPos>400</YPos>
+                <size>4</size>
+                <XPos>260</XPos>
+                <YPos>450</YPos>
             </items>
             <x>0</x>
             <y>0</y>
