@@ -406,7 +406,6 @@ public class GameLogicTestClass {
 		new PlaceItem().apply(container, item, player);
 		assertEquals(0, player.getInventory().size());
 		assertEquals(true, container.getContainedItems().contains(item));
-		System.out.println(container.getActions());
 		assertEquals(true, container.getActionsString().contains(new RemoveItem(item.getName()).toString()));
 		
 		new RemoveItem(item.getName()).apply(container, item, player);

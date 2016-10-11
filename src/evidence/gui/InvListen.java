@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 
+/**
+ * 
+ * @author Callum Crosby
+ */
 public class InvListen implements ActionListener{
 
 
@@ -65,12 +69,10 @@ public class InvListen implements ActionListener{
 			resetSelected();
 			ClientWindow.retButtons()[i].setBackground(Color.BLACK);
 			ClientWindow.currentlySelected=ClientWindow.rPackage.getInventory().get(i);
-			System.out.println(ClientWindow.currentlySelected);
 		}
 		else{
 			resetSelected();
 			ClientWindow.currentlySelected=null;
-			System.out.println(ClientWindow.currentlySelected);
 		}
 	}
 

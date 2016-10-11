@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
  *
  * So ClientWindow is the GUI, Client is the back-end Network interaction.
  *
- * @author Tyler Jones
+ * @author Callum Crosby
  */
 public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;

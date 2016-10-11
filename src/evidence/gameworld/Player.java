@@ -12,7 +12,7 @@ import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 
 /**
- * Player Class
+ * Player Class, Responsible for having a direction, Unique Id for server, feed back string to print to the screen.
  * 
  * @author Georgina Murphy
  *

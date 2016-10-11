@@ -21,7 +21,7 @@ import evidence.gameworld.items.MovableItem;
  * This class holds the current state of the game with a list of rooms and players. It is responsible for
  * calling to read in or save the game, also for rotating and applying and calculating score.
  * 
- * @author Georgina,Connor
+ * @author Georgina, Connor, Tyler, Callum
  *
  */
 @XmlRootElement
@@ -795,9 +795,6 @@ public class Game {
 			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
 		} else{
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
-		System.out.println(gameItem.getActions());
-		System.out.println(action);
-		System.out.println( gameItem.getAction(action));
 		}
 		return feedback;
 	}
@@ -831,7 +828,6 @@ public class Game {
 				}
 			}
 		}
-		System.out.println("SCORE WAS " + score);
 		return score;
 	}
 	

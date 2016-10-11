@@ -6,6 +6,11 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Keys unlock doors and safes.
+ * @author Georgina
+ *
+ */
 @XmlRootElement
 public class Key extends MovableItem {
 	private int code;

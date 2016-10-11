@@ -1,15 +1,17 @@
 package evidence.gui;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import evidence.clientserver.infoholders.RenderPackage;
-import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
-import evidence.testobjects.TestItem;
-import evidence.testobjects.TestWall;
 
+
+/**
+ * The RenderCanvas is the panel that renders the game view to the user. It has a custom paint method
+ * to render images to the screen.
+ * 
+ * @author Callum Crosby
+ */
 public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	
