@@ -495,6 +495,10 @@ public class ClientWindow extends JFrame implements Runnable{
 			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
 			this.roomText.append(rPackage.getFeedback());
 		}
+		else if(rPackage.getFrontWall().getImageName().equals("obj/youwin.png") ){
+			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
+			this.roomText.append(rPackage.getFeedback());
+		}
 		else{
 			this.roomText.setText("Location: "+rPackage.getFrontWall().getDirection()+" wall of the "+rPackage.getCurrentRoom()+"\n\n");
 			this.roomText.append(rPackage.getFeedback());
@@ -516,7 +520,12 @@ public class ClientWindow extends JFrame implements Runnable{
 	//Called whenever a visible change needs to be shown to players
 	public void reRenderWall(){
 		if(rPackage.getFrontWall().getImageName().equals("obj/gameover.png") ){
-			canvas.rPackage =  rPackage;
+			canvas.rPackage = rPackage;
+			refreshInfo();
+			canvas.repaint();
+		}
+		else if(rPackage.getFrontWall().getImageName().equals("obj/youwin.png") ){
+			canvas.rPackage = rPackage;
 			refreshInfo();
 			canvas.repaint();
 		}

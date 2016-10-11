@@ -23,7 +23,6 @@ public class RenderCanvas extends Canvas{
 	public void paint(Graphics g){
 		if(rPackage==null){return;}
 		if(rPackage.getBackWall() != null){
-			System.out.println("backwalled");
 			g.drawImage(new ImageIcon(rPackage.getBackWall().getImageName() ).getImage(), 0, 0, null);
 			for(Item item : rPackage.getBackWall().getItems() ){
 				g.drawImage(new ImageIcon("obj/"+item.getImageName()).getImage(), item.getXPos(), item.getYPos(), null);
