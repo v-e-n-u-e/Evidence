@@ -37,7 +37,6 @@ public class Enter extends Action {
 			Door door = (Door) gameItem;
 			if(player.getBloody() && !door.getBloody()){
 				door.makeBloody();
-				door.addAction("clean");
 			}
 			player.setCurrentRoom(door.getRoom());
 			feedback = "You are now in the " + player.getCurrentRoom().toString();
