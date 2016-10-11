@@ -72,6 +72,6 @@ public class TestDataStorage {
 				assertEquals(game.getRoom().get(i).getWalls()[0].getItems().get(0).getName(),game2.getRoom().get(i).getWalls()[0].getItems().get(0).getName());
 			}
 		}
-	}	
+	}
 }
 

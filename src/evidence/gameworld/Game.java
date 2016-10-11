@@ -83,6 +83,9 @@ public class Game {
 		}
 	}
 
+	/**
+	 * this method is used for testing and initializing "NewGame.Xml"
+	 */
 	public void setup() {
 		setupRooms();
 		ArrayList<Door> doors = setupDoors();
