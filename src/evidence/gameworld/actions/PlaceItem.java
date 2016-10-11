@@ -29,9 +29,6 @@ public class PlaceItem extends Action {
 				inventoryItem.makeBloody();
 			}
 			feedback = container.putItem(inventoryItem, player);
-			if(inventoryItem.getBloody()){
-				container.makeBloody();
-			}
 		}else
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 

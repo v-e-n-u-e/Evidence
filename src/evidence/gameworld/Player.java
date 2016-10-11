@@ -1,6 +1,7 @@
 package evidence.gameworld;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -27,6 +28,12 @@ public class Player {
 	private boolean bloody = false;
 
 	public void makeBloody() {
+		for (Item item : inventory) {
+			if (item.toString().equals("Gloves")) {
+				this.bloody = false;
+			}
+		}
+			
 		this.bloody = true;
 	}
 

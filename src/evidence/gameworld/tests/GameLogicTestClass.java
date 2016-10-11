@@ -12,6 +12,8 @@ import evidence.gameworld.Player;
 import evidence.gameworld.Room;
 import evidence.gameworld.Room.Name;
 import evidence.gameworld.Wall.Direction;
+import evidence.gameworld.actions.Burn;
+import evidence.gameworld.actions.Clean;
 import evidence.gameworld.actions.CutUp;
 import evidence.gameworld.actions.Drop;
 import evidence.gameworld.actions.Enter;
@@ -19,11 +21,13 @@ import evidence.gameworld.actions.Fill;
 import evidence.gameworld.actions.Flush;
 import evidence.gameworld.actions.Inspect;
 import evidence.gameworld.actions.Kick;
+import evidence.gameworld.actions.Light;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.PlaceItem;
 import evidence.gameworld.actions.RemoveItem;
 import evidence.gameworld.actions.Unlock;
+import evidence.gameworld.actions.WashHands;
 import evidence.gameworld.items.Container;
 import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Evidence;
@@ -97,9 +101,6 @@ public class GameLogicTestClass {
 		assertEquals("Enter", door.getActions().get(2).toString());
 		door.getAction(door.getActions().get(2)).apply(door, null, player);
 		assertEquals(kitchen, player.getCurrentRoom());
-		
-		door.getAction(door.getActions().get(2)).apply(door, null, player);
-		assertEquals(bathroom, player.getCurrentRoom());
 	}
 	
 	@Test
@@ -107,7 +108,7 @@ public class GameLogicTestClass {
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		MovableItem hammer = createMItem();
 		Player player = createPlayer(room);
-		assertEquals("Pick up", hammer.getActions().get(0));
+		assertEquals("PickUp", hammer.getActions().get(0));
 		hammer.getAction(hammer.getActions().get(0)).apply(hammer, null, player);
 		assertEquals(1, player.getInventory().size());
 		assertEquals("Hammer", player.getInventory().get(0).toString());
@@ -207,7 +208,7 @@ public class GameLogicTestClass {
 		Door door = createDoor(null, true);
 		Player player = createPlayer(null);
 		assertEquals("Unlock", door.getActions().get(0));
-		door.getAction(door.getActions().get(0)).apply(door, createKey(123), player);
+		new Unlock().apply(door, createKey(123), player);
 		assertEquals(false, door.getLocked());
 		String s = door.getAction(door.getActions().get(0)).apply(door, createMItem(), player);
 		assertEquals("Cannot perform Unlock using Hammer", s);
@@ -224,9 +225,9 @@ public class GameLogicTestClass {
 		new Unlock().apply(safe, createKey(555), player);
 		assertEquals(false, safe.getLocked());
 		assertEquals(false, safe.getActions().contains(new Unlock().toString()));
-		assertEquals(true, safe.getActions().contains(new Lock().toString()));
+		assertEquals(true, safe.getActionsString().contains(new Lock().toString()));
 
-		assertEquals(true, safe.getActions().contains(new PlaceItem().toString()));
+		assertEquals(true, safe.getActionsString().contains(new PlaceItem().toString()));
 		String s = new Unlock().apply(safe, createMItem(), player);
 		assertEquals("Cannot perform Unlock using Hammer", s);
 		s = new Unlock().apply(createMItem(), createKey(123), player);
@@ -248,6 +249,14 @@ public class GameLogicTestClass {
 		Room r = new Room(Name.BATHROOM, null, null, null, null);
 		Player player = createPlayer(r);
 		MovableItem item = createMItem();
+		new Burn().apply(null, null, player);
+		new Burn().apply(null, item, player);
+		new Burn().apply(item, null, player);
+
+		new Clean().apply(null, null, player);
+		new Clean().apply(null, item, player);
+		new Clean().apply(item, null, player);
+		
 		new CutUp().apply(null, null, player);
 		new CutUp().apply(null, item, player);
 		new CutUp().apply(item, null, player);
@@ -276,6 +285,10 @@ public class GameLogicTestClass {
 		new Kick().apply(null, item, player);
 		new Kick().apply(item, null, player);
 
+		new Light().apply(null, null, player);
+		new Light().apply(null, item, player);
+		new Light().apply(item, null, player);
+		
 		new Lock().apply(null, null, player);
 		new Lock().apply(null, item, player);
 		new Lock().apply(item, null, player);
@@ -295,6 +308,10 @@ public class GameLogicTestClass {
 		new Unlock().apply(null, null, player);
 		new Unlock().apply(null, item, player);
 		new Unlock().apply(item, null, player);
+		
+		new WashHands().apply(null, null, player);
+		new WashHands().apply(null, item, player);
+		new WashHands().apply(item, null, player);
 	}
 	
 	@Test
@@ -356,13 +373,13 @@ public class GameLogicTestClass {
 		new PlaceItem().apply(bath, item, player);
 		String s = new Fill().apply(bath, null, player);
 		assertEquals("Bath must be empty to fill", s);
-		assertEquals(true, bath.getActions().contains(new Fill().toString()));
-		assertEquals(true, bath.getActions().contains(new RemoveItem("Item").toString()));
+		assertEquals(true, bath.getActionsString().contains(new Fill().toString()));
+		assertEquals(true, bath.getActionsString().contains(new RemoveItem("Item").toString()));
 		bath = new Container("Bath", null, new ArrayList<>(Arrays.asList("placeitem", "fill")), false, 5, false);
-		assertEquals(true, bath.getActions().contains(new PlaceItem().toString()));
+		assertEquals(true, bath.getActionsString().contains(new PlaceItem().toString()));
 		new Fill().apply(bath, null, player);
-		assertEquals(false, bath.getActions().contains(new PlaceItem().toString()));
-		assertEquals(false, bath.getActions().contains(new Fill().toString()));
+		assertEquals(false, bath.getActionsString().contains(new PlaceItem().toString()));
+		assertEquals(false, bath.getActionsString().contains(new Fill().toString()));
 	}
 	
 	@Test
@@ -381,7 +398,7 @@ public class GameLogicTestClass {
 	@Test
 	public void RemoveItemAction(){
 		Container container = new Container("Name", "Description", new ArrayList<>(Arrays.asList("placeitem")), false, 0, false);
-		MovableItem item = new MovableItem("", null, new ArrayList<>(Arrays.asList("pickup")), 0, false);
+		MovableItem item = new MovableItem("Name", null, new ArrayList<>(Arrays.asList("pickup")), 0, false);
 		Room room = new Room(Name.BATHROOM, "bathroom.png", "bathroom.png", "bathroom.png", "bathroom.png");
 		Player player = createPlayer(room);
 		player.addItem(item);
@@ -389,7 +406,9 @@ public class GameLogicTestClass {
 		new PlaceItem().apply(container, item, player);
 		assertEquals(0, player.getInventory().size());
 		assertEquals(true, container.getContainedItems().contains(item));
-		assertEquals(true, container.getActions().contains(new RemoveItem(item.getName()).toString()));
+		System.out.println(container.getActions());
+		assertEquals(true, container.getActionsString().contains(new RemoveItem(item.getName()).toString()));
+		
 		new RemoveItem(item.getName()).apply(container, item, player);
 		assertEquals(1, player.getInventory().size());
 		assertEquals(false, container.getContainedItems().contains(item));
@@ -437,6 +456,8 @@ public class GameLogicTestClass {
 		actions.add("Lock");
 		actions.add("Enter");
 		Door door = new Door("Cardbord Box", "A cardboard box", actions, room1, locked, 123, false);
+		Door door2 = new Door("Cardbord Box", "A cardboard box", actions, room1, locked, 123, false);
+		door.setOtherDoor(door2);
 		return door;
 	}
 
