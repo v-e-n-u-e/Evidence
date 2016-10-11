@@ -413,7 +413,6 @@ public class GameLogicTestClass {
 		assertEquals(1, player.getInventory().size());
 		assertEquals(false, container.getContainedItems().contains(item));
 		assertEquals(false, container.getActions().contains(new RemoveItem(item.getName()).toString()));	
-		
 	}
 	
 

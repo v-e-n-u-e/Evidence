@@ -202,7 +202,7 @@ public class Game {
 
 		return doors;
 	}
-
+  
 	private void setupBathroom(ArrayList<Door> doors) {
 
 		// Bathroom North Wall
@@ -392,7 +392,7 @@ public class Game {
 	private void setupGarage(ArrayList<Door> doors) {
 
 		// Garage North Wall
-		Furniture gDoor = new Furniture("Door", "Garage door", new ArrayList<>(Arrays.asList("inspect")), false);
+		Furniture gDoor = new Furniture("Garage", "Garage door", new ArrayList<>(Arrays.asList("inspect", "leavehouse")), false);
 		gDoor.setCurrentImage("garagedoor.png");
 		gDoor.setXPos(76);
 		gDoor.setYPos(70);
