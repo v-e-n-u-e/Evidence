@@ -9,6 +9,12 @@ import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
 
 
+/**
+ * The RenderCanvas is the panel that renders the game view to the user. It has a custom paint method
+ * to render images to the screen.
+ * 
+ * @author Callum Crosby
+ */
 public class RenderCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	
