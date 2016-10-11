@@ -9,7 +9,6 @@ import evidence.gameworld.items.Item;
  * interaction in the game.  Whether this is a player performing an action on a single item,
  * or the user making two items interact with each other. 
  * 
- * If the interaction
  * @author Tyler Jones
  *
  */

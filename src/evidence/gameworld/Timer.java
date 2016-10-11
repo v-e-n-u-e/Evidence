@@ -12,7 +12,7 @@ import evidence.clientserver.Server;
  * The toString method returns a String in the following format:
  * "Time Remaining: 00 minutes, 00 seconds"
  * 
- * @author Georgina Murphy
+ * @author Georgina Murphy / Tyler Jones
  *
  */
 @XmlRootElement

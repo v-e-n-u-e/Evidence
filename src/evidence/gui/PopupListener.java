@@ -10,7 +10,7 @@ import evidence.gameworld.items.Item;
  * A listener for the PopUp Menu that appears when the user
  * clicks on an item in the render view
  *
- * @author Tyler Jones
+ * @author Callum Crosby, Tyler Jones
  */
 class PopupListener implements ActionListener {
 
