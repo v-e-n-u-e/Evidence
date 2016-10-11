@@ -692,6 +692,9 @@ public class Game {
 	 * @return string - updated state
 	 */
 	public String rotateLeft(Player player) {
+		if(player.getWall().getImageName().equals("obj/outside.png")){
+			return "You cannot rotate outside";
+		}
 		return player.rotateView("L");
 	}
 
@@ -703,6 +706,9 @@ public class Game {
 	 * @return string - updated state
 	 */
 	public String rotateRight(Player player) {
+		if(player.getWall().getImageName().equals("obj/outside.png")){
+			return "You cannot rotate outside";
+		}
 		return player.rotateView("R");
 	}
 
