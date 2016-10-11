@@ -292,6 +292,12 @@ public class Game {
 		getRoom(Name.BEDROOM).getWalls()[2].addItem(doors.get(6));
 
 		// Bedroom West Wall
+		Furniture painting2 = new Furniture("Painting", "What could it mean...",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		painting2.setCurrentImage("painting2.png");
+		painting2.setXPos(440);
+		painting2.setYPos(130);
+		getRoom(Name.BEDROOM).getWalls()[3].addItem(painting2);
 		getRoom(Name.BEDROOM).getWalls()[3].addItem(doors.get(0));
 	}
 

@@ -308,7 +308,7 @@ It just might conceal some evidence</description>
                 <description>This painting seems to be of three cool dudes...</description>
                 <name>Painting</name>
                 <XPos>70</XPos>
-                <YPos>100</YPos>
+                <YPos>130</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
@@ -346,6 +346,14 @@ It just might conceal some evidence</description>
         <walls>
             <direction>WEST</direction>
             <currentImage>obj/bedroom.png</currentImage>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>painting2.png</currentImage>
+                <description>What could it mean...</description>
+                <name>Painting</name>
+                <XPos>440</XPos>
+                <YPos>130</YPos>
+            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
                 <actions>enter</actions>
@@ -635,6 +643,7 @@ It just might conceal some evidence</description>
                 <actions>remove Wrench</actions>
                 <actions>remove Hammer</actions>
                 <actions>remove Screw Driver</actions>
+                <actions>remove Crow Bar</actions>
                 <capacity>7</capacity>
                 <currentImage>toolbox.png</currentImage>
                 <description>A tool Box</description>
