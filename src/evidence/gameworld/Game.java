@@ -647,7 +647,7 @@ public class Game {
 		key.setCurrentImage("key.png");
 		key.setXPos(330);
 		key.setYPos(325);
-		getRoom(Name.OFFICE).getWalls()[2].addItem(key);
+		getRoom(Name.OFFICE).getWalls()[2].addItem(key);  
 
 		// Office West Wall
 		getRoom(Name.OFFICE).getWalls()[3].addItem(doors.get(8));
