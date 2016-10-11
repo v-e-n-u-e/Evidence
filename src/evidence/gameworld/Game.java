@@ -163,7 +163,7 @@ public class Game {
 		door.setCurrentImage("door.png");
 		door.setXPos(400);
 		door.setYPos(44);
-		doors.add(door);
+		doors.add(door);  
 
 		door = new Door("Door", "Door to the office",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.OFFICE), false, 5, false);
@@ -478,16 +478,17 @@ public class Game {
 		hammer.setYPos(0);
 
 		MovableItem screwdriver = new MovableItem("Screw Driver", "A screw driver",
-				new ArrayList<>(Arrays.asList("remove")), 1, false);
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, false);
 		screwdriver.setCurrentImage("screwdriver.png");
-		screwdriver.setXPos(0);
-		screwdriver.setYPos(0);
+		screwdriver.setXPos(350);
+		screwdriver.setYPos(436);
 		
 		MovableItem crowBar = new MovableItem("Crow Bar", "A crow bar",
-				new ArrayList<>(Arrays.asList("remove")), 1, false);
-		screwdriver.setCurrentImage("crowbar.png");
-		screwdriver.setXPos(0);
-		screwdriver.setYPos(0);
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, false);
+		crowBar.setCurrentImage("crowbar.png");
+		crowBar.setXPos(0);
+		crowBar.setYPos(0);
+		getRoom(Name.OFFICE).getWalls()[3].addItem(crowBar);
 
 		Container toolbox = new Container("Tool Box", "A tool Box",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(),
@@ -601,7 +602,6 @@ public class Game {
 
 		// Office South Wall  
 		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect", "turnoff","unscrew")), 30,
-
 				false);
 		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
@@ -626,13 +626,13 @@ public class Game {
 		desk.setYPos(330);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(desk);
 
-		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect","pryopen","cutwire")), false);
+		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect","pryopen")), false);
 		computer.setCurrentImage("computer.png");
 		computer.setXPos(41);
 		computer.setYPos(165);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
 		
-		Key key = new Key("Key", "Key for the door between the Kitchen and the lounge", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 6, true);
+		Key key = new Key("Key", "Key for the door between the Kitchen and the lounge", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 2, true);
 		key.setCurrentImage("key.png");
 		key.setXPos(330);
 		key.setYPos(325);
@@ -643,8 +643,8 @@ public class Game {
 
 		Furniture painting = new Furniture("Painting", "A painting", new ArrayList<>(Arrays.asList("inspect")), false);
 		painting.setCurrentImage("painting.png");
-		painting.setXPos(70);
-		painting.setYPos(100);
+		painting.setXPos(170);
+		painting.setYPos(130);
 		getRoom(Name.OFFICE).getWalls()[3].addItem(painting);
 	}
 
