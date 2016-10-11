@@ -33,7 +33,8 @@ import evidence.gameworld.actions.Inspect;
 /**
  * Abstract class for item.
  * 
- * Each item will have a name, description,
+ * Each item will have a name, description,List of actions, a current image, x and y positions and a 
+ * boolean for bloody or not.
  * 
  * @author Georgina Murphy
  *

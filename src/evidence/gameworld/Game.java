@@ -17,7 +17,13 @@ import evidence.gameworld.items.Furniture;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
-
+/**
+ * This class holds the current state of the game with a list of rooms and players. It is responsible for
+ * calling to read in or save the game,
+ * 
+ * @author Georgina,Connor
+ *
+ */
 @XmlRootElement
 public class Game {
 	private List<Room> rooms = new ArrayList<Room>();
@@ -177,7 +183,7 @@ public class Game {
 		door.setCurrentImage("bdoor.png");
 		door.setXPos(400);
 		door.setYPos(44);
-		doors.add(door);
+		doors.add(door);  
 
 		door = new Door("Door", "Door to the garage",
 				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.GARAGE), false, 6, true);
@@ -330,7 +336,7 @@ public class Game {
 		fridge.setYPos(106);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
 		
-		Evidence blood = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+		Evidence blood = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 30,
 				true);
 		blood.setCurrentImage("bpool.png");
 		blood.setXPos(12);
@@ -415,7 +421,7 @@ public class Game {
 		numpad.setYPos(259);
 		getRoom(Name.GARAGE).getWalls()[0].addItem(numpad);
 		
-		Evidence blood2 = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+		Evidence blood2 = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 30,
 				true);
 		blood2.setCurrentImage("bpool.png");
 		blood2.setXPos(12);
@@ -541,7 +547,7 @@ public class Game {
 		tv.setYPos(241);
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(tv);
 		
-		Evidence blood3 = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+		Evidence blood3 = new Evidence("Blood", "Victim's Blood", new ArrayList<>(Arrays.asList("inspect", "clean")), 30,
 				true);
 		blood3.setCurrentImage("bpool.png");
 		blood3.setXPos(12);

@@ -4,6 +4,8 @@
 package evidence.gameworld.actions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
@@ -34,8 +36,16 @@ public class CutUp extends Action {
 		String feedback = "";
 		if (gameItem.toString().equals("Body")) {
 			if (inventoryItem.toString().equals("Saw") || inventoryItem.toString().equals("Axe")) {
-				player.getWall().addItem(makeBodyPart("limb.png", gameItem.getXPos(), gameItem.getYPos(), 1, true));
-				player.getWall().addItem(makeBodyPart("bhead.png", gameItem.getXPos() + 30, gameItem.getYPos(), 4, true));
+				MovableItem limb = new MovableItem("Limb", "This is a limb", new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 1, true);
+				limb.setCurrentImage("blimb.png");
+				limb.setXPos(gameItem.getXPos());
+				limb.setYPos(gameItem.getYPos());
+				player.getWall().addItem(limb);
+				MovableItem head = new MovableItem("Head", "This is a head", new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 4, true);
+				head.setCurrentImage("bhead.png");
+				head.setXPos(gameItem.getXPos() + 30);
+				head.setYPos(gameItem.getYPos());
+				player.getWall().addItem(head);
 				player.setBloodie(true);
 				player.getWall().removeItem(gameItem);
 
