@@ -302,6 +302,14 @@ It just might conceal some evidence</description>
                 <XPos>200</XPos>
                 <YPos>200</YPos>
             </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>painting3.png</currentImage>
+                <description>This painting seems to be of three cool dudes...</description>
+                <name>Painting</name>
+                <XPos>70</XPos>
+                <YPos>100</YPos>
+            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
                 <actions>enter</actions>
@@ -829,6 +837,7 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
                 <actions>unlock</actions>
+                <actions>remove Gold</actions>
                 <capacity>6</capacity>
                 <currentImage>safe.png</currentImage>
                 <description>A safe</description>
@@ -847,6 +856,8 @@ It just might conceal some evidence</description>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
+                <actions>pryopen</actions>
+                <actions>cutwire</actions>
                 <currentImage>computer.png</currentImage>
                 <description>A computer</description>
                 <name>Computer</name>

@@ -7,10 +7,10 @@ import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 
 @XmlElement
-public class PryOpen extends Action {
+public class CutWires extends Action {
 	
-	public PryOpen(){
-		super("PryOpen","Pry this open");
+	public CutWires(){
+		super("CutWires","Cut these wires");
 	}
 
 	@Override
@@ -22,12 +22,13 @@ public class PryOpen extends Action {
 		if (inventoryItem == null){
 			return "please select an item";
 		}
-		if(gameItem.toString().equals("Computer") && inventoryItem.toString().equals("Crow Bar")){
-			gameItem.addAction("cutWires");
-			gameItem.removeAction("pryopen");
-			return "Back of computer has been pryed open, we can see the wires.";
+		if(gameItem.toString().equals("Computer") && inventoryItem.toString().equals("Knife")){
+			gameItem.removeAction("cutwire");
+			//change image of computer
+			
+			return "Hardware footage has been disabled";
 		}
-		return "You may need a crow bar to open this up";
+		return "You may need somthing to cut this like a knife";
 	
 	}
 
