@@ -800,4 +800,13 @@ public class Game {
 		}
 		return score;
 	}
+	
+	public boolean allPlayersOutside(){
+		for(Player p : players){
+			if(!p.getWall().getImageName().equals("obj/outside.png") ){
+				return false;
+			}
+		}
+		return true;
+	}
 }

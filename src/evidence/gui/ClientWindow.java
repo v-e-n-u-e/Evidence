@@ -1,7 +1,6 @@
 package evidence.gui;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -11,8 +10,6 @@ import javax.swing.text.DefaultCaret;
 import evidence.clientserver.ClientPipe;
 import evidence.clientserver.infoholders.EventPackage;
 import evidence.clientserver.infoholders.RenderPackage;
-import evidence.gameworld.Wall;
-import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
 
 import javax.swing.JTextArea;
@@ -20,13 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import java.awt.SystemColor;
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.util.Collections;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -41,10 +35,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  * The client window is the main window that houses the Scene, the Interaction and Chat Panels.
@@ -203,15 +197,6 @@ public class ClientWindow extends JFrame implements Runnable{
 			e.printStackTrace();
 		}
 
-
-		/**
-		 * This was used as a tester for adjusting game window based on screen size.
-		 * Unused - can delete
-		 */
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension frameSize = new Dimension(screenSize.width-200,screenSize.height-200);
-	    // setBounds(0,0,screenSize.width, screenSize.height);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//1400 by 700
 		setBounds(100, 100, 1400, 711);
@@ -227,6 +212,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		mntmSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sendSaveGame();
+				JOptionPane.showMessageDialog(canvas, "Saved Game!");
 			}
 		});
 		mnFile.add(mntmSave);
@@ -235,6 +221,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		mntmLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadGame();
+				JOptionPane.showMessageDialog(canvas, "Loaded Game!");
 			}
 		});
 		mnFile.add(mntmLoad);
@@ -472,8 +459,8 @@ public class ClientWindow extends JFrame implements Runnable{
 	 * @return - The item clicked on, null otherwise
 	 */
 	public Item getItemClickedOn(int clickX, int clickY){
-		for(int index = this.rPackage.getFrontWall().getItems().size() - 1; index > -1; index-- ){
-			Item i = this.rPackage.getFrontWall().getItems().get(index);
+		for(int index = rPackage.getFrontWall().getItems().size() - 1; index > -1; index-- ){
+			Item i = rPackage.getFrontWall().getItems().get(index);
 			Image itemImage = new ImageIcon("obj/"+i.getImageName() ).getImage();
 			int width = itemImage.getWidth(null);
 			int height = itemImage.getHeight(null);
