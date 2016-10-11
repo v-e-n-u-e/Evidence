@@ -48,7 +48,7 @@ public class Unlock extends Action {
 					door.addAction("lock");
 					door.addAction("enter");
 					door.removeAction("unlock");
-					
+					System.out.println(door.getDoor().getDescription());
 					door.getDoor().setLocked(false);
 					door.getDoor().addAction("lock");
 					door.getDoor().addAction("enter");

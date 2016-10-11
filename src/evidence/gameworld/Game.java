@@ -64,7 +64,7 @@ public class Game {
 	}
 
 	public void UpdatePlayersInv() {
-		for (int i = 0; i < storedPlayers.size(); i++) {
+		for (int i = 0; i < storedPlayers.size(); i++) {  
 			// Set Direction
 			players.get(i).setCurrentDirection(storedPlayers.get(i).getCurrentDirection());
 			// Set Inventory
@@ -173,20 +173,20 @@ public class Game {
 		doors.add(door);
 
 		door = new Door("Door", "Door to the kitchen",
-				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.KITCHEN), false, 6, true);
-		door.setCurrentImage("door.png");
+				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.KITCHEN), false, 6, true);
+		door.setCurrentImage("bdoor.png");
 		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
 
 		door = new Door("Door", "Door to the garage",
 				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.GARAGE), false, 6, true);
-		door.setCurrentImage("door.png");
+		door.setCurrentImage("bdoor.png");
 		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
-		for (int i = 0; i < doors.size() - 1; i++) {
+		for (int i = 0; i < doors.size() - 1; i += 2) {
 			doors.get(i).setOtherDoor(doors.get(i + 1));
 			doors.get(i + 1).setOtherDoor(doors.get(i));
 		}
