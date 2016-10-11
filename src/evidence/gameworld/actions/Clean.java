@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import evidence.gameworld.Player;
 import evidence.gameworld.items.Container;
+import evidence.gameworld.items.Evidence;
 import evidence.gameworld.items.Item;
 import evidence.gameworld.items.MovableItem;
 
@@ -34,6 +35,10 @@ public class Clean extends Action {
 			gameItem.setBloodie(false);
 			gameItem.removeAction("clean");
 			gameItem.setCurrentImage(gameItem.getCurrentImage().substring(1));
+			if(gameItem instanceof Evidence){
+				Evidence evidence = (Evidence) gameItem;
+				evidence.setValue(0);
+			}
 			
 		}
 		return feedback;

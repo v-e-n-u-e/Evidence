@@ -1,5 +1,8 @@
 README
 
+	Before starting, make sure the obj and icon folders are located in the project directory.  Select them and move them into the evidence folder so they are in the same directory
+	as src, otherwise no images will load.
+
 How to run:
 	!IF NOT RUNNING THE SERVER ON YOUR LOCAL MACHINE, SKIP TO STEP 3!
 	
@@ -25,7 +28,7 @@ How to run:
 		You are a robber who has committed a horrible crime.  You have murdered a young, wealthy man in his home and now have 5 minutes to get rid of all evidence.
 		Evidence comes in various forms, there is blood on floors, bloody items around the house, a body to hide/dispose of are an example of a few.  There are
 		less obvious forms of evidence but I don't want to give too much away...  Before the timer expires, you should aim to leave the house through the garage door,
-		note if you leave the house you may not return.  When all players have left the house, or the timer expirse, the game will calculate a score for your group.
+		note if you leave the house you may not return.  When all players have left the house, or the timer expires, the game will calculate a score for your group.
 		There may also be a special treasure for you to find.
 		
 		If your score is not low enough, you will all be arrested and sent to prison.  If your score IS low enough, you will escape conviction for your horrible crime.

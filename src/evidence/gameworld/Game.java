@@ -179,14 +179,14 @@ public class Game {
 		doors.add(door);
 
 		door = new Door("Door", "Door to the kitchen",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.KITCHEN), false, 6, true);
+				new ArrayList<>(Arrays.asList("inspect", "unlock", "clean")), getRoom(Name.KITCHEN), false, 6, true);
 		door.setCurrentImage("bdoor.png");
 		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);  
 
 		door = new Door("Door", "Door to the garage",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.GARAGE), false, 6, true);
+				new ArrayList<>(Arrays.asList("inspect", "unlock", "clean")), getRoom(Name.GARAGE), false, 6, true);
 		door.setCurrentImage("bdoor.png");
 		door.setXPos(20);
 		door.setYPos(44);
@@ -597,7 +597,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 0,
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 100,
 				true);
 		body.setCurrentImage("nbbody.png");
 		body.setXPos(12);

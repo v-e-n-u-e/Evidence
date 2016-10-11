@@ -41,7 +41,7 @@ public class CutUp extends Action {
 				limb.setXPos(gameItem.getXPos());
 				limb.setYPos(gameItem.getYPos());
 				player.getWall().addItem(limb);
-				MovableItem head = new MovableItem("Head", "This is a head", new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 4, true);
+				MovableItem head = new MovableItem("Head", "This is a head", new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 5, true);
 				head.setCurrentImage("bhead.png");
 				head.setXPos(gameItem.getXPos() + 30);
 				head.setYPos(gameItem.getYPos());
