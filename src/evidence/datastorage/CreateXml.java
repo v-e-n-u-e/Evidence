@@ -26,6 +26,7 @@ public class CreateXml {
 	
 	public void CreateGame(String FileName,Game game) throws Exception{
 		/*To create a new XMl make sure to remove the Set methods from wall.*/
+		//e.g
 		//Game game = new Game();
 		//game.setup();
 		try {

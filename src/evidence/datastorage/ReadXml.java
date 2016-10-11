@@ -18,7 +18,7 @@ import evidence.gameworld.items.Door;
 import evidence.gameworld.items.Item;
 /**
  * Reads A new instance of Game from an XML file, All of the fields and classes from the previous instance
- * will be copied over to this new instance of game. The doors are then connected to the walls manually.
+ * will be copied over to this new instance of game. The doors are then connected to the Rooms walls manually.
  * 
  * @author Connor
  *
@@ -36,15 +36,12 @@ public class ReadXml {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Game game = (Game) jaxbUnmarshaller.unmarshal(file);
-			//doors = game.getDoors();
 			players = game.getPlayers();
 			rooms = game.getRoom();
 			seconds = game.getSeconds();
-			//Manually set roomOne and roomTwo for doors.
-			//System.out.println(game.getRoom(Name.LOUNGE).getWalls()[1].getImageName());
-		
+			/*Manually up the doors, This has to be done as it causes an infinite loop for 		
+			jaxB if this is not done.*/
 			setupDoors(game);
-		
 		
 		}catch (JAXBException e) {
 			e.printStackTrace();
@@ -65,6 +62,10 @@ public class ReadXml {
 	}
 
 
+	/**
+	 * links the doors to a room and then adds the new doors to the current rooms.
+	 * @param game
+	 */
 	private void setupDoors(Game game) {
 		doors = new ArrayList<Door>();
 
