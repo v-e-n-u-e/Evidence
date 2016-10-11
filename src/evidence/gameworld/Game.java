@@ -592,7 +592,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[0].addItem(potplant);
 
 		// Office East Wall
-		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 110,
+		Evidence body = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "cutup")), 60,
 				true);
 		body.setCurrentImage("nbbody.png");
 		body.setXPos(12);
