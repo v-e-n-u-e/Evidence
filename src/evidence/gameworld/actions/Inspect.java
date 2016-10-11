@@ -28,7 +28,6 @@ public class Inspect extends Action {
 			else
 				feedback += ". It is unlocked";
 		}
-		System.out.println(feedback);
 		
 		return feedback;
 	}

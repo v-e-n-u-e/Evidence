@@ -389,7 +389,6 @@ public class Server implements Runnable{
 				game.UpdatePlayersInv();
 				this.timer.kill();
 				this.timer = new Timer(game.getSeconds(), this);
-				System.out.println(game.getSeconds() );
 				updateAllViews();
 			} catch (Exception e) {
 				e.printStackTrace();
