@@ -26,7 +26,7 @@ public class Light extends Action {
 		}
 		
 		if (gameItem.toString().equals("Fireplace") && inventoryItem.toString().equals("Matches")) {
-			gameItem.setCurrentImage("firepalcelit.png");
+			gameItem.setCurrentImage("fireplaceon.png");
 			gameItem.removeAction("light");
 			gameItem.addAction("burn");
 			feedback = "Fireplace is now burning. This could be useful to get rid of evidence";

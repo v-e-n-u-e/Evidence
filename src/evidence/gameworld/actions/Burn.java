@@ -25,6 +25,7 @@ public class Burn extends Action {
 		if(gameItem.toString().equals("Fireplace")){
 			if(inventoryItem.getSize() < 3){
 			player.getWall().removeItem(inventoryItem);
+			player.removeItem(inventoryItem);
 			feedback = inventoryItem + " was burned";
 			}else
 				feedback = inventoryItem + " cannot be burned";

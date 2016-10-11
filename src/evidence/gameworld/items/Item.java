@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 import evidence.gameworld.actions.Action;
+import evidence.gameworld.actions.Burn;
 import evidence.gameworld.actions.Clean;
 import evidence.gameworld.actions.CutUp;
 import evidence.gameworld.actions.Drop;
@@ -119,6 +120,9 @@ public abstract class Item implements Serializable {
 				break;
 			case "turnoff":
 				action = new TurnOff();
+				break;
+			case "burn":
+				action = new Burn();
 				break;
 			}
 		}

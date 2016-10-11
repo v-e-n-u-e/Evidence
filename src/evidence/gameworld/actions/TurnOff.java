@@ -38,7 +38,7 @@ public class TurnOff extends Action {
 			if (inventoryItem.toString().equals("Screw Driver") || inventoryItem.toString().equals("Hammer")) {
 				camera.setValue(10);
 				camera.removeAction("turnoff");
-				camera.setCurrentImage("camreaoff.png");
+				camera.setCurrentImage("cameraoff.png");
 				feedback = "The camera has been disabled";
 			} else {
 				feedback = "The camera cannot be disabled with " + inventoryItem;
