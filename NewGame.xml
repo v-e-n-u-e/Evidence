@@ -803,7 +803,7 @@ It just might conceal some evidence</description>
                 <currentImage>nbbody.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
-                <value>110</value>
+                <value>60</value>
                 <XPos>12</XPos>
                 <YPos>466</YPos>
             </items>
