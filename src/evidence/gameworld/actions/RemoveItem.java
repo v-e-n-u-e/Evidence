@@ -19,6 +19,7 @@ public class RemoveItem extends Action {
 		if (gameItem == null) {
 			return "Need an item from the game";
 		}
+		if(player.getInventory().size() >= 8){return "Cant hold anymore items!";}
 		System.out.println("In Apply");
 		String feedback = "";
 		if (gameItem instanceof Container) {
