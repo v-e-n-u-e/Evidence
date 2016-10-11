@@ -1,11 +1,8 @@
 package evidence.gui;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import evidence.clientserver.infoholders.RenderPackage;
-import evidence.gameworld.Wall;
 import evidence.gameworld.items.Item;
 
 

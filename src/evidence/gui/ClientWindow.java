@@ -236,9 +236,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		contentPane.add(infoPanel);
 		infoPanel.setLayout(null);
 
-		/**
-		 * Sets the count down timer in the appropriate position
-		 */
+		
+		//Sets the count down timer in the appropriate position
 		timeLeftArea = new JTextArea();
 		timeLeftArea.setBackground(UIManager.getColor("Button.background"));
 		timeLeftArea.setEditable(false);
@@ -246,10 +245,8 @@ public class ClientWindow extends JFrame implements Runnable{
 		timeLeftArea.setText(" ");
 		infoPanel.add(timeLeftArea);
 
-		/**
-		 * Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
-		 * e.g. when an item is picked up/dropped
-		 */
+		//Used to set up the inventory portion of the UI. inventoryRefresh can be called any time you need to refresh a players inventory
+		//e.g. when an item is picked up/dropped
 		invPanel = new JPanel();
 		invPanel.setBorder(new TitledBorder(null, "Inventory", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		invPanel.setToolTipText("Inventory");
@@ -380,12 +377,18 @@ public class ClientWindow extends JFrame implements Runnable{
 		}
 	}
 
+	/**
+	 * Used for invListen class to get the buttons in inventoryPanel
+	 * @return - Returns set up buttons in invPanel
+	 */
 	public static JButton[] retButtons(){
 		return invButtons;
 	}
-
-	//This is used when you need to show a player's inventory has changed in some way.
-		//This method will re-make the buttons/icons based on what the player is holding
+		
+		/**
+		 * This is used when you need to show a player's inventory has changed in some way.
+		 * This method will re-make the buttons/icons based on what the player is holding
+		 */
 		private void inventoryRefresh(){
 			ImageIcon[] invIcons = new ImageIcon[9];
 			//Go through the players current inventory and get their images
@@ -508,7 +511,11 @@ public class ClientWindow extends JFrame implements Runnable{
 		return pipe.getId();
 	}
 
-	//Called whenever a visible change needs to be shown to players
+	/**
+	 * Called whenever a visible change needs to be shown to players
+	 * Has variants for win/loss, and afterwards refreshes a players inventory and info panel and then 
+	 * repaints the canvas
+	 */
 	public void reRenderWall(){
 		if(rPackage.getFrontWall().getImageName().equals("obj/gameover.png") ){
 			canvas.rPackage = rPackage;
