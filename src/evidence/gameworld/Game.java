@@ -19,7 +19,7 @@ import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
 /**
  * This class holds the current state of the game with a list of rooms and players. It is responsible for
- * calling to read in or save the game,
+ * calling to read in or save the game, also for rotating and applying and calculating score.
  * 
  * @author Georgina,Connor
  *
@@ -270,7 +270,7 @@ public class Game {
 		bedsideTable.setYPos(389);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bedsideTable);
 		
-		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
+		Key key = new Key("Safe Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
 		key.setCurrentImage("key.png");
 		key.setXPos(550);
 		key.setYPos(370);
@@ -331,7 +331,7 @@ public class Game {
 
 		Container fridge = new Container("Fridge", "A Fridge", new ArrayList<>(Arrays.asList("inspect", "placeitem")),
 				false, 5, false);
-		fridge.setCurrentImage("fridge.png");
+		fridge.setCurrentImage("fridge.png");  
 		fridge.setXPos(394);
 		fridge.setYPos(106);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
@@ -525,7 +525,7 @@ public class Game {
 		fireplace.setYPos(119);
 		getRoom(Name.LOUNGE).getWalls()[0].addItem(fireplace);
 		
-		Key key = new Key("Key", "Key to the garage", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 6, true);
+		Key key = new Key("Garage Key", "Key to the garage", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 6, true);
 		key.setCurrentImage("key.png");
 		key.setXPos(450);
 		key.setYPos(160);
@@ -643,11 +643,11 @@ public class Game {
 		computer.setYPos(165);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
 		
-		Key key = new Key("Key", "Key for the door between the Kitchen and the lounge", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 2, true);
+		Key key = new Key("Lounge Kitchen Key", "Key for the door between the Kitchen and the lounge", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 2, true);
 		key.setCurrentImage("key.png");
 		key.setXPos(330);
 		key.setYPos(325);
-		getRoom(Name.OFFICE).getWalls()[2].addItem(key);
+		getRoom(Name.OFFICE).getWalls()[2].addItem(key);  
 
 		// Office West Wall
 		getRoom(Name.OFFICE).getWalls()[3].addItem(doors.get(8));

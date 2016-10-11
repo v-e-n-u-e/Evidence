@@ -37,7 +37,7 @@ public class CutUp extends Action {
 		if (gameItem.toString().equals("Body")) {
 			if (inventoryItem.toString().equals("Saw") || inventoryItem.toString().equals("Axe")) {
 				MovableItem limb = new MovableItem("Limb", "This is a limb", new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 1, true);
-				limb.setCurrentImage("blimb.png");
+				limb.setCurrentImage("limb.png");
 				limb.setXPos(gameItem.getXPos());
 				limb.setYPos(gameItem.getYPos());
 				player.getWall().addItem(limb);
