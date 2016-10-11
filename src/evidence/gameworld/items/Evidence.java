@@ -9,7 +9,7 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 /**
  * Class for pieces of evidence.
  * 
- * Each item will have a name, description, 
+ * Each item will have a name, description, a value and a boolean bloodied
  * 
  * @author Georgina Murphy
  *

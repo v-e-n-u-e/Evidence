@@ -37,14 +37,28 @@ public class PickUp extends Action {
 			if (player.getInventory().size() < 8) {
 				player.getCurrentRoom().removeItem(player.getCurrentDirection(), mItem);
 				player.addItem(mItem);
-				if(player.getBloody() || mItem.getBloody()){
-					if(!mItem.getBloody() ){mItem.makeBloody();}
-					if(!player.getBloody()){player.makeBloody();}
+				boolean hasGloves = false;
+				for (Item item : player.getInventory()) {
+					if (item.toString().equals("Gloves")) {
+						hasGloves = true;
+					}
+					if (!hasGloves) {
+						if (player.getBloody() || mItem.getBloody()) {
+							if (!mItem.getBloody()) {
+								mItem.makeBloody();
+							}
+							if (!player.getBloody()) {
+								player.makeBloody();
+							}
+						}
+					}
 				}
 				feedback = gameItem.toString() + " has been added to your inventory";
 			} else
 				feedback = "Your inventory is full. You can't pick this item up.";
-		} else {
+		} else
+
+		{
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 		}
 		System.out.println(player.getInventory());
