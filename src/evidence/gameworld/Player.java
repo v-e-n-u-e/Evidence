@@ -43,11 +43,11 @@ public class Player {
 	}
 
 	public void setCurrentRoom(Room room) {
-		currentRoom = room;
+		this.currentRoom = room;
 	}
 
 	public void setCurrentDirection(Direction direction) {
-		currentDirection = direction;
+		this.currentDirection = direction;
 	}
 
 	public void setInventory(ArrayList<Item> items) {

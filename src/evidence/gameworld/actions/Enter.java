@@ -40,7 +40,6 @@ public class Enter extends Action {
 				door.addAction("clean");
 			}
 			player.setCurrentRoom(door.getRoom());
-
 			feedback = "You are now in the " + player.getCurrentRoom().toString();
 		} else {
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
