@@ -50,6 +50,11 @@ public class Game {
 		this.storedPlayers = t.getPlayers();
 		this.rooms = t.getRooms();
 		this.seconds = t.getSeconds();
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getDescription());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getXPos());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getYPos());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getImageName());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getActions());
 	}
 
 	/**
@@ -85,6 +90,11 @@ public class Game {
 		setupGarage(doors);
 		setupLounge(doors);
 		setupOffice(doors);
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getDescription());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getXPos());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getYPos());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getImageName());
+		System.out.println(this.getRoom(Name.BEDROOM).getWalls()[3].getItems().get(0).getActions());
 	}
 
 	private void setupRooms() {
