@@ -109,7 +109,7 @@ public abstract class Item implements Serializable {
 			case "light":
 				action = new Light();
 				break;
-			case "washhands":
+			case "wash":
 				action = new WashHands();
 				break;
 			}

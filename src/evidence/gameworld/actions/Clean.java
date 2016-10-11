@@ -34,9 +34,6 @@ public class Clean extends Action {
 			gameItem.setBloodie(false);
 			gameItem.removeAction("clean");
 			gameItem.setCurrentImage(gameItem.getCurrentImage().substring(1));
-			inventoryItem.setBloodie(true);
-			inventoryItem.addAction("clean");
-			inventoryItem.setCurrentImage(inventoryItem.getBloodyImage());
 			
 		}
 		return feedback;

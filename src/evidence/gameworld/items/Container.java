@@ -37,7 +37,7 @@ public class Container extends Item {
 	 */
 	public String putItem(MovableItem item, Player player){
 		int size = 0;
-		for(MovableItem i: containedItems){
+		for(MovableItem i: containedItems){ 
 			size += i.getSize();
 		}
 		
@@ -48,6 +48,9 @@ public class Container extends Item {
 			capacity-= item.getSize();
 			player.removeItem(item);
 			this.addAction("remove " + item.toString());
+			if(item.getBloody()){
+				this.makeBloody();
+			}
 			return item.toString() + " successfully placed in " + this.toString();
 		}
 		else{

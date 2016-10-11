@@ -24,7 +24,7 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private List<Player> storedPlayers = new ArrayList<Player>();
-	private int seconds;  
+	private int seconds;
 
 	public Game() {
 
@@ -121,7 +121,7 @@ public class Game {
 		door = new Door("Door", "Door between the lounge and the bedroom",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BEDROOM), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(400);  
+		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
 
@@ -195,12 +195,11 @@ public class Game {
 		door.setYPos(44);
 		doors.add(door);
 
-		
-		for (int i = 0; i < doors.size()-1; i++) {
-			doors.get(i).setOtherDoor(doors.get(i+1));
-			doors.get(i+1).setOtherDoor(doors.get(i));
+		for (int i = 0; i < doors.size() - 1; i++) {
+			doors.get(i).setOtherDoor(doors.get(i + 1));
+			doors.get(i + 1).setOtherDoor(doors.get(i));
 		}
-		
+
 		return doors;
 	}
 
@@ -248,9 +247,8 @@ public class Game {
 		// Bathroom West Wall
 		getRoom(Name.BATHROOM).getWalls()[3].addItem(doors.get(4));
 
-		Container sink = new Container("Sink",
-				"A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
-				new ArrayList<>(Arrays.asList("inspect", "placeitem", "washhands")), false, 1, false);
+		Furniture sink = new Furniture("Sink", "A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
+				new ArrayList<>(Arrays.asList("inspect", "wash")), false);
 		sink.setCurrentImage("sink.png");
 		sink.setXPos(383);
 		sink.setYPos(157);
@@ -339,25 +337,25 @@ public class Game {
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		bleach.setCurrentImage("bleach.png");
 		bleach.setXPos(100);
-		gloves.setYPos(100);
+		bleach.setYPos(100);
 
 		MovableItem cloth = new MovableItem("Cloth", "A cloth, can be used to clean blood off items",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		cloth.setCurrentImage("shirt.png");
 		cloth.setXPos(200);
-		gloves.setYPos(100);
-		
+		cloth.setYPos(100);
+
 		MovableItem matches = new MovableItem("Matches", "Matches can be used to light the fire",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
-		cloth.setCurrentImage("matches.png");
-		cloth.setXPos(100);
-		gloves.setYPos(200);
+		matches.setCurrentImage("matches.png");
+		matches.setXPos(100);
+		matches.setYPos(200);
 
-
-		Container kBench = new Container("Kitchen Bench", "This kitchen bench is filled with cleaning products", new ArrayList<>(
-				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString(), "remove " + matches.toString())),
+		Container kBench = new Container("Kitchen Bench", "This kitchen bench is filled with cleaning products",
+				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(),
+						"remove " + bleach.toString(), "remove " + matches.toString())),
 				false, 3, false);
-		
+
 		kBench.getContainedItems().add(gloves);
 		kBench.getContainedItems().add(bleach);
 		kBench.getContainedItems().add(cloth);
@@ -366,7 +364,7 @@ public class Game {
 		kBench.setXPos(244);
 		kBench.setYPos(279);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(kBench);
-		
+
 		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false,
 				3, false);
 		oven.setCurrentImage("oven.png");
@@ -433,12 +431,12 @@ public class Game {
 		cbBox.setYPos(347);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(cbBox);
 
-		Evidence clothes = new Evidence("Bloodied Clothing",
-				"Bloody clothes. The police probably wont like seeing this", new ArrayList<>(Arrays.asList("inspect")),
-				4, false);
+		MovableItem clothes = new MovableItem("Bloodied Clothing",
+				"Bloody clothes. The police probably wont like seeing this",
+				new ArrayList<>(Arrays.asList("inspect", "pickup", "clean")), 4, true);
 		clothes.setCurrentImage("bpants.png");
-		clothes.setXPos(400);
-		clothes.setYPos(400);
+		clothes.setXPos(260);
+		clothes.setYPos(450);
 		getRoom(Name.GARAGE).getWalls()[2].addItem(clothes);
 
 		// Garage West Wall
@@ -455,12 +453,14 @@ public class Game {
 		saw.setYPos(307);
 		getRoom(Name.GARAGE).getWalls()[3].addItem(saw);
 
-		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("remove")), 1, false);
+		MovableItem wrench = new MovableItem("Wrench", "A wrench", new ArrayList<>(Arrays.asList("inspect", "pickup")),
+				1, false);
 		wrench.setCurrentImage("wrench.png");
 		wrench.setXPos(0);
 		wrench.setYPos(0);
 
-		MovableItem hammer = new MovableItem("Hammer", "A Hammer", new ArrayList<>(Arrays.asList("remove")), 1, false);
+		MovableItem hammer = new MovableItem("Hammer", "A Hammer", new ArrayList<>(Arrays.asList("inspect", "pickup")),
+				1, false);
 		hammer.setCurrentImage("hammer.png");
 		hammer.setXPos(0);
 		hammer.setYPos(0);
@@ -567,7 +567,7 @@ public class Game {
 		knife.setYPos(532);
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
-		// Office South Wall
+		// Office South Wall  
 		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect")), 20,
 				false);
 		camera.setCurrentImage("cameraon.png");
@@ -606,7 +606,7 @@ public class Game {
 
 	public String timeUp() {
 		int score = calculateScore();
-		if (score < 100) {
+		if (score < 70) {
 			return "Congratualtions you concealed enough evidence, you have all evaded capture";
 		} else {
 			return "Enough evidence was found at the house to convict all of you. Enjoy prison";
