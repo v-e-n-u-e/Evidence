@@ -627,7 +627,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[2].addItem(desk);
 
 		Furniture computer = new Furniture("Computer", "A computer", new ArrayList<>(Arrays.asList("inspect","pryopen")), false);
-		computer.setCurrentImage("computer.png");
+		computer.setCurrentImage("computer.png");  
 		computer.setXPos(41);
 		computer.setYPos(165);
 		getRoom(Name.OFFICE).getWalls()[2].addItem(computer);
@@ -782,9 +782,12 @@ public class Game {
 		}
 		if (gameItem == null) {
 			feedback = inventoryItem.getAction(action).apply(gameItem, inventoryItem, player);
-		} else
+		} else{
 			feedback = gameItem.getAction(action).apply(gameItem, inventoryItem, player);
-		System.out.println(feedback);
+		System.out.println(gameItem.getActions());
+		 System.out.println(action);
+		System.out.println( gameItem.getAction(action));
+		}
 		return feedback;
 	}
 

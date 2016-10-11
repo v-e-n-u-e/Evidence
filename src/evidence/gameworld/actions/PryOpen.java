@@ -24,8 +24,7 @@ public class PryOpen extends Action {
 		}
 		if(gameItem.toString().equals("Computer") && inventoryItem.toString().equals("Crow Bar")){
 			gameItem.removeAction("pryopen");
-			gameItem.addAction("cutwire");
-			System.out.println(gameItem.getActions());
+			gameItem.addAction("cutwires");
 			return "Back of computer has been pryed open, we can see the wires.";
 		}
 		return "You may need a crow bar to open this up";

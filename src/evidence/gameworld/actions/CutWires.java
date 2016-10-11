@@ -25,7 +25,8 @@ public class CutWires extends Action {
 			gameItem.removeAction("cutwire");
 			//change image of computer
 			gameItem.setCurrentImage("computeroff.png");
-			gameItem.removeAction("cutwire");
+			gameItem.removeAction("cutwires");
+
 			return "Hardware footage has been disabled";
 		}
 		return "You may need somthing to cut this like a knife";

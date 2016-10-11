@@ -133,8 +133,9 @@ public abstract class Item implements Serializable {
 			case "pryopen":
 				action = new PryOpen();
 				break;
-			case "cutwire":
+			case "cutwires":
 				action = new CutWires();
+				break;
 			}
 		}
 		return action;
