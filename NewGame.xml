@@ -5,7 +5,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the bedroom and the lounge</description>
+        <description>Door to the lounge</description>
         <keyCode>1</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -17,7 +17,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the lounge and the bedroom</description>
+        <description>Door to the bedroom</description>
         <keyCode>1</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -26,24 +26,22 @@
     </doors>
     <doors>
         <actions>inspect</actions>
-        <actions>enter</actions>
-        <actions>lock</actions>
+        <actions>unlock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the lounge and the kitchen</description>
+        <description>Door to the kitchen</description>
         <keyCode>2</keyCode>
-        <locked>false</locked>
+        <locked>true</locked>
         <name>Door</name>
         <XPos>400</XPos>
         <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
-        <actions>enter</actions>
-        <actions>lock</actions>
+        <actions>unlock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the kitchen and the lounge</description>
+        <description>Door to the lounge</description>
         <keyCode>2</keyCode>
-        <locked>false</locked>
+        <locked>true</locked>
         <name>Door</name>
         <XPos>20</XPos>
         <YPos>44</YPos>
@@ -53,7 +51,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the bathroom and the bedroom</description>
+        <description>Door to the bedroom</description>
         <keyCode>3</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -65,7 +63,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the bedroom and the bathroom</description>
+        <description>Door to the bathroom</description>
         <keyCode>3</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -77,7 +75,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the bedroom and the office</description>
+        <description>Door to the office</description>
         <keyCode>4</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -89,7 +87,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the office and the bedroom</description>
+        <description>Door to the bedroom</description>
         <keyCode>4</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -101,7 +99,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the office and the kitchen</description>
+        <description>Door to the kitchen</description>
         <keyCode>5</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -113,7 +111,7 @@
         <actions>enter</actions>
         <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the kitchen and the office</description>
+        <description>Door to the office</description>
         <keyCode>5</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -122,10 +120,9 @@
     </doors>
     <doors>
         <actions>inspect</actions>
-        <actions>enter</actions>
-        <actions>lock</actions>
-        <currentImage>door.png</currentImage>
-        <description>Door between the garage and the kitchen</description>
+        <actions>unlock</actions>
+        <currentImage>bdoor.png</currentImage>
+        <description>Door to the kitchen</description>
         <keyCode>6</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -134,10 +131,9 @@
     </doors>
     <doors>
         <actions>inspect</actions>
-        <actions>enter</actions>
-        <actions>lock</actions>
-        <currentImage>door.png</currentImage>
-        <description>Door between the kitchen and the garage</description>
+        <actions>unlock</actions>
+        <currentImage>bdoor.png</currentImage>
+        <description>Door to the garage</description>
         <keyCode>6</keyCode>
         <locked>false</locked>
         <name>Door</name>
@@ -229,7 +225,7 @@
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bathroom and the bedroom</description>
+                <description>Door to the bedroom</description>
                 <keyCode>3</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -255,27 +251,13 @@ It just might conceal some evidence</description>
         <walls>
             <direction>NORTH</direction>
             <currentImage>obj/bedroom.png</currentImage>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <actions>placeitem</actions>
-                <capacity>6</capacity>
                 <currentImage>bed.png</currentImage>
-                <description>A bed. You may take a nap here, or you could hide something underneath this bed.</description>
-                <locked>false</locked>
+                <description>A bed. You could nap here, or you could keep covering up a murder.</description>
                 <name>Bed</name>
                 <XPos>24</XPos>
                 <YPos>293</YPos>
-            </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
-                <actions>inspect</actions>
-                <actions>pickup</actions>
-                <currentImage>key.png</currentImage>
-                <description>Key to the safe</description>
-                <name>Key</name>
-                <size>1</size>
-                <XPos>300</XPos>
-                <YPos>400</YPos>
-                <code>555</code>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
@@ -284,6 +266,17 @@ It just might conceal some evidence</description>
                 <name>Bedside Table</name>
                 <XPos>511</XPos>
                 <YPos>389</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
+                <actions>inspect</actions>
+                <actions>pickup</actions>
+                <currentImage>key.png</currentImage>
+                <description>Key to the safe</description>
+                <name>Key</name>
+                <size>1</size>
+                <XPos>550</XPos>
+                <YPos>370</YPos>
+                <code>555</code>
             </items>
             <x>0</x>
             <y>0</y>
@@ -315,7 +308,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the bathroom</description>
+                <description>Door to the bathroom</description>
                 <keyCode>3</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -333,7 +326,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the office</description>
+                <description>Door to the office</description>
                 <keyCode>4</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -359,7 +352,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the lounge</description>
+                <description>Door to the lounge</description>
                 <keyCode>1</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -377,12 +370,11 @@ It just might conceal some evidence</description>
             <currentImage>obj/kitchenhole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>enter</actions>
-                <actions>lock</actions>
+                <actions>unlock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the kitchen and the lounge</description>
+                <description>Door to the lounge</description>
                 <keyCode>2</keyCode>
-                <locked>false</locked>
+                <locked>true</locked>
                 <name>Door</name>
                 <XPos>20</XPos>
                 <YPos>44</YPos>
@@ -398,7 +390,7 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <currentImage>stool.png</currentImage>
-                <description>A stool. Only lift this stool once!</description>
+                <description>Another stool. Take a seat and strech your legs</description>
                 <name>Stool</name>
                 <XPos>513</XPos>
                 <YPos>381</YPos>
@@ -414,7 +406,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the kitchen and the office</description>
+                <description>Door to the office</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -491,10 +483,9 @@ It just might conceal some evidence</description>
             <currentImage>obj/kitchen.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>enter</actions>
-                <actions>lock</actions>
-                <currentImage>door.png</currentImage>
-                <description>Door between the kitchen and the garage</description>
+                <actions>unlock</actions>
+                <currentImage>bdoor.png</currentImage>
+                <description>Door to the garage</description>
                 <keyCode>6</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -553,10 +544,9 @@ It just might conceal some evidence</description>
             <currentImage>obj/garage.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>enter</actions>
-                <actions>lock</actions>
-                <currentImage>door.png</currentImage>
-                <description>Door between the garage and the kitchen</description>
+                <actions>unlock</actions>
+                <currentImage>bdoor.png</currentImage>
+                <description>Door to the kitchen</description>
                 <keyCode>6</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -670,6 +660,17 @@ It just might conceal some evidence</description>
                 <XPos>98</XPos>
                 <YPos>119</YPos>
             </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
+                <actions>inspect</actions>
+                <actions>pickup</actions>
+                <currentImage>key.png</currentImage>
+                <description>Key to the garage</description>
+                <name>Key</name>
+                <size>1</size>
+                <XPos>450</XPos>
+                <YPos>160</YPos>
+                <code>6</code>
+            </items>
             <x>0</x>
             <y>0</y>
         </walls>
@@ -681,7 +682,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the bedroom</description>
+                <description>Door to the bedroom</description>
                 <keyCode>1</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -722,12 +723,11 @@ It just might conceal some evidence</description>
             <currentImage>obj/loungehole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>enter</actions>
-                <actions>lock</actions>
+                <actions>unlock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the kitchen</description>
+                <description>Door to the kitchen</description>
                 <keyCode>2</keyCode>
-                <locked>false</locked>
+                <locked>true</locked>
                 <name>Door</name>
                 <XPos>400</XPos>
                 <YPos>44</YPos>
@@ -745,7 +745,7 @@ It just might conceal some evidence</description>
                 <currentImage>stool.png</currentImage>
                 <description>A stool</description>
                 <name>Stool</name>
-                <XPos>30</XPos>
+                <XPos>252</XPos>
                 <YPos>381</YPos>
             </items>
             <x>0</x>
@@ -784,7 +784,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the office and the bedroom</description>
+                <description>Door to the bedroom</description>
                 <keyCode>4</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -866,12 +866,22 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
                 <actions>pryopen</actions>
-                <actions>cutwire</actions>
                 <currentImage>computer.png</currentImage>
                 <description>A computer</description>
                 <name>Computer</name>
                 <XPos>41</XPos>
                 <YPos>165</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
+                <actions>inspect</actions>
+                <actions>pickup</actions>
+                <currentImage>key.png</currentImage>
+                <description>Key for the door between the Kitchen and the lounge</description>
+                <name>Key</name>
+                <size>1</size>
+                <XPos>330</XPos>
+                <YPos>325</YPos>
+                <code>2</code>
             </items>
             <x>0</x>
             <y>0</y>
@@ -884,7 +894,7 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the office and the kitchen</description>
+                <description>Door to the kitchen</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
@@ -896,8 +906,8 @@ It just might conceal some evidence</description>
                 <currentImage>painting.png</currentImage>
                 <description>A painting</description>
                 <name>Painting</name>
-                <XPos>70</XPos>
-                <YPos>100</YPos>
+                <XPos>170</XPos>
+                <YPos>130</YPos>
             </items>
             <x>0</x>
             <y>0</y>
