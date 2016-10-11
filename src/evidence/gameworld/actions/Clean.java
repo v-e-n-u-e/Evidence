@@ -30,7 +30,7 @@ public class Clean extends Action {
 		}
 		
 		String feedback = "";
-		if(inventoryItem.toString().equals("Bleach") || inventoryItem.toString().equals("Cloth")){
+		if(inventoryItem.toString().equals("Bleach") || inventoryItem.toString().equals("Cloth") || inventoryItem.toString().equals("Mop")){
 			gameItem.setBloodie(false);
 			gameItem.removeAction("clean");
 			gameItem.setCurrentImage(gameItem.getCurrentImage().substring(1));

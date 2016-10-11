@@ -21,6 +21,7 @@ import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.PlaceItem;
 import evidence.gameworld.actions.RemoveItem;
+import evidence.gameworld.actions.UnScrew;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.actions.Inspect;
 
@@ -111,6 +112,9 @@ public abstract class Item implements Serializable {
 				break;
 			case "wash":
 				action = new WashHands();
+				break;
+			case "unscrew":
+				action = new UnScrew();
 				break;
 			}
 		}

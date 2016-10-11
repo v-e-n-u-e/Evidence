@@ -257,7 +257,7 @@ public class Game {
 		bed.setYPos(293);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
-		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 1, false);
+		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
 		key.setCurrentImage("numpad.png");
 		key.setXPos(300);
 		key.setYPos(400);
@@ -316,6 +316,13 @@ public class Game {
 		fridge.setXPos(394);
 		fridge.setYPos(106);
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
+		
+		Evidence blood = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+				true);
+		blood.setCurrentImage("bgloves.png");
+		blood.setXPos(12);
+		blood.setYPos(466);
+		getRoom(Name.KITCHEN).getWalls()[1].addItem(blood);
 
 		// Kitchen South Wall
 		MovableItem gloves = new MovableItem("Gloves", "Rubber gloves",
@@ -559,7 +566,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
 		// Office South Wall  
-		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect")), 20,
+		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect","unscrew")), 20,
 				false);
 		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
