@@ -12,6 +12,7 @@ import evidence.gameworld.actions.Action;
 import evidence.gameworld.actions.Burn;
 import evidence.gameworld.actions.Clean;
 import evidence.gameworld.actions.CutUp;
+import evidence.gameworld.actions.CutWires;
 import evidence.gameworld.actions.Drop;
 import evidence.gameworld.actions.Enter;
 import evidence.gameworld.actions.Fill;
@@ -22,6 +23,7 @@ import evidence.gameworld.actions.Light;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.PlaceItem;
+import evidence.gameworld.actions.PryOpen;
 import evidence.gameworld.actions.RemoveItem;
 import evidence.gameworld.actions.UnScrew;
 import evidence.gameworld.actions.TurnOff;
@@ -128,6 +130,11 @@ public abstract class Item implements Serializable {
 			case "burn":
 				action = new Burn();
 				break;
+			case "pryopen":
+				action = new PryOpen();
+				break;
+			case "cutwire":
+				action = new CutWires();
 			}
 		}
 		return action;

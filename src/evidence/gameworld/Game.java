@@ -491,7 +491,7 @@ public class Game {
 
 		Container toolbox = new Container("Tool Box", "A tool Box",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(),
-						"remove " + hammer.toString(), "remove " + screwdriver.toString())),
+						"remove " + hammer.toString(), "remove " + screwdriver.toString(), "remove " + crowBar.toString())),
 				false, 7, false);
 		toolbox.setCurrentImage("toolbox.png");
 		toolbox.setXPos(132);
