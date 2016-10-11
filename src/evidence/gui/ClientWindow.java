@@ -49,7 +49,7 @@ import javax.swing.JOptionPane;
  *
  * In a Model-View-Controller sense, ClientWindow is the view.
  *
- * @author Tyler Jones
+ * @author Callum Crosby, Tyler Jones - Mostly Callum Crosby, with Tyler adding in functionality with the ClientPipe
  */
 public class ClientWindow extends JFrame implements Runnable{
 	private static final long serialVersionUID = 1L;
