@@ -34,7 +34,7 @@ public class CutUp extends Action {
 		String feedback = "";
 		if (gameItem.toString().equals("Body")) {
 			if (inventoryItem.toString().equals("Saw") || inventoryItem.toString().equals("Axe")) {
-				player.getWall().addItem(makeBodyPart("barm.png", gameItem.getXPos(), gameItem.getYPos(), 1, true));
+				player.getWall().addItem(makeBodyPart("limb.png", gameItem.getXPos(), gameItem.getYPos(), 1, true));
 				player.getWall().addItem(makeBodyPart("bhead.png", gameItem.getXPos() + 30, gameItem.getYPos(), 4, true));
 				player.setBloodie(true);
 				player.getWall().removeItem(gameItem);

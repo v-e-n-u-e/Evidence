@@ -499,6 +499,10 @@ public class ClientWindow extends JFrame implements Runnable{
 			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
 			this.roomText.append(rPackage.getFeedback());
 		}
+		else if(rPackage.getFrontWall().getImageName().equals("obj/outside.png") ){
+			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
+			this.roomText.append(rPackage.getFeedback());
+		}
 		else{
 			this.roomText.setText("Location: "+rPackage.getFrontWall().getDirection()+" wall of the "+rPackage.getCurrentRoom()+"\n\n");
 			this.roomText.append(rPackage.getFeedback());
