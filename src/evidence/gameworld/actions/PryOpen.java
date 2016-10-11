@@ -10,7 +10,7 @@ import evidence.gameworld.items.MovableItem;
 public class PryOpen extends Action {
 	
 	public PryOpen(){
-		super("PryOpen","Pry this open");
+		super("Pry Open","Pry this open");
 	}
 
 	@Override
@@ -20,11 +20,12 @@ public class PryOpen extends Action {
 			return "Need an item from the game";
 		}
 		if (inventoryItem == null){
-			return "please select an item";
+			return "please select an item from your inventory";
 		}
 		if(gameItem.toString().equals("Computer") && inventoryItem.toString().equals("Crow Bar")){
-			gameItem.addAction("cutWires");
 			gameItem.removeAction("pryopen");
+			gameItem.addAction("cutwire");
+			System.out.println(gameItem.getActions());
 			return "Back of computer has been pryed open, we can see the wires.";
 		}
 		return "You may need a crow bar to open this up";
