@@ -248,7 +248,7 @@ public class Game {
 		getRoom(Name.BATHROOM).getWalls()[3].addItem(doors.get(4));
 
 		Furniture sink = new Furniture("Sink", "A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
-				new ArrayList<>(Arrays.asList("inspect", "wash")), false);
+				new ArrayList<>(Arrays.asList("inspect", "washhands")), false);
 		sink.setCurrentImage("sink.png");
 		sink.setXPos(383);
 		sink.setYPos(157);
@@ -568,7 +568,7 @@ public class Game {
 		getRoom(Name.OFFICE).getWalls()[1].addItem(knife);
 
 		// Office South Wall  
-		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect")), 20,
+		Evidence camera = new Evidence("Camera", "A security camera", new ArrayList<>(Arrays.asList("inspect", "turnoff")), 30,
 				false);
 		camera.setCurrentImage("cameraon.png");
 		camera.setXPos(550);
@@ -758,7 +758,7 @@ public class Game {
 			for (Wall wall : room.getWalls()) {
 				for (Item item : wall.getItems()) {
 					if (item.getBloody()) {
-						score += 5;
+						score += 10;
 					}
 					if (item instanceof Evidence) {
 						Evidence evidence = (Evidence) item;

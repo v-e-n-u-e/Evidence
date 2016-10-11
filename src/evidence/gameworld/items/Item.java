@@ -16,11 +16,13 @@ import evidence.gameworld.actions.Enter;
 import evidence.gameworld.actions.Fill;
 import evidence.gameworld.actions.Flush;
 import evidence.gameworld.actions.Kick;
+import evidence.gameworld.actions.LeaveHouse;
 import evidence.gameworld.actions.Light;
 import evidence.gameworld.actions.Lock;
 import evidence.gameworld.actions.PickUp;
 import evidence.gameworld.actions.PlaceItem;
 import evidence.gameworld.actions.RemoveItem;
+import evidence.gameworld.actions.TurnOff;
 import evidence.gameworld.actions.Unlock;
 import evidence.gameworld.actions.Inspect;
 
@@ -109,8 +111,14 @@ public abstract class Item implements Serializable {
 			case "light":
 				action = new Light();
 				break;
-			case "wash":
+			case "washhands":
 				action = new WashHands();
+				break;
+			case "leavehouse":
+				action = new LeaveHouse();
+				break;
+			case "turnoff":
+				action = new TurnOff();
 				break;
 			}
 		}
