@@ -63,8 +63,9 @@ public class Timer{
 			
 			
 		}
-		
-		if(seconds == 0)server.timeEnd();
+		if(seconds == -1){
+			server.timeEnd();
+		}
 		
 	}
 	
@@ -105,7 +106,7 @@ public class Timer{
 	}
 	
 	public void kill(){
-		this.seconds = -1;
+		this.seconds = -2;
 	}
 	
 	@XmlElement

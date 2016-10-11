@@ -305,6 +305,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		feedbackPanel.setLayout(null);
 		roomText = new JTextArea();
 		roomText.setLineWrap(true);
+		roomText.setWrapStyleWord(true);
 		roomText.setEditable(false);
 		roomText.setBackground(UIManager.getColor("Button.background"));
 		roomText.setBounds(12, 21, 258, 169);
@@ -320,6 +321,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		chatLog = new JTextArea();
 		chatLog.setBackground(SystemColor.info);
 		chatLog.setLineWrap(true);
+		chatLog.setWrapStyleWord(true);
 		chatLog.setEditable(false);
 		caret = (DefaultCaret) chatLog.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -489,8 +491,14 @@ public class ClientWindow extends JFrame implements Runnable{
 	
 	//Refreshes the information in the info panel. Give room/actions feedback
 	public void refreshInfo(){
-		this.roomText.setText("Location: "+rPackage.getFrontWall().getDirection()+" wall of the "+rPackage.getCurrentRoom()+"\n\n");
-		this.roomText.append(rPackage.getFeedback());
+		if(rPackage.getFrontWall().getImageName().equals("obj/gameover.png") ){
+			this.roomText.setText("Location: " + rPackage.getCurrentRoom()+"\n\n");
+			this.roomText.append(rPackage.getFeedback());
+		}
+		else{
+			this.roomText.setText("Location: "+rPackage.getFrontWall().getDirection()+" wall of the "+rPackage.getCurrentRoom()+"\n\n");
+			this.roomText.append(rPackage.getFeedback());
+		}
 	}
 
 	public static Item getSelected(){
@@ -507,9 +515,16 @@ public class ClientWindow extends JFrame implements Runnable{
 
 	//Called whenever a visible change needs to be shown to players
 	public void reRenderWall(){
-		canvas.rPackage = this.rPackage;
-		inventoryRefresh();
-		refreshInfo();
-		canvas.repaint();
+		if(rPackage.getFrontWall().getImageName().equals("obj/gameover.png") ){
+			canvas.rPackage =  rPackage;
+			refreshInfo();
+			canvas.repaint();
+		}
+		else{
+			canvas.rPackage = rPackage;
+			inventoryRefresh();
+			refreshInfo();
+			canvas.repaint();
+		}
 	}
 }

@@ -555,8 +555,9 @@ public class Server implements Runnable{
 	public void timeEnd(){
 		Wall wall = createEndScreenWall();
 		System.out.println(game.timeUp());
-		RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "");
+		RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "PRISON");
 		updateAllViews(end);
+		this.running = false;
 	}
 	
 	/**
@@ -565,7 +566,11 @@ public class Server implements Runnable{
 	 * @return
 	 */
 	public Wall createEndScreenWall(){
-		return new Wall();
+		Wall wall = new Wall();
+		wall.setImageName("obj/gameover.png");
+		wall.setX(0);
+		wall.setY(0);
+		return wall;
 	}
 
 	/**
