@@ -35,7 +35,11 @@ import evidence.gui.ServerGUI;
  * until it receives something through the socket.  If we did not have a separate
  * thread for this, the entire server would sit and wait and this is not desirable.
  * 
- * * In a Model-View-Controller sense, Server acts as the controller.
+ * The server also holds the game state, and any events the user wishes to perform
+ * in the game is first received by the Server and then sent to the appropriate game
+ * logic methods within game.
+ * 
+ * In a Model-View-Controller sense, Server acts as the controller.
  *
  * @author Tyler Jones
  */
@@ -133,8 +137,6 @@ public class Server implements Runnable{
 	public void run() {
 		running = true;
 		gui.writeToLog("Server successfully started on port: " + port);
-		//game = new Game();
-		//game.setup();
 		manageClients();
 		receive();
 	}
@@ -264,6 +266,8 @@ public class Server implements Runnable{
 	 *  /ping/ - A Client responding to a ping by the server
 	 *  /rotLeft/ - A Client attempting to rotate their view left
 	 *  /rotRight/ - A Client attempting to rotate their view right
+	 *  /save/ - A Client attempting to save the state of the game
+	 *  /load/ - A Client attempting to load the state of the game
 	 *
 	 * @param string - The String to process
 	 * @param packet - The packet the String arrived in
@@ -303,16 +307,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				game.setup();
-//				try {
-//					game.ReadFromXml("NewGame.xml");
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
+				//game.setup();
+				try {
+					game.ReadFromXml("NewGame.xml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				//game.UpdatePlayersInv();
+				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -409,6 +413,12 @@ public class Server implements Runnable{
 		String feedback = game.apply(e.getPerformedOn(), (MovableItem) e.getPerforming(), game.getPlayerWithID(e.getID() ), e.getAction() );
 		game.getPlayerWithID(e.getID() ).setFeedback(feedback);
 		updateAllViews();
+		
+		// If all the players are outside after the event, stop the timer and calculate the score
+		if(game.allPlayersOutside() ){
+			timer.kill();
+			timeEnd();
+		}
 	}
 
 	/**
@@ -420,7 +430,6 @@ public class Server implements Runnable{
 	 * @throws IOException
 	 */
 	public byte[] getBytes(Object o) throws IOException{
-		//System.out.println(o.getClass());
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.flush();
@@ -671,7 +680,7 @@ public class Server implements Runnable{
 
 	/**
 	 * Will call the series of game logic methods that
-	 * rotate's a client current view to the left.  Returns
+	 * rotates a client current view to the left.  Returns
 	 * a boolean representing the success of the rotation.
 	 *
 	 * @param ID - The ID of the player to move
@@ -688,7 +697,7 @@ public class Server implements Runnable{
 
 	/**
 	 * Will call the series of game logic methods that
-	 * rotate's a client current view to the right.  Returns
+	 * rotates a client current view to the right.  Returns
 	 * a boolean representing the success of the rotation.
 	 *
 	 * @param ID - The ID of the player to move
