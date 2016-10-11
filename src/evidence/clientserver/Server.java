@@ -307,16 +307,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				//game.setup();
-				try {
-					game.ReadFromXml("NewGame.xml");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				game.setup();
+//				try {
+//					game.ReadFromXml("NewGame.xml");
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				game.UpdatePlayersInv();
+				//game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -329,7 +329,7 @@ public class Server implements Runnable{
 			disconnect(Integer.parseInt(ID), true);
 		}
 
-		// Is this packet a message packet?
+		// Is this packet a message packet?  
 		else if(string.startsWith("/m/") ){
 			sendToAll(string);
 		}

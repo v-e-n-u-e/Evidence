@@ -10,12 +10,11 @@ import evidence.gameworld.items.MovableItem;
 public class CutWires extends Action {
 	
 	public CutWires(){
-		super("CutWires","Cut these wires");
+		super("Cut Wires","Cut these wires");
 	}
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
-		String feedback = "";
 		if (gameItem == null) {
 			return "Need an item from the game";
 		}
@@ -25,7 +24,9 @@ public class CutWires extends Action {
 		if(gameItem.toString().equals("Computer") && inventoryItem.toString().equals("Knife")){
 			gameItem.removeAction("cutwire");
 			//change image of computer
-			
+			gameItem.setCurrentImage("computeroff.png");
+			gameItem.removeAction("cutwires");
+
 			return "Hardware footage has been disabled";
 		}
 		return "You may need somthing to cut this like a knife";
