@@ -238,7 +238,7 @@
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
-                <actions>wash</actions>
+                <actions>washhands</actions>
                 <currentImage>sink.png</currentImage>
                 <description>A sink. Go ahead and wash your hands here. 
 It just might conceal some evidence</description>
@@ -269,13 +269,13 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="key">
                 <actions>inspect</actions>
                 <actions>pickup</actions>
-                <currentImage>numpad.png</currentImage>
+                <currentImage>key.png</currentImage>
                 <description>Key to the safe</description>
                 <name>Key</name>
                 <size>1</size>
                 <XPos>300</XPos>
                 <YPos>400</YPos>
-                <code>1</code>
+                <code>555</code>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
@@ -416,6 +416,16 @@ It just might conceal some evidence</description>
                 <XPos>394</XPos>
                 <YPos>106</YPos>
             </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
+                <actions>inspect</actions>
+                <actions>clean</actions>
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
+            </items>
             <x>0</x>
             <y>0</y>
         </walls>
@@ -494,9 +504,10 @@ It just might conceal some evidence</description>
             <currentImage>obj/garage.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
+                <actions>leavehouse</actions>
                 <currentImage>garagedoor.png</currentImage>
                 <description>Garage door</description>
-                <name>Door</name>
+                <name>Garage</name>
                 <XPos>76</XPos>
                 <YPos>70</YPos>
             </items>
@@ -507,6 +518,16 @@ It just might conceal some evidence</description>
                 <name>Numpad</name>
                 <XPos>635</XPos>
                 <YPos>259</YPos>
+            </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
+                <actions>inspect</actions>
+                <actions>clean</actions>
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
             </items>
             <x>0</x>
             <y>0</y>
@@ -666,6 +687,16 @@ It just might conceal some evidence</description>
                 <XPos>70</XPos>
                 <YPos>241</YPos>
             </items>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
+                <actions>inspect</actions>
+                <actions>clean</actions>
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
+            </items>
             <x>0</x>
             <y>0</y>
         </walls>
@@ -786,10 +817,12 @@ It just might conceal some evidence</description>
             <currentImage>obj/office.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
+                <actions>turnoff</actions>
+                <actions>unscrew</actions>
                 <currentImage>cameraon.png</currentImage>
                 <description>A security camera</description>
                 <name>Camera</name>
-                <value>20</value>
+                <value>30</value>
                 <XPos>550</XPos>
                 <YPos>30</YPos>
             </items>
