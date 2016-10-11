@@ -258,7 +258,7 @@ public class Game {
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(bed);
 
 		Key key = new Key("Key", "Key to the safe", new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, 555, false);
-		key.setCurrentImage("numpad.png");
+		key.setCurrentImage("key.png");
 		key.setXPos(300);
 		key.setYPos(400);
 		getRoom(Name.BEDROOM).getWalls()[0].addItem(key);
