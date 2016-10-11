@@ -494,7 +494,6 @@ public class Game {
 		crowBar.setCurrentImage("crowbar.png");
 		crowBar.setXPos(0);
 		crowBar.setYPos(0);
-		getRoom(Name.OFFICE).getWalls()[3].addItem(crowBar);
 
 		Container toolbox = new Container("Tool Box", "A tool Box",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(),
