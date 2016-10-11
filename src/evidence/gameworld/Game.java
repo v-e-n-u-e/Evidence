@@ -19,7 +19,7 @@ import evidence.gameworld.items.Key;
 import evidence.gameworld.items.MovableItem;
 /**
  * This class holds the current state of the game with a list of rooms and players. It is responsible for
- * calling to read in or save the game,
+ * calling to read in or save the game, also for rotating and applying and calculating score.
  * 
  * @author Georgina,Connor
  *
