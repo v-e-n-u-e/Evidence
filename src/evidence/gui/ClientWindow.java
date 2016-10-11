@@ -50,6 +50,8 @@ import javax.swing.JOptionPane;
  * In a Model-View-Controller sense, ClientWindow is the view.
  *
  * @author Callum Crosby, Tyler Jones - Mostly Callum Crosby, with Tyler adding in functionality with the ClientPipe
+ * 
+ * Callum Crosby created all the images and icons used in the game, which can all be found under the "icon" and "obj" folders respectively.
  */
 public class ClientWindow extends JFrame implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -202,12 +204,13 @@ public class ClientWindow extends JFrame implements Runnable{
 		setBounds(100, 100, 1400, 711);
 		setLocationRelativeTo(null);
 		
+		//Create a menubar and add to it various buttons for functions such as saving/loading
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
+		//Set up for the save game button under menu bar
 		JMenuItem mntmSave = new JMenuItem("Save");
 		mntmSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -217,6 +220,7 @@ public class ClientWindow extends JFrame implements Runnable{
 		});
 		mnFile.add(mntmSave);
 		
+		//Set up for the load game button under menu bar
 		JMenuItem mntmLoad = new JMenuItem("Load");
 		mntmLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -224,12 +228,15 @@ public class ClientWindow extends JFrame implements Runnable{
 				JOptionPane.showMessageDialog(canvas, "Loaded Game!");
 			}
 		});
+		
+		//Content pane is the top most panel that contains all GUI components
 		mnFile.add(mntmLoad);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		//Info panel will contain inventory, buttons, and room info panel
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new TitledBorder(null, "Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setBounds(768, 11, 306, 639);
@@ -299,7 +306,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		//Set up for multiplayer chat
 		JScrollPane chatPane = new JScrollPane();
 		chatPane.setBounds(1084, 11, 300, 615);
-		//chatPane.setBounds(frameSize.width-(frameSize.width/4), 11, (frameSize.width/4)-11, frameSize.height-11);
 		chatPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(chatPane);
 		chatLog = new JTextArea();
@@ -310,7 +316,6 @@ public class ClientWindow extends JFrame implements Runnable{
 		caret = (DefaultCaret) chatLog.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		chatPane.setViewportView(chatLog);
-
 		messageField = new JTextField();
 		messageField.addKeyListener(new KeyAdapter() {
 			@Override

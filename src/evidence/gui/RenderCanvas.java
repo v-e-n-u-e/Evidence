@@ -8,7 +8,7 @@ import evidence.gameworld.items.Item;
 
 /**
  * The RenderCanvas is the panel that renders the game view to the user. It has a custom paint method
- * to render images to the screen.
+ * to render images to the screen. 
  * 
  * @author Callum Crosby
  */
