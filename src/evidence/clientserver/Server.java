@@ -34,7 +34,7 @@ import evidence.gui.ServerGUI;
  * the server may provide.  This is mainly because receive() will sit and wait
  * until it receives something through the socket.  If we did not have a separate
  * thread for this, the entire server would sit and wait and this is not desirable.
- *
+ * 
  * * In a Model-View-Controller sense, Server acts as the controller.
  *
  * @author Tyler Jones
@@ -303,16 +303,16 @@ public class Server implements Runnable{
 			// and we just added the last player, start the timer / game.
 			if(!allPlayersConnected && clients.size() == numPlayers){
 				game = new Game();
-				game.setup();
-//				try {
-//					game.ReadFromXml("NewGame.xml");
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
+				//game.setup();
+				try {
+					game.ReadFromXml("NewGame.xml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				//game.UpdatePlayersInv();
+				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;
@@ -545,29 +545,59 @@ public class Server implements Runnable{
 	 * Starts the timer for our game
 	 */
 	private void startTimer(){
-		this.timer = new Timer(300, this);
+		this.timer = new Timer(5, this);
 	}
+	
+	// ===================================================================================================================================================================================
+	//                                                     METHODS BEYOND THIS POINT ARE MORE RELATED TO GAME LOGIC
+	// ===================================================================================================================================================================================
+	
 	
 	/**
 	 * Called when the timer runs out, starts the process of each
 	 * client rendering the end game screen.
 	 */
 	public void timeEnd(){
-		Wall wall = createEndScreenWall();
-		System.out.println(game.timeUp());
-		RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "PRISON");
-		updateAllViews(end);
-		this.running = false;
+		String result = game.timeUp();
+		
+		// If the players won
+		if(result.startsWith("Con") ){
+			Wall wall = createWinScreenWall();
+			RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "NOT PRISON");
+			updateAllViews(end);
+			this.running = false;
+		}
+		
+		// If the players lost
+		else if(result.startsWith("Enough") ){
+			Wall wall = createLossScreenWall();
+			RenderPackage end = new RenderPackage(wall, null, null, game.timeUp(), "PRISON");
+			updateAllViews(end);
+			this.running = false;
+		}
 	}
 	
 	/**
+	 * Creates a wall that will represent the loss screen. 
 	 * 
-	 * 
-	 * @return
+	 * @return - The wall representing the loss screen
 	 */
-	public Wall createEndScreenWall(){
+	public Wall createLossScreenWall(){
 		Wall wall = new Wall();
 		wall.setImageName("obj/gameover.png");
+		wall.setX(0);
+		wall.setY(0);
+		return wall;
+	}
+	
+	/**
+	 * Creates a wall that will represent the win screen. 
+	 * 
+	 * @return - The wall representing the win screen
+	 */
+	public Wall createWinScreenWall(){
+		Wall wall = new Wall();
+		wall.setImageName("obj/youwin.png");
 		wall.setX(0);
 		wall.setY(0);
 		return wall;
@@ -617,16 +647,22 @@ public class Server implements Runnable{
 	 */
 	private RenderPackage createRenderPackage(Integer ID){
 		Player p = game.getPlayerWithID(ID);
+		
+		// Is the user facing the window in the kitchen?
 		if(p.getWall().getDirection() == Direction.NORTH && p.getCurrentRoom().getName() == Name.KITCHEN){
 			Room lounge = game.getRoom(Name.LOUNGE);
 			Wall loungeNorth = lounge.getWalls()[0];
 			return new RenderPackage(p.getWall(), loungeNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 		}
+		
+		// Is the user facing the window in the lounge?
 		else if(p.getWall().getDirection() == Direction.SOUTH && p.getCurrentRoom().getName() == Name.LOUNGE){
 			Room kitchen = game.getRoom(Name.KITCHEN);
 			Wall kitchenNorth = kitchen.getWalls()[2];
 			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() );
 		}
+		
+		// Send the client the default configuration for a Render Package
 		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
 	}
 
