@@ -1,116 +1,166 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game>
     <players>
-        <currentDirection>NORTH</currentDirection>
+        <currentDirection>SOUTH</currentDirection>
         <currentRoom>
-            <name>BATHROOM</name>
+            <name>KITCHEN</name>
             <walls>
                 <direction>NORTH</direction>
-                <currentImage>obj/bathroom.png</currentImage>
-                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+                <currentImage>obj/kitchenhole.png</currentImage>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                     <actions>inspect</actions>
-                    <actions>placeitem</actions>
-                    <capacity>2</capacity>
-                    <currentImage>bucket.png</currentImage>
-                    <description>A bucket. Things can be hidden in here</description>
+                    <actions>enter</actions>
+                    <actions>lock</actions>
+                    <currentImage>door.png</currentImage>
+                    <description>Door between the kitchen and the lounge</description>
+                    <keyCode>2</keyCode>
                     <locked>false</locked>
-                    <name>Bucket</name>
-                    <XPos>87</XPos>
-                    <YPos>466</YPos>
+                    <name>Door</name>
+                    <XPos>20</XPos>
+                    <YPos>44</YPos>
+                </items>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                    <actions>inspect</actions>
+                    <currentImage>stool.png</currentImage>
+                    <description>A stool. Take a seat and strech your legs</description>
+                    <name>Stool</name>
+                    <XPos>314</XPos>
+                    <YPos>381</YPos>
+                </items>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                    <actions>inspect</actions>
+                    <currentImage>stool.png</currentImage>
+                    <description>A stool. Only lift this stool once!</description>
+                    <name>Stool</name>
+                    <XPos>513</XPos>
+                    <YPos>381</YPos>
                 </items>
                 <x>0</x>
                 <y>0</y>
             </walls>
             <walls>
                 <direction>EAST</direction>
-                <currentImage>obj/bathroom.png</currentImage>
+                <currentImage>obj/kitchen.png</currentImage>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
+                    <actions>inspect</actions>
+                    <actions>enter</actions>
+                    <actions>lock</actions>
+                    <currentImage>door.png</currentImage>
+                    <description>Door between the kitchen and the office</description>
+                    <keyCode>5</keyCode>
+                    <locked>false</locked>
+                    <name>Door</name>
+                    <XPos>20</XPos>
+                    <YPos>44</YPos>
+                </items>
                 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                     <actions>inspect</actions>
                     <actions>placeitem</actions>
-                    <actions>fill</actions>
-                    <capacity>6</capacity>
-                    <currentImage>bath.png</currentImage>
-                    <description>A bath tub. Things can be hidden in here</description>
+                    <capacity>5</capacity>
+                    <currentImage>fridge.png</currentImage>
+                    <description>A Fridge</description>
                     <locked>false</locked>
-                    <name>Bath</name>
-                    <XPos>130</XPos>
-                    <YPos>292</YPos>
+                    <name>Fridge</name>
+                    <XPos>394</XPos>
+                    <YPos>106</YPos>
                 </items>
                 <x>0</x>
                 <y>0</y>
             </walls>
             <walls>
                 <direction>SOUTH</direction>
-                <currentImage>obj/bathroom.png</currentImage>
-                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+                <currentImage>obj/kitchen.png</currentImage>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                     <actions>inspect</actions>
-                    <actions>flush</actions>
-                    <actions>placeitem</actions>
-                    <capacity>2</capacity>
-                    <currentImage>toilet.png</currentImage>
-                    <description>A toilet. This toilet can be flushed</description>
-                    <locked>false</locked>
-                    <name>Toilet</name>
-                    <XPos>383</XPos>
-                    <YPos>290</YPos>
+                    <currentImage>kbench.png</currentImage>
+                    <description>A kitchen bench</description>
+                    <name>Kitchen bench</name>
+                    <XPos>244</XPos>
+                    <YPos>279</YPos>
                 </items>
                 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                     <actions>inspect</actions>
-                    <actions>kick</actions>
                     <actions>placeitem</actions>
-                    <capacity>5</capacity>
-                    <currentImage>trashcan.png</currentImage>
-                    <description>A trash can. You can kick this trash can over if you are feeling frustrated</description>
+                    <capacity>3</capacity>
+                    <currentImage>oven.png</currentImage>
+                    <description>An oven</description>
                     <locked>false</locked>
-                    <name>Trash Can</name>
-                    <XPos>120</XPos>
-                    <YPos>473</YPos>
+                    <name>Oven</name>
+                    <XPos>-18</XPos>
+                    <YPos>279</YPos>
+                </items>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+                    <actions>inspect</actions>
+                    <actions>placeitem</actions>
+                    <capacity>3</capacity>
+                    <currentImage>oven.png</currentImage>
+                    <description>An oven</description>
+                    <locked>false</locked>
+                    <name>Oven</name>
+                    <XPos>-18</XPos>
+                    <YPos>279</YPos>
+                </items>
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
+                    <actions>inspect</actions>
+                    <actions>pickup</actions>
+                    <currentImage>scissors.png</currentImage>
+                    <description>A pair of Kitchen scissors</description>
+                    <name>Scissors</name>
+                    <size>1</size>
+                    <XPos>0</XPos>
+                    <YPos>0</YPos>
                 </items>
                 <x>0</x>
                 <y>0</y>
             </walls>
             <walls>
                 <direction>WEST</direction>
-                <currentImage>obj/bathroom.png</currentImage>
+                <currentImage>obj/kitchen.png</currentImage>
                 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                     <actions>inspect</actions>
                     <actions>enter</actions>
                     <actions>lock</actions>
                     <currentImage>door.png</currentImage>
-                    <description>Door between the lounge and the kitchen</description>
-                    <keyCode>2</keyCode>
+                    <description>Door between the kitchen and the garage</description>
+                    <keyCode>6</keyCode>
                     <locked>false</locked>
                     <name>Door</name>
-                    <XPos>400</XPos>
+                    <XPos>20</XPos>
                     <YPos>44</YPos>
                 </items>
-                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
+                <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                     <actions>inspect</actions>
-                    <actions>placeitem</actions>
-                    <capacity>1</capacity>
-                    <currentImage>sink.png</currentImage>
-                    <description>A sink. Go ahead and wash your hands here. 
-It just might conceal some evidence</description>
-                    <locked>false</locked>
-                    <name>Sink</name>
-                    <XPos>383</XPos>
-                    <YPos>157</YPos>
+                    <currentImage>table2.png</currentImage>
+                    <description>Dining Table</description>
+                    <name>Table</name>
+                    <XPos>357</XPos>
+                    <YPos>337</YPos>
                 </items>
                 <x>0</x>
                 <y>0</y>
             </walls>
         </currentRoom>
-        <feedback>Mop has been added to your inventory</feedback>
-        <ID>4743</ID>
+        <feedback>Bleach has been added to your inventory</feedback>
+        <ID>5324</ID>
         <inventory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
             <actions>inspect</actions>
             <actions>pickup</actions>
-            <currentImage>mop.png</currentImage>
-            <description>A mop. This mop can be used for cleaning up and concealing evidence</description>
-            <name>Mop</name>
-            <size>3</size>
-            <XPos>30</XPos>
-            <YPos>240</YPos>
+            <currentImage>shirt.png</currentImage>
+            <description>A cloth, can be used to clean blood off items</description>
+            <name>Cloth</name>
+            <size>2</size>
+            <XPos>0</XPos>
+            <YPos>0</YPos>
+        </inventory>
+        <inventory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
+            <actions>inspect</actions>
+            <actions>pickup</actions>
+            <currentImage>bleach.png</currentImage>
+            <description>Kitchen Bleach, can be used to clean blood off items</description>
+            <name>Bleach</name>
+            <size>2</size>
+            <XPos>0</XPos>
+            <YPos>0</YPos>
         </inventory>
     </players>
     <room>
@@ -118,6 +168,16 @@ It just might conceal some evidence</description>
         <walls>
             <direction>NORTH</direction>
             <currentImage>obj/bathroom.png</currentImage>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
+                <actions>inspect</actions>
+                <actions>pickup</actions>
+                <currentImage>mop.png</currentImage>
+                <description>A mop. This mop can be used for cleaning up and concealing evidence</description>
+                <name>Mop</name>
+                <size>3</size>
+                <XPos>30</XPos>
+                <YPos>240</YPos>
+            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
                 <actions>placeitem</actions>
@@ -188,11 +248,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the kitchen</description>
-                <keyCode>2</keyCode>
+                <description>Door between the bathroom and the bedroom</description>
+                <keyCode>3</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>400</XPos>
+                <XPos>0</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
@@ -236,7 +296,7 @@ It just might conceal some evidence</description>
                 <size>1</size>
                 <XPos>300</XPos>
                 <YPos>400</YPos>
-                <code>555</code>
+                <code>1</code>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
@@ -268,8 +328,8 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the kitchen</description>
-                <keyCode>2</keyCode>
+                <description>Door between the bedroom and the bathroom</description>
+                <keyCode>3</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>400</XPos>
@@ -286,11 +346,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the kitchen and the lounge</description>
-                <keyCode>2</keyCode>
+                <description>Door between the bedroom and the office</description>
+                <keyCode>4</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>20</XPos>
+                <XPos>220</XPos>
                 <YPos>44</YPos>
             </items>
             <x>0</x>
@@ -301,13 +361,14 @@ It just might conceal some evidence</description>
             <currentImage>obj/bedroom.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the bedroom</description>
+                <description>Door between the bedroom and the lounge</description>
                 <keyCode>1</keyCode>
-                <locked>true</locked>
+                <locked>false</locked>
                 <name>Door</name>
-                <XPos>400</XPos>
+                <XPos>20</XPos>
                 <YPos>44</YPos>
             </items>
             <x>0</x>
@@ -321,11 +382,12 @@ It just might conceal some evidence</description>
             <currentImage>obj/kitchenhole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the lounge</description>
-                <keyCode>1</keyCode>
-                <locked>true</locked>
+                <description>Door between the kitchen and the lounge</description>
+                <keyCode>2</keyCode>
+                <locked>false</locked>
                 <name>Door</name>
                 <XPos>20</XPos>
                 <YPos>44</YPos>
@@ -357,11 +419,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bathroom and the bedroom</description>
-                <keyCode>3</keyCode>
+                <description>Door between the kitchen and the office</description>
+                <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>0</XPos>
+                <XPos>20</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
@@ -400,26 +462,6 @@ It just might conceal some evidence</description>
                 <XPos>-18</XPos>
                 <YPos>279</YPos>
             </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
-                <actions>inspect</actions>
-                <actions>pickup</actions>
-                <currentImage>bleach.png</currentImage>
-                <description>Kitchen Bleach, can be used to clean blood off items</description>
-                <name>Bleach</name>
-                <size>2</size>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
-            </items>
-            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="movableItem">
-                <actions>inspect</actions>
-                <actions>pickup</actions>
-                <currentImage>shirt.png</currentImage>
-                <description>A cloth, can be used to clean blood off items</description>
-                <name>Cloth</name>
-                <size>2</size>
-                <XPos>0</XPos>
-                <YPos>0</YPos>
-            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
                 <actions>inspect</actions>
                 <actions>placeitem</actions>
@@ -452,11 +494,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the bathroom</description>
-                <keyCode>3</keyCode>
+                <description>Door between the kitchen and the garage</description>
+                <keyCode>6</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>400</XPos>
+                <XPos>20</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -503,8 +545,8 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the bathroom</description>
-                <keyCode>3</keyCode>
+                <description>Door between the garage and the kitchen</description>
+                <keyCode>6</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
                 <XPos>400</XPos>
@@ -622,11 +664,12 @@ It just might conceal some evidence</description>
             <currentImage>obj/lounge.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
                 <description>Door between the lounge and the bedroom</description>
                 <keyCode>1</keyCode>
-                <locked>true</locked>
+                <locked>false</locked>
                 <name>Door</name>
                 <XPos>400</XPos>
                 <YPos>44</YPos>
@@ -655,13 +698,14 @@ It just might conceal some evidence</description>
             <currentImage>obj/loungehole.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the lounge</description>
-                <keyCode>1</keyCode>
-                <locked>true</locked>
+                <description>Door between the lounge and the kitchen</description>
+                <keyCode>2</keyCode>
+                <locked>false</locked>
                 <name>Door</name>
-                <XPos>20</XPos>
+                <XPos>400</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -716,11 +760,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the kitchen and the lounge</description>
-                <keyCode>2</keyCode>
+                <description>Door between the office and the bedroom</description>
+                <keyCode>4</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>20</XPos>
+                <XPos>220</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -811,11 +855,11 @@ It just might conceal some evidence</description>
                 <actions>enter</actions>
                 <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bathroom and the bedroom</description>
-                <keyCode>3</keyCode>
+                <description>Door between the office and the kitchen</description>
+                <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-                <XPos>0</XPos>
+                <XPos>400</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
@@ -830,5 +874,5 @@ It just might conceal some evidence</description>
             <y>0</y>
         </walls>
     </room>
-    <seconds>11</seconds>
+    <seconds>284</seconds>
 </game>
