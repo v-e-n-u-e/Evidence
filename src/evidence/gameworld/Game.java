@@ -177,7 +177,7 @@ public class Game {
 		door.setCurrentImage("bdoor.png");
 		door.setXPos(400);
 		door.setYPos(44);
-		doors.add(door);
+		doors.add(door);  
 
 		door = new Door("Door", "Door to the garage",
 				new ArrayList<>(Arrays.asList("inspect", "unlock")), getRoom(Name.GARAGE), false, 6, true);
