@@ -401,6 +401,13 @@ public class Game {
 		numpad.setXPos(635);
 		numpad.setYPos(259);
 		getRoom(Name.GARAGE).getWalls()[0].addItem(numpad);
+		
+		Evidence blood2 = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+				true);
+		blood2.setCurrentImage("bgloves.png");
+		blood2.setXPos(12);
+		blood2.setYPos(466);
+		getRoom(Name.GARAGE).getWalls()[0].addItem(blood2);
 
 		// Garage East Wall
 		getRoom(Name.GARAGE).getWalls()[1].addItem(doors.get(10));
@@ -507,6 +514,13 @@ public class Game {
 		tv.setXPos(70);
 		tv.setYPos(241);
 		getRoom(Name.LOUNGE).getWalls()[1].addItem(tv);
+		
+		Evidence blood3 = new Evidence("Body", "Victim's Body", new ArrayList<>(Arrays.asList("inspect", "clean")), 50,
+				true);
+		blood3.setCurrentImage("bgloves.png");
+		blood3.setXPos(12);
+		blood3.setYPos(466);
+		getRoom(Name.LOUNGE).getWalls()[1].addItem(blood3);
 
 		// Lounge South Wall
 		getRoom(Name.LOUNGE).getWalls()[2].addItem(doors.get(2));
