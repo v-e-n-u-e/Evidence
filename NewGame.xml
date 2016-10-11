@@ -346,6 +346,14 @@ It just might conceal some evidence</description>
         <walls>
             <direction>WEST</direction>
             <currentImage>obj/bedroom.png</currentImage>
+            <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
+                <actions>inspect</actions>
+                <currentImage>painting2.png</currentImage>
+                <description>What could it mean...</description>
+                <name>Painting</name>
+                <XPos>440</XPos>
+                <YPos>130</YPos>
+            </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
                 <actions>enter</actions>
