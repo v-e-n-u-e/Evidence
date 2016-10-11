@@ -14,16 +14,19 @@ public class LeaveHouse extends Action {
 
 	@Override
 	public String apply(Item gameItem, MovableItem inventoryItem, Player player) {
+		System.out.println("i entered the method");
 		String feedback = "";
 		if (gameItem == null) {
 			return "Need an item from the game";
 		}
 
-		if (gameItem.toString().equals("Garage Door")) {
+		if (gameItem.toString().equals("Garage")) {
 			player.setCurrentRoom(null);
 			player.removeFromGame();
+			System.out.println("SUp boiiii");
 			feedback = "You have left the house. You are relying on your team now!";
 		}
+		System.out.println("i got to da bottom");
 		return feedback;
 	}
 }

@@ -661,6 +661,9 @@ public class Server implements Runnable{
 			Wall kitchenNorth = kitchen.getWalls()[2];
 			return new RenderPackage(p.getWall(), kitchenNorth, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString() );
 		}
+		else if(p.getWall().getImageName().equals("obj/outside.png")){
+			return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), "outside");
+		}
 		
 		// Send the client the default configuration for a Render Package
 		return new RenderPackage(p.getWall(), null, p.getInventory(), p.getFeedback(), p.getCurrentRoom().toString());
