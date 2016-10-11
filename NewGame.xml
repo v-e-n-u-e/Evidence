@@ -419,12 +419,21 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
                 <actions>clean</actions>
+<<<<<<< HEAD
                 <currentImage>bgloves.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
                 <value>50</value>
                 <XPos>12</XPos>
                 <YPos>466</YPos>
+=======
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
             </items>
             <x>0</x>
             <y>0</y>
@@ -522,12 +531,21 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
                 <actions>clean</actions>
+<<<<<<< HEAD
                 <currentImage>bgloves.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
                 <value>50</value>
                 <XPos>12</XPos>
                 <YPos>466</YPos>
+=======
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
             </items>
             <x>0</x>
             <y>0</y>
@@ -690,12 +708,21 @@ It just might conceal some evidence</description>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="evidence">
                 <actions>inspect</actions>
                 <actions>clean</actions>
+<<<<<<< HEAD
                 <currentImage>bgloves.png</currentImage>
                 <description>Victim's Body</description>
                 <name>Body</name>
                 <value>50</value>
                 <XPos>12</XPos>
                 <YPos>466</YPos>
+=======
+                <currentImage>bpool.png</currentImage>
+                <description>Victim's Blood</description>
+                <name>Blood</name>
+                <value>50</value>
+                <XPos>12</XPos>
+                <YPos>592</YPos>
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
             </items>
             <x>0</x>
             <y>0</y>
