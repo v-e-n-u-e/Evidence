@@ -2,24 +2,26 @@
 <game>
     <doors>
         <actions>inspect</actions>
-        <actions>unlock</actions>
+        <actions>enter</actions>
+        <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the lounge and the bedroom</description>
+        <description>Door between the bedroom and the lounge</description>
         <keyCode>1</keyCode>
-        <locked>true</locked>
+        <locked>false</locked>
         <name>Door</name>
-        <XPos>400</XPos>
+        <XPos>20</XPos>
         <YPos>44</YPos>
     </doors>
     <doors>
         <actions>inspect</actions>
-        <actions>unlock</actions>
+        <actions>enter</actions>
+        <actions>lock</actions>
         <currentImage>door.png</currentImage>
-        <description>Door between the bedroom and the lounge</description>
+        <description>Door between the lounge and the bedroom</description>
         <keyCode>1</keyCode>
-        <locked>true</locked>
+        <locked>false</locked>
         <name>Door</name>
-        <XPos>20</XPos>
+        <XPos>400</XPos>
         <YPos>44</YPos>
     </doors>
     <doors>
@@ -275,7 +277,7 @@ It just might conceal some evidence</description>
                 <size>1</size>
                 <XPos>300</XPos>
                 <YPos>400</YPos>
-                <code>555</code>
+                <code>1</code>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">
                 <actions>inspect</actions>
@@ -340,13 +342,14 @@ It just might conceal some evidence</description>
             <currentImage>obj/bedroom.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the lounge and the bedroom</description>
+                <description>Door between the bedroom and the lounge</description>
                 <keyCode>1</keyCode>
-                <locked>true</locked>
+                <locked>false</locked>
                 <name>Door</name>
-                <XPos>400</XPos>
+                <XPos>20</XPos>
                 <YPos>44</YPos>
             </items>
             <x>0</x>
@@ -401,11 +404,7 @@ It just might conceal some evidence</description>
                 <keyCode>5</keyCode>
                 <locked>false</locked>
                 <name>Door</name>
-<<<<<<< HEAD
                 <XPos>20</XPos>
-=======
-                <XPos>400</XPos>
->>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/jonestyle/Evidence.git
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="container">
@@ -666,13 +665,14 @@ It just might conceal some evidence</description>
             <currentImage>obj/lounge.png</currentImage>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="door">
                 <actions>inspect</actions>
-                <actions>unlock</actions>
+                <actions>enter</actions>
+                <actions>lock</actions>
                 <currentImage>door.png</currentImage>
-                <description>Door between the bedroom and the lounge</description>
+                <description>Door between the lounge and the bedroom</description>
                 <keyCode>1</keyCode>
-                <locked>true</locked>
+                <locked>false</locked>
                 <name>Door</name>
-                <XPos>20</XPos>
+                <XPos>400</XPos>
                 <YPos>44</YPos>
             </items>
             <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="furniture">

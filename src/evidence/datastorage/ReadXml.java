@@ -36,7 +36,7 @@ public class ReadXml {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Game game = (Game) jaxbUnmarshaller.unmarshal(file);
-			doors = game.getDoors();
+			//doors = game.getDoors();
 			players = game.getPlayers();
 			rooms = game.getRoom();
 			seconds = game.getSeconds();
@@ -68,17 +68,17 @@ public class ReadXml {
 	private void setupDoors(Game game) {
 		doors = new ArrayList<Door>();
 
-		Door door = new Door("Door", "Door between the lounge and the bedroom",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.BEDROOM), true, 1, false);
+		Door door = new Door("Door", "Door between the bedroom and the lounge",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.LOUNGE), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(400);
+		door.setXPos(20);
 		door.setYPos(44);
 		doors.add(door);
 
-		door = new Door("Door", "Door between the bedroom and the lounge",
-				new ArrayList<>(Arrays.asList("inspect", "unlock")), game.getRoom(Name.LOUNGE), true, 1, false);
+		door = new Door("Door", "Door between the lounge and the bedroom",
+				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), game.getRoom(Name.BEDROOM), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(20);
+		door.setXPos(400);
 		door.setYPos(44);
 		doors.add(door);
 
@@ -159,18 +159,18 @@ public class ReadXml {
 		}
 		
 	
-		game.getRoom(Name.BATHROOM).getWalls()[3].getItems().set(0, doors.get(2));
-		game.getRoom(Name.BEDROOM).getWalls()[1].getItems().set(1, doors.get(2));
-		game.getRoom(Name.BEDROOM).getWalls()[2].getItems().set(0, doors.get(3));
+		game.getRoom(Name.BATHROOM).getWalls()[3].getItems().set(0, doors.get(4));
+		game.getRoom(Name.BEDROOM).getWalls()[1].getItems().set(1, doors.get(5));
+		game.getRoom(Name.BEDROOM).getWalls()[2].getItems().set(0, doors.get(6));
 		game.getRoom(Name.BEDROOM).getWalls()[3].getItems().set(0,doors.get(0));
-		game.getRoom(Name.KITCHEN).getWalls()[0].getItems().set(0,doors.get(1));
-		game.getRoom(Name.KITCHEN).getWalls()[1].getItems().set(0,doors.get(4));
-		game.getRoom(Name.KITCHEN).getWalls()[3].getItems().set(0,doors.get(5));
-		game.getRoom(Name.GARAGE).getWalls()[1].getItems().set(0,doors.get(5));
-		game.getRoom(Name.LOUNGE).getWalls()[1].getItems().set(0,doors.get(0));
-		game.getRoom(Name.LOUNGE).getWalls()[2].getItems().set(0,doors.get(1));
-		game.getRoom(Name.OFFICE).getWalls()[0].getItems().set(0,doors.get(3));
-		game.getRoom(Name.OFFICE).getWalls()[3].getItems().set(0,doors.get(4));
+		game.getRoom(Name.KITCHEN).getWalls()[0].getItems().set(0,doors.get(3));
+		game.getRoom(Name.KITCHEN).getWalls()[1].getItems().set(0,doors.get(9));
+		game.getRoom(Name.KITCHEN).getWalls()[3].getItems().set(0,doors.get(11));
+		game.getRoom(Name.GARAGE).getWalls()[1].getItems().set(0,doors.get(10));
+		game.getRoom(Name.LOUNGE).getWalls()[1].getItems().set(0,doors.get(1));
+		game.getRoom(Name.LOUNGE).getWalls()[2].getItems().set(0,doors.get(2));
+		game.getRoom(Name.OFFICE).getWalls()[0].getItems().set(0,doors.get(7));
+		game.getRoom(Name.OFFICE).getWalls()[3].getItems().set(0,doors.get(8));
 	}
 	
 }
