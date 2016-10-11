@@ -26,6 +26,7 @@ public class Player {
 	private Integer ID; // Used to identify clients with a player object
 	private String feedback = "";
 	private boolean bloody = false;
+	private boolean inGame = true;
 
 	public void makeBloody() {
 		for (Item item : inventory) {
@@ -78,11 +79,19 @@ public class Player {
 	 */
 	public Wall getWall() {
 		Wall wall = null;
-		for (Wall w : currentRoom.getWalls()) {
-			if (w.getDirection().equals(currentDirection)) {
-				wall = w;
+		if (inGame) {
+			for (Wall w : currentRoom.getWalls()) {
+				if (w.getDirection().equals(currentDirection)) {
+					wall = w;
+				}
 			}
+		}else{
+			wall = new Wall();
+			wall.setImageName("obj/outside.png");
+			wall.setX(0);
+			wall.setY(0);
 		}
+		
 		return wall;
 	}
 
@@ -170,5 +179,9 @@ public class Player {
 	public void setBloodie(boolean b) {
 		this.bloody = b;
 
+	}
+	
+	public void removeFromGame(){
+		inGame = false;
 	}
 }

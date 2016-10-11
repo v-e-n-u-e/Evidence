@@ -19,23 +19,32 @@ public class RemoveItem extends Action {
 		if (gameItem == null) {
 			return "Need an item from the game";
 		}
+		System.out.println("In Apply");
 		String feedback = "";
 		if (gameItem instanceof Container) {
+			System.out.println("Container check");
 			Container container = (Container) gameItem;
 			String[] s = super.getName().split(" ", 2);
+			System.out.println(container.getContainedItems().size());
 			for (int i = 0; i < container.getContainedItems().size(); i++) {
 				Item item = container.getContainedItems().get(i);
+
+				System.out.println("item check");
 				if (item.toString().equals(s[1].trim())) {
+
+					System.out.println("item in container check");
 					if (item.toString().equals("Gloves")) {
 						player.addItem(item);
 					} else {
-						container.removeItem((MovableItem) item, player);
+
+						System.out.println("not gloves check");
+						feedback = container.removeItem((MovableItem) item, player);
 						container.removeAction("remove " + item.toString());
 					}
+				}else{
+					feedback = item.toString() + " not in " + container.toString();
 				}
 			}
-
-			// feedback = container.removeItem(inventoryItem, player);
 		} else
 			feedback = "Cannot perform " + this.toString() + " on " + gameItem.toString();
 
