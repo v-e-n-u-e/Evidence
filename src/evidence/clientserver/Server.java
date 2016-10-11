@@ -316,7 +316,7 @@ public class Server implements Runnable{
 				for(Player p : playerBuffer){
 					game.addPlayer(p);
 				}
-				//game.UpdatePlayersInv();
+//				game.UpdatePlayersInv();
 				updateAllViews();
 				startTimer();
 				allPlayersConnected = true;

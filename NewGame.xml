@@ -430,7 +430,7 @@ It just might conceal some evidence</description>
                 <currentImage>bpool.png</currentImage>
                 <description>Victim's Blood</description>
                 <name>Blood</name>
-                <value>50</value>
+                <value>30</value>
                 <XPos>12</XPos>
                 <YPos>592</YPos>
             </items>
@@ -532,7 +532,7 @@ It just might conceal some evidence</description>
                 <currentImage>bpool.png</currentImage>
                 <description>Victim's Blood</description>
                 <name>Blood</name>
-                <value>50</value>
+                <value>30</value>
                 <XPos>12</XPos>
                 <YPos>592</YPos>
             </items>
@@ -711,7 +711,7 @@ It just might conceal some evidence</description>
                 <currentImage>bpool.png</currentImage>
                 <description>Victim's Blood</description>
                 <name>Blood</name>
-                <value>50</value>
+                <value>30</value>
                 <XPos>12</XPos>
                 <YPos>592</YPos>
             </items>
