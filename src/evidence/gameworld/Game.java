@@ -278,6 +278,13 @@ public class Game {
 		cupboard.setXPos(200);
 		cupboard.setYPos(200);
 		getRoom(Name.BEDROOM).getWalls()[1].addItem(cupboard);
+		
+		Furniture painting3 = new Furniture("Painting", "This painting seems to be of three cool dudes...",
+				new ArrayList<>(Arrays.asList("inspect")), false);
+		painting3.setCurrentImage("painting3.png");
+		painting3.setXPos(70);
+		painting3.setYPos(130);
+		getRoom(Name.BEDROOM).getWalls()[1].addItem(painting3);
 
 		getRoom(Name.BEDROOM).getWalls()[1].addItem(doors.get(5));
 
@@ -484,7 +491,7 @@ public class Game {
 
 		Container toolbox = new Container("Tool Box", "A tool Box",
 				new ArrayList<>(Arrays.asList("inspect", "placeitem", "remove " + wrench.toString(),
-						"remove " + hammer.toString(), "remove " + screwdriver.toString())),
+						"remove " + hammer.toString(), "remove " + screwdriver.toString(), "remove " + crowBar.toString())),
 				false, 7, false);
 		toolbox.setCurrentImage("toolbox.png");
 		toolbox.setXPos(132);
