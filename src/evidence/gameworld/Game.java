@@ -111,7 +111,7 @@ public class Game {
 		door = new Door("Door", "Door between the lounge and the bedroom",
 				new ArrayList<>(Arrays.asList("inspect", "enter", "lock")), getRoom(Name.BEDROOM), false, 1, false);
 		door.setCurrentImage("door.png");
-		door.setXPos(400);
+		door.setXPos(400);  
 		door.setYPos(44);
 		doors.add(door);
 
@@ -240,7 +240,7 @@ public class Game {
 
 		Container sink = new Container("Sink",
 				"A sink. Go ahead and wash your hands here. \nIt just might conceal some evidence",
-				new ArrayList<>(Arrays.asList("inspect", "placeitem")), false, 1, false);
+				new ArrayList<>(Arrays.asList("inspect", "placeitem", "washhands")), false, 1, false);
 		sink.setCurrentImage("sink.png");
 		sink.setXPos(383);
 		sink.setYPos(157);
@@ -319,20 +319,6 @@ public class Game {
 		getRoom(Name.KITCHEN).getWalls()[1].addItem(fridge);
 
 		// Kitchen South Wall
-		Furniture kBench = new Furniture("Kitchen bench", "A kitchen bench", new ArrayList<>(Arrays.asList("inspect")),
-				false);
-		kBench.setCurrentImage("kbench.png");
-		kBench.setXPos(244);
-		kBench.setYPos(279);
-		getRoom(Name.KITCHEN).getWalls()[2].addItem(kBench);
-
-		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false,
-				3, false);
-		oven.setCurrentImage("oven.png");
-		oven.setXPos(-18);
-		oven.setYPos(279);
-		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
-
 		MovableItem gloves = new MovableItem("Gloves", "Rubber gloves",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 1, false);
 		gloves.setCurrentImage("gloves.png");
@@ -342,24 +328,40 @@ public class Game {
 		MovableItem bleach = new MovableItem("Bleach", "Kitchen Bleach, can be used to clean blood off items",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		bleach.setCurrentImage("bleach.png");
-		bleach.setXPos(0);
-		gloves.setYPos(0);
-		getRoom(Name.KITCHEN).getWalls()[2].addItem(bleach);
+		bleach.setXPos(100);
+		gloves.setYPos(100);
 
 		MovableItem cloth = new MovableItem("Cloth", "A cloth, can be used to clean blood off items",
 				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
 		cloth.setCurrentImage("shirt.png");
-		cloth.setXPos(0);
-		gloves.setYPos(0);
-		getRoom(Name.KITCHEN).getWalls()[2].addItem(cloth);
+		cloth.setXPos(200);
+		gloves.setYPos(100);
+		
+		MovableItem matches = new MovableItem("Matches", "Matches can be used to light the fire",
+				new ArrayList<>(Arrays.asList("inspect", "pickup")), 2, false);
+		cloth.setCurrentImage("matches.png");
+		cloth.setXPos(100);
+		gloves.setYPos(200);
 
-		Container cabnet = new Container("Cabnet", "A cabnet", new ArrayList<>(
-				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString())),
+
+		Container kBench = new Container("Kitchen Bench", "This kitchen bench is filled with cleaning products", new ArrayList<>(
+				Arrays.asList("inspect", "placeitem", "remove " + gloves.toString(), "remove " + bleach.toString(), "remove " + matches.toString())),
 				false, 3, false);
-		cabnet.setCurrentImage("cabnet.png");
-		cabnet.setXPos(0);
-		cabnet.setYPos(0);
-		cabnet.getContainedItems().add(gloves);
+		
+		kBench.getContainedItems().add(gloves);
+		kBench.getContainedItems().add(bleach);
+		kBench.getContainedItems().add(cloth);
+		kBench.getContainedItems().add(matches);
+		kBench.setCurrentImage("kbench.png");
+		kBench.setXPos(244);
+		kBench.setYPos(279);
+		getRoom(Name.KITCHEN).getWalls()[2].addItem(kBench);
+		
+		Container oven = new Container("Oven", "An oven", new ArrayList<>(Arrays.asList("inspect", "placeitem")), false,
+				3, false);
+		oven.setCurrentImage("oven.png");
+		oven.setXPos(-18);
+		oven.setYPos(279);
 		getRoom(Name.KITCHEN).getWalls()[2].addItem(oven);
 
 		MovableItem scissors = new MovableItem("Scissors", "A pair of Kitchen scissors",
